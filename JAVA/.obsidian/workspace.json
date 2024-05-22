@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "ba8bf2607dcc04c4",
+    "type": "split",
+    "children": [
+      {
+        "id": "aa3152988d5d21ed",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ab9b226ee206dfc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Overall/LEET CODE.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "916b45985cdc2b81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Overall/LEET CODE.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "94d4aac882d60c9f",
+    "type": "split",
+    "children": [
+      {
+        "id": "c7d714402c32f2aa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "89eca41a42d8c25f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b970d9fce54ca7f3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#searchingarray",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "347bf9ff47d1e07d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "5bfc47c1c786812a",
+    "type": "split",
+    "children": [
+      {
+        "id": "a7aac248007dda84",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6a94c56e94bbed1a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "639819c8f08873b0",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Overall/LEET CODE.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9c37db6a32e4d582",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Overall/LEET CODE.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "2877fac1c94ddb67",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Overall/LEET CODE.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "916b45985cdc2b81",
+  "lastOpenFiles": [
+    "Overall/EXERCISES.md",
+    "Overall/LEET CODE.md",
+    "Overall/BASICS.md",
+    "Pasted image 20240319215420.png",
+    "Pasted image 20240319212449.png",
+    "Pasted image 20240319211014.png",
+    "Pasted image 20240316090410.png",
+    "Pasted image 20240316090200.png",
+    "Pasted image 20240316090124.png",
+    "Pasted image 20240316085449.png",
+    "Pasted image 20240313225235.png",
+    "Pasted image 20240313223710.png",
+    "Pasted image 20240313223000.png",
+    "CORE (AMIGO COURSE)/Amigo content.md",
+    "CORE (AMIGO COURSE)/ABOUT.md",
+    "Overall/SHORT CUT KEYWORDDS.md",
+    "switch box v1 1.f3d",
+    "switch box v1.f3d",
+    "Overall/Images",
+    "BASICS.md",
+    "Untitled.md",
+    "poi.md",
+    "Overall",
+    "CORE (AMIGO COURSE)/Untitled",
+    "CORE (AMIGO COURSE)/Untitled.md",
+    "Basic.md",
+    "2024-01-22.md",
+    "dfvgbv.md",
+    "Untitled 1.md",
+    "Welcome.md",
+    "Untitled 1/Untitled.md",
+    "Untitled 1",
+    "CORE (AMIGO COURSE)"
+  ]
+}
