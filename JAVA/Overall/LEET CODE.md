@@ -208,3 +208,78 @@ class Solution {
 
 }
 ```
+# [66. Plus One](https://leetcode.com/problems/plus-one/)
+![[Pasted image 20240524103603.png]]
+```java
+class Solution {
+
+    public int[] plusOne(int[] digits) {
+
+        int n = digits.length;
+
+        int[] arr = new int[n];
+
+        int carry = 1;
+
+        for (int i = n - 1; i >= 0; i--) {
+
+            int sum = digits[i] + carry;
+
+            arr[i] = sum % 10;
+
+            carry = sum / 10;
+
+        }
+
+        if (carry == 1) {
+
+            arr = new int[n + 1];
+
+            arr[0] = 1;
+
+        }
+
+        return arr;
+
+    }
+
+}
+```
+# [26. Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+![[Pasted image 20240525213219.png]]
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int n = nums.length;
+        int arr[] = new int[n];
+
+        // Initialize the auxiliary array to 0
+        for (int i = 0; i < n; i++) {
+            arr[i] = 0;
+        }
+
+        // Mark duplicates in the auxiliary array
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0) {
+                for (int j = i + 1; j < n; j++) {
+                    if (nums[i] == nums[j]) {
+                        arr[j] = 1;  // Mark duplicate elements
+                    }
+                }
+            }
+        }
+
+        // Count the number of unique elements
+        int k = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0) {  // If not marked as duplicate
+                nums[k] = nums[i];  // Move unique element to the front
+                k += 1;
+            }
+        }
+        
+        return k;  // Number of unique elements
+    }
+}
+
+```

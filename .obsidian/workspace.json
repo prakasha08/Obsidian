@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/Overall/EXERCISES.md",
+                "file": "HTML & CSS/BASICS.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JAVA/Overall/EXERCISES.md",
+                "file": "HTML & CSS/BASICS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JAVA/Overall/EXERCISES.md",
+                "file": "HTML & CSS/BASICS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JAVA/Overall/EXERCISES.md"
+                "file": "HTML & CSS/BASICS.md"
               }
             }
           }
@@ -146,15 +146,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f5739767b53ebc22",
+  "active": "920f96a8efee16dd",
   "lastOpenFiles": [
+    "Pasted image 20240525213219.png",
+    "Pasted image 20240524103603.png",
     "JAVA/Overall/BASICS.md",
-    "JAVA/Overall/LEET CODE.md",
     "JAVA/Overall/EXERCISES.md",
+    "JAVA/Overall/LEET CODE.md",
+    "HTML & CSS/BASICS.md",
+    "PS/Level 4(own).md",
     "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
     "PS/Level 4.md",
-    "PS/Level 4(own).md",
     "JAVA/Overall/SHORT CUT KEYWORDDS.md",
     "Untitled.md",
     "Untitled",
