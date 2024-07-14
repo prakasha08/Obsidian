@@ -155,13 +155,10 @@ int main() {
 int main() {
    int size;
    scanf("%d",&size);
-   
    int arr[size];
-   
    for(int i=0;i<size;i++){
        scanf("%d",&arr[i]);
    }
-   
    int max = -1;
    int min = 100000;
    for(int i=0;i<size;i++){
@@ -200,27 +197,24 @@ int main() {
 ### Print the peak elements in array
 `
 ```C
-// Online C compiler to run C program online
 #include <stdio.h>
 
 int main() {
-   int size;
-   scanf("%d",&size);
-   
-   int arr[size];
-   
-   for(int i=0;i<size;i++){
-       scanf("%d",&arr[i]);
-   }
-   int ans = -1;
-   for(int i=1;i<size-1;i++){
-       if(arr[i-1] < arr[i] && arr[i+1] < arr[i]){
-           ans = arr[i];
-       }
-   }
-   printf("%d",ans);
-   
-}   
+    int i,j;
+    int arr[]={1,2,3,4,3,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    for(i=0;i<n;i++){
+       if(i==0&&arr[i+1]<arr[i])
+            printf("%d ",arr[i]);
+        else if(i==n-1&&arr[i]>arr[i-1]){
+            printf("%d ",arr[i]);
+        }
+        else if(arr[i-1]<arr[i]&&arr[i]>arr[i+1]){
+            printf("%d ",arr[i]);
+        }
+    }
+    return 0;
+} 
 ```
 
 ### Find the count of the positive number
@@ -379,13 +373,12 @@ int main() {
     for(int i=0;i<size;i++){
         scanf("%d",&num[i]);
     }
-    
     for(int i=0;i<size;i++){
-        for(int j=0;j<size-1;j++){
-            if(num[j]>num[j+1]){
-                int temp = num[j];
-                num[j] = num[j+1];
-                num[j+1] = temp;
+        for(int j=i+1;j<size;j++){
+            if(arr[i]>arr[j]){
+                int a=arr[i];
+                arr[i]=arr[j];
+                arr[j]=a;
             }
         }
     }
@@ -432,12 +425,12 @@ int main() {
         scanf("%d",&num[i]);
     }
     
-    for(int i=0;i<size;i++){
-        for(int j=0;j<size-1;j++){
-            if(num[j] > num[j+1]){
-                int temp = num[j];
-                num[j] = num[j+1];
-                num[j+1] = temp;
+   for(int i=0;i<size;i++){
+        for(int j=i+1;j<size;j++){
+            if(num[i]>num[j]){
+                int a=num[i];
+                num[i]=num[j];
+                num[j]=a;
             }
         }
     }
@@ -687,5 +680,105 @@ int main() {
     }
     
 }
+```
+### Matrix Multipilcation
+```c
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int main() {
+    int arr[3][3]={{1,2,3},{4,5,6},{7,8,9}};
+    int a[3][3];
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int m = sizeof(arr[0]) / sizeof(arr[0][0]);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            int sum=0;
+            for(int k=0;k<m;k++){
+               sum+=arr[i][k]*arr[k][j];
+            }
+            a[i][j]=sum;
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+           printf("%d ",a[i][j]);
+    }
+    printf("\n");
+}
+  return 0;
+}
+
+```
+### chunk 
+```java
+#include<stdio.h>
+int main(){
+    int n;
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++){
+        scanf("%d",&arr[i]);
+    }
+   
+    printf("The entered array is: ");
+    for(int i=0;i<n;i++){
+        printf("%d ",arr[i]);
+    }
+   
+    int size=2;
+    for(int i=0;i<n;i+=size){
+        printf("[");
+        for(int j=i;j<i+size && j<n;j++){
+            printf("%d",arr[j]);
+            if(j<i+size-1 && j<n-1){
+                printf(",");
+            }
+        }
+        printf("]");
+        if(i<n-2){
+            printf(",");
+        }
+    }
+}
+```
+### given degree as input, convert it into radian and store it in an array and then print the cosine values of the radian
+```java
+#include <stdio.h>
+#include <math.h>
+
+#define MAX_DEGREES 100
+
+int main() {
+    int n;
+    
+    // Read the number of degrees
+    printf("Enter the number of degrees: ");
+    scanf("%d", &n);
+    
+    // Ensure the number of degrees does not exceed the maximum limit
+    if (n > MAX_DEGREES) {
+        printf("Error: Number of degrees exceeds maximum limit.\n");
+        return 1;
+    }
+    
+    // Read the degrees and convert them into radians
+    double radians[MAX_DEGREES];
+    printf("Enter the degrees:\n");
+    for (int i = 0; i < n; i++) {
+        double degree;
+        scanf("%lf", &degree);
+        radians[i] = degree * M_PI / 180.0; // Convert degrees to radians
+    }
+    
+    // Print the cosine values of the radian angles
+    printf("Cosine values:\n");
+    for (int i = 0; i < n; i++) {
+        printf("cos(%.2f°) = %.4f\n", radians[i] * 180.0 / M_PI, cos(radians[i]));
+    }
+    
+    return 0;
+}
+
 ```
 

@@ -13,13 +13,62 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTML & CSS/BASICS.md",
+                "file": "JAVA/Overall/BASICS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f8e2e3ae9d9bcde1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PS/Level 3.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "780b84664b8e7339",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7f1374b2afd72925",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PS/Set Questions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5c4cbd4372a292da",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PS/Set Questions.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -85,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "HTML & CSS/BASICS.md",
+                "file": "PS/Set Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "HTML & CSS/BASICS.md",
+                "file": "PS/Set Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "HTML & CSS/BASICS.md"
+                "file": "PS/Set Questions.md"
               }
             }
           }
@@ -146,23 +195,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "920f96a8efee16dd",
+  "active": "5c4cbd4372a292da",
   "lastOpenFiles": [
+    "PS/Level 4(own).md",
+    "PS/Set Questions.md",
+    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
+    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
+    "PS/Level 3.md",
+    "PS/Level 4.md",
     "Pasted image 20240525213219.png",
     "Pasted image 20240524103603.png",
-    "JAVA/Overall/BASICS.md",
-    "JAVA/Overall/EXERCISES.md",
-    "JAVA/Overall/LEET CODE.md",
-    "HTML & CSS/BASICS.md",
-    "PS/Level 4(own).md",
-    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
-    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "PS/Level 4.md",
-    "JAVA/Overall/SHORT CUT KEYWORDDS.md",
-    "Untitled.md",
     "Untitled",
+    "JAVA/Overall/EXERCISES.md",
+    "JAVA/Overall/BASICS.md",
+    "HTML & CSS/BASICS.md",
+    "JAVA/Overall/LEET CODE.md",
+    "JAVA/Overall/SHORT CUT KEYWORDDS.md",
     "pattern",
-    "PS/Level 3.md",
     "PS"
   ]
 }
