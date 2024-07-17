@@ -8,67 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f5739767b53ebc22",
+            "id": "ef893aab7c0836d6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/Overall/BASICS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f8e2e3ae9d9bcde1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PS/Level 3.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "780b84664b8e7339",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7f1374b2afd72925",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PS/Set Questions.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5c4cbd4372a292da",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PS/Set Questions.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -118,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "ed5f225efcc64e2f",
@@ -134,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PS/Set Questions.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PS/Set Questions.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PS/Set Questions.md"
+                "file": "JAVA/OOPs/OOPs in Java.md"
               }
             }
           }
@@ -195,19 +146,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5c4cbd4372a292da",
+  "active": "ef893aab7c0836d6",
   "lastOpenFiles": [
+    "Pasted image 20240716191015.png",
     "PS/Level 4(own).md",
-    "PS/Set Questions.md",
-    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "PS/Level 3.md",
     "PS/Level 4.md",
+    "JAVA/OOPs/OOPs in Java.md",
+    "JAVA/Overall/BASICS.md",
+    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
+    "PS/Set Questions.md",
+    "Set Questions.pdf",
+    "Untitled.md",
+    "JAVA/OOPs",
+    "Level 4.pdf",
+    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "Pasted image 20240525213219.png",
     "Pasted image 20240524103603.png",
-    "Untitled",
     "JAVA/Overall/EXERCISES.md",
-    "JAVA/Overall/BASICS.md",
     "HTML & CSS/BASICS.md",
     "JAVA/Overall/LEET CODE.md",
     "JAVA/Overall/SHORT CUT KEYWORDDS.md",
