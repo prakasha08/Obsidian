@@ -56,8 +56,8 @@ int main() {
         return 1;
     }
     for (int i = 0; i < len_s; i++) {
-        count_s[(unsigned char)s[i]]++;
-        count_g[(unsigned char)g[i]]++;
+        count_s[s[i]]++;
+        count_g[g[i]]++;
     }
     for (int i = 0; i < 256; i++) {
         if (count_s[i] != count_g[i]) {
@@ -1168,19 +1168,34 @@ int main() {
 ## 2d matrix 90 deg rotation(Transpose of String characters)
 ```c
 #include <stdio.h>
+#include <string.h>
+
 int main() {
-    char t[3][3];
-    for (int i = 0; i < 3; i++) {
-        scanf("%3s", t[i]);
+    int m;
+    scanf("%d",&m);
+    getchar();
+    char s[m][m];
+    char temp[10]; // temporary buffer to read each row
+    // Reading the input
+    for (int i = 0; i < m; i++) {
+        fgets(temp, sizeof(temp), stdin);
+        temp[strcspn(temp, "\n")] = '\0';
+        for (int j = 0, k = 0; j < m; j++, k += 2) {
+            s[i][j] = temp[k];
+        }
     }
+
+    // Printing the array in reverse order
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
-           printf("%c\t",t[j][i]);
+           printf("%c ",s[j][i]);
         }
         printf("\n");
     }
+
     return 0;
 }
+
 ```
 ## Remove vowels( program to print the given string without any vowel character example: ChatGPT 3.0 @REn_Gan --> ChtGPT 3.0 @ Rn_Gn)
 ```c
@@ -1421,48 +1436,22 @@ int main() {
 ```
 
 ## print the odd position words and concatenate them. Sample Test case: Input : 3 apple orange mango (words will be in separate lines one below other 👇🏼). Output :applemango
-### get input by next line
-```c
-#include <stdio.h>
-#include<string.h>
-#include<ctype.h>
-int main() {
-     char s[3][100];
-    for (int i = 0; i < 3; i++) {
-        scanf("%s", &s[i]);
-    }
-    
-    for (int i = 0; i < 3; i++){
-         if((i+1)%2!=0){
-             printf("%s",s[i]);
-             
-         }
-         else{
-             continue;
-         }
-    }
-    return 0;
-    }
-```
-### get Input by space
 ```c
 #include <stdio.h>
 #include <string.h>
-
 int main() {
-    char ch[100];
-    fgets(ch,100,stdin);
-    int i=0;
-    char ans[100][100];
-    char *word=strtok(ch," ");
-    while(word!=NULL){
-        strcpy(ans[i++],word);
-        word=strtok(NULL," ");
+    int numWords;
+    printf("Enter the number of words: ");
+    scanf("%d", &numWords);
+    char words[numWords][100];
+    printf("Enter the words:\n");
+    for (int i = 0; i < numWords; i++) {
+        scanf("%s", words[i]);
     }
-    for(int j=0;j<i;j++){
-        if(j%2==0){
-            printf("%s",ans[j]);
-        }
+    printf("Words at even positions:\n");
+    for (int i = 0; i < numWords; i ++) { 
+        if((i+1)%2!=0)
+        printf("%s", words[i]);
     }
     return 0;
 }
@@ -1667,22 +1656,21 @@ int main() {
 #include <string.h>
 #include <ctype.h>
 int main() {
-    char s[100];
-    fgets(s, sizeof(s), stdin);  
-    s[strcspn(s, "\n")] = '\0'; 
+    char s[9];
+    int hours, minutes, seconds;
+    scanf("%8s", s);
     if (strlen(s) != 8 || s[2] != ':' || s[5] != ':' ||
         !isdigit(s[0]) || !isdigit(s[1]) || !isdigit(s[3]) || !isdigit(s[4]) || !isdigit(s[6]) || !isdigit(s[7])) {
         printf("Invalid\n");
         return 0;
     }
-    int hh = (s[0] - '0') * 10 + (s[1] - '0');
-    int mm = (s[3] - '0') * 10 + (s[4] - '0');
-    int ss = (s[6] - '0') * 10 + (s[7] - '0');
-    if (hh < 0 || hh > 23 || mm < 0 || mm > 59 || ss < 0 || ss > 59) {
-        printf("Invalid\n");
-    } else {
-        printf("Hour:%c%c Minutes:%c%c seconds:%c%c",s[0],s[1],s[3],s[4],s[6],s[7]);
-    }
+    sscanf(s, "%d:%d:%d", &hours, &minutes, &seconds);
+    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+            printf("Invalid\n");
+        } else {
+            printf("Hour:%d Minutes:%d seconds:%d",hours,minutes,seconds);
+        }
+
     return 0;
 }
 
@@ -1697,36 +1685,30 @@ Found at index: 10
 ```c
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-void tolowerS(char *string) {
-    for (int i = 0; string[i]; i++) {
-        string[i] = tolower(string[i]);
-    }
-}
-int main() {
-    char s[100];
-    char s1[100];
-    char lower_s[100];
-    printf("Enter the first string: ");
-    fgets(s, sizeof(s), stdin);
-    printf("Enter the word to search for: ");
-    fgets(s1, sizeof(s1), stdin);
-    s1[strcspn(s1, "\n")] = '\0';
-    tolowerS(s1);
-    tolowerS(s);
-    char *pos = strstr(s, s1);
-    int found = 0;
-    while (pos != NULL) {
-        int index = pos - s;
-        printf("Found at index: %d\n", index);
-        found = 1;
-        pos = strstr(pos + 1, s1);
-    }
-    if (!found) {
-        printf("Word not found\n");
-    }
 
-    return 0;
+int main() {
+    char arr[100], word[100];
+    fgets(arr,100,stdin);
+    fgets(word,100,stdin);
+    arr[strlen(arr)-1]='\0';
+    word[strlen(word)-1]='\0';
+    int c=0;
+    for(int i=0; i<sizeof(arr); i++){
+        if(arr[i]==' '){
+            c++;
+         }
+     }
+    char *t = strtok(arr," ");
+    int i=0;
+    while(t!=NULL ){
+         if(strcmp(t,word)==0){
+            printf("word found at index: %d\n",i);
+        }
+        i+=strlen(t)+1;
+        t = strtok(NULL, " ");
+    }
+   
+   return 0;
 }
 
 ```
@@ -1790,25 +1772,18 @@ int main() {
 ```
 
 ## 2 largest string size in a 2d array
-### get Input by space
-![[Pasted image 20240723230922.png]]
 ```c
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 int main() {
-    int n, m1=0,m2=0;
+    int n,m1=0,m2=0;
+    printf("Enter the number of words: ");
     scanf("%d", &n);
-    getchar();
-    char s[100];
-    fgets(s, sizeof(s), stdin);  
-    s[strcspn(s, "\n")] = '\0';
-    char words[100][100];
-    int k=0;
-    char *word = strtok(s, " ");
-    while (word != NULL) {
-        strcpy(words[k++], word);
-        word = strtok(NULL, " ");
+    char words[n][100];
+    printf("Enter the words:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%s", words[i]);
     }
    for(int i=0;i<n;i++){
                 if(m1<strlen(words[i])){
@@ -1822,38 +1797,8 @@ int main() {
     printf("%d",m2);
     return 0;
 }
-
 ```
-### get input by next line
-![[Pasted image 20240723231105.png]]
-```c
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-int main() {
-    int n, m1 = 0,m2=0;
-    scanf("%d", &n);
-    getchar();
-      char words[n][100]; 
-    for (int i = 0; i < n; i++) {
-        fgets(words[i], sizeof(words[i]), stdin);
-        words[i][strcspn(words[i], "\n")] = '\0';
-    }
-    for(int i=0;i<n;i++){
-                if(m1<strlen(words[i])){
-                        m2=m1;
-                       m1=strlen(words[i]);
-                   }
-                   else if(m1>strlen(words[i])&&m2<strlen(words[i])){
-                       m2=strlen(words[i]);
-                   }
-    }
-    printf("%d",m2);
-    return 0;
-}
-
-```
-## Largest and smallest string in an 2d array
+## Largest and smallest in an 2d array
 ![[Pasted image 20240724075632.png]]
 ```c
 #include <stdio.h>
@@ -1939,4 +1884,117 @@ int main() {
     printf("Pangram");
     return 0;
 }
+```
+## Left rotation
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int count;
+    scanf("%d",&count);
+    for(int i=0;i<count;i++){
+        char temp=s[0];
+        for(int j=0;j<strlen(s)-1;j++){
+            s[j]=s[j+1];
+        }
+        s[strlen(s)-1]=temp;
+    }
+        printf("%s",s);
+    return 0;
+} 
+```
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0'; // Remove the newline character
+
+    int count;
+    scanf("%d", &count);
+
+    int len = strlen(s);
+
+    // Ensure count is within the bounds of the string length
+    count = count % len;
+
+    // Temporary buffer to hold the rotated part
+    char temp[count];
+    
+    // Copy the first 'count' characters to the temp array
+    strncpy(temp, s, count);
+
+    // Shift the remaining part of the string to the beginning
+    memmove(s, s + count, len - count);
+
+    // Append the temp array to the end
+    strncpy(s + len - count, temp, count);
+
+    printf("%s", s);
+    return 0;
+}
+
+```
+## Right Rotation
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int count;
+    scanf("%d",&count);
+    for(int i=0;i<count;i++){
+        char temp=s[strlen(s)-1];
+        for(int j=strlen(s)-1;j>0;j--){
+            s[j]=s[j-1];
+        }
+        s[0]=temp;
+    }
+        printf("%s",s);
+    return 0;
+}
+```
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0'; // Remove the newline character
+
+    int count;
+    scanf("%d", &count);
+
+    int len = strlen(s);
+
+    // Ensure count is within the bounds of the string length
+    count = count % len;
+
+    // Temporary buffer to hold the rotated part
+    char temp[count];
+    
+    strncpy(temp, s + len - count, count);
+
+    // Shift the remaining part of the string to the right
+    memmove(s + count, s, len - count);
+
+    // Prepend the temp array to the beginning
+    strncpy(s, temp, count);
+
+    printf("%s", s);
+    return 0;
+}
+
 ```

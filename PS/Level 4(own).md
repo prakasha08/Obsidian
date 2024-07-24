@@ -31,21 +31,15 @@ int main() {
 int main() {
     char str[10],lstr[10];
     scanf("%[^\n]s",str);
-    //   for(int i=0;i<strlen(str);i++){
-    //     lstr[i] = tolower(str[i]);
-    // }zx vbnbvcxzaq1221q  1 
     for(int i=0;i<strlen(str);i++){
         if(str[i]=='a'){
                  str[i]='b';
-                //  printf("%c",str[i]);
           }
           else if(str[i]=='t'){
                  str[i]='g';
-                //  printf("%c",str[i]);
           }
             else if(isdigit(str[i])){
                 str[i]='n';
-                // printf("%c",str[i]);
             }
             else{
                 continue;
@@ -184,26 +178,22 @@ int main() {
 #include <string.h>
 int main() {
     char str[20], rstr[20];
-    // Read input
     printf("Enter a string: ");
     scanf("%[^\n]", str);
-
     int length = strlen(str);
     int start = 0;
-
     for (int i = 0; i <= length; i++) {
         if (str[i] == ' ' || str[i] == '\0') {
             int end = i - 1;
             int k = 0;
             for (int j = end; j >= start; j--) {
-                rstr[k++] = str[j];
+            printf("%c",str[j]);
             }
-            rstr[k] = '\0';
-            printf("%s ", rstr);
+            if(str[i]!='\0')
+            printf(" ");
             start = i + 1;
-        }
+         }
     }
-    printf("\n");
     return 0;
 }
 
@@ -300,35 +290,7 @@ int main() {
     
     for(int i=mS;in[i] != ' ' &&i < strlen(in);i++){
         printf("%c",in[i]);
-}
-}
-```
-### Smallest repeated element in a String!
-```c
-#include <stdio.h>
-#include<string.h>
-int main() {
-    char in[1024];
-    scanf("%[^\n]",&in);
-    int start = 0;
-    int count=0;
-    int min =10000,minS;
-    for(int i=0;i<=strlen(in);i++){
-        if(in[i] == ' ' || in[i] == '\0'){
-            if(min>count){
-                min = count;
-                minS=start;
-            }
-            start=i+1;
-            count=0;
-        }else{
-            count++;
-        }
-    }
-    for(int i=minS;in[i]!=' '&&i<strlen(in);i++){
-        printf("%c",in[i]);
-    }
-    return 0;
+ }
 }
 ```
 ### Replace space in a string with character("%20"). Input : world is big#Output:world%20is%20big
@@ -351,7 +313,7 @@ int main() {
     return 0;
 }
 ```
-### remove duplicate characters in a string input engineering output enginr
+### Remove duplicate characters in a string input engineering output enginr
 
 ```c
 #include <stdio.h>
@@ -386,25 +348,28 @@ int main() {
 ```c
 #include <stdio.h>
 #include <string.h>
-
+#include <ctype.h>
 int main() {
-    char time[9]; // Assuming maximum length of input string is 8 characters ("HH:MM:SS" + '\0')
+    char s[9];
     int hours, minutes, seconds;
-
-    // Input time string from user
-    printf("Enter the time in HH:MM:SS format: ");
-    scanf("%8s", time); // Read at most 8 characters to prevent buffer overflow
-
-    // Parse hours, minutes, and seconds from the input string
-    sscanf(time, "%d:%d:%d", &hours, &minutes, &seconds);
-
-    // Print the time in desired format
-    printf("Hours: %d Minutes: %d Seconds: %d\n", hours, minutes, seconds);
+    scanf("%8s", s);
+    if (strlen(s) != 8 || s[2] != ':' || s[5] != ':' ||
+        !isdigit(s[0]) || !isdigit(s[1]) || !isdigit(s[3]) || !isdigit(s[4]) || !isdigit(s[6]) || !isdigit(s[7])) {
+        printf("Invalid\n");
+        return 0;
+    }
+    sscanf(s, "%d:%d:%d", &hours, &minutes, &seconds);
+    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59) {
+            printf("Invalid\n");
+        } else {
+            printf("Hour:%d Minutes:%d seconds:%d",hours,minutes,seconds);
+        }
 
     return 0;
 }
 ```
-### swap adjacent characters in a given string input:OpenAI||output:pOneIA
+### swap adjacent characters in a given string 
+#### for i/p->openai,o/p->poenia
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -423,6 +388,28 @@ int main() {
     return 0;
 }
 
+```
+#### for input: OpenAI , output: pOneIA
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s) - 1; i++) {
+        if (!isspace(s[i]) && !isspace(s[i + 1])) {
+            char temp = s[i];
+            s[i] = s[i + 1];
+            s[i + 1] = temp;
+            i++; 
+        }
+    }
+    printf("%s", s);
+    return 0;
+}
 ```
 ### count the total characters in a string and check the number is odd,even,prime
 ```c
@@ -471,92 +458,121 @@ int main() {
 ```c
 #include <stdio.h>
 #include <string.h>
-
-int oddeven(int count){
-    if(count%2==0){
-        printf("%d is Even",count);
-        return 0;
-    }
-    else{
-    printf("%d is odd",count);
-    return 0;
+void oddeven(int count) {
+    if(count % 2 == 0) {
+        printf("%d is Even", count);
+    } else {
+        printf("%d is Odd", count);
     }
 }
-int main() {
-    char str[10];
-    int count=0,prime=1;
-    scanf("%[^\n]",str);
-    for(int i=0;i<strlen(str);i++){
-        if(str[i]==' '){
-            continue;
+int isPrime(int count) {
+    if (count <= 1) {
+        return 0;
+    }
+    for (int i = 2; i <= count / 2; i++) {
+        if (count % i == 0) {
+            return 0;
         }
-       count+=1;
     }
-    if(count<=1){
-        oddeven(count);
-        printf(" & not Prime");
-        return 0;
+    return 1;
+}
+
+int main() {
+    char str[100];
+    int count = 0;
+
+    // Reading input string
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0'; 
+
+    for(int i = 0; i < strlen(str); i++) {
+        if(str[i] != ' ') {
+            count++;
+        }
     }
-    else{
-    for(int i=2;i<count/2;i++){
-        prime=0;
-          }
-     }
-    if(prime){
-        oddeven(count);
-         printf(" & prime");
+
+    oddeven(count);
+
+    if (isPrime(count)) {
+        printf(" & Prime\n");
+    } else {
+        printf(" & Not Prime\n");
     }
-    else{
-        oddeven(count);
-        printf(" & not Prime");
-    }
+
     return 0;
 }
+
 ```
 ### Smallest appeared character in a string
 ```c
 #include <stdio.h>
-#include <string.h>
-#include <ctype.h>
+#include<string.h>
+#include<ctype.h>
 
 int main() {
+    int i,j;
     char str[100];
-    int count[256] = {0}; // Initialize count array with zeros
-    int minCount = 100000; // Initialize minCount with a large value
-    char minChar;
-
-    // Input string from user
-    printf("Enter a string: ");
-    scanf("%[^\n]", str);
-
-    // Convert the string to lowercase
-    for (int i = 0; str[i]; i++) {
+    scanf("%[^\n]s",str);
+    int len = strlen(str);
+    int max = 10000;
+    char c;
+    int count=1;
+    
+    for(i=0;i<len;i++){
         str[i] = tolower(str[i]);
     }
-
-    // Count occurrences of each character
-    for (int i = 0; str[i]; i++) {
-        if (str[i] != ' ') { // Ignore spaces
-            count[str[i]]++;
+    
+    for(i = 0 ; i<len;i++){
+        for(j=0;j<len;j++){
+            if(str[i] == str[j]&&i!=j){
+                count++;
+            }
         }
-    }
-
-    // Find the character with the smallest count
-    for (int i = 0; i < 256; i++) {
-        if (count[i] > 0 && count[i] < minCount) {
-            minCount = count[i];
-            minChar = i;
+        if(max>count){
+            max = count;
+            c = str[i];
         }
+        count = 1;
     }
-
-    // Print the character with the smallest count
-    printf("Smallest appeared count character: %c\n", minChar);
-
+    
+    printf("%c min repeated times %d",c,max);
     return 0;
 }
 
 ```
 ### Rotate a matrix to 90 degree!
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int m;
+    scanf("%d",&m);
+    getchar();
+    char s[m][m];
+    char temp[10]; // temporary buffer to read each row
+    // Reading the input
+    for (int i = 0; i < m; i++) {
+        fgets(temp, sizeof(temp), stdin);
+        temp[strcspn(temp, "\n")] = '\0';
+        for (int j = 0, k = 0; j < m; j++, k += 2) {
+            s[i][j] = temp[k];
+        }
+    }
+
+    // Printing the array in reverse order
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+           printf("%c ",s[j][i]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+```
+
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -721,62 +737,26 @@ int main() {
 ### Enter a sentence: rethu is girl:Reversed sentence: girl is rethu
 ```c
 #include <stdio.h>
-#include <string.h>
-
-void reverseWords(char *sentence) {
-    int len = strlen(sentence);
-    int start = 0;
-    int end = 0;
-
-    // Reverse the entire sentence
-    for (int i = 0; i < len / 2; i++) {
-        char temp = sentence[i];
-        sentence[i] = sentence[len - 1 - i];
-        sentence[len - 1 - i] = temp;
-    }
-
-    // Reverse each word individually
-    while (start < len) {
-        // Find the start of the next word
-        while (start < len && sentence[start] == ' ') {
-            start++;
-        }
-
-        // Find the end of the current word
-        end = start;
-        while (end < len && sentence[end] != ' ') {
-            end++;
-        }
-
-        // Reverse the current word
-        for (int i = start, j = end - 1; i < j; i++, j--) {
-            char temp = sentence[i];
-            sentence[i] = sentence[j];
-            sentence[j] = temp;
-        }
-
-        start = end;
-    }
-}
-
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
 int main() {
-    char sentence[1000];
-
-    // Read the sentence from the user
-    printf("Enter a sentence: ");
-    fgets(sentence, sizeof(sentence), stdin);
-
-    // Remove the newline character from fgets result
-    if (sentence[strlen(sentence) - 1] == '\n') {
-        sentence[strlen(sentence) - 1] = '\0';
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    char words[100][100];
+    int k = 0;
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
     }
-
-    // Reverse the words in the sentence
-    reverseWords(sentence);
-
-    // Print the reversed sentence
-    printf("Reversed sentence: %s\n", sentence);
-
+    for(int i=k-1;i>=0;i--){
+        printf("%s",words[i]);
+        if(i>0){
+            printf(" ");
+        }
+    }
     return 0;
 }
 ```
