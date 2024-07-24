@@ -851,7 +851,7 @@ int main() {
 
 int main() {
     char str1[100], str2[100];
-    int map1[2`156] = {0};
+    int map1[256] = {0};
     int map2[256] = {0};
     printf("Enter the first string: ");
     fgets(str1, sizeof(str1), stdin);

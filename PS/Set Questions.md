@@ -70,7 +70,7 @@ int main() {
 }
 
 ```
-## 2.[5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+## 2. [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
 ```c
 
 #include <stdio.h>
@@ -307,6 +307,166 @@ int main() {
 }
 ```
 
+## 8. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)
+in java
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class PalindromePartitioning {
+
+    private boolean isPalindrome(String s, int start, int end) {
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    private void backtrack(String s, int start, List<String> currentList, List<List<String>> result) {
+        if (start == s.length()) {
+            result.add(new ArrayList<>(currentList));
+            return;
+        }
+
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                currentList.add(s.substring(start, end + 1));
+                backtrack(s, end + 1, currentList, result);
+                currentList.remove(currentList.size() - 1);
+            }
+        }
+    }
+
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<>();
+        if (s.length() == 1) {
+            return result;
+        }
+        backtrack(s, 0, new ArrayList<>(), result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        PalindromePartitioning pp = new PalindromePartitioning();
+
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        List<List<String>> result = pp.partition(input);
+        if (input.length() == 1) {
+            System.out.println("-2");
+        } else { 
+                System.out.println(result);
+            
+        }
+
+        scanner.close();
+    }
+}
+
+```
+in c
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_LEN 100
+
+// Function to check if a substring is a palindrome
+bool isPalindrome(char *s, int start, int end) {
+    while (start < end) {
+        if (s[start] != s[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}
+
+// Helper function for backtracking
+void backtrack(char *s, int start, char **currentList, int currentListSize, char ***result, int *returnSize, int **returnColumnSizes) {
+    int len = strlen(s);
+    if (start == len) {
+        result[*returnSize] = (char **)malloc(currentListSize * sizeof(char *));
+        (*returnColumnSizes)[*returnSize] = currentListSize;
+        for (int i = 0; i < currentListSize; i++) {
+            result[*returnSize][i] = strdup(currentList[i]);
+        }
+        (*returnSize)++;
+        return;
+    }
+
+    for (int end = start; end < len; end++) {
+        if (isPalindrome(s, start, end)) {
+            char *substring = (char *)malloc((end - start + 2) * sizeof(char));
+            strncpy(substring, s + start, end - start + 1);
+            substring[end - start + 1] = '\0';
+            currentList[currentListSize] = substring;
+            backtrack(s, end + 1, currentList, currentListSize + 1, result, returnSize, returnColumnSizes);
+            free(substring);
+        }
+    }
+}
+
+// Function to find all palindrome partitions
+char ***partition(char *s, int *returnSize, int **returnColumnSizes) {
+    *returnSize = 0;
+    int len = strlen(s);
+    char ***result = (char ***)malloc(MAX_LEN * sizeof(char **));
+    *returnColumnSizes = (int *)malloc(MAX_LEN * sizeof(int));
+    char **currentList = (char **)malloc(len * sizeof(char *));
+    backtrack(s, 0, currentList, 0, result, returnSize, returnColumnSizes);
+    free(currentList);
+    return result;
+}
+
+// Main function to read input and call the partition function
+int main() {
+    char input[MAX_LEN];
+    printf("Enter a string: ");
+    scanf("%s", input);
+
+    int returnSize;
+    int *returnColumnSizes;
+    char ***result = partition(input, &returnSize, &returnColumnSizes);
+
+    if (returnSize == 0) {
+        printf("[[]]\n");
+    } else {
+        printf("[");
+        for (int i = 0; i < returnSize; i++) {
+            printf("[");
+            for (int j = 0; j < returnColumnSizes[i]; j++) {
+                printf("\"%s\"", result[i][j]);
+                if (j < returnColumnSizes[i] - 1) {
+                    printf(",");
+                }
+                free(result[i][j]);
+            }
+            printf("]");
+            if (i < returnSize - 1) {
+                printf(",");
+            }
+        }
+        printf("]");
+    }
+
+    free(returnColumnSizes);
+    free(result);
+
+    return 0;
+}
+
+```
 # Set 2
 ## [318. Maximum Product of Word Lengths](https://leetcode.com/problems/maximum-product-of-word-lengths/)
 ```c
@@ -1001,6 +1161,782 @@ int main() {
          printf("count of \"%s\" : %d \n", words[i],count);
        }
     }
+    return 0;
+}
+```
+# Extra
+## 2d matrix 90 deg rotation(Transpose of String characters)
+```c
+#include <stdio.h>
+int main() {
+    char t[3][3];
+    for (int i = 0; i < 3; i++) {
+        scanf("%3s", t[i]);
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+           printf("%c\t",t[j][i]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+```
+## Remove vowels( program to print the given string without any vowel character example: ChatGPT 3.0 @REn_Gan --> ChtGPT 3.0 @ Rn_Gn)
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s); i++){
+        if(s[i]!='a'&&s[i]!='e'&&s[i]!='i'&&s[i]!='o'&&s[i]!='u'&&s[i]!='A'&&s[i]!='E'&&s[i]!='I'&&s[i]!='O'&&s[i]!='U'){
+           printf("%c",s[i]);
+        }
+    }
+    return 0;
+}
+
+```
+
+## Replacing Words( program to print the given string by replacing specific letter in a string and replace it with provided characters Example : e-->f h-->j numbers --> n hello there 123! --> jfllo tjfrf nnn!)
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s); i++){
+        if(s[i]=='e'){
+           printf("f");
+        }
+        else if(s[i]=='h'){
+           printf("j");
+        }
+        else if(isdigit(s[i])){
+            printf("n");
+        }
+        else
+            printf("%c",s[i]);
+    }
+    return 0;
+}
+
+```
+## program to print maximum character that is repeated in the string i.e Hello World - l ( l 3 repetition )
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int max=0,k;
+    for (int i = 0; i < strlen(s); i++){
+        int count=0;
+        for (int j = 0; j < strlen(s); j++){
+            if(s[i]==s[j]&&i!=j){
+                count++;
+            }
+        }
+        if(max<count)
+            k=i;
+    }
+    printf("%c",s[k]);
+    return 0;
+    }
+```
+
+## program to print the given string without any alphabet character
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s); i++){
+            if(!isalpha(s[i])){
+                printf("%c",s[i]);
+        }
+    }
+    return 0;
+    }
+
+```
+## Hello123sfj4 --> 123+4=127,fjs100fsokf100 -->200
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int  n=0,m=0;
+    for (int i = 0; i < strlen(s); i++){
+           if(isdigit(s[i])){
+               n=(n*10)+(s[i]-'0');
+           }
+           else {
+               m+=n;
+               n=0;
+           }
+    }
+    m+=n;
+    printf("%d",m);
+    return 0;
+    }
+
+```
+## print the string replacing the space with given character -- input : string - "Hello World" replace :- "$" output : "Hello$World"
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s); i++){
+            if(isspace(s[i])){
+                printf("$");
+                }
+                else{
+                    printf("%c",s[i]);
+                }
+    }
+    return 0;
+    }
+
+```
+## count no of parenthesis , semicolons , question marks ( that is special characters in a string ) - Input = "Hello World ? }" Output = 2
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int count=0;
+    for (int i = 0; i < strlen(s); i++){
+            if(!isalnum(s[i])&&!isspace(s[i])){
+                count++;
+                }
+    }
+    printf("%d",count);
+    return 0;
+    }
+
+```
+## Print first non-repeating character of a string
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int count=0;
+    for (int i = 0; i < strlen(s); i++){
+        count=0;
+        for (int j = 0; j < strlen(s); j++){
+            if(s[i]==s[j]&&i!=j){
+                count=1;
+            }
+        }
+        
+            if(!count){
+                printf("%c",s[i]);
+                return 0;
+            }
+    }
+    printf("%d",count);
+    return 0;
+    }
+
+```
+## String encoding and print the square count(input: star , output: star, 1111, 16)(input: apple, output: apple, 1211,25)
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int count=0;
+    printf("%s,",s);
+    int visited[100]={0};
+    for (int i = 0; i < strlen(s); i++){
+        count=0;
+        if(!visited[i]){
+                for (int j = 0; j < strlen(s); j++){
+                    if(s[i]==s[j]){
+                        count++;
+                        visited[j]=1;
+                 }
+            }
+        }
+    if(count>0)
+    printf("%d",count);
+}
+printf(",%d",strlen(s)*strlen(s));
+return 0;
+}
+
+```
+## Extract numbers from string Input: 20 apples and 5 oranges Output: 20 5 (print numbers in newline)
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int  n=0,m=0;
+    for (int i = 0; i < strlen(s); i++){
+           if(isdigit(s[i])){
+               n=(n*10)+(s[i]-'0');
+           }
+           else if(n>0){
+               printf("%d ",n);
+               n=0;
+           }
+    }
+    if(n>0)
+    printf("%d",n);
+    return 0;
+    }
+```
+
+## print the odd position words and concatenate them. Sample Test case: Input : 3 apple orange mango (words will be in separate lines one below other 👇🏼). Output :applemango
+### get input by next line
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+     char s[3][100];
+    for (int i = 0; i < 3; i++) {
+        scanf("%s", &s[i]);
+    }
+    
+    for (int i = 0; i < 3; i++){
+         if((i+1)%2!=0){
+             printf("%s",s[i]);
+             
+         }
+         else{
+             continue;
+         }
+    }
+    return 0;
+    }
+```
+### get Input by space
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char ch[100];
+    fgets(ch,100,stdin);
+    int i=0;
+    char ans[100][100];
+    char *word=strtok(ch," ");
+    while(word!=NULL){
+        strcpy(ans[i++],word);
+        word=strtok(NULL," ");
+    }
+    for(int j=0;j<i;j++){
+        if(j%2==0){
+            printf("%s",ans[j]);
+        }
+    }
+    return 0;
+}
+```
+## remove duplicate characters in a string EG: INPUT: Hello world OUTPUT: Helo wrd
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int visited[100]={0};
+    for (int i = 0; i < strlen(s); i++){
+        if(!visited[i]){
+                for (int j = i+1; j < strlen(s); j++){
+                    if(s[i]==s[j]){
+                        visited[j]=1;
+                 }
+            }
+        }
+    }
+    for (int i = 0; i < strlen(s); i++){
+        if(!visited[i])
+            printf("%c",s[i]);
+    }
+    return 0;
+}
+```
+
+## remove duplicate words in a string(not a case sensitive) INPUT : Sucess sucess is a problem OUTPUT: Sucess is a problem
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+int main() {
+    char s1[100];
+    fgets(s1, sizeof(s1), stdin);  
+    s1[strcspn(s1, "\n")] = '\0';
+    char words[100][100]; 
+    int visited[100] = {0};
+    int k = 0, m = 0;
+    char s[200];
+    for (int i = 0; i<strlen(s1); i++) {
+        s[i] = tolower((unsigned char)s1[i]);
+    }
+    s[strlen(s1)] = '\0';
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
+    }
+    for (int i = 0; i < k; i++){
+        if(!visited[i]){
+                for (int j = i+1; j < k; j++){
+                    if(!strcmp(words[i],words[j])){
+                        visited[j]=1;
+                 }
+            }
+        }
+    }
+   int firstWord = 1;
+    for (int i = 0; i < k; i++) {
+        if (!visited[i]) {
+            if (!firstWord) {
+                printf(" ");
+            } else {
+                // Capitalize the first letter of the first word
+                words[i][0] = toupper(words[i][0]);
+            }
+            printf("%s", words[i]);
+            firstWord = 0;
+        }
+    }
+    return 0;
+}
+```
+## Delete target word in a string
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    char words[100][100]; 
+    int visited[100] = {0};
+    int k=0;
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
+    }
+    for (int i = 0; i < k; i++){
+                    if(i+1==1){
+                        visited[i]=1;
+            }
+    }
+    int m=0;
+    for (int i = 0; i < k; i++) {
+        if (!visited[i]) {
+            if(m>0){
+                printf(" ");
+            }
+            printf("%s", words[i]);
+            m++;
+        }
+    }
+    return 0;
+}
+```
+## REVERSE THE WORD WHICH ARE PRESENT IN THE EVEN POSITION INPUT: 5 APPLE MANGO ORANGE BANANA GRAPES OUTPUT: OGNAM ANANAB
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<math.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    char words[100][100]; 
+    int visited[100] = {0};
+    int k=0;
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
+    }
+    for (int i = 0; i < k; i++){
+                    if(i%2==0){
+                        visited[i]=1;
+                 }
+            }
+    for (int i = 0; i < k; i++) {
+        if (!visited[i]) {
+           for (int j = strlen(words[i])-1; j>=0; j--){
+            printf("%c", words[i][j]);
+           }
+           printf("\n");
+        }
+    }
+    return 0;
+}
+```
+
+## Convert unformat string into Title case.
+```c
+#include <stdio.h>
+#include <ctype.h>
+int main() {
+    char str[100];
+    fgets(str, 100, stdin);
+    int capitalize = 1; 
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (isspace(str[i])) {
+            capitalize = 1; 
+        } else if (capitalize && isalpha(str[i])) {
+            str[i] = toupper(str[i]);
+            capitalize = 0;
+        } else {
+            str[i] = tolower(str[i]);
+        }
+    }
+    printf("%s", str);
+    return 0;
+}
+```
+## Sum of digits in a string and reverse the sum .if i/p->"djs1245d" , o/p->21.if i/p->"djs55d" , o/p->01
+```c
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    int sum=0;
+    for(int i=0;i<strlen(s);i++){
+        if(isdigit(s[i])){
+            sum+=(s[i]-'0');
+        }
+    }
+    char sumStr[20];
+    sprintf(sumStr, "%d", sum);
+    int len = strlen(sumStr);
+    for (int i = len - 1; i >= 0; i--) {
+        printf("%c",sumStr[i]);
+    }
+    
+    return 0;
+}
+```
+## Railway time if valid print it. if incorrect format print "Invalid"
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0'; 
+    if (strlen(s) != 8 || s[2] != ':' || s[5] != ':' ||
+        !isdigit(s[0]) || !isdigit(s[1]) || !isdigit(s[3]) || !isdigit(s[4]) || !isdigit(s[6]) || !isdigit(s[7])) {
+        printf("Invalid\n");
+        return 0;
+    }
+    int hh = (s[0] - '0') * 10 + (s[1] - '0');
+    int mm = (s[3] - '0') * 10 + (s[4] - '0');
+    int ss = (s[6] - '0') * 10 + (s[7] - '0');
+    if (hh < 0 || hh > 23 || mm < 0 || mm > 59 || ss < 0 || ss > 59) {
+        printf("Invalid\n");
+    } else {
+        printf("Hour:%c%c Minutes:%c%c seconds:%c%c",s[0],s[1],s[3],s[4],s[6],s[7]);
+    }
+    return 0;
+}
+
+```
+## Found the all the Index of a target word in a i/p string
+
+Enter the first string: School is school
+Enter the word to search for: school
+Found at index: 0
+Found at index: 10
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void tolowerS(char *string) {
+    for (int i = 0; string[i]; i++) {
+        string[i] = tolower(string[i]);
+    }
+}
+int main() {
+    char s[100];
+    char s1[100];
+    char lower_s[100];
+    printf("Enter the first string: ");
+    fgets(s, sizeof(s), stdin);
+    printf("Enter the word to search for: ");
+    fgets(s1, sizeof(s1), stdin);
+    s1[strcspn(s1, "\n")] = '\0';
+    tolowerS(s1);
+    tolowerS(s);
+    char *pos = strstr(s, s1);
+    int found = 0;
+    while (pos != NULL) {
+        int index = pos - s;
+        printf("Found at index: %d\n", index);
+        found = 1;
+        pos = strstr(pos + 1, s1);
+    }
+    if (!found) {
+        printf("Word not found\n");
+    }
+
+    return 0;
+}
+
+```
+## Swap the Adjacent char of words .i/p->Open Ai , o/p->pOne iA
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char s[100];
+    fgets(s, sizeof(s), stdin);
+    s[strcspn(s, "\n")] = '\0';
+    for (int i = 0; i < strlen(s) - 1; i++) {
+        if (!isspace(s[i]) && !isspace(s[i + 1])) {
+            char temp = s[i];
+            s[i] = s[i + 1];
+            s[i + 1] = temp;
+            i++; 
+        }
+    }
+    printf("%s", s);
+    return 0;
+}
+
+```
+## Get a integer as input. Get that much strings Each of 15 Characters.
+**(ⅰ) 1st 10 characters represent phone number
+(ⅱ) Next Character represent Gender
+(iii) Next 2 Chai represent age
+(iv) Remaining represent seat no.
+Find the count whose age is greats than 60.
+Sample i/p:
+3
+9034567890M62H5
+9034563767M4245
+9034563767M6245
+Output: 2
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    int n, count = 0;
+    scanf("%d", &n);
+    getchar();
+    char strings[n][100]; 
+    for (int i = 0; i < n; i++) {
+        fgets(strings[i], sizeof(strings[i]), stdin);
+        strings[i][strcspn(strings[i], "\n")] = '\0';
+    }
+    for (int i = 0; i < n; i++) {
+            int m = (strings[i][11] - '0') * 10 + (strings[i][12] - '0');
+            if (m > 60) {
+                count++;
+            }
+    }
+    printf("%d\n", count);
+    return 0;
+}
+```
+
+## 2 largest string size in a 2d array
+### get Input by space
+![[Pasted image 20240723230922.png]]
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    int n, m1=0,m2=0;
+    scanf("%d", &n);
+    getchar();
+    char s[100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    char words[100][100];
+    int k=0;
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
+    }
+   for(int i=0;i<n;i++){
+                if(m1<strlen(words[i])){
+                        m2=m1;
+                       m1=strlen(words[i]);
+                   }
+                   else if(m1>strlen(words[i])&&m2<strlen(words[i])){
+                       m2=strlen(words[i]);
+                   }
+    }
+    printf("%d",m2);
+    return 0;
+}
+
+```
+### get input by next line
+![[Pasted image 20240723231105.png]]
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    int n, m1 = 0,m2=0;
+    scanf("%d", &n);
+    getchar();
+      char words[n][100]; 
+    for (int i = 0; i < n; i++) {
+        fgets(words[i], sizeof(words[i]), stdin);
+        words[i][strcspn(words[i], "\n")] = '\0';
+    }
+    for(int i=0;i<n;i++){
+                if(m1<strlen(words[i])){
+                        m2=m1;
+                       m1=strlen(words[i]);
+                   }
+                   else if(m1>strlen(words[i])&&m2<strlen(words[i])){
+                       m2=strlen(words[i]);
+                   }
+    }
+    printf("%d",m2);
+    return 0;
+}
+
+```
+## Largest and smallest string in an 2d array
+![[Pasted image 20240724075632.png]]
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    int n, m2=1000000,m1=0;
+    scanf("%d", &n);
+    getchar();
+    char s[100],s1[100][100],s2[100][100];
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    char words[100][100];
+    int k=0;
+    char *word = strtok(s, " ");
+    while (word != NULL) {
+        strcpy(words[k++], word);
+        word = strtok(NULL, " ");
+    }
+    int a,b;
+   for(int i=0;i<n;i++){
+                if(m1<strlen(words[i])){
+                       m1=strlen(words[i]);
+                       a=0;
+                       strcpy(s1[a++],words[i]);
+                   }
+                   else if(strlen(words[i])==m1){
+                       strcpy(s1[a++],words[i]);
+                   }
+                if(m2>strlen(words[i])){
+                       m2=strlen(words[i]);
+                       b=0;
+                       strcpy(s2[b++],words[i]);
+                   }
+                   else if(strlen(words[i])==m2){
+                       strcpy(s2[b++],words[i]);
+                   }
+                 
+    }
+    printf("largest string: ");
+     for(int i=0;i<a;i++){
+         if(i>0){
+             printf(" ");
+         }
+         printf("%s",s1[i]);
+     }
+     printf("\n");
+    printf("Smallest string: ");
+   for(int i=0;i<b;i++){
+        if(i>0){
+             printf(" ");
+         }
+         printf("%s",s2[i]);
+     }
+    return 0;
+}
+```
+## Pangram
+```c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+    char s[100];
+    char a[256]={0};
+    int count=0;
+    fgets(s, sizeof(s), stdin);  
+    s[strcspn(s, "\n")] = '\0';
+    for(int i=0;i<strlen(s);i++){
+        s[i]=tolower(s[i]);
+    }
+    for(int i=0;i<strlen(s);i++){
+       if(isalpha(s[i])){
+            a[(int)s[i]]=1;
+       }
+    }
+    for(int i=97;i<123;i++){
+       if(!a[i]){
+            printf("Not Pangram");
+            return 0;
+       }
+    }
+    printf("Pangram");
     return 0;
 }
 ```

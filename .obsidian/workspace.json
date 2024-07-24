@@ -23,10 +23,8 @@
             "id": "19f98e6f3521a9e5",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "Pasted image 20240717171116.png"
-              }
+              "type": "empty",
+              "state": {}
             }
           },
           {
@@ -35,14 +33,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/OOPs/OOPs in Java.md",
+                "file": "PS/Set Questions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "16f09f9c530b0895",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PS/Set Questions.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -108,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JAVA/OOPs/OOPs in Java.md",
+                "file": "PS/Set Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JAVA/OOPs/OOPs in Java.md",
+                "file": "PS/Set Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JAVA/OOPs/OOPs in Java.md"
+                "file": "PS/Set Questions.md"
               }
             }
           }
@@ -169,10 +179,16 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "60fa2846daa10293",
+  "active": "16f09f9c530b0895",
   "lastOpenFiles": [
-    "JS/BASICS.md",
+    "PS/Level 4(own).md",
+    "PS/Set Questions.md",
+    "Pasted image 20240724075632.png",
+    "Pasted image 20240723231105.png",
+    "Pasted image 20240723230922.png",
+    "JAVA/Overall/BASICS.md",
     "JAVA/OOPs/OOPs in Java.md",
+    "JS/BASICS.md",
     "Pasted image 20240717183223.png",
     "Pasted image 20240717183154.png",
     "Pasted image 20240717171122.png",
@@ -181,9 +197,6 @@
     "Pasted image 20240717173710.png",
     "Pasted image 20240717173611.png",
     "Pasted image 20240717173354.png",
-    "Pasted image 20240717172329.png",
-    "Pasted image 20240717172004.png",
-    "Pasted image 20240717171840.png",
     "Untitled.md",
     "JAVA/OOPs/IMAGES",
     "JAVA/Untitled",
@@ -191,12 +204,9 @@
     "JAVA/OOPs/Untitled.md",
     "JS.md",
     "JS",
-    "PS/Level 4(own).md",
     "PS/Level 3.md",
     "PS/Level 4.md",
-    "JAVA/Overall/BASICS.md",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "PS/Set Questions.md",
     "Set Questions.pdf",
     "JAVA/OOPs",
     "Level 4.pdf",
