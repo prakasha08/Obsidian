@@ -381,7 +381,7 @@ in c
 #define MAX_LEN 100
 
 // Function to check if a substring is a palindrome
-bool isPalindrome(char *s, int start, int end) {
+bool isPalindrome(const char *s, int start, int end) {
     while (start < end) {
         if (s[start] != s[end]) {
             return false;
@@ -393,40 +393,32 @@ bool isPalindrome(char *s, int start, int end) {
 }
 
 // Helper function for backtracking
-void backtrack(char *s, int start, char **currentList, int currentListSize, char ***result, int *returnSize, int **returnColumnSizes) {
+void backtrack(const char *s, int start, char currentList[MAX_LEN][MAX_LEN], int currentListSize, char result[MAX_LEN][MAX_LEN][MAX_LEN], int *returnSize, int returnColumnSizes[MAX_LEN]) {
     int len = strlen(s);
     if (start == len) {
-        result[*returnSize] = (char **)malloc(currentListSize * sizeof(char *));
-        (*returnColumnSizes)[*returnSize] = currentListSize;
         for (int i = 0; i < currentListSize; i++) {
-            result[*returnSize][i] = strdup(currentList[i]);
+            strcpy(result[*returnSize][i], currentList[i]);
         }
+        returnColumnSizes[*returnSize] = currentListSize;
         (*returnSize)++;
         return;
     }
 
     for (int end = start; end < len; end++) {
         if (isPalindrome(s, start, end)) {
-            char *substring = (char *)malloc((end - start + 2) * sizeof(char));
-            strncpy(substring, s + start, end - start + 1);
-            substring[end - start + 1] = '\0';
-            currentList[currentListSize] = substring;
+            strncpy(currentList[currentListSize], s + start, end - start + 1);
+            currentList[currentListSize][end - start + 1] = '\0';
             backtrack(s, end + 1, currentList, currentListSize + 1, result, returnSize, returnColumnSizes);
-            free(substring);
         }
     }
 }
 
 // Function to find all palindrome partitions
-char ***partition(char *s, int *returnSize, int **returnColumnSizes) {
+void partition(const char *s, int *returnSize, int returnColumnSizes[MAX_LEN], char result[MAX_LEN][MAX_LEN][MAX_LEN]) {
     *returnSize = 0;
     int len = strlen(s);
-    char ***result = (char ***)malloc(MAX_LEN * sizeof(char **));
-    *returnColumnSizes = (int *)malloc(MAX_LEN * sizeof(int));
-    char **currentList = (char **)malloc(len * sizeof(char *));
+    char currentList[MAX_LEN][MAX_LEN] = {0};
     backtrack(s, 0, currentList, 0, result, returnSize, returnColumnSizes);
-    free(currentList);
-    return result;
 }
 
 // Main function to read input and call the partition function
@@ -436,8 +428,10 @@ int main() {
     scanf("%s", input);
 
     int returnSize;
-    int *returnColumnSizes;
-    char ***result = partition(input, &returnSize, &returnColumnSizes);
+    int returnColumnSizes[MAX_LEN];
+    char result[MAX_LEN][MAX_LEN][MAX_LEN];
+
+    partition(input, &returnSize, returnColumnSizes, result);
 
     if (returnSize == 0) {
         printf("[[]]\n");
@@ -450,7 +444,6 @@ int main() {
                 if (j < returnColumnSizes[i] - 1) {
                     printf(",");
                 }
-                free(result[i][j]);
             }
             printf("]");
             if (i < returnSize - 1) {
@@ -460,11 +453,9 @@ int main() {
         printf("]");
     }
 
-    free(returnColumnSizes);
-    free(result);
-
     return 0;
 }
+
 
 ```
 # Set 2
@@ -524,7 +515,7 @@ int main() {
             strcpy(s1,words[i]),strcpy(s2,words[j]);
              a=0;
               for(int m=0;m<strlen(words[i]);m++){
-                    for(int n=0;m<strlen(words[j]);m++){
+                    for(int n=0;m<strlen(words[j]);n++){
                        if(s1[m]==s2[n]){
                            a=1;
                            break;
@@ -1072,9 +1063,8 @@ int main() {
     fgets(mail, 100, stdin);
      mail[strcspn(mail, "\n")] = 0;
     int k=1,b1=0,b2=0;
-    
         for(int i=0;i<strlen(mail);i++){
-            if(mail[0]=='@'&& mail[strlen(mail)-1]=='@'){
+            if(mail[0]!='@'&& mail[strlen(mail)-1]!='@'){
             if(mail[i]=='@'&&k!=0){
                 b1=1;
                 k--;
@@ -1106,14 +1096,14 @@ int main() {
     int count;
     char visited[100] = {0};
     for (int i = 0; i < strlen(s); i++) {
-        if (!visited[i] && !((isalpha(s[i]))&&!(s[i]==' ')) {
+        if (!visited[i] && !(isalnum(s[i]))&&!(s[i]==' ')) {
             char c = s[i];
             count = 1;
-            visited[i] = 1;
-            for (int j = i + 1; j < strlen(s); j++) {
+            for (int j = 0; j < strlen(s); j++) {
                 if (s[j] == c && !visited[j]) {
                     count++;
                     visited[j] = 1; 
+                    visited[i] = 1;
                 }
             }
             printf("%c:%d\n", c, count);
@@ -1141,6 +1131,7 @@ int main() {
         }
     }
     str[j] = '\0'; 
+    printf("%s",str);
   char words[100][100];
   char *word = strtok(str, " ");
   while(word!=NULL){
@@ -1207,10 +1198,10 @@ int main() {
     fgets(s, sizeof(s), stdin);  
     s[strcspn(s, "\n")] = '\0';
     for (int i = 0; i < strlen(s); i++){
-        if(s[i]!='a'&&s[i]!='e'&&s[i]!='i'&&s[i]!='o'&&s[i]!='u'&&s[i]!='A'&&s[i]!='E'&&s[i]!='I'&&s[i]!='O'&&s[i]!='U'){
-           printf("%c",s[i]);
-        }
-    }
+	        if(s[i]!='a'&&s[i]!='e'&&s[i]!='i'&&s[i]!='o'&&s[i]!='u'&&s[i]!='A'&&s[i]!='E'&&s[i]!='I'&&s[i]!='O'&&s[i]!='U'){
+	           printf("%c",s[i]);
+	        }
+	    }
     return 0;
 }
 
@@ -1255,12 +1246,14 @@ int main() {
     for (int i = 0; i < strlen(s); i++){
         int count=0;
         for (int j = 0; j < strlen(s); j++){
-            if(s[i]==s[j]&&i!=j){
+            if(s[i]==s[j]){
                 count++;
             }
         }
-        if(max<count)
+        if(max<count){
+            max=count;
             k=i;
+        }
     }
     printf("%c",s[k]);
     return 0;
@@ -1283,7 +1276,6 @@ int main() {
     }
     return 0;
     }
-
 ```
 ## Hello123sfj4 --> 123+4=127,fjs100fsokf100 -->200
 ```c
@@ -1449,8 +1441,7 @@ int main() {
         scanf("%s", words[i]);
     }
     printf("Words at even positions:\n");
-    for (int i = 0; i < numWords; i ++) { 
-        if((i+1)%2!=0)
+    for (int i = 1 i < numWords; i+=2){
         printf("%s", words[i]);
     }
     return 0;
@@ -1496,7 +1487,7 @@ int main() {
     s1[strcspn(s1, "\n")] = '\0';
     char words[100][100]; 
     int visited[100] = {0};
-    int k = 0, m = 0;
+    int k = 0;
     char s[200];
     for (int i = 0; i<strlen(s1); i++) {
         s[i] = tolower((unsigned char)s1[i]);
@@ -1675,6 +1666,32 @@ int main() {
 }
 
 ```
+
+```c
+#include <stdio.h>
+
+int main() {
+    char a[8];
+    scanf("%s",a);
+  
+    if(a[0]-'0'<3&&a[1]-'0'<9&&a[3]-'0'<6&&a[4]-'0'<10&&a[6]-'0'<6&&a[7]-'0'<10)
+    {
+        if(a[0]-'0'==2)
+        {
+            if(a[1]-'0'<4)
+                printf("Valid");
+            else
+           
+            printf("Invalid");
+        }
+        else
+        printf("Valid");
+    }
+   
+    else
+    printf("Invalid");
+}
+```
 ## Found the all the Index of a target word in a i/p string
 
 Enter the first string: School is school
@@ -1685,19 +1702,19 @@ Found at index: 10
 ```c
 #include <stdio.h>
 #include <string.h>
-
+void tolowers(char * s){
+for(int i=0;i<strlen(s);i++){
+s[i]=tolower(s[i]);
+}
+}
 int main() {
     char arr[100], word[100];
     fgets(arr,100,stdin);
     fgets(word,100,stdin);
     arr[strlen(arr)-1]='\0';
     word[strlen(word)-1]='\0';
-    int c=0;
-    for(int i=0; i<sizeof(arr); i++){
-        if(arr[i]==' '){
-            c++;
-         }
-     }
+    tolowers(arr);
+    tolowers(word);
     char *t = strtok(arr," ");
     int i=0;
     while(t!=NULL ){
@@ -1707,7 +1724,6 @@ int main() {
         i+=strlen(t)+1;
         t = strtok(NULL, " ");
     }
-   
    return 0;
 }
 

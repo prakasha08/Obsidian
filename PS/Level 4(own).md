@@ -201,42 +201,24 @@ int main() {
 ### Find the largest and smallest word in a string. Input: The bottle is full Output: is bottle
 ```c
 #include <stdio.h>
-#include<string.h>
+#include <string.h>
 int main() {
-    char in[1024];
-    scanf("%[^\n]",&in);
-    int start = 0;
-    int min = 10000;
-    int mS=0;
-    int count=0;
-    int max =0;  
-    int maxS = 0;
-    for(int i=0;i<=strlen(in);i++){
-        if(in[i] == ' ' || in[i]=='\0'){
-            if(min > count){
-                min = count;
-                mS=start;
+    char str[20], rstr[20];
+    printf("Enter a string: ");
+    scanf("%[^\n]", str);
+    int length = strlen(str);
+    int start = 0,max=0;
+    for (int i = 0; i <= length; i++) {
+        if (str[i] == ' ' || str[i] == '\0') {
+            int end = i - 1;
+            if(max<((end-start)+1)){
+                max=end-start+1;
             }
-            if(max<count){
-                max = count;
-                maxS = start;
-            }
-            start=i+1;
-            count=0;
-        }else{
-            count++;
-        }
+            start = i + 1;
+         }
     }
-    
-    for(int i=mS;in[i] != ' ' &&i < strlen(in);i++){
-        printf("%c",in[i]);
-    }
-    printf("\t");
-    
-    for(int i=maxS;in[i] != ' ' && i < strlen(in);i++){
-        printf("%c",in[i]);
-    }
-    
+    printf("%d",max);
+    return 0;
 }
 ```
 ### Find the largest number length in the given sentence. Input :- 4(range of words) This question is easy. Output:- 8(length of the largest word)
@@ -679,9 +661,9 @@ int main() {
 int main() {
     char str[20];
     scanf("%[^\n]",str);
-    int n=strlen(str);
-    for(int i=0;i<n;i++){
-       if(str[i]!=str[n-i-1]){
+    int end=strlen(str)-1,start=0;
+    if(start<=end){
+       if(str[start++]!=str[end--]){
            printf("Not a Palindrome");
            return 0;
        }
@@ -752,15 +734,15 @@ int main() {
         word = strtok(NULL, " ");
     }
     for(int i=k-1;i>=0;i--){
-        printf("%s",words[i]);
         if(i>0){
             printf(" ");
         }
+        printf("%s",words[i]);
     }
     return 0;
 }
 ```
-### Removing Word from sentence i/p :" the sun is hot". word: "is" o/p: "the sun hot".
+### Removing Word from sentence i/p :"the sun is hot". word: "is" o/p: "the sun hot".
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -803,12 +785,6 @@ int main() {
     fgets(word,100,stdin);
     arr[strlen(arr)-1]='\0';
     word[strlen(word)-1]='\0';
-    int c=0;
-    for(int i=0; i<sizeof(arr); i++){
-        if(arr[i]==' '){
-            c++;
-         }
-     }
     char *t = strtok(arr," ");
     int i=0;
     while(t!=NULL ){

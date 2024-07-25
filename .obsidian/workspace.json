@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "0b4ee8f7c8a9bcd1",
+        "id": "546191394d3df6e4",
         "type": "tabs",
         "children": [
           {
-            "id": "60fa2846daa10293",
+            "id": "ed76520238f63ddb",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,7 +20,7 @@
             }
           },
           {
-            "id": "4beb9a9ebedf12ad",
+            "id": "db8789444baf498a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -159,10 +159,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4beb9a9ebedf12ad",
+  "active": "db8789444baf498a",
   "lastOpenFiles": [
     "PS/Level 4(own).md",
     "PS/Set Questions.md",
+    "Set Questions.pdf",
     "PS/Level 4.md",
     "PS/Level 3.md",
     "PS/images/Pasted image 20240724075632.png",
@@ -188,7 +189,6 @@
     "JS.md",
     "JS",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "Set Questions.pdf",
     "JAVA/OOPs",
     "Level 4.pdf",
     "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
