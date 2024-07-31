@@ -1,5 +1,5 @@
 # Set 1
-## 1.Anagram
+## 1.[242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -109,7 +109,7 @@ int main() {
     return 0;
 }
 ```
-## 3.Greatest English Letter in Upper and Lower Case
+## 3.[2309. Greatest English Letter in Upper and Lower Case](https://leetcode.com/problems/greatest-english-letter-in-upper-and-lower-case/)
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -138,7 +138,7 @@ int main() {
     return 0;
 }
 ```
-## 4.Valid Parentheses
+## 4.[20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -185,7 +185,7 @@ int main() {
 }
 
 ```
-## 5.Minimum Length of String After Deleting Similar Ends.
+## 5.[1750. Minimum Length of String After Deleting Similar Ends](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/)
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -261,7 +261,7 @@ int main() {
     return 0;
 }
 ```
-## 7.Kth Distinct String in an Array
+## 7.[2053. Kth Distinct String in an Array](https://leetcode.com/problems/kth-distinct-string-in-an-array/)
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -997,7 +997,7 @@ int main() {
     return 0;
 }
 ```
-## 3.Bulls and Cows game
+## 3.[299. Bulls and Cows](https://leetcode.com/problems/bulls-and-cows/)
 ```C
 #include <stdio.h>
 #include <string.h>
