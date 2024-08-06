@@ -8,19 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ed76520238f63ddb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "HTML & CSS/BASICS.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "44b712f028ef00bb",
+            "id": "3eb5361f31479943",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -32,7 +20,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "stacked": true
       }
     ],
     "direction": "vertical"
@@ -128,7 +116,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": false
               }
             }
           },
@@ -142,11 +130,13 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -158,43 +148,46 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "44b712f028ef00bb",
+  "active": "3eb5361f31479943",
   "lastOpenFiles": [
-    "HTML & CSS/BASICS.md",
-    "JS/BASICS.md",
-    "Pasted image 20240729125923.png",
-    "Pasted image 20240729125916.png",
-    "Pasted image 20240729123406.png",
-    "Pasted image 20240729123338.png",
-    "Pasted image 20240729122556.png",
-    "Pasted image 20240729122554.png",
-    "Pasted image 20240729122411.png",
-    "Pasted image 20240729121217.png",
-    "Pasted image 20240728220805.png",
-    "Pasted image 20240728220717.png",
+    "JAVA/DSA/images/Pasted image 20240806183732.png",
+    "JAVA/DSA/images/Pasted image 20240806183822.png",
+    "JAVA/DSA/images/Pasted image 20240806184652.png",
+    "JAVA/DSA/images",
+    "Pasted image 20240806183732.png",
+    "Pasted image 20240806183822.png",
+    "Pasted image 20240806184652.png",
+    "JS/Images/Pasted image 20240806183732.png",
+    "JS/Images/Pasted image 20240806183822.png",
+    "JS/Images/Pasted image 20240806184652.png",
+    "JAVA/DSA/DSA.md",
     "PS/Set Questions.md",
+    "JAVA/DSA",
+    "Untitled",
     "PS/Level 4(own).md",
-    "Set Questions.pdf",
-    "PS/Level 4.md",
-    "PS/Level 3.md",
-    "PS/images",
     "JAVA/Overall/BASICS.md",
+    "JAVA/Overall/EXERCISES.md",
+    "BASICS.pdf",
+    "JS/BASICS.md",
     "JAVA/OOPs/OOPs in Java.md",
+    "JS/Images/Pasted image 20240801220101.png",
+    "JS/Images/Pasted image 20240801205340.png",
+    "PS/Level 3.md",
+    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
+    "PS/Level 5.md",
+    "JAVA/Overall/LEET CODE.md",
+    "PS/Level 4.md",
+    "PS/Level 5",
+    "HTML & CSS/BASICS.md",
+    "Set Questions.pdf",
+    "PS/images",
     "JS/Images",
     "Untitled.md",
     "JAVA/OOPs/IMAGES",
-    "JAVA/Untitled",
-    "Untitled",
     "JAVA/OOPs/Untitled.md",
     "JS.md",
     "JS",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "JAVA/OOPs",
-    "Level 4.pdf",
-    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
-    "JAVA/Overall/EXERCISES.md",
-    "JAVA/Overall/LEET CODE.md",
-    "JAVA/Overall/SHORT CUT KEYWORDDS.md",
-    "pattern"
+    "JAVA/Overall/SHORT CUT KEYWORDDS.md"
   ]
 }

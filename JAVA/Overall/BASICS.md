@@ -211,7 +211,7 @@ o/p
 - ![[Pasted image 20240201210906.png]]
 
 # Primitive and Reference Type
-- ![[Screenshot 2024-02-01 204748.png]]![[Screenshot 2024-02-01 204815.png]]![[Screenshot 2024-02-01 204839.png]]
+![[Screenshot 2024-02-01 204748.png]]![[Screenshot 2024-02-01 204815.png]]![[Screenshot 2024-02-01 204839.png]]
 
 ![[Screenshot 2024-02-01 204850.png]]
 

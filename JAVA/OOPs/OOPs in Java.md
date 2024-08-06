@@ -1,5 +1,30 @@
+![[WhatsApp Image 2024-07-30 at 9.57.46 PM.jpeg]]
 # Class And Object Creation
+**Here the Objects are in stack memory and their properties are in heap memory
+Whenever class(student) called it will be automatically memory in heap for the properties in it.
+![[Screenshot 2024-08-03 233338.png]]
+**Object will be  created in compile time and Properties are created in runtime(Here only it will allocate memory) 
+![[Screenshot 2024-08-03 233538.png]]
+*** If there is no Value assign to the properties it will allocate the default values with respect to the datatype.
+![[Screenshot 2024-08-03 234549.png]]
+
+![[Screenshot 2024-08-03 234630.png]]
+** By Passing parameters through the constructor.we can assign values to the properties of the object;
+![[Screenshot 2024-08-03 235442.png]]
+
+![[Screenshot 2024-08-03 235517.png]]
+
+![[Screenshot 2024-08-03 235847.png]]
+## Creating a object using another object
+![[Pasted image 20240804214438.png]]
+![[Pasted image 20240804214450.png]]
+## Constructor overloading
+- If you create object in constructor with parameter inside it .then it will automatically call the second constructor named as student with parameters.
+- create normally without it student constructor which does not have parameters.
+![[Pasted image 20240804214135.png]]
+
 ## Class Structure 
+
 ```java
 public static void main(String args) {  
 }  
@@ -102,7 +127,7 @@ public class Main {
     }
 }
 ```
-## 2. Function Overriding (Run-Time Polymorphism)
+## Function Overriding (Run-Time Polymorphism)
 
 Function overriding is an example of run-time polymorphism in Java. It occurs when a subclass provides a specific implementation for a method that is already defined in its superclass. The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
 
@@ -204,6 +229,7 @@ When `myDog.makeSound()` and `myCat.makeSound()` are called, the JVM determines 
 **Inheritance in Java is a mechanism where one class acquires the properties (fields) and behaviors (methods) of another class. The class that inherits the properties is known as the subclass (or child class, or derived class), and the class from which properties are inherited is known as the superclass (or parent class, or base class). There are several types of inheritance in Java:
 - **Single Level Inheritance**
 - **Multi-Level Inheritance**
+- **Multiple Inheritance
 - **Hierarchical Inheritance**
 - **Hybrid Inheritance
 ![[Pasted image 20240716191015.png]]
@@ -689,6 +715,8 @@ The diamond problem is an issue that arises in multiple inheritance when a class
 - **Avoiding Diamond Problem**: By using interfaces, Java avoids the complexity and ambiguity associated with multiple inheritance of classes.
 # Encapsulation
 
+https://www.w3schools.com/java/java_encapsulation.asp
+
 Encapsulation in Java is a fundamental principle of object-oriented programming that involves bundling data (variables) and methods (functions) that operate on the data into a single unit, often a class. The key idea behind encapsulation is to restrict direct access to some of an object's components, usually the internal state (variables), and enforce access through methods (getters and setters) that maintain the object's integrity and behavior.
 ### Key Points of Encapsulation
 
@@ -1008,9 +1036,6 @@ public class Main {
 ### Summary
 
 Abstraction in Java is a core principle of object-oriented programming that focuses on simplifying complex systems by hiding the implementation details and exposing only the essential features. It allows developers to work with high-level concepts and interactions without needing to understand the intricate workings beneath. This is achieved through abstract classes and interfaces, where abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation), and interfaces define a contract with abstract methods that must be implemented by any class that adheres to the interface. By using abstraction, developers can create more modular, maintainable, and understandable code, as they can concentrate on what an object does rather than how it does it.
-
-The `static` keyword in Java is used for memory management primarily. It can be applied to variables, methods, blocks, and nested classes. Here's an in-depth look at its usage and implications:
-
 # Static keyword
 
 The `static` keyword in Java is used for memory management primarily. It can be applied to variables, methods, blocks, and nested classes. Here's an in-depth look at its usage and implications:

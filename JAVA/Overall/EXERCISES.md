@@ -239,7 +239,34 @@ public class Fibonacci {
 }
 
 ```
+### without using loops
+```java
+public class FibonacciSeries {
 
+    // Recursive method to calculate the nth Fibonacci number
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    // Recursive method to print the Fibonacci series up to the nth term
+    public static void printFibonacciSeries(int current, int count) {
+        if (current < count) {
+            System.out.print(fibonacci(current) + " ");
+            printFibonacciSeries(current + 1, count);
+        }
+    }
+
+    public static void main(String[] args) {
+        int count = 10; // Change this to the desired number of terms
+        System.out.println("Fibonacci series up to " + count + " terms:");
+        printFibonacciSeries(0, count);
+    }
+}
+
+```
 
 ## Find nth Number in fibonacci(without recursion)
 ### wihtout ternary
@@ -293,6 +320,7 @@ public class Main {
 
 ```
 ![[Pasted image 20240307224536.png]]
+
 # Armstrong Number
 ```java
 public static void main(String[] args) {  
