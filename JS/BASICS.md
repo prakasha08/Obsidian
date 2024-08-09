@@ -200,6 +200,7 @@ let index = fruits.indexOf("orange");//1
 let index = fruits.indexOf("mango");//-1
 console.log(index);
 ```
+
 ## For loop
 ```js
 let fruits = ["apple", "orange", "banana", "coconut"];
@@ -319,6 +320,118 @@ function getShortWords (element){ return element.length <= 6;
 }
 function getLongWords (element){ return element.length > 6;
 ```
+## Reduce
+***reduce() = reduce the elements of an array to a single value
+
+```js
+const prices [5, 30, 10, 25, 15, 20];
+const total prices.reduce(sum);
+console.log($${total.toFixed(2)));
+function sum(accumulator, element){ 
+return accumulator + element;
+}
+```
+
+```js
+const grades [75, 50, 90, 80, 65, 95];
+const maximum grades.reduce(getMax);
+const minimum
+grades.reduce(getMin);
+console.log(maximum);
+console.log(minimum);
+function getMax (accumulator, element){
+return Math.max(accumulator, element);
+}
+function getMin (accumulator, element){
+return Math.min(accumulator, element);
+}
+```
+## Destructuring(In Arrays)
+
+**destructuring = extract values from arrays and objects, then assign them to variables in a convenient way
+[]= to perform array destructuring
+()= to perform object destructuring
+```js
+EXAMPLE 1
+// SWAP THE VALUE OF TWO VARIABLES
+let a = 1;
+let b = 2;
+[a, b] = [b, a];
+console.log(a);
+console.log(b);
+```
+
+```js
+//
+EXAMPLE 2
+// SWAP 2 ELEMENTS IN AN ARRA
+const colors ["red", "green", "blue", "black", "white"];
+[colors[0], colors [4]] = [colors [4], colors[0]);
+console.log(colors);
+```
+
+```js
+//
+EXAMPLE 3
+// ASSIGN ARRAY ELEMENTS TO VARIABLES
+const colors = ["red", "green", "blue", "black", "white"];
+const [firstColor, secondColor, thirdColor, ...extraColors] = colors;
+console.log(firstColor);
+console.log(secondColor);
+console.log(thirdColor);
+console.log(extraColors);
+```
+## Sorting Array
+sort() method used to sort elements of an array in place. Sorts elements as strings in lexicographic order, not alphabetical lexicographic (alphabet + numbers + symbols) as strings
+```js
+let fruits ["apple", "orange", "banana" "coconut", "pineapple");
+fruits.sort();
+console.log(fruits);
+//Number array
+let numbers = [1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
+numbers.sort((a, b) => a - b);//Ascending Order
+numbers.sort((a, b) => b - a);//decending Order
+console.log(numbers);
+```
+# Function Expression
+***function expressions a way to define functions as Values or variables
+```js
+setTimeout(function(){ console.log("Hello"); ), 3000);
+```
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6];
+const squares numbers.map(function(element){
+return Math.pow(element, 2);
+1);
+const cubes numbers.map(function(element){
+return Math.pow(element, 3);
+));
+const evenNums numbers.filter(function(element){
+return element%20;
+});
+const oddNums numbers.filter(function(element){
+return element %2!=0;
+));
+const total numbers.reduce(function(accumulator, element) (
+return accumulator + element;
+));
+  ```
+# Arrow Function
+**arrow functions is a concise way to write function expressions good for simple functions that you use only once (parameters) => some code
+
+```js
+setTimeout( => console.log("Hello"), 3000);
+```
+
+```js
+const squares numbers.map((element) => Math.pow(element, 2));
+const cubes = numbers.map((element) Math.pow(element, 3));
+const evenNums = numbers.filter((element) => element % 2 == 0);
+const oddNums = numbers.filter((element) => element % 2 != 0);
+const total = numbers.reduce((accumulator, element) => accumulator + element;
+console.log(total);
+```
 # Spread operator
 ***spread operator = allows an iterable such as an array or string to be expanded into separate elements (unpacks the elements)
 ```js
@@ -397,6 +510,62 @@ console.log(result);
 }
 function displayPage(result) {
 document.getElementById("myH1").textContent = result;
+```
+# Synchronous Code
+// synchronous = Executes line by line consecutively in a sequential manner Code that waits for an operation to complete.
+
+// asynchronous = Allows multiple operations to be performed concurrently without waiting Doesn't block the execution flow and allows the program to continue (I/O operations, network requests, fetching data) Handled with: Callbacks, Promises, Async/Await
+//
+```js
+
+function func1(callback) {
+setTimeout(() => {console.log("Task 1"); callback()), 3000);
+}
+function func2(){
+console.log("Task 2");
+console.log("Task 3"); console.log("Task 4");
+func1(func2); 
+```
+# Error Handling
+Error An Object that is created to represent a problem that occurs Occur often with user input or establishing a connection
+-try {} finally {} = Encloses code that might potentially cause an error.
+-catch {} = Catch and handle any thrown Errors from 
+-finally {} = (optional) Always executes. Used mostly for clean up
+ex, close files, close connections, release resources
+```js
+try{
+console.log("Hello");
+// NETWORK ERRORS
+// PROMISE REJECTION
+// SECURITY ERRORS
+}
+catch(error) {
+console.error(error);
+}
+finally{
+// CLOSE FILES
+// CLOSE CONNECTIONS
+// RELEASE RESOURCES
+console.log("This always executes");
+}
+console.log("You have reached the end!");
+```
+
+```js
+try{
+const dividend Number(window.prompt("Enter a dividend: "));
+const divisor = Number(window.prompt("Enter a divisor: "));
+if(divisor == 0)
+throw new Error("You can't divide by zero!");
+if(isNaN(dividend) || isNaN(divisor)) {
+throw new Error("Values must be a number");
+}
+const result dividend / divisor;
+console.log(result);
+}
+catch(error) { console.error(error);
+}
+console.log("You have reached the end!");
 ```
 # Switch Case
 ```js
@@ -513,6 +682,7 @@ console.log("Invalid credentials! Please try again");
 }
 }
 ```
+
 # DOM Manipulation
 
 ![[Screenshot 2024-07-26 094911.png]]

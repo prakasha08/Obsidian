@@ -81,6 +81,123 @@ static class lens{
 ```
 ![[Pasted image 20240207212408.png]]
 
+# Static keyword
+
+The `static` keyword in Java is used for memory management primarily. It can be applied to variables, methods, blocks, and nested classes. Here's an in-depth look at its usage and implications:
+
+Static only access static data ,Not an Non-static Data(you cant use this because it requires an instance),but the function you are using it in does not depend on instances
+![[Pasted image 20240806232352.png]]
+
+### Static Variables
+
+A static variable is shared among all instances of a class. It's associated with the class itself rather than any particular instance of the class..
+```java
+class Example {
+    static int counter = 0; // Static variable
+
+    Example() {
+        counter++;
+    }
+
+    void display() {
+        System.out.println("Counter: " + counter);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Example obj1 = new Example();
+        Example obj2 = new Example();
+        
+        obj1.display(); // Output: Counter: 2
+        obj2.display(); // Output: Counter: 2
+    }
+}
+```
+### Static Methods
+
+Static methods belong to the class rather than any instance of the class. They can be called without creating an instance of the class. Static methods can only access other static variables and static methods directly. 
+```java
+class Example {
+    static int counter = 0;
+
+    static void incrementCounter() { // Static method
+        counter++;
+    }
+
+    static void displayCounter() {
+        System.out.println("Counter: " + counter);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Example.incrementCounter();
+        Example.incrementCounter();
+        Example.displayCounter(); // Output: Counter: 2
+    }
+}
+```
+### Static Blocks
+
+Static blocks are used for static initializations of a class. This code inside static blocks is executed once, when the class is first loaded into memory.
+```java
+class Example {
+    static int counter;
+
+    static { // Static block
+        counter = 10;
+        System.out.println("Static block executed");
+    }
+
+    static void displayCounter() {
+        System.out.println("Counter: " + counter);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Example.displayCounter(); // Output: Static block executed, Counter: 10
+    }
+}
+```
+// Static Block will only run once, when the first obj is create i.e. when the class is loaded
+![[Pasted image 20240806233401.png]]
+### Static Classes (Nested Classes)
+
+A static nested class is a static class defined inside another class. It can access static members of the outer class but cannot directly access non-static members.
+```java
+class OuterClass {
+    static int outerStaticVar = 10;
+
+    static class StaticNestedClass {
+        void display() {
+            System.out.println("Outer static variable: " + outerStaticVar);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
+        nestedObject.display(); // Output: Outer static variable: 10
+    }
+}
+```
+![[Pasted image 20240806234629.png]]
+### Summary of Static Keyword Usage:
+
+|Feature|Description|
+|---|---|
+|**Static Variables**|Variables shared among all instances of a class.|
+|**Static Methods**|Methods that belong to the class rather than any instance, accessible without creating an instance.|
+|**Static Blocks**|Blocks used for static initialization of a class, executed once when the class is first loaded.|
+|**Static Classes**|Nested classes marked as static, which can access the outer class's static members but not non-static members.|
+
+By using the `static` keyword, Java provides a mechanism to create class-level attributes and methods that can be accessed without needing to instantiate objects, improving memory management and efficiency in certain scenarios.
+# Singleton Class
+![[Pasted image 20240806235644.png]]
+![[Pasted image 20240806235648.png]]
 # Polymorphism 
 
 **Polymorphism is one of the fundamental concepts of object-oriented programming (OOP). It allows objects to be treated as instances of their parent class rather than their actual class. Polymorphism enables a single function, operator, or object to behave differently in different contexts. 
@@ -227,6 +344,11 @@ When `myDog.makeSound()` and `myCat.makeSound()` are called, the JVM determines 
 # Inheritance
 
 **Inheritance in Java is a mechanism where one class acquires the properties (fields) and behaviors (methods) of another class. The class that inherits the properties is known as the subclass (or child class, or derived class), and the class from which properties are inherited is known as the superclass (or parent class, or base class). There are several types of inheritance in Java:
+![[Pasted image 20240807233834.png]]
+![[Pasted image 20240807233844.png]]
+![[Pasted image 20240807233900.png]]
+![[Pasted image 20240807235337.png]]
+![[Pasted image 20240807233850.png]]
 - **Single Level Inheritance**
 - **Multi-Level Inheritance**
 - **Multiple Inheritance
@@ -1036,111 +1158,3 @@ public class Main {
 ### Summary
 
 Abstraction in Java is a core principle of object-oriented programming that focuses on simplifying complex systems by hiding the implementation details and exposing only the essential features. It allows developers to work with high-level concepts and interactions without needing to understand the intricate workings beneath. This is achieved through abstract classes and interfaces, where abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation), and interfaces define a contract with abstract methods that must be implemented by any class that adheres to the interface. By using abstraction, developers can create more modular, maintainable, and understandable code, as they can concentrate on what an object does rather than how it does it.
-# Static keyword
-
-The `static` keyword in Java is used for memory management primarily. It can be applied to variables, methods, blocks, and nested classes. Here's an in-depth look at its usage and implications:
-
-### Static Variables
-
-A static variable is shared among all instances of a class. It's associated with the class itself rather than any particular instance of the class..
-```java
-class Example {
-    static int counter = 0; // Static variable
-
-    Example() {
-        counter++;
-    }
-
-    void display() {
-        System.out.println("Counter: " + counter);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Example obj1 = new Example();
-        Example obj2 = new Example();
-        
-        obj1.display(); // Output: Counter: 2
-        obj2.display(); // Output: Counter: 2
-    }
-}
-```
-### Static Methods
-
-Static methods belong to the class rather than any instance of the class. They can be called without creating an instance of the class. Static methods can only access other static variables and static methods directly. 
-```java
-class Example {
-    static int counter = 0;
-
-    static void incrementCounter() { // Static method
-        counter++;
-    }
-
-    static void displayCounter() {
-        System.out.println("Counter: " + counter);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Example.incrementCounter();
-        Example.incrementCounter();
-        Example.displayCounter(); // Output: Counter: 2
-    }
-}
-```
-### Static Blocks
-
-Static blocks are used for static initializations of a class. This code inside static blocks is executed once, when the class is first loaded into memory.
-```java
-class Example {
-    static int counter;
-
-    static { // Static block
-        counter = 10;
-        System.out.println("Static block executed");
-    }
-
-    static void displayCounter() {
-        System.out.println("Counter: " + counter);
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Example.displayCounter(); // Output: Static block executed, Counter: 10
-    }
-}
-```
-### Static Classes (Nested Classes)
-
-A static nested class is a static class defined inside another class. It can access static members of the outer class but cannot directly access non-static members.
-```java
-class OuterClass {
-    static int outerStaticVar = 10;
-
-    static class StaticNestedClass {
-        void display() {
-            System.out.println("Outer static variable: " + outerStaticVar);
-        }
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();
-        nestedObject.display(); // Output: Outer static variable: 10
-    }
-}
-```
-### Summary of Static Keyword Usage:
-
-|Feature|Description|
-|---|---|
-|**Static Variables**|Variables shared among all instances of a class.|
-|**Static Methods**|Methods that belong to the class rather than any instance, accessible without creating an instance.|
-|**Static Blocks**|Blocks used for static initialization of a class, executed once when the class is first loaded.|
-|**Static Classes**|Nested classes marked as static, which can access the outer class's static members but not non-static members.|
-
-By using the `static` keyword, Java provides a mechanism to create class-level attributes and methods that can be accessed without needing to instantiate objects, improving memory management and efficiency in certain scenarios.

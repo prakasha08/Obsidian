@@ -205,12 +205,12 @@ int main() {
     int n=sizeof(arr)/sizeof(arr[0]);
     for(i=0;i<n;i++){
        if(i==0&&arr[i+1]<arr[i])
-            printf("%d ",arr[i]);
+            arr[i]=arr[i]+arr[i+1];
         else if(i==n-1&&arr[i]>arr[i-1]){
-            printf("%d ",arr[i]);
+            arr[i]=arr[i]+arr[i-1];
         }
         else if(arr[i-1]<arr[i]&&arr[i]>arr[i+1]){
-            printf("%d ",arr[i]);
+            arr[i]=arr[i-1]+arr[i+1];
         }
     }
     return 0;

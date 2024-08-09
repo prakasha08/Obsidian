@@ -283,3 +283,131 @@ class Solution {
 }
 
 ```
+# [840. Magic Squares In Grid](https://leetcode.com/problems/magic-squares-in-grid/)
+```java
+
+
+public class Solution {
+
+    public int numMagicSquaresInside(int[][] grid) {
+
+        int count = 0;
+
+        for (int r = 0; r + 2 < grid.length; r++) {
+
+            for (int c = 0; c + 2 < grid[0].length; c++) {
+
+                if (isMagicSquare(grid, r, c)) {
+
+                    count++;
+
+                }
+
+            }
+
+        }
+
+        return count;
+
+    }
+
+  
+
+    public boolean isMagicSquare(int[][] grid, int r, int c) {
+
+        int[][] result = new int[3][3];
+
+        for (int i = 0; i < 3; i++) {
+
+            for (int j = 0; j < 3; j++) {
+
+                result[i][j] = grid[r + i][c + j];
+
+            }
+
+        }
+
+        return hasUniqueElements(result) && rcSum(result);
+
+    }
+
+  
+
+    public boolean hasUniqueElements(int[][] matrix) {
+
+        Set<Integer> elements = new HashSet<>();
+
+        for (int i = 0; i < 3; i++) {
+
+            for (int j = 0; j < 3; j++) {
+
+                int val = matrix[i][j];
+
+                if (val < 1 || val > 9 || elements.contains(val)) {
+
+                    return false;
+
+                }
+
+                elements.add(val);
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+  
+
+    public boolean rcSum(int[][] result) {
+
+        int sum = result[0][0] + result[0][1] + result[0][2];
+
+        int diag1 = 0, diag2 = 0;
+
+  
+
+        for (int i = 0; i < 3; i++) {
+
+            int rowSum = 0, colSum = 0;
+
+            for (int j = 0; j < 3; j++) {
+
+                rowSum += result[i][j];
+
+                colSum += result[j][i];
+
+            }
+
+            if (rowSum != sum || colSum != sum) {
+
+                return false;
+
+            }
+
+            diag1 += result[i][i];
+
+            diag2 += result[i][2 - i];
+
+        }
+
+  
+
+        if (diag1 != sum || diag2 != sum) {
+
+            return false;
+
+        }
+
+  
+
+        return true;
+
+    }
+
+  
+
+}
+```
