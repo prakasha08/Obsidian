@@ -9,6 +9,10 @@ HashMap<String, Integer> map = new HashMap<>();
 ```java
 map.put("Apple", 1); map.put("Banana", 2); map.put("Cherry", 3);
 ```
+
+```java
+HashSet<String> set1 = new HashSet<>(); set1.add("Element1"); set1.add("Element2"); set1.add("Element3"); // Create the second HashSet HashSet<String> set2 = new HashSet<>(); // Copy elements from set1 to set2 set2.addAll(set1);
+```
 #### Accessing Elements
 ```java
 int value = map.get("Apple"); // Returns 1

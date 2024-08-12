@@ -685,12 +685,120 @@ console.log("Invalid credentials! Please try again");
 
 # DOM Manipulation
 
+***DOCUMENT OBJECT MODEL
+Object() that represents the page you see in the web browser and provides you with an API to interact with it. Web browser constructs the DOM when it loads an HTML document, and structures all the elements in a tree-like representation. JavaScript can access the DOM to dynamically change the content, structure, and style of a web page.
+
+***" Element selectors" Methods used to target and manipulate HTML elements
+They allow you to select one or multiple HTML elements from the DOM (Document Object Model)
+```js
+1. document.getElementById()// ELEMENT OR NULL
+2. document.getElementsClassName()// HTML COLLECTION
+3. document.getElementsByTagName()// HTML COLLECTION
+4. document.querySelector()// ELEMENT OR NULL
+5. document.querySelectorAll()// NODELIST
+```
+
+```js
+const fruits document.getElementsByClassName("fruits");
+Array.from(fruits).forEach(fruit => {
+fruit.style.backgroundColor = "yellow";
+```
+```js
+const h4Elements
+document.getElementsByTagName("h4");
+const liElements document.getElementsByTagName("li");
+for(let h4Element of h4Elements) {
+h4Element.style.backgroundColor = "yellow";
+}
+for(let liElement of liElements){
+liElement.style.backgroundColor = "lightgreen";
+}
+```
+```js
+const foods document.querySelectorAll("li");
+foods.forEach(food => {
+food.style.backgroundColor = "yellow";
+});
+```
+
 ![[Screenshot 2024-07-26 094911.png]]
 
 ![[Screenshot 2024-07-26 094647.png]]
 
 ![[Screenshot 2024-07-26 094657.png]]
 
+
+## DOM Navigation
+
+***DOM Navigation The process of navigating through the structure of an HTML document using JavaScript.
+- firstElementChild
+- lastElementChild
+- .nextElementSibling
+- previousElementSibling
+- parentElement
+- children
+```html
+<ul id="fruits">
+<li id="apple">apple</li>
+<li id="orange">orange</li>
+<li id="banana">banana</li>
+</ul>
+<ul id="vegetables">
+<li id="carrots">carrots</li>
+<li id="onions">onions</li>
+<li id="potatoes">potatoes</li>
+</ul>
+<ul id="desserts">
+<li id="cake">cake</li>
+<li id="pie">pie</li>
+<li id="ice cream">ice cream</li>
+</ul>
+```
+
+```js
+//.firstElementChild
+const ulElements = document.querySelectorAll("ul");
+ulElements.forEach(ulElement => {
+const firstChild ulElement.firstElementChild;
+firstChild.style.backgroundColor = "yellow";
+});// all the 1st element of ul will be yellow
+```
+
+```js
+//.lastElementChild
+const element = document.getElementById("desserts");
+const lastChild = element.lastElementChild;
+lastChild.style.backgroundColor "yellow";//last element of desserts ul will be yellow
+```
+
+```js
+//.nextElementSibling
+const element = document.getElementById("apple");
+const nextSibling element.nextElementSibling;
+nextSibling.style.backgroundColor = "yellow";//orange will be yellow
+```
+
+```js
+//previous ElementSibling
+const element = document.getElementById("desserts");
+const prevSibling = element.previous.ElementSibling; prevSibling.style.backgroundColor = "yellow";//whole list before dessert ul will yellow
+```
+
+```js
+// .parentElement(parent access by the childrens)
+const element = document.getElementById("ice cream");
+const parent = element.parentElement;
+parent.style.backgroundColor = "yellow";//it will access the icecream whole lists
+```
+
+```js
+//.children(childrens acces by parents)
+const element = document.getElementById("vegetables");
+const children = element.children;
+Array.from(children).forEach(child => {
+child.style.backgroundColor = "yellow";
+});
+```
 ## Events and Event handler
 
 ![[Pasted image 20240726100250.png]]
@@ -874,6 +982,22 @@ event.target.remove()
 ![[Pasted image 20240728202525.png]]
 ![[Pasted image 20240728202528.png]]
 
+# EventListener
+ Listen for specific events to create interactive web pages
+events: click, mouseover, mouseout
+.addEventListener(event, callback);
+```js
+const myBox = document.getElementById("myBox");
+myBox.addEventListener("click", event=> { event.target.style.backgroundColor = "tomato";
+event.target.textContent = "OUCH! 😯"});
+myBox.addEventListener("mouseover", event => {
+event.target.style.backgroundColor = "yellow";
+event.target.textContent = "Don't do it";
+});
+myBox.addEventListener("mouseout", event => {event.target.style.backgroundColor = "lightgreen";
+event.target.textContent = "Click Me 😊";
+});
+```
 # Todo list
 
 ![[Pasted image 20240728220717.png]]
@@ -904,6 +1028,51 @@ console.log(div[count].textContent)
 ![[Pasted image 20240729122554.png]]
 ![[Pasted image 20240729122556.png]]
 ![[Pasted image 20240729123406.png]]
+```js
+//
+//EXAMPLE 1 <h1>
+// STEP 1 CREATE THE ELEMENT 
+const newH1 = document.createElement("h1");
+// STEP 2 ADD ATTRIBUTES/PROPERTIES
+newH1.textContent = "I like pizza!";
+newH1.id "myH1";
+newH1.style.color = "tomato";
+newH1.style.textAlign="center";
+//STEP 3 APPEND ELEMENT TO DOM
+document.body.append(newLink);
+document.body.prepend(newLink);
+document.getElementById("box1").append(newLink);
+document.getElementById("box4").prepend(newLink);
+const box4 document.getElementById("box4");
+document.body.insertBefore(newLink, box4);
+const boxes document.querySelectorAll(".box");
+document.body.insertBefore(newLink, boxes [4]);
+//REMOVE HTML ELEMENT
+document.body.removeChild(newLink);
+document.getElementById("box1").removeChild(newLink);
+```
+
+```js
+//EXAMPLE 2 <li>
+// STEP 1 CREATE THE ELEMENT 
+const newListItem = document.createElement("li");
+// STEP 2 ADD ATTRIBUTES/PROPERTIES
+newListItem.textContent = "coconut";
+newListItem.id = "coconut";
+newListItem.style.fontweight = "bold";
+newListItem.style.backgroundColor = "lightgreen";
+// STEP 3 APPEND ELEMENT TO DOM
+document.body.append(newListItem);
+document.body.prepend(newListItem);
+document.getElementById("fruits").append(newListItem);
+document.getElementById("fruits").prepend(newListItem);
+const banana = document.getElementById("banana");
+document.getElementById("fruits").insertBefore(newListItem, banana);
+const listItems document.querySelectorAll("#fruits li");
+document.getElementById("fruits").insertBefore(newListItem, listItems[4]);
+// REMOVE HTML ELEMENT
+```
+
 ```html
 <input id="input">
 <button onclick="add()">Add</button>

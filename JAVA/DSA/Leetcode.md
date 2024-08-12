@@ -1,4 +1,188 @@
-# [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
+# HashMap
+## [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+```java
+import java.util.HashSet;
+
+  
+
+class Solution {
+
+    public int lengthOfLongestSubstring(String s) {
+
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            HashSet<Character> lS = new HashSet<>();
+
+            for (int j = i; j < s.length(); j++) {
+
+                if (!lS.contains(s.charAt(j))) {
+
+                    lS.add(s.charAt(j));
+
+                } else {
+
+                    break;
+
+                }
+
+            }
+
+            if (lS.size() > count) {
+
+                count = lS.size();
+
+            }
+
+        }
+
+        return count;
+
+    }
+
+}
+```
+
+```java
+import java.util.HashSet;
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int count = 0;
+        HashSet<Character> set = new HashSet<>();
+        int i = 0, j = 0;
+
+        while (i < n && j < n) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                count = Math.max(count, j - i);
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+
+        return count;
+    }
+}
+
+```
+## [2260. Minimum Consecutive Cards to Pick Up](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/)
+Below will give correct answer but result in time exceed
+```java
+import java.util.HashSet;
+class Solution {
+    public int minimumCardPickup(int[] cards) {
+        int count = 0;
+        int min=100000;
+        HashSet<Integer> N = new HashSet<>();
+        int i = 0;
+        while (i < cards.length) {
+            int  j = cards.length-1;
+            while(i<j){
+                if(cards[i]==cards[j]&&j-i+1<min){
+                    min=j-i+1;
+                    count=min;
+                }
+                j--;
+            }
+            i++;
+        }
+        return (count > 0) ? count : -1;  // Return the count or -1 if no valid pickup
+    }
+}
+```
+
+```java
+
+```
+## [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
+```java
+```java
+ public int maximumUniqueSubarray(int[] nums) {
+        int max = Integer.MIN_VALUE, l = 0, curSum = 0;
+        int memo[] = new int[10001];
+        for(int n: nums){
+            while(memo[n] == 1){
+                memo[nums[l]]--;
+                curSum -= nums[l];
+                l++;
+            }
+            curSum += n;
+            memo[n]++;
+            max = Math.max(max, curSum);
+        }
+        return max;
+    }
+```
+
+```java
+class Solution {
+
+    public int maximumUniqueSubarray(int[] nums) {
+
+        HashSet<Integer> N=new HashSet<>();
+
+        int i = 0, j = 0;
+
+        int count = 0;
+
+        while (i < nums.length) {
+
+            if (!N.contains(nums[i])) {
+
+                N.add(nums[i]);
+
+                count += nums[i++];
+
+                continue;
+
+            }
+
+            i++;
+
+        }
+
+        return count;
+
+    }
+
+}
+```
+## [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+```java
+class Solution {
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        HashMap<String,List<String>> S = new HashMap<>();
+
+        for(String s:strs){
+
+            char[] charArray=s.toCharArray();
+
+            Arrays.sort(charArray);
+
+            String key = new String(charArray);
+
+            if(!S.containsKey(key)){
+
+                S.put(key,new ArrayList<>());
+
+            }
+
+            S.get(key).add(s);
+
+        }
+
+        return new ArrayList<>(S.values());
+
+    }
+
+}
+```
+## [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
 ```java
 class Solution {
            static HashMap<Integer, String> Ones = new HashMap<>() {
@@ -89,8 +273,8 @@ class Solution {
     }
 }
 ```
-## Sorting
-### [912. Sort an Array](https://leetcode.com/problems/sort-an-array/)
+# Sorting
+## [912. Sort an Array](https://leetcode.com/problems/sort-an-array/)
 ```java
 class Solution {
     public int[] sortArray(int[] nums) {
@@ -134,3 +318,4 @@ class Solution {
 }
 
 ```
+ 
