@@ -217,6 +217,62 @@ o/p
 
 ![[Screenshot 2024-02-01 204855.png]]
 
+# String Builder
+
+In Java, `StringBuilder` is a mutable sequence of characters, which is used to create and manipulate strings in a more efficient manner compared to using `String`. The `String` class in Java is immutable, meaning once a `String` object is created, it cannot be changed. Each modification of a `String` creates a new `String` object, which can be inefficient in terms of memory and performance when there are many string manipulations. 
+
+`StringBuilder` addresses this by allowing modifications without creating new objects, making it more efficient for scenarios where strings are frequently appended, inserted, or modified.
+
+Here are some key points about `StringBuilder`:
+
+1. **Mutable**: Unlike `String`, `StringBuilder` objects can be modified after they are created.
+2. **Performance**: It is faster and more memory-efficient when performing multiple string manipulations.
+3. **Methods**: `StringBuilder` provides various methods to manipulate strings, such as `append()`, `insert()`, `delete()`, `reverse()`, and more.
+4. **Thread Safety**: `StringBuilder` is not synchronized, which means it is not thread-safe. For thread-safe operations, you should use `StringBuffer`.
+
+### Example Usage
+
+Here's a basic example demonstrating the use of `StringBuilder`:
+
+```java
+public class StringBuilderExample {
+    public static void main(String[] args) {
+        // Creating a StringBuilder object
+        StringBuilder sb = new StringBuilder("Hello");
+
+        // Appending a string to the StringBuilder
+        sb.append(" World");
+        System.out.println(sb.toString()); // Output: Hello World
+
+        // Inserting a string at a specific position
+        sb.insert(6, "Java ");
+        System.out.println(sb.toString()); // Output: Hello Java World
+
+        // Reversing the contents of the StringBuilder
+        sb.reverse();
+        System.out.println(sb.toString()); // Output: dlroW avaJ olleH
+
+        // Deleting a portion of the string
+        sb.delete(0, 6);
+        System.out.println(sb.toString()); // Output: avaJ olleH
+    }
+}
+```
+
+### Key Methods
+
+- `append(String str)`: Appends the specified string to this character sequence.
+- `insert(int offset, String str)`: Inserts the specified string at the specified position.
+- `delete(int start, int end)`: Removes the characters in a substring of this sequence.
+- `reverse()`: Reverses the sequence of characters.
+- `toString()`: Converts the `StringBuilder` object to a `String`.
+
+### When to Use
+
+- Use `StringBuilder` when you need to perform a lot of modifications to a string, such as in loops or when constructing a string dynamically.
+- Avoid `StringBuilder` in multi-threaded environments unless external synchronization is provided, as it is not thread-safe.
+
+Using `StringBuilder` can significantly improve the performance of your Java applications when dealing with extensive string manipulations.
 # Break And Continue
 ```java
 public static void main(String[] args) {

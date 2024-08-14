@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8f4802b86bfabf2b",
+            "id": "01b64d4547e6d96e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#Error",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -66,7 +66,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -135,8 +136,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -148,31 +148,31 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8f4802b86bfabf2b",
+  "active": "01b64d4547e6d96e",
   "lastOpenFiles": [
     "JS/OOPs in JS.md",
+    "JS/BASICS.md",
+    "Pasted image 20240814230453.png",
+    "JAVA/OOPs/OOPs in Java.md",
+    "Pasted image 20240813232200.png",
+    "JAVA/DSA/Map.md",
     "JAVA/DSA/Leetcode.md",
     "JAVA/Overall/BASICS.md",
-    "JAVA/DSA/Map.md",
+    "Pasted image 20240813132338.png",
+    "Pasted image 20240813132331.png",
+    "Pasted image 20240813101325.png",
+    "Pasted image 20240813101258.png",
+    "Pasted image 20240813100543.png",
+    "Pasted image 20240813070540.png",
+    "Pasted image 20240813070213.png",
+    "Pasted image 20240813070046.png",
     "PS/Set Questions.md",
     "PS/Level 4(own).md",
     "PS/Level 5.md",
     "JAVA/DSA/Queue.md",
     "JAVA/DSA/Sorting.md",
     "JAVA/Overall/LEET CODE.md",
-    "JS/BASICS.md",
-    "JAVA/OOPs/OOPs in Java.md",
-    "Pasted image 20240806233401.png",
-    "Pasted image 20240806232352.png",
-    "Pasted image 20240806232104.png",
-    "Pasted image 20240807235337.png",
     "Untitled.canvas",
-    "Pasted image 20240807233900.png",
-    "Pasted image 20240807233850.png",
-    "Pasted image 20240807233844.png",
-    "Pasted image 20240807233834.png",
-    "Pasted image 20240806235648.png",
-    "Pasted image 20240806235644.png",
     "2024-08-07.md",
     "PS/Level 3.md",
     "JAVA/DSA/Leetcode",

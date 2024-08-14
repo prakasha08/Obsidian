@@ -1,4 +1,26 @@
 # HashMap
+## [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> N=new HashSet<>();
+        int max=0;
+        for(int num:nums){
+            N.add(num);
+        }
+        for(int num:N){
+            if(!N.contains(num-1)){
+                int count=1;
+                while(N.contains(num+count)){
+                    count++;
+                }
+                if(count>max)max=count;
+            }
+        }
+         return max;
+    }
+}
+```
 ## [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 ```java
 import java.util.HashSet;

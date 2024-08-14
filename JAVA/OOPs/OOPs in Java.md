@@ -195,6 +195,9 @@ public class Main {
 |**Static Classes**|Nested classes marked as static, which can access the outer class's static members but not non-static members.|
 
 By using the `static` keyword, Java provides a mechanism to create class-level attributes and methods that can be accessed without needing to instantiate objects, improving memory management and efficiency in certain scenarios.
+***By Static we can inherit but cannot be override
+override depends on objects. but static does not depend object.so static cannot be override
+
 # Singleton Class
 ![[Pasted image 20240806235644.png]]
 ![[Pasted image 20240806235648.png]]
@@ -205,6 +208,8 @@ By using the `static` keyword, Java provides a mechanism to create class-level a
 1.compile-time polymorphism(Achieved by defining multiple methods with the same name but different parameters. The decision about which method to invoke is made at compile time.) and 
 2.run-time polymorphism.(Achieved by defining a method in the subclass with the same signature as a method in the superclass. The decision about which method to invoke is made at run time, based on the actual object type.)**
 ## Function Overloading (Compile-Time Polymorphism)
+
+![[Pasted image 20240813100543.png]]
 
 Function overloading, also known as compile-time polymorphism, occurs when multiple functions in the same scope have the same name but different parameters (number, type, or both). The appropriate function is selected by the compiler at compile time based on the arguments passed to the function.
 #### Characteristics:
@@ -249,6 +254,7 @@ public class Main {
 Function overriding is an example of run-time polymorphism in Java. It occurs when a subclass provides a specific implementation for a method that is already defined in its superclass. The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
 
 #### Characteristics:
+![[Pasted image 20240813101325.png]]
 
 - **Same method signature**: The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
 - **Resolved at run time**: The JVM determines which method to call at run time based on the object type.
@@ -289,6 +295,97 @@ public class Main {
 }
 
 ```
+### Dynamic method dispatch
+Dynamic method dispatch, also known as runtime polymorphism, is a core concept in object-oriented programming, particularly in languages like Java. It allows a program to determine at runtime which method implementation to execute, based on the actual object's type rather than the reference type.
+
+#### How Dynamic Method Dispatch Works
+
+1. **Inheritance and Overriding**:
+   - In Java, a class can inherit from another class (superclass) and override its methods in a subclass.
+   - Method overriding occurs when a subclass provides a specific implementation for a method that is already defined in its superclass.
+
+2. **Method Signature**:
+   - The method signature (name, parameters, and return type) in the subclass must match the method signature in the superclass for overriding to occur.
+
+3. **Polymorphism**:
+   - Polymorphism allows a subclass object to be referenced by a superclass variable.
+   - At runtime, the actual method that gets invoked is determined by the type of the object, not the type of the reference.
+
+#### Example of Dynamic Method Dispatch
+
+Consider the following example to understand dynamic method dispatch:
+
+```java
+// Superclass
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+// Subclass 1
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+// Subclass 2
+class Cat extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Reference of type Animal but object of type Dog
+        Animal myAnimal = new Dog();
+        myAnimal.makeSound();  // Output: Dog barks
+
+        // Reference of type Animal but object of type Cat
+        myAnimal = new Cat();
+        myAnimal.makeSound();  // Output: Cat meows
+    }
+}
+```
+
+#### Detailed Explanation
+
+1. **Class Definitions**:
+   - `Animal` is a superclass with a method `makeSound`.
+   - `Dog` and `Cat` are subclasses of `Animal` that override the `makeSound` method.
+
+2. **Reference Type vs. Object Type**:
+   - In the `main` method, `myAnimal` is a reference of type `Animal`.
+   - `myAnimal` can refer to objects of type `Dog`, `Cat`, or `Animal`.
+
+3. **Method Invocation**:
+   - **First Assignment**: `myAnimal = new Dog();`
+     - Here, `myAnimal` is assigned an object of type `Dog`. Despite the reference being of type `Animal`, the actual object is a `Dog`.
+     - When `myAnimal.makeSound()` is called, Java's dynamic method dispatch mechanism determines that `makeSound` should invoke the `Dog`'s version of `makeSound`, resulting in "Dog barks".
+   
+   - **Second Assignment**: `myAnimal = new Cat();`
+     - Now, `myAnimal` is assigned an object of type `Cat`.
+     - When `myAnimal.makeSound()` is called again, Java determines that the `Cat`'s version of `makeSound` should be executed, resulting in "Cat meows".
+
+#### Why Dynamic Method Dispatch is Useful
+
+1. **Flexibility**:
+   - It allows a program to decide at runtime which method to invoke, based on the actual object type. This enables the creation of more flexible and reusable code.
+
+2. **Code Maintainability**:
+   - It supports a clean separation of interface and implementation. Changes in the subclass implementations do not require changes in the code that uses the superclass references.
+
+3. **Extensibility**:
+   - New classes can be introduced without modifying existing code that uses superclass references. This adheres to the Open/Closed Principle in object-oriented design.
+
+#### Summary
+
+Dynamic method dispatch is a powerful feature of object-oriented programming that enables a program to determine the method to invoke at runtime based on the actual object type. It enhances flexibility, maintainability, and extensibility of code, making it a fundamental concept in designing polymorphic behavior in applications.
+
 ### Superclass and Subclass
 
 - **Superclass**: The superclass is the parent class from which other classes inherit. In this case, `Animal` is the superclass.
@@ -341,14 +438,20 @@ public class Main {
 - **`Animal myCat = new Cat();`**: Similarly, a `Cat` object is created but referenced as an `Animal`.
 
 When `myDog.makeSound()` and `myCat.makeSound()` are called, the JVM determines at runtime which version of the `makeSound` method to execute based on the actual object type (`Dog` or `Cat`), not the reference type (`Animal`). This is run-time polymorphism (function overriding) in action.
+***Overriding can be avoid using final keyword
+
 # Inheritance
 
 **Inheritance in Java is a mechanism where one class acquires the properties (fields) and behaviors (methods) of another class. The class that inherits the properties is known as the subclass (or child class, or derived class), and the class from which properties are inherited is known as the superclass (or parent class, or base class). There are several types of inheritance in Java:
+.***Inheritance can be avoid using final keyword(if the class or method to be final)
 ![[Pasted image 20240807233834.png]]
 ![[Pasted image 20240807233844.png]]
 ![[Pasted image 20240807233900.png]]
 ![[Pasted image 20240807235337.png]]
 ![[Pasted image 20240807233850.png]]
+
+### Super keyword
+![[Pasted image 20240813065627.png]]![[Pasted image 20240813065634.png]]![[Pasted image 20240813065637.png]]
 - **Single Level Inheritance**
 - **Multi-Level Inheritance**
 - **Multiple Inheritance
@@ -553,6 +656,7 @@ public class OOPS {
 ## Hierarchical Inheritance
 
 Hierarchical inheritance is a type of inheritance where multiple classes inherit from a single superclass. This means that a single parent class can have multiple child classes, each inheriting the properties and methods of the parent class.
+![[Pasted image 20240813070213.png]]
 
 ### Example of Hierarchical Inheritance in Java
 
@@ -675,6 +779,7 @@ public class OOPS {
 ## Hybrid Inheritance
 
 Hybrid inheritance is a combination of two or more types of inheritance, such as single inheritance, multiple inheritance (through interfaces in Java), hierarchical inheritance, and multi-level inheritance. It allows for a more complex inheritance structure and enables the modeling of complex relationships in object-oriented programming.
+![[Pasted image 20240813070540.png]]
 
 ### Example of Hybrid Inheritance in Java
 
@@ -766,7 +871,7 @@ By combining these forms of inheritance:
 ## Multiple Inheritance
 
 **Multiple Inheritance** is a feature in object-oriented programming where a class can inherit characteristics and behaviors from more than one parent class. This means a subclass can have multiple super classes and can inherit properties and methods from all of them. However, this can lead to complexity and potential issues, such as the "diamond problem."
-
+![[Pasted image 20240813070046.png]]
 ### Multiple Inheritance in Java
 
 Java does not support multiple inheritance with classes to avoid the complexity and ambiguity it can create. Instead, Java supports multiple inheritance through interfaces. This allows a class to implement multiple interfaces and thus inherit the behavior defined in those interfaces.
@@ -840,6 +945,7 @@ The diamond problem is an issue that arises in multiple inheritance when a class
 https://www.w3schools.com/java/java_encapsulation.asp
 
 Encapsulation in Java is a fundamental principle of object-oriented programming that involves bundling data (variables) and methods (functions) that operate on the data into a single unit, often a class. The key idea behind encapsulation is to restrict direct access to some of an object's components, usually the internal state (variables), and enforce access through methods (getters and setters) that maintain the object's integrity and behavior.
+![[Pasted image 20240813132338.png]]
 ### Key Points of Encapsulation
 
 - **Data Hiding**: Encapsulated data is not directly accessible from outside the class, which prevents unintended modification and ensures that the object's state remains consistent.
@@ -856,6 +962,8 @@ In Java, a **package** is a namespace that organizes classes and interfaces. Pac
 
 - **Encapsulation and Packages**: By placing classes in packages, you can control the scope of access to classes and their members. Classes within the same package can access each other’s package-private members (those without any explicit access modifier), but classes outside the package cannot.
 ### Access Modifiers
+![[Pasted image 20240813232200.png]]
+
 | Feature                                          | Public                           | Default (Package-Private)                | Protected                                          | Private                                |
 | ------------------------------------------------ | -------------------------------- | ---------------------------------------- | -------------------------------------------------- | -------------------------------------- |
 | **Access Level**                                 | Accessible from any other class. | Accessible only within the same package. | Accessible within the same package and subclasses. | Accessible only within the same class. |
@@ -865,7 +973,7 @@ In Java, a **package** is a namespace that organizes classes and interfaces. Pac
 | **Access from Subclass (Same Package)**          | Yes                              | Yes                                      | Yes                                                | No                                     |
 | **Access from Subclass (Different Package)**     | Yes                              | No                                       | Yes                                                | No                                     |
 | **Access from Non-Subclass (Different Package)** | Yes                              | No                                       | No                                                 | No                                     |
-Public Example
+#### Public Example
 ```java
 package com.example.shapes;
 
@@ -885,7 +993,7 @@ class Triangle extends Shape {
     }
 }
 ```
-Default (Package-Private) Example
+#### Default (Package-Private) Example
 ```java
 package com.example.shapes;
 
@@ -906,7 +1014,7 @@ class Triangle extends Shape {
 }
 
 ```
-Protected Example
+#### Protected Example
 ```java
 package com.example.shapes;
 
@@ -938,6 +1046,80 @@ import com.example.shapes.Shape;
 class AnotherPackageTriangle extends Shape
 
 ```
+In Java, the `protected` access modifier allows a member (field, method, or constructor) to be accessed in the following ways:
+
+1. **Within the same package**: Any class within the same package can access the `protected` member.
+2. **In subclasses**: Subclasses can access the `protected` member, even if they are in different packages.
+
+To clarify, here's an example:
+
+##### Example:
+
+###### Package: `com.example.base`
+
+**BaseClass.java**
+```java
+package com.example.base;
+
+public class BaseClass {
+    protected void protectedMethod() {
+        System.out.println("Protected method in BaseClass");
+    }
+}
+```
+
+###### Package: `com.example.subclass`
+
+**SubClass.java**
+```java
+package com.example.subclass;
+
+import com.example.base.BaseClass;
+
+public class SubClass extends BaseClass {
+    public void accessProtectedMethod() {
+        protectedMethod(); // This is allowed
+    }
+
+    public static void main(String[] args) {
+        SubClass subClass = new SubClass();
+        subClass.accessProtectedMethod();
+    }
+}
+```
+
+In this example:
+
+- The `protectedMethod` in `BaseClass` is declared as `protected`.
+- `SubClass`, which is in a different package (`com.example.subclass`), extends `BaseClass`.
+- `SubClass` can access `protectedMethod` because it is a subclass of `BaseClass`, even though they are in different packages.
+
+###### Important Points:
+- A `protected` member is not accessible to non-subclass classes in different packages.
+- Only subclasses (direct or indirect) can access the `protected` member in different packages.
+
+###### Example of Inaccessibility:
+
+###### Package: `com.example.other`
+
+**OtherClass.java**
+```java
+package com.example.other;
+
+import com.example.base.BaseClass;
+
+public class OtherClass {
+    public void accessProtectedMethod() {
+        BaseClass base = new BaseClass();
+        // base.protectedMethod(); // This will cause a compile-time error
+    }
+}
+```
+
+In this example:
+
+- `OtherClass` is neither in the same package as `BaseClass` nor a subclass of `BaseClass`.
+- Therefore, it cannot access the `protectedMethod`, and attempting to do so will result in a compile-time error.
 `private` Example
 ```java
 class Shape {
@@ -970,6 +1152,7 @@ In practice, encapsulation is achieved by declaring the class's variables as pri
 **Abstraction** in object-oriented programming is a process of hiding the implementation details and showing only the essential features of an object. It helps in reducing complexity by allowing the programmer to focus on interactions at a higher level rather than getting bogged down with details.
 
 Think of a car: you interact with the car through the steering wheel, pedals, and buttons (interface), without needing to know the intricate details of how the engine works or how the fuel is converted into motion (implementation details).
+![[Pasted image 20240813132331.png]]
 
 In Java, abstraction is achieved using:
 

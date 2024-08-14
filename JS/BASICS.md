@@ -393,6 +393,122 @@ numbers.sort((a, b) => a - b);//Ascending Order
 numbers.sort((a, b) => b - a);//decending Order
 console.log(numbers);
 ```
+# Switch Case
+```js
+
+let day = 2;
+switch(day){
+case 1:
+console.log("It is Monday");
+break;
+case 2:
+console.log("It is Tuesday");
+break;
+case 3:
+console.log("It is Wednesday");
+case 4:
+console.log("It is Thursday");
+case 5:
+console.log("It is Friday");
+case 6:
+console.log("It is Saturday");
+case 7:
+console.log("It is Sunday");
+break;
+default:
+console.log($(day) is not a day);
+}
+```
+# String Methods
+```js
+let username = "Prakii its"
+console.log(username.charAt(1));//r
+console.log(username.indexAt("P");//0
+console.log(username.length);//9
+console.log(username.trim());//Prakiiits
+console.log(username.toUpperCase());//PRAKII ITS
+console.log(username.toLowerCase());//prakii its
+console.log(username.repeat(2));//prakii itsprakii its
+console.log(username.startsWith(" "));//false
+console.log(username.startsWith("s"));//true
+console.log(username.includes(" "));//true
+console.log(username.replace(" ","-"));//prakii-its
+console.log(username.padStart(11,"-"));//--Prakii its
+console.log(username.padend(11,"-"));//Prakii its--
+```
+## String Slicing
+string slicing creating a substring from a portion of another string
+```js
+string.slice(start, end)
+const fullName = "Bro Code";
+let firstName = fullName.slice(0, 3);//upto 2nd index
+let lastName=fullName.slice(4, 8);//upto 7th index
+let lastchar=fullName.slice(-1);//e
+let lastchar=fullName.slice(-2);//de
+const firstName = fullName.slice(0, fullName.indexOf(""));//bro
+const lastName = fullName.slice(fullName.indexOf(" ") + 1);//code
+
+console.log(firstName);//bro
+console.log(lastName);//code
+
+```
+# Method Chaining
+
+**calling one method after another in one continuous line of code
+
+```js
+let username = window.prompt("Enter your username: ");
+//NO METHOD CHAINING
+username = username.trim();
+let letter=username.charAt(0);
+letter= letter.toUpperCase();
+let extraChars username.slice(1);
+extraChars=extraChars.toLowerCase();
+username=letter + extraChars;
+console.log(username);
+//METHOD CHAINING
+username = username.trim().charAt(0).toUpperCase() + username.trim().slice(1).toLowerCase();
+```
+
+# Logical Operators
+**logical operators used to combine or manipulate Boolean values
+(true or false)
+AND &
+OR
+NOT 
+
+# Strictly Operators
+**assignment operator
+== comparison operator (compare if values are equal)
+=== strict equality operator (compare if values & datatype are equal)
+! inequality operator
+!== strict inequality operator
+
+# While Loop
+```js
+let username = "BroCode";
+while(username === ""){
+console.log("You didn't enter your name");
+console.log(Hello $(username));
+```
+
+```js
+let loggedIn = false;
+let username;
+let password;
+while(!loggedIn){
+username = window.prompt("Enter your username");
+password = window.prompt("Enter your password");
+if (username === "myUsername" && password === "myPassword") {
+loggedIn = true;
+console.log("You are logged in!");
+}
+else{
+console.log("Invalid credentials! Please try again");
+}
+}
+```
+
 # Function Expression
 ***function expressions a way to define functions as Values or variables
 ```js
@@ -511,6 +627,53 @@ console.log(result);
 function displayPage(result) {
 document.getElementById("myH1").textContent = result;
 ```
+# Callback hell
+Situation in JavaScript where callbacks
+are nested within other callbacks to the
+degree where the code is difficult to read. Old pattern to handle asynchronous functions.
+Use Promises + async/await to avoid Callback Hell
+```js
+function task1(callback) {
+setTimeout(() => {
+console.log("Task 1 complete");
+callback();
+), 2000);
+}
+function task2(callback) {
+setTimeout(() => {
+console.log("Task 2 complete");
+callback();
+}, 1000);
+}
+function task3(callback) {
+setTimeout(() => {
+console.log("Task 3 complete");
+callback();
+), 3000);
+}
+function task4(callback) {
+setTimeout(() => {
+console.log("Task 4 complete");
+callback();
+), 1500);
+}
+function task5(callback) {
+setTimeout(() => {
+console.log("Task 5 complete");
+callback();
+}, 2000);
+task1(() => {
+	task2(() => {
+		task3(() => {
+			task4(() => {
+				task5(() =>
+				 console.log("All tasks complete"));
+			});
+		})
+	});
+})
+```
+
 # Synchronous Code
 // synchronous = Executes line by line consecutively in a sequential manner Code that waits for an operation to complete.
 
@@ -525,6 +688,78 @@ function func2(){
 console.log("Task 2");
 console.log("Task 3"); console.log("Task 4");
 func1(func2); 
+```
+# Promise Object
+An Object that manages asynchronous operations.
+Wrap a Promise Object around (asynchronous code)
+"I promise to return a value"
+PENDING -> RESOLVED or REJECTED
+new Promise((resolve, reject) => (asynchronous code))
+// DO THESE CHORES IN ORDER
+// 1. WALK THE DOG
+// 2. CLEAN THE KITCHEN
+// 3. TAKE OUT THE TRASH
+```js
+function walkDog(){
+return new Promise((resolve, reject) => {
+setTimeout(() => {
+const dogwalked = false;
+if(dogwalked) {
+resolve("You walk the dog ");
+}
+else{
+reject("You DIDN'T walk the dog");
+}
+), 1500);
+
+function cleankitchen(){
+		return new Promise((resolve, reject) {
+		setTimeout(() => {
+		const cleankitchen = true;
+		if(cleankitchen) {
+			resolve("You clean the kitchen");
+		}
+		else{
+			reject("You DIDN'T clean the kitchen");
+		}
+		}, 500);
+	});
+}
+
+function takeOutTrash(){
+		return new Promise((resolve, reject) {
+		setTimeout(() => {
+		const trashTakenOut = true;
+		if(trashTakenout) {
+			resolve("You take out the trash ");
+		}
+		else{
+			reject("You DIDN'T take out the trash");
+		}
+		}, 500);
+	});
+}
+walkDog().then(value> {console.log(value); return cleankitchen()})
+.then(value=> {console.log(value); return takeOutTrash()}) .then(value => {console.log(value); console.log("You finished all the chores")
+.catch(error =>
+console.error(error));
+```
+# Async/Await 
+Async - makes a function return a promise
+Await - makes an async function wait for a promise
+### The `await` Keyword
+The `await` keyword can be used inside an `async` function to pause the execution of the function until the promise is settled (either fulfilled or rejected). When the promise is fulfilled, `await` returns the result of the promise. If the promise is rejected, `await` throws the rejected value
+
+Allows you write asynchronous code in a synchronous manner Async doesn't have resolve or reject parameters Everything after Await is placed in an event queue
+```js
+async function dochores(){
+try{  
+	const walkDogResult = await walkDog(); console.log(walkDogResult); 
+	const cleankitchenResult = await cleanKitchen(); console.log(cleanKitchenResult); 
+	const takeOutTrashResult = await takeOutTrash(); console.log(takeOutTrashResult); 
+	console.log("You finsihed all the chores!"); } catch(error) = > { console.error(error);}
+	}
+dochores();
 ```
 # Error Handling
 Error An Object that is created to represent a problem that occurs Occur often with user input or establishing a connection
@@ -567,122 +802,6 @@ catch(error) { console.error(error);
 }
 console.log("You have reached the end!");
 ```
-# Switch Case
-```js
-
-let day = 2;
-switch(day){
-case 1:
-console.log("It is Monday");
-break;
-case 2:
-console.log("It is Tuesday");
-break;
-case 3:
-console.log("It is Wednesday");
-case 4:
-console.log("It is Thursday");
-case 5:
-console.log("It is Friday");
-case 6:
-console.log("It is Saturday");
-case 7:
-console.log("It is Sunday");
-break;
-default:
-console.log($(day) is not a day);
-}
-```
-# String Methods
-```js
-let username = "Prakii its"
-console.log(username.charAt(1));//r
-console.log(username.indexAt("P");//0
-console.log(username.length);//9
-console.log(username.trim());//Prakiiits
-console.log(username.toUpperCase());//PRAKII ITS
-console.log(username.toLowerCase());//prakii its
-console.log(username.repeat(2));//prakii itsprakii its
-console.log(username.startsWith(" "));//false
-console.log(username.startsWith("s"));//true
-console.log(username.includes(" "));//true
-console.log(username.replace(" ","-"));//prakii-its
-console.log(username.padStart(11,"-"));//--Prakii its
-console.log(username.padend(11,"-"));//Prakii its--
-```
-## String Slicing
-string slicing creating a substring from a portion of another string
-```js
-string.slice(start, end)
-const fullName = "Bro Code";
-let firstName = fullName.slice(0, 3);//upto 2nd index
-let lastName=fullName.slice(4, 8);//upto 7th index
-let lastchar=fullName.slice(-1);//e
-let lastchar=fullName.slice(-2);//de
-const firstName = fullName.slice(0, fullName.indexOf(""));//bro
-const lastName = fullName.slice(fullName.indexOf(" ") + 1);//code
-
-console.log(firstName);//bro
-console.log(lastName);//code
-
-```
-# Method Chaining
-
-**calling one method after another in one continuous line of code
-
-```js
-let username = window.prompt("Enter your username: ");
-//NO METHOD CHAINING
-username = username.trim();
-let letter=username.charAt(0);
-letter= letter.toUpperCase();
-let extraChars username.slice(1);
-extraChars=extraChars.toLowerCase();
-username=letter + extraChars;
-console.log(username);
-//METHOD CHAINING
-username = username.trim().charAt(0).toUpperCase() + username.trim().slice(1).toLowerCase();
-```
-
-# Logical Operators
-**logical operators used to combine or manipulate Boolean values
-(true or false)
-AND &
-OR
-NOT 
-
-# Strictly Operators
-**assignment operator
-== comparison operator (compare if values are equal)
-=== strict equality operator (compare if values & datatype are equal)
-! inequality operator
-!== strict inequality operator
-
-# While Loop
-```js
-let username = "BroCode";
-while(username === ""){
-console.log("You didn't enter your name");
-console.log(Hello $(username));
-```
-
-```js
-let loggedIn = false;
-let username;
-let password;
-while(!loggedIn){
-username = window.prompt("Enter your username");
-password = window.prompt("Enter your password");
-if (username === "myUsername" && password === "myPassword") {
-loggedIn = true;
-console.log("You are logged in!");
-}
-else{
-console.log("Invalid credentials! Please try again");
-}
-}
-```
-
 # DOM Manipulation
 
 ***DOCUMENT OBJECT MODEL
@@ -1096,3 +1215,278 @@ function deleteItem(event)
 event target parentElement.remove
 ```
 ![[Pasted image 20240729125923.png]]
+# NodeList
+NodeList Static collection of HTML elements by (id, class, element)
+Can be created by using querySelectorAll()
+Similar to an array, but no (map, filter, reduce)
+NodeList won't update to automatically reflect changes
+```js
+///4 buttons in html code
+//ADD HTML/CSS PROPERTIES
+buttons.forEach(button => {
+button.style.backgroundColor = "green";
+button.textContent +="😯";
+});
+
+// CLICK event listener
+buttons.forEach(button => {
+button.addEventListener("click", event => {
+event.target.style.backgroundColor = "tomato";
+});
+});
+
+// MOUSEOVER + MOUSEOUT event listener
+buttons.forEach(button => {
+button.addEventListener("mouseover", event => {
+event.target.style.backgroundColor = "hsl (205, 100%, 40%)";
+});
+});
+buttons.forEach(button => {
+button.addEventListener("mouseout", event => {
+event.target.style.backgroundColor = "hsl (205, 100%, 60%)";
+});
+});
+
+// ADD AN ELEMENT
+const newButton document.createElement("button"); //STEP 1
+newButton.textContent = "Button 5"; //STEP 2
+newButton.classList "myButtons";
+document.body.appendChild(newButton); //STEP 3
+
+// REMOVE AN ELEMENT
+buttons.forEach(button => {
+button.addEventListener("click", event => {
+event.target.remove();
+buttons document.querySelectorAll(".myButtons");//node cannot be updated automatically it.so we can update for each events
+});
+});
+```
+# classList
+ classList Element property in JavaScript used to interact // with an element's list of classes (CSS classes)
+Allows you to make reusable classes for many elements across your webpage.
+// add()
+// remove()
+//toggle(Remove if present, Add if not)
+// replace(oldClass, newClass)
+// contains()
+```css
+#myButtons{
+font-size: 4rem;
+margin: 10px;
+border: none;
+border-radius: 5px;
+padding: 10px 15px;
+}
+.enabled{
+background-color:
+hsl (204, 100%, 50%);
+color: white;
+}
+.hover{
+box-shadow: 0 0 10px ☐ hsla(0, 0%, 0%, 0.2);
+font-weight: bold;
+}
+.disabled{
+background-color:
+color:
+hsl(0, 0%, 60%);
+hsl(0, 0%, 80%);
+}
+```
+
+```js
+// add()
+const myButton document.getElementById("myButton");
+myButton.addEventListener("mouseover", event => { event.target.classList.add("hover");
+));
+// remove()
+myButton.addEventListener("mouseout", event => { event.target.classList.remove("hover"); });	 
+```
+
+```js
+//toggle(Remove if present, Add if not)
+myButton.addEventListener("mouseover", event event.target.classList.toggle("hover"); });
+myButton.addEventListener("mouseout", event event.target.classList.toggle("hover"); });
+```
+
+```js
+// replace(oldClass, newClass)
+// contains()
+myButton.classList.add("enabled");
+myButton.addEventListener("click", event => {
+if(event.target.classList.contains("disabled")) {
+event.target.textContent += "😯";
+}
+else{
+event.target.classList.replace("enabled", "disabled");
+});
+```
+
+```js
+//set of buttons with class mybuttons
+let buttons document.querySelectorAll(".myButtons");
+buttons.forEach(button => {
+button.classList.add("enabled");
+});
+buttons.forEach(button => {
+button.addEventListener("mouseover", event {
+event.target.classList.toggle("hover"); });
+});
+buttons.forEach(button
+button.addEventListener("mouseout, event {
+event.target.classList.toggle("hover"); });
+});
+buttons.forEach (button => {
+button.addEventListener("click", event {
+if(event.target.classList.contains("disabled")){
+event.target.textContent +="😯";
+}
+else{
+event.target.classList.replace("enabled", "disabled");
+});
+});
+myButton.addEventListener("mouseout", event => { event.target.classList.remove("hover"); });const myButton document.getElementById("myButton");
+myButton.addEventListener("mouseover", event => { event.target.classList.add("hover");
+));
+```
+# Fetch API
+***fetch Function used for making HTTP requests to fetch resources.
+(JSON style data, images, files)
+Simplifies asynchronous data fetching in JavaScript and used for interacting with APIs to retrieve and send data asynchronously over the web.
+![[Pasted image 20240814230453.png]]
+Sure! Let's break down the JavaScript code step by step for someone who is new to fetching data from an API and using asynchronous functions in JavaScript.
+
+```js
+async function fetchData() {
+    try {
+        // Get the input value and convert it to lowercase
+        const pokemonName = document.getElementById("pokemonName").value.toLowerCase();
+        
+        // Make a network request to fetch the Pokemon data
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        
+        // Check if the response is okay (status code 200-299)
+        if (!response.ok) {
+            throw new Error("Could not fetch resource");
+        }
+        
+        // Parse the response body as JSON
+        const data = await response.json();
+        
+        // Get the Pokemon sprite URL from the JSON data
+        const pokemonSprite = data.sprites.front_default;
+        
+        // Get the image element and set its source to the sprite URL
+        const imgElement = document.getElementById("pokemonSprite");
+        imgElement.src = pokemonSprite;
+        imgElement.style.display = "block";
+    } catch (error) {
+        // Log any errors that occur
+        console.error(error);
+    }
+}
+```
+### Step-by-Step Explanation:
+
+1. **HTML Setup:**
+    - We have an input field where the user can type the name of a Pokemon.
+    - A button that, when clicked, will call the `fetchData` function.
+    - An `img` element that will display the Pokemon sprite once it's fetched.
+
+2. **JavaScript Function (`fetchData`):**
+
+    ```javascript
+    async function fetchData() {
+    ```
+
+    - The `async` keyword before the function declaration allows us to use `await` inside this function. `await` makes the function wait for a promise to resolve, making it easier to work with asynchronous code.
+
+3. **Try-Catch Block:**
+
+    ```javascript
+    try {
+    ```
+
+    - The `try` block lets us write code that might throw an error, which we can handle gracefully using the `catch` block.
+
+4. **Getting Input Value:**
+
+    ```javascript
+    const pokemonName = document.getElementById("pokemonName").value.toLowerCase();
+    ```
+
+    - We get the value from the input field (the name of the Pokemon entered by the user) and convert it to lowercase to ensure it matches the API's requirements (Pokemon names are case-sensitive in the API).
+
+5. **Fetching Data from the API:**
+
+    ```javascript
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+    ```
+    Promises and `await` Work Together
+    - The `fetch` function returns a promise. The `await` keyword waits for this promise to resolve.
+	- While waiting, the function is paused and other code can run.
+	- Once the promise resolves, the `response` object contains the HTTP response.
+    - `fetch` is a function that makes a network request to the specified URL. The `await` keyword makes the code wait until the request is complete and returns a response.
+    - We use a template literal (backticks) to insert the Pokemon name into the URL dynamically.
+
+6. **Checking Response Status:**
+
+    ```javascript
+    if (!response.ok) {
+        throw new Error("Could not fetch resource");
+    }
+    ```
+
+    - `response.ok` is a boolean that indicates if the response status is in the range 200-299, which means the request was successful.
+    - If the response is not okay, we throw an error with a custom message.
+
+7. **Parsing the JSON Data:**
+
+    ```javascript
+    const data = await response.json();
+    ```
+    - The `response.json()` method returns a promise that resolves to a JSON object.
+	- The `await` keyword waits for this promise to resolve.
+	- Once the promise resolves, the `data` object contains the parsed JSON.
+    - The `response.json()` method parses the JSON body of the response and returns a promise. We use `await` to wait for this promise to resolve and give us the parsed data.
+
+8. **Extracting the Pokemon Sprite URL:**
+
+    ```javascript
+    const pokemonSprite = data.sprites.front_default;
+    ```
+
+    - We extract the URL of the Pokemon's front sprite from the parsed data. The API response includes various properties, and `sprites.front_default` is the URL of the front image of the Pokemon.
+
+9. **Displaying the Image:**
+
+    ```javascript
+    const imgElement = document.getElementById("pokemonSprite");
+    imgElement.src = pokemonSprite;
+    imgElement.style.display = "block";
+    ```
+
+    - We get the `img` element by its ID.
+    - We set the `src` attribute of the `img` element to the URL of the Pokemon sprite, so the image is displayed.
+    - We set the `display` style of the image element to `block` to ensure it is visible (it was initially set to `none`).
+
+10. **Handling Errors:**
+
+    ```javascript
+    } catch (error) {
+        console.error(error);
+    }
+    ```
+
+    - If any error occurs during the execution of the `try` block (e.g., network error, invalid Pokemon name), the control moves to the `catch` block.
+    - The `catch` block logs the error to the console.
+### How it Works:
+
+1. The user enters a Pokemon name and clicks the "Fetch Pokemon" button.
+2. The `fetchData` function is called.
+3. The function gets the entered Pokemon name, converts it to lowercase, and makes a request to the PokeAPI.
+4. If the response is successful, it extracts the Pokemon sprite URL from the response data.
+5. The function then sets the `src` attribute of the image element to the sprite URL and makes the image visible.
+6. If there is an error (e.g., the Pokemon name is invalid), it logs the error to the console.
+
+
