@@ -104,6 +104,64 @@ System.out.println(empIds);
 another way to whole is 
 ![[Pasted image 20240806184652.png]]
 
+## getOrDefault
+
+The `getOrDefault` method in Java is part of the `Map` interface and is available from Java 8 onwards. It is used to retrieve the value associated with a specified key in a map. If the key is not present in the map, `getOrDefault` returns a specified default value instead of `null`. This method provides a concise and readable way to handle cases where a key might not be present in the map.
+
+### Syntax
+
+```java
+V getOrDefault(Object key, V defaultValue)
+```
+
+- **key**: The key whose associated value is to be returned.
+- **defaultValue**: The value to be returned if the key is not found in the map.
+
+### Example
+
+Here's a practical example to illustrate the usage of `getOrDefault`:
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a HashMap and populate it with some values
+        Map<String, Integer> fruitMap = new HashMap<>();
+        fruitMap.put("Apple", 10);
+        fruitMap.put("Banana", 20);
+        fruitMap.put("Orange", 30);
+        
+        // Using getOrDefault to retrieve values
+        System.out.println("Apple count: " + fruitMap.getOrDefault("Apple", 0)); // Output: 10
+        System.out.println("Banana count: " + fruitMap.getOrDefault("Banana", 0)); // Output: 20
+        System.out.println("Grapes count: " + fruitMap.getOrDefault("Grapes", 0)); // Output: 0
+        
+        // Using getOrDefault to handle a missing key with a default value
+        System.out.println("Pineapple count: " + fruitMap.getOrDefault("Pineapple", 5)); // Output: 5
+    }
+}
+```
+
+### Explanation
+
+1. **Initialization**: A `HashMap` named `fruitMap` is created and populated with some fruit names as keys and their counts as values.
+2. **Using `getOrDefault`**:
+   - `fruitMap.getOrDefault("Apple", 0)`: Since "Apple" is present in the map with a count of 10, the method returns 10.
+   - `fruitMap.getOrDefault("Banana", 0)`: Since "Banana" is present in the map with a count of 20, the method returns 20.
+   - `fruitMap.getOrDefault("Grapes", 0)`: Since "Grapes" is not present in the map, the method returns the default value 0.
+   - `fruitMap.getOrDefault("Pineapple", 5)`: Since "Pineapple" is not present in the map, the method returns the default value 5.
+
+### Advantages of `getOrDefault`
+
+- **Readability**: The method provides a clear and concise way to handle missing keys without needing additional checks.
+- **Default Value**: It allows you to specify a default value directly, making the code cleaner and more maintainable.
+- **Null Handling**: It helps avoid `NullPointerException` by providing a default value when the key is not found.
+
+### Summary
+
+The `getOrDefault` method is a useful addition to the `Map` interface that simplifies handling cases where a key might not be present. It enhances code readability and reduces the need for explicit null checks, making it a valuable tool in any Java programmer's toolkit.
 # HashSet
 
 In Java, a `HashSet` is a part of the Java Collections Framework and implements the `Set` interface. It is used to store unique elements and does not maintain any specific order. It is backed by a `HashMap`, which provides constant-time performance for basic operations like add, remove, and contains.

@@ -204,6 +204,66 @@ class Solution {
 
 }
 ```
+## [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/)
+```java
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer> numbers=new ArrayList<>();
+        int n=nums.length/3;
+        HashMap<Integer,Integer> num=new HashMap<>();
+        for(int N:nums){
+            num.put(N,num.getOrDefault(N,0)+1);
+        }
+        int c=0;
+        for(int N:nums){
+            if(num.get(N)>n&&!numbers.contains(N)){
+                numbers.add(N);
+            }
+        }
+        return numbers;
+    }
+}
+```
+## [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
+```java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+    int count=0,sum=0;
+    HashMap<Integer,Integer> num= new HashMap<>();
+    num.put(0,1);
+    for(int n:nums){
+        sum+=n;
+        int diff=sum-k;
+        if(num.containsKey(diff)){
+            count+=num.get(diff);
+        }
+        num.put(sum,num.getOrDefault(sum,0)+1);
+    }
+    return count;
+    }
+}
+```
+
+## [974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/)
+```java
+  class Solution {
+    public int subarraysDivByK(int[] nums, int k) {
+    int count=0,sum=0;
+    HashMap<Integer,Integer> num= new HashMap<>();
+    num.put(0,1);
+    for(int n:nums){
+        sum+=n;
+        int rem=(sum % k + k) % k;
+        if(num.containsKey(rem)){
+            count+=num.get(rem);
+        }
+        num.put(rem,num.getOrDefault(rem,0)+1);
+    }
+    return count;
+    }
+}
+```
+``
 ## [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
 ```java
 class Solution {
