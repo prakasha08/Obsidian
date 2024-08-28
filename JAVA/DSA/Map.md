@@ -1,5 +1,75 @@
  
-# HashMap
+# Collision in HashMap solved By
+In a HashMap, handling collisions (when two keys hash to the same index) is a crucial aspect. Two common methods for collision resolution are **chaining** and **open addressing**.
+
+### 1. Chaining
+
+**Chaining** involves creating a chain (often a linked list) at each index of the hash table to store multiple elements that hash to the same index.
+
+- **How it works**:
+  - Each index in the hash table array contains a reference to a list (or any other data structure like a tree or another hash table).
+  - When a new element is inserted, its hash code determines the index.
+  - If the index is already occupied (collision occurs), the new element is added to the list at that index.
+  - To search for an element, the index is determined first, and then a search is performed within the list at that index.
+
+- **Advantages**:
+  - Simple to implement.
+  - The hash table can hold more elements than the number of slots since each slot can store a list of elements.
+  - Deletion is straightforward because you only remove the element from the list.
+
+- **Disadvantages**:
+  - If many elements hash to the same index, the list can become long, leading to slower lookups.
+  - More memory is used since additional data structures (like linked lists) are required.
+
+**Example**:
+Let's say we have a hash table of size 10, and the keys 15, 25, and 35 are inserted. If they all hash to index 5, chaining will store them in a list at that index.
+
+```
+Index  | Values
+----------------
+  5    | [15, 25, 35]
+```
+
+### 2. Open Addressing
+
+**Open addressing** handles collisions by finding another open (empty) slot within the hash table. It does not use extra data structures like chaining.
+
+- **How it works**:
+  - When a collision occurs, the algorithm probes or searches through alternative locations in the array until an empty slot is found.
+  - There are several probing methods:
+    - **Linear Probing**: Sequentially checks the next available slots.
+    - **Quadratic Probing**: Checks slots at increasing intervals.
+    - **Double Hashing**: Uses a secondary hash function to determine the interval between slots.
+
+- **Advantages**:
+  - It avoids the overhead of using additional data structures like linked lists.
+  - More memory-efficient since all elements are stored within the hash table itself.
+
+- **Disadvantages**:
+  - Clustering can occur, where a group of occupied slots makes the probing process slower.
+  - Deletion is more complicated because simply removing an element can disrupt the probing sequence.
+
+**Example**:
+Consider a hash table of size 10. If keys 15, 25, and 35 all hash to index 5, and we use linear probing:
+- 15 is inserted at index 5.
+- 25 is inserted at the next available slot, say index 6.
+- 35 is inserted at the next available slot, say index 7.
+
+```
+Index  | Values
+----------------
+  5    | 15
+  6    | 25
+  7    | 35
+```
+
+### Comparison
+
+- **Chaining** is more suitable when the load factor (ratio of elements to table size) is expected to be high, as it can handle more elements without degrading performance too much.
+- **Open addressing** is more memory-efficient but may degrade in performance as the load factor increases due to clustering.
+
+Both methods have their use cases depending on the specific needs of the application.
+#  HashMap
 In Java, a `HashMap` is a part of the Java Collections Framework and is used to store key-value(always in wrapper class like Integer,Float not primitives int,float) pairs. It's a map-based collection that allows you to store and retrieve values based on keys. Here are some key properties and how to use a `HashMap`:
 #### Creating a `HashMap`
 ```java

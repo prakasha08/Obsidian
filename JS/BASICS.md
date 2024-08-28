@@ -1,3 +1,4 @@
+![[Screenshot 2024-08-26 144550.png]]
 # Datatypes
 ![[Pasted image 20240717173611.png]]
 
@@ -17,9 +18,9 @@ let firstName = "Bro";
 let favoriteFood = "pizza";
 let email = "Bro123@gmail.com";
 console.log(typeof firstName);
-console.log("Your name is ${firstName));
-console.log(You like ${favoriteFood));
-console.log(Your email is ${email});
+console.log(`Your name is ${firstName}`);
+console.log(`You like ${favoriteFood}`);
+console.log(`Your email is ${email}`);
 ```
 ### Boolean
 ```js
@@ -107,11 +108,11 @@ Find Circumstance of circle using Constant
 ```js
 const PI = 3.14159;
 let radius;
-Let circumference;
+let circumference;
 document.getElementById("mySubmit").onclick = function(){
-radius= document.getElementById("myText").value;
-radius Number(radius);
-circumference 2 PI * radius;
+radius = document.getElementById("myText").value;
+radius = Number(radius);
+circumference = 2 * PI * radius;
 document.getElementById("myH3").textContent circumference "cm"
 ```
 ![[Pasted image 20240801220101.png]]
@@ -119,7 +120,7 @@ document.getElementById("myH3").textContent circumference "cm"
 ```js
 // type conversion change the datatype of a value to another // (strings, numbers, booleans)
 let age = window.prompt("How old are you?");
-age Number(age);
+age = Number(age);
 age += 1;
 console.log(age, typeof age);//age+1
 ```
@@ -141,7 +142,7 @@ Math - > built-in object that provides a collection of properties and methods
 let x = 3;
 let y = 2;
 let z = 1;
-zMath.round(x);
+z = Math.round(x);
 z= Math.floor(x);
 z = Math.ceil(x);
 z = Math.trunc(x);
@@ -168,10 +169,10 @@ function add(x, y){
 return x + y;
 }
 function subtract(x, y) {
-return x y;
+return x - y;
 }
 function multiply(x, y){
-return x y;
+return x * y;
 }
 function divide(x, y) {
 return x / y;
@@ -190,7 +191,7 @@ console.log(isValidEmail("Zuckerborg@Meta.com"));
 ![[Pasted image 20240717183223.png]]
 # Arrays
 ```js
-let fruits = ["apple", "orange", "banana", "coconut"];
+let fruits = ["apple", "orange", "banana"];
 //fruits.push("coconut");-> apple orange banana coconut
 //fruits.pop();-> apple orange 
 //fruits.unshift("mango");-> mango apple orange banana
@@ -239,7 +240,7 @@ fruits.forEach(display);
 function upperCase(element, index, array){ 
 array [index] = element.toUpperCase();}
 function lowercase (element, index, array){ 
-array [index] element.toLowerCase();}
+array [index] = element.toLowerCase();}
 function capitalize(element, index, array){
 array[index] = element.charAt(0).toUpperCase() + element.slice(1);
 function display(element){
@@ -249,9 +250,9 @@ console.log(element);}
 ***.map() = accepts a callback and applies that function to each element of an array, then return a new array
 It same as like foreach loop
 ```js
-const numbers [1, 2, 3, 4, 5];
+const numbers = [1, 2, 3, 4, 5];
 const squares = numbers.map(square);
-const cubes numbers.map(cube);
+const cubes = numbers.map(cube);
 console.log(cubes);
 function square(element) {
 return Math.pow(element, 2)
@@ -262,25 +263,12 @@ return Math.pow(element, 3)
 ```
 
 ```js
-const numbers [1, 2, 3, 4, 5];
-const squares = numbers.map(square);
-const cubes numbers.map(cube);
-console.log(cubes);
-function square(element) {
-return Math.pow(element, 2)
-}
-function cube (element) {
-return Math.pow(element, 3)
-}
-```
-
-```js
-const dates ["2024-1-10", "2025-2-20", "2026-3-30"];
-const formattedDates dates.map(formatDates);
+const dates = ["2024-1-10", "2025-2-20", "2026-3-30"];
+const formattedDates = dates.map(formatDates);
 console.log(formattedDates);
 function formatDates (element){
-const parts element.split("-");
-return ${parts[1])/${parts [2]}/${parts[0]);
+const parts = element.split("-");
+return ${parts[1]}/${parts [2]}/${parts[0]);
 ```
 ## Filter
 ***.filter() creates a new array by filtering out elements
@@ -324,7 +312,7 @@ function getLongWords (element){ return element.length > 6;
 ***reduce() = reduce the elements of an array to a single value
 
 ```js
-const prices [5, 30, 10, 25, 15, 20];
+const prices = [5, 30, 10, 25, 15, 20];
 const total prices.reduce(sum);
 console.log($${total.toFixed(2)));
 function sum(accumulator, element){ 
@@ -333,8 +321,8 @@ return accumulator + element;
 ```
 
 ```js
-const grades [75, 50, 90, 80, 65, 95];
-const maximum grades.reduce(getMax);
+const grades = [75, 50, 90, 80, 65, 95];
+const maximum = grades.reduce(getMax);
 const minimum
 grades.reduce(getMin);
 console.log(maximum);
@@ -365,8 +353,8 @@ console.log(b);
 //
 EXAMPLE 2
 // SWAP 2 ELEMENTS IN AN ARRA
-const colors ["red", "green", "blue", "black", "white"];
-[colors[0], colors [4]] = [colors [4], colors[0]);
+const colors = ["red", "green", "blue", "black", "white"];
+[colors[0], colors [4]] = [colors [4], colors[0]];
 console.log(colors);
 ```
 
@@ -517,32 +505,31 @@ setTimeout(function(){ console.log("Hello"); ), 3000);
 
 ```js
 const numbers = [1, 2, 3, 4, 5, 6];
-const squares numbers.map(function(element){
-return Math.pow(element, 2);
-1);
+const squares = numbers.map(function(element){
+return Math.pow(element, 2);1);
 const cubes numbers.map(function(element){
 return Math.pow(element, 3);
-));
+});
 const evenNums numbers.filter(function(element){
 return element%20;
 });
 const oddNums numbers.filter(function(element){
 return element %2!=0;
-));
-const total numbers.reduce(function(accumulator, element) (
+});
+const total numbers.reduce(function(accumulator, element) {
 return accumulator + element;
-));
+});
   ```
 # Arrow Function
 **arrow functions is a concise way to write function expressions good for simple functions that you use only once (parameters) => some code
 
 ```js
-setTimeout( => console.log("Hello"), 3000);
+setTimeout( )=> console.log("Hello"), 3000);
 ```
 
 ```js
-const squares numbers.map((element) => Math.pow(element, 2));
-const cubes = numbers.map((element) Math.pow(element, 3));
+const squares = numbers.map((element) => Math.pow(element, 2));
+const cubes = numbers.map((element) => Math.pow(element, 3));
 const evenNums = numbers.filter((element) => element % 2 == 0);
 const oddNums = numbers.filter((element) => element % 2 != 0);
 const total = numbers.reduce((accumulator, element) => accumulator + element;
@@ -612,7 +599,7 @@ console.log(fullName);//Mr. Spongebob Squarepants III
 # Callback()
 ***callback a function that is passed as an argument to another function.
 used to handle asynchronous operations:
-1. Reading a file
+ 1. Reading a file
  2. Network requests
  3. Interacting with databases
 " Hey, when you're done, call this next."
@@ -620,12 +607,14 @@ used to handle asynchronous operations:
 sum(displayPage, 1, 2);
 function sum(callback, x, y) {
 let result = x + y;
+
 callback(result);
 function displayConsole (result) {
 console.log(result);
 }
 function displayPage(result) {
 document.getElementById("myH1").textContent = result;
+}
 ```
 # Callback hell
 Situation in JavaScript where callbacks
@@ -634,115 +623,194 @@ degree where the code is difficult to read. Old pattern to handle asynchronous f
 Use Promises + async/await to avoid Callback Hell
 ```js
 function task1(callback) {
-setTimeout(() => {
-console.log("Task 1 complete");
-callback();
-), 2000);
+    setTimeout(() => {
+        console.log("Task 1 complete");
+        callback();
+    }, 2000);
 }
+
 function task2(callback) {
-setTimeout(() => {
-console.log("Task 2 complete");
-callback();
-}, 1000);
+    setTimeout(() => {
+        console.log("Task 2 complete");
+        callback();
+    }, 1000);
 }
+
 function task3(callback) {
-setTimeout(() => {
-console.log("Task 3 complete");
-callback();
-), 3000);
+    setTimeout(() => {
+        console.log("Task 3 complete");
+        callback();
+    }, 3000);
 }
+
 function task4(callback) {
-setTimeout(() => {
-console.log("Task 4 complete");
-callback();
-), 1500);
+    setTimeout(() => {
+        console.log("Task 4 complete");
+        callback();
+    }, 1500);
 }
+
 function task5(callback) {
-setTimeout(() => {
-console.log("Task 5 complete");
-callback();
-}, 2000);
-task1(() => {
-	task2(() => {
-		task3(() => {
-			task4(() => {
-				task5(() =>
-				 console.log("All tasks complete"));
-			});
-		})
-	});
-})
-```
-
-# Synchronous Code
-// synchronous = Executes line by line consecutively in a sequential manner Code that waits for an operation to complete.
-
-// asynchronous = Allows multiple operations to be performed concurrently without waiting Doesn't block the execution flow and allows the program to continue (I/O operations, network requests, fetching data) Handled with: Callbacks, Promises, Async/Await
-//
-```js
-
-function func1(callback) {
-setTimeout(() => {console.log("Task 1"); callback()), 3000);
+    setTimeout(() => {
+        console.log("Task 5 complete");
+        callback();
+    }, 2000);
 }
-function func2(){
-console.log("Task 2");
-console.log("Task 3"); console.log("Task 4");
-func1(func2); 
+
+// Start the chain of tasks
+task1(() => {
+    task2(() => {
+        task3(() => {
+            task4(() => {
+                task5(() => {
+                    console.log("All tasks complete");
+                });
+            });
+        });
+    });
+});
+
 ```
+
+# Synchronous vs Asynchronous Programming
+
+**Synchronous Programming**:
+- Operations are executed one after another.
+- Each operation must complete before the next one starts.
+- If an operation takes a long time, the entire program waits for it to finish.
+
+Example:
+```javascript
+console.log('Start');
+console.log('Step 1');
+console.log('Step 2');
+console.log('End');
+```
+Output:
+```
+Start
+Step 1
+Step 2
+End
+```
+
+**Asynchronous Programming**:
+- Operations can be executed without waiting for previous operations to complete.
+- The program can continue running while waiting for other operations to finish.
+- Commonly used for operations that take a long time, such as network requests or file I/O.
+
+Example with `setTimeout` (a simple asynchronous function):
+```javascript
+console.log('Start');
+setTimeout(() => {
+    console.log('Step 1');
+}, 1000);
+console.log('End');
+```
+Output:
+```
+Start
+End
+Step 1  // This appears after 1 second
+```
+
 # Promise Object
-An Object that manages asynchronous operations.
+A **Promise** is an object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+A promise can be in one of three states:
+1. **Pending**: The initial state, neither fulfilled nor rejected.
+2. **Fulfilled**: The operation completed successfully.
+3. **Rejected**: The operation failed.
 Wrap a Promise Object around (asynchronous code)
 "I promise to return a value"
 PENDING -> RESOLVED or REJECTED
 new Promise((resolve, reject) => (asynchronous code))
-// DO THESE CHORES IN ORDER
-// 1. WALK THE DOG
-// 2. CLEAN THE KITCHEN
-// 3. TAKE OUT THE TRASH
-```js
-function walkDog(){
-return new Promise((resolve, reject) => {
-setTimeout(() => {
-const dogwalked = false;
-if(dogwalked) {
-resolve("You walk the dog ");
-}
-else{
-reject("You DIDN'T walk the dog");
-}
-), 1500);
+Example of creating a promise:
+```javascript
+let promise = new Promise((resolve, reject) => {
+    let success = true; // Change this to false to simulate a failure
+    if (success) {
+        resolve("Operation was successful");
+    } else {
+        reject("Operation failed");
+    }
+});
+```
 
-function cleankitchen(){
-		return new Promise((resolve, reject) {
-		setTimeout(() => {
-		const cleankitchen = true;
-		if(cleankitchen) {
-			resolve("You clean the kitchen");
-		}
-		else{
-			reject("You DIDN'T clean the kitchen");
-		}
-		}, 500);
-	});
+### `then` Method
+
+The `then` method is used to handle the fulfillment of a promise. It takes two arguments:
+1. A callback function to be executed if the promise is fulfilled (resolved).
+2. (Optional) A callback function to be executed if the promise is rejected.
+
+Example:
+```javascript
+promise.then(
+    value => { console.log(value); }, // Success handler
+    error => { console.error(error); } // Failure handler
+);
+```
+
+### Using Promises to Sequence Asynchronous Tasks
+
+Now let's look at your example in detail:
+
+```javascript
+function walkDog() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const dogwalked = false;
+            if (dogwalked) {
+                resolve("You walk the dog");
+            } else {
+                reject("You DIDN'T walk the dog");
+            }
+        }, 1500);
+    });
 }
 
-function takeOutTrash(){
-		return new Promise((resolve, reject) {
-		setTimeout(() => {
-		const trashTakenOut = true;
-		if(trashTakenout) {
-			resolve("You take out the trash ");
-		}
-		else{
-			reject("You DIDN'T take out the trash");
-		}
-		}, 500);
-	});
+function cleankitchen() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const cleankitchen = true;
+            if (cleankitchen) {
+                resolve("You clean the kitchen");
+            } else {
+                reject("You DIDN'T clean the kitchen");
+            }
+        }, 500);
+    });
 }
-walkDog().then(value> {console.log(value); return cleankitchen()})
-.then(value=> {console.log(value); return takeOutTrash()}) .then(value => {console.log(value); console.log("You finished all the chores")
-.catch(error =>
-console.error(error));
+
+function takeOutTrash() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const trashTakenOut = true;
+            if (trashTakenOut) {
+                resolve("You take out the trash");
+            } else {
+                reject("You DIDN'T take out the trash");
+            }
+        }, 500);
+    });
+}
+
+walkDog()
+    .then(value => {
+        console.log(value);
+        return cleankitchen();
+    })
+    .then(value => {
+        console.log(value);
+        return takeOutTrash();
+    })
+    .then(value => {
+        console.log(value);
+        console.log("You finished all the chores");
+    })
+    .catch(error => {
+        console.error(error);
+    });
 ```
 # Async/Await 
 Async - makes a function return a promise
@@ -788,14 +856,14 @@ console.log("You have reached the end!");
 
 ```js
 try{
-const dividend Number(window.prompt("Enter a dividend: "));
+const dividend = Number(window.prompt("Enter a dividend: "));
 const divisor = Number(window.prompt("Enter a divisor: "));
 if(divisor == 0)
 throw new Error("You can't divide by zero!");
 if(isNaN(dividend) || isNaN(divisor)) {
 throw new Error("Values must be a number");
 }
-const result dividend / divisor;
+const result = dividend / divisor;
 console.log(result);
 }
 catch(error) { console.error(error);
@@ -818,14 +886,14 @@ They allow you to select one or multiple HTML elements from the DOM (Document Ob
 ```
 
 ```js
-const fruits document.getElementsByClassName("fruits");
+const fruits = document.getElementsByClassName("fruits");
 Array.from(fruits).forEach(fruit => {
 fruit.style.backgroundColor = "yellow";
+}
 ```
 ```js
-const h4Elements
-document.getElementsByTagName("h4");
-const liElements document.getElementsByTagName("li");
+const h4Elements = document.getElementsByTagName("h4");
+const liElements = document.getElementsByTagName("li");
 for(let h4Element of h4Elements) {
 h4Element.style.backgroundColor = "yellow";
 }
@@ -834,7 +902,7 @@ liElement.style.backgroundColor = "lightgreen";
 }
 ```
 ```js
-const foods document.querySelectorAll("li");
+const foods = document.querySelectorAll("li");
 foods.forEach(food => {
 food.style.backgroundColor = "yellow";
 });
@@ -845,8 +913,6 @@ food.style.backgroundColor = "yellow";
 ![[Screenshot 2024-07-26 094647.png]]
 
 ![[Screenshot 2024-07-26 094657.png]]
-
-
 ## DOM Navigation
 
 ***DOM Navigation The process of navigating through the structure of an HTML document using JavaScript.
@@ -1349,6 +1415,68 @@ myButton.addEventListener("mouseout", event => { event.target.classList.remove("
 myButton.addEventListener("mouseover", event => { event.target.classList.add("hover");
 ));
 ```
+# JSON File
+**JSON** (JavaScript Object Notation) is a lightweight data-interchange format that's easy for humans to read and write, and easy for machines to parse and generate. It is widely used for transmitting data between a server and a web application as text.
+
+### **Key Features of JSON:**
+
+1. **Human-Readable:** JSON is formatted in a way that is easy for humans to understand. It consists of key-value pairs and arrays, much like how objects are defined in JavaScript.
+
+2. **Lightweight:** JSON is a compact format that minimizes the amount of data being transmitted over a network, making it efficient for data exchange.
+
+3. **Language Independent:** Although JSON is based on a subset of JavaScript, it is language-independent and can be parsed and generated by most programming languages, including Python, Java, C#, PHP, and many others.
+
+4. **Self-Describing:** JSON is easy to understand because its format closely resembles the way data is structured in many programming languages.
+
+### **Structure of JSON:**
+
+JSON data is structured as a collection of key-value pairs, similar to how dictionaries or objects work in programming languages. The structure typically includes:
+
+- **Objects:** Enclosed in curly braces `{}` and contain key-value pairs.
+- **Arrays:** Enclosed in square brackets `[]` and can contain a list of values or objects.
+- **Values:** Can be strings, numbers, booleans, null, objects, or arrays.
+
+### **Example of JSON:**
+
+```json
+{
+  "name": "John Doe",
+  "age": 30,
+  "isStudent": false,
+  "courses": ["Math", "Science", "History"],
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "state": "CA",
+    "postalCode": "12345"
+  }
+}
+```
+
+- **Objects:** `{"name": "John Doe", "age": 30, "isStudent": false, "courses": [...], "address": {...}}`
+- **Arrays:** `"courses": ["Math", "Science", "History"]`
+- **Key-Value Pairs:** `"name": "John Doe"`, `"age": 30`, etc.
+
+### **Why Use JSON?**
+
+1. **Data Exchange:** JSON is commonly used to exchange data between a client and a server in web applications. When a client requests data from a server, the server often responds with JSON data.
+
+2. **Configuration Files:** JSON is also used for configuration files in various software applications because of its simplicity and readability.
+
+3. **APIs:** Many RESTful APIs return data in JSON format because it's easy for both humans and machines to understand and process.
+
+### **Advantages of JSON:**
+
+- **Easy to read and write:** Simple and intuitive syntax.
+- **Widely supported:** Almost every modern programming language has libraries or built-in support for JSON.
+- **Efficient:** Lightweight format, making it faster to transmit over networks.
+
+### **Disadvantages of JSON:**
+
+- **No support for complex data types:** JSON only supports basic data types like strings, numbers, booleans, arrays, and objects.
+- **Lacks schema validation:** JSON doesn't natively support data validation, though there are libraries and tools to add this functionality.
+
+JSON has become a standard for data interchange on the web due to its simplicity and flexibility. It's an essential format to understand when working with web development, APIs, and various modern applications.
 # Fetch API
 ***fetch Function used for making HTTP requests to fetch resources.
 (JSON style data, images, files)

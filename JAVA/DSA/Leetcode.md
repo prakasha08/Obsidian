@@ -1,4 +1,123 @@
+# list
+## [885. Spiral Matrix III](https://leetcode.com/problems/spiral-matrix-iii/)
+```java
+class Solution {
+    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+        int step = 1;
+        int k = 0;
+        int[][] direction = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int r = rStart, c = cStart;
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        while (result.size() < (rows * cols)) {
+            for (int i = 0; i < 2; i++) {
+                int dR = direction[k][0];
+                int dC = direction[k][1];
+                for (int j = 0; j < step; j++) {
+                    if (0 <= r && r < rows && 0 <= c && c < cols) {
+                        ArrayList<Integer> row = new ArrayList<>();
+                        row.add(r);
+                        row.add(c);
+                        result.add(row);
+                    }
+                    r = r + dR;
+                    c = c + dC;
+                }
+                k = (k + 1) % 4;
+            }
+            step += 1;
+        }
+        int[][] array = new int[result.size()][];
+        for (int i = 0; i < result.size(); i++) {
+            ArrayList<Integer> row = result.get(i);
+            array[i] = new int[row.size()];
+            for (int j = 0; j < row.size(); j++) {
+                array[i][j] = row.get(j);
+            }
+        }
+        return array;
+    }
+}
+```
+## [442. Find All Duplicates in an Array](https://leetcode.com/problems/find-all-duplicates-in-an-array/)
+```java
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        int[] count = new int[nums.length + 1];
+        List<Integer> res = new ArrayList<>();
+        for(int num : nums){
+            if(count[num] == 1){
+                res.add(num);
+            }
+            count[num]++;
+        }
+        return res;
+    }
+}
+```
 # HashMap
+## [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+```java 
+///using Stack And HashMap
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2 =  nums2.length;
+        int[] res = new int[n1];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack();
+        for(int i=0;i<n2;i++){
+            while(!stack.empty()&&nums2[i]>stack.peek()){
+                map.put(stack.pop(),nums2[i]);
+            stack.push(nums2[i]);
+        }
+        for(int i=0;i<n1;i++){
+            res[i]=map.getOrDefault(nums1[i],-1);
+        }
+        return res;
+    }
+}
+```
+
+```java 
+//using Dequeu(Interface) and HashMap
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2 =  nums2.length;
+        int[] res = new int[n1];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for(int i=0;i<n2;i++){
+            while(!stack.isEmpty()&&nums2[i]>stack.peek()){
+                map.put(stack.pop(),nums2[i]);
+            }
+            stack.push(nums2[i]);
+        }
+        for(int i=0;i<n1;i++){
+            res[i]=map.getOrDefault(nums1[i],-1);
+        }
+        return res;
+    }
+}
+```
+## [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/)
+```java
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n=nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res,-1);
+        Stack<Integer> stack = new Stack();
+        for(int i=0;i<2*n;i++){
+            while(!stack.empty()&&nums[i%n]>nums[stack.peek()]){
+                res[stack.pop()]=nums[i%n];
+            }
+            stack.push(i%n);
+        }
+        return res;
+    }
+}
+```
 ## [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
 ```java
 class Solution {
@@ -204,6 +323,32 @@ class Solution {
 
 }
 ```
+## [1282. Group the People Given the Group Size They Belong To](https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/)
+
+```java
+class Solution {
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        List<List<Integer>> result = new ArrayList<>();
+        HashSet<Integer> Duplicate = new HashSet<>();
+         for(int i = 0; i < groupSizes.length; i++) {
+            if(!Duplicate.contains(groupSizes[i])){
+                Duplicate.add(groupSizes[i]);
+                List<Integer> freq= new ArrayList<>();
+                for(int j=0;j<groupSizes.length;j++){
+                    if((groupSizes[i]==groupSizes[j])&&(freq.size()<=groupSizes[i])){
+                        freq.add(j);
+                    }
+                    if (freq.size() == groupSizes[i]) {
+                        result.add(new ArrayList<>(freq));
+                        freq.clear();
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
+```
 ## [229. Majority Element II](https://leetcode.com/problems/majority-element-ii/)
 ```java
 class Solution {
@@ -244,6 +389,50 @@ class Solution {
 }
 ```
 
+## [2442. Count Number of Distinct Integers After Reverse Operations](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/)
+```java
+class Solution {
+    public int countDistinctIntegers(int[] nums) {
+        Set<Integer> distinctIntegers = new HashSet<>();
+        for (int num : nums) {
+            distinctIntegers.add(num);
+            int reverseNum = Integer.parseInt(new StringBuilder().append(num).reverse().toString());
+            distinctIntegers.add(reverseNum);
+        }
+        return distinctIntegers.size();
+    }
+}
+```
+
+```java
+class Solution {
+    public int countDistinctIntegers(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            result.add(nums[i]);
+        }
+         for(int i=0;i<nums.length;i++){
+            result.add(reverse(nums[i]));
+        }
+        Set<Integer> r = new HashSet<>();
+        for(int n:result){
+                r.add(n);
+                count++;
+            }
+        return count;
+    }
+    int reverse(int num){
+        int i=0;
+        while(num>0){
+            int temp=num%10;
+            i=i*10+temp;
+            num/=10;
+        }
+        return i;
+    }
+}
+```
 ## [974. Subarray Sums Divisible by K](https://leetcode.com/problems/subarray-sums-divisible-by-k/)
 ```java
   class Solution {
@@ -263,7 +452,51 @@ class Solution {
     }
 }
 ```
-``
+
+## [2001. Number of Pairs of Interchangeable Rectangles](https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/)
+```java
+class Solution {
+    public long interchangeableRectangles(int[][] rectangles) {
+        long res=0;
+        HashMap<Double,Integer> map= new HashMap<>();
+        for(int i=0;i<rectangles.length;i++){
+            double ratio = (double)rectangles[i][0]/rectangles[i][1];
+            res+=map.getOrDefault(ratio,0);
+            map.put(ratio,map.getOrDefault(ratio,0)+1);
+        }
+        return res;
+    }
+}
+```
+## [791. Custom Sort String](https://leetcode.com/problems/custom-sort-string/)
+```java
+class Solution {
+    public String customSortString(String order, String s) {
+        HashMap<Character,Integer> Freq = new HashMap<>();
+        for(char c:s.toCharArray()){
+            Freq.put(c,Freq.getOrDefault(c,0)+1);
+        }
+        StringBuilder S = new StringBuilder();
+        for(char c:order.toCharArray()){
+            if(Freq.containsKey(c)){
+                int count=Freq.get(c);
+                for(int i=0;i<count;i++){
+                     S.append(c);
+                }
+                Freq.remove(c);
+            }
+        }
+       for (Map.Entry<Character, Integer> entry : Freq.entrySet()) {
+            char c = entry.getKey();
+            int count = entry.getValue();
+            for (int i = 0; i < count; i++) {
+                S.append(c);
+            }
+        }
+        return S.toString();
+    }
+}
+```
 ## [273. Integer to English Words](https://leetcode.com/problems/integer-to-english-words/)
 ```java
 class Solution {
@@ -352,6 +585,72 @@ class Solution {
             }
         }
         return s.toString();
+    }
+}
+```
+# Stack
+## [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+```java 
+///using Stack And HashMap
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2 =  nums2.length;
+        int[] res = new int[n1];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack();
+        for(int i=0;i<n2;i++){
+            while(!stack.empty()&&nums2[i]>stack.peek()){
+                map.put(stack.pop(),nums2[i]);
+            stack.push(nums2[i]);
+        }
+        for(int i=0;i<n1;i++){
+            res[i]=map.getOrDefault(nums1[i],-1);
+        }
+        return res;
+    }
+}
+```
+
+```java 
+//using Dequeu(Interface) and HashMap
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2 =  nums2.length;
+        int[] res = new int[n1];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for(int i=0;i<n2;i++){
+            while(!stack.isEmpty()&&nums2[i]>stack.peek()){
+                map.put(stack.pop(),nums2[i]);
+            }
+            stack.push(nums2[i]);
+        }
+        for(int i=0;i<n1;i++){
+            res[i]=map.getOrDefault(nums1[i],-1);
+        }
+        return res;
+    }
+}
+```
+## [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/)
+## [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+```java
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        int n=temperatures.length;
+            int[] res = new int[n];
+            Arrays.fill(res,0);
+            Stack<Integer> stack = new Stack();
+            for(int i=0;i<n;i++){
+                while(!stack.empty()&&temperatures[i]>temperatures[stack.peek()]){
+                    int index = stack.pop();
+                    res[index]=i-index;
+                }
+                stack.push(i);
+            }
+            return res;
     }
 }
 ```

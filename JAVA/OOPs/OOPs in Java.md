@@ -1,4 +1,67 @@
 ![[WhatsApp Image 2024-07-30 at 9.57.46 PM.jpeg]]
+# Diff btw Run-compile time
+In programming, **runtime** and **compile-time** refer to different phases in the lifecycle of a program. Understanding the differences between them is crucial for debugging, optimizing, and writing effective code. Here's a breakdown of what each term means and how they differ:
+
+### Compile-Time
+
+- **Definition**: Compile-time refers to the period during which the source code is translated into executable code by a compiler. This is the phase where the program is checked for syntax errors, type checking, and other static code analysis.
+
+- **Key Aspects**:
+  1. **Syntax Checking**: The compiler checks the code for syntax errors. If the syntax is incorrect, the program will not compile.
+  2. **Type Checking**: The compiler ensures that variable types are consistent and correct according to the language's rules.
+  3. **Static Analysis**: The compiler may perform optimizations, inlining, and other static analysis techniques to improve performance and catch potential issues.
+  4. **Error Detection**: Errors that can be detected without executing the program, such as undeclared variables, type mismatches, or missing semicolons, are flagged at compile-time.
+
+- **Example**:
+  ```java
+  int x = "Hello";  // Compile-time error: incompatible types
+  ```
+  This code will fail to compile because you're trying to assign a `String` to an `int`.
+
+- **Compile-Time Errors**: Errors that are detected at this stage are known as compile-time errors, which must be fixed before the program can be successfully compiled.
+
+### Runtime
+
+- **Definition**: Runtime refers to the period when the program is executed, after it has been compiled. This is the phase where the compiled code is run, and the program performs its intended tasks.
+
+- **Key Aspects**:
+  1. **Execution of Code**: The code that was compiled is now executed. The program interacts with resources such as memory, file systems, and networks.
+  2. **Dynamic Behavior**: Any dynamic aspects of the program, like user input, network communication, or file handling, occur at runtime.
+  3. **Error Detection**: Errors that occur during the execution of the program, such as division by zero, null pointer exceptions, or out-of-bounds array access, are detected at runtime.
+  4. **Memory Management**: Dynamic memory allocation and garbage collection, if applicable, happen at runtime.
+
+- **Example**:
+  ```java
+  int[] arr = new int[5];
+  System.out.println(arr[10]);  // Runtime error: ArrayIndexOutOfBoundsException
+  ```
+  This code will compile successfully, but it will throw an `ArrayIndexOutOfBoundsException` when run because it attempts to access an index that doesn't exist.
+
+- **Runtime Errors**: Errors that occur during the execution of the program are known as runtime errors. These errors might be due to unexpected user input, resource unavailability, or logic errors in the code.
+
+### Key Differences
+
+1. **Timing**:
+   - **Compile-Time**: Occurs before the program runs, during the compilation process.
+   - **Runtime**: Occurs while the program is running.
+
+2. **Error Types**:
+   - **Compile-Time**: Syntax errors, type mismatches, and other issues that prevent the program from being compiled.
+   - **Runtime**: Errors that occur when the program is executing, such as logic errors, exceptions, and resource-related issues.
+
+3. **Code Checking**:
+   - **Compile-Time**: The compiler checks for errors and performs optimizations.
+   - **Runtime**: The program is actually executed, and errors related to the program's logic or environment may arise.
+
+4. **Performance**:
+   - **Compile-Time**: Affects the time it takes to compile the program; optimizations can improve runtime performance.
+   - **Runtime**: Affects the program's execution time and efficiency.
+
+### Summary
+- **Compile-Time**: The stage where the program is checked and translated into executable code. Issues found here prevent the program from being compiled.
+- **Runtime**: The stage where the program is executed. Issues found here occur while the program is running and can lead to crashes or unexpected behavior.
+
+Understanding the distinction between compile-time and runtime is essential for effective debugging and program development.
 # Class And Object Creation
 **Here the Objects are in stack memory and their properties are in heap memory
 Whenever class(student) called it will be automatically memory in heap for the properties in it.
@@ -115,7 +178,7 @@ public class Main {
 }
 ```
 ### Static Methods
-
+***OVERRIDDING IS DEPEND ON OBJECT. BUT STATIC METHOD DOESNOT DEPEND ON OBJECT. SO STATIC CANNOT BE OVERRIDE
 Static methods belong to the class rather than any instance of the class. They can be called without creating an instance of the class. Static methods can only access other static variables and static methods directly. 
 ```java
 class Example {
@@ -201,6 +264,185 @@ override depends on objects. but static does not depend object.so static cannot 
 # Singleton Class
 ![[Pasted image 20240806235644.png]]
 ![[Pasted image 20240806235648.png]]
+A **singleton class** in Java is a design pattern that restricts the instantiation of a class to one single instance. This is useful when exactly one object is needed to coordinate actions across the system, such as in cases where a single point of control or a shared resource is required.
+
+### Key Characteristics of a Singleton Class:
+1. **Single Instance**: Only one instance of the class is created, and this instance is reused across the application.
+2. **Global Access**: The single instance is globally accessible, meaning that it can be accessed from any part of the program.
+3. **Controlled Instantiation**: The class controls the creation of the instance, typically using a private constructor to prevent direct instantiation from outside the class.
+
+### Implementation of a Singleton Class
+
+Here’s a simple example of how a singleton class can be implemented in Java:
+
+```java
+public class Singleton {
+    // Step 1: Create a private static variable to hold the single instance of the class.
+    private static Singleton instance;
+
+    // Step 2: Make the constructor private to prevent instantiation from other classes.
+    private Singleton() {
+        // Private constructor to prevent instantiation
+    }
+
+    // Step 3: Provide a public static method that returns the single instance of the class.
+    public static Singleton getInstance() {
+        if (instance == null) {
+            // Lazy initialization: instance is created only when it is needed.
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    // Other methods of the singleton class
+    public void showMessage() {
+        System.out.println("Hello from Singleton!");
+    }
+}
+```
+
+### How It Works:
+
+1. **Private Static Instance**: 
+   - `private static Singleton instance;` is a static variable that holds the single instance of the class. Since it’s static, it’s shared across all instances of the class (but here, there will only be one).
+
+2. **Private Constructor**:
+   - `private Singleton() {}` is the constructor that is marked private, so no other classes can instantiate the `Singleton` class directly using the `new` keyword.
+
+3. **Public Static Method**:
+   - `public static Singleton getInstance() {}` is a public static method that returns the single instance of the class. If the instance doesn’t exist yet (`instance == null`), it creates it. This ensures that only one instance is created.
+
+4. **Lazy Initialization**:
+   - The instance is created only when it is needed, known as lazy initialization. This can save resources if the instance is never used.
+
+### Example Usage
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Get the only object available
+        Singleton singleton = Singleton.getInstance();
+
+        // Show a message
+        singleton.showMessage(); // Output: Hello from Singleton!
+    }
+}
+```
+
+### Key Points to Consider
+
+1. **Thread Safety**: In a multithreaded environment, you must ensure that the singleton instance is created only once, even when multiple threads try to access it simultaneously. This can be achieved using synchronization.
+
+2. **Eager Initialization**: An alternative to lazy initialization is eager initialization, where the instance is created at the time of class loading, like this:
+   ```java
+   private static final Singleton instance = new Singleton();
+
+   public static Singleton getInstance() {
+       return instance;
+   }
+   ```
+
+3. **Reflection**: Singleton can be broken using reflection because private constructors can be accessed using reflection. This can be prevented by throwing an exception if the constructor is already called once.
+
+4. **Serialization**: When dealing with serialization, the singleton pattern can be broken if the class does not implement the `readResolve` method. Implementing `readResolve` can prevent a new instance from being created during deserialization.
+
+### When to Use Singleton
+
+- **Resource Management**: When you need to manage a shared resource, like a database connection pool.
+- **Logging**: Implementing a logging class that is used throughout the application.
+- **Configuration Settings**: Managing configuration settings or global state in an application. 
+
+The Singleton pattern is a widely used design pattern, but it should be used carefully to avoid issues like unnecessary tight coupling and difficulties in testing.
+# Final Keyword
+The `final` keyword in Java is a modifier that can be applied to variables, methods, and classes, and it imposes specific restrictions on how they can be used. Here's a detailed explanation of how the `final` keyword works in each context:
+
+### 1. **Final Variables**
+
+When a variable is declared as `final`, it means that the variable can only be assigned once. After its initial assignment, the value of a `final` variable cannot be changed.
+
+#### Example:
+```java
+public class Example {
+    public static void main(String[] args) {
+        final int x = 10;
+        x = 20;  // Compile-time error: Cannot assign a value to final variable 'x'
+    }
+}
+```
+
+#### Key Points:
+- **Primitive Types**: For primitive types (like `int`, `float`, `char`), the value itself cannot be changed after assignment.
+- **Reference Types**: For reference types (like objects or arrays), the reference cannot be changed to point to a different object, but the object's internal state can still be modified.
+  ```java
+  final StringBuilder sb = new StringBuilder("Hello");
+  sb.append(" World");  // This is allowed
+  sb = new StringBuilder("New");  // Compile-time error: Cannot assign a value to final variable 'sb'
+  ```
+
+### 2. **Final Methods**
+
+When a method is declared as `final`, it means that the method cannot be overridden by subclasses. This is useful when you want to prevent altering the behavior of a method in derived classes.
+
+#### Example:
+```java
+class Parent {
+    public final void display() {
+        System.out.println("This is a final method.");
+    }
+}
+
+class Child extends Parent {
+    public void display() {  // Compile-time error: Cannot override the final method from Parent
+        System.out.println("Trying to override.");
+    }
+}
+```
+
+#### Key Points:
+- **Prevent Overriding**: `final` methods cannot be overridden in subclasses, ensuring that the implementation remains unchanged.
+
+### 3. **Final Classes**
+
+When a class is declared as `final`, it means that the class cannot be subclassed. No other class can extend a `final` class. This is typically used to prevent inheritance for security reasons or to ensure that the class's behavior cannot be altered through subclassing.
+
+#### Example:
+```java
+final class FinalClass {
+    public void display() {
+        System.out.println("This is a final class.");
+    }
+}
+
+class SubClass extends FinalClass {  // Compile-time error: Cannot subclass the final class 'FinalClass'
+}
+```
+
+#### Key Points:
+- **No Inheritance**: `final` classes cannot be extended, which makes them the last class in their inheritance hierarchy.
+- **Immutable Classes**: Many immutable classes in Java, such as `String`, are declared as `final` to prevent their behavior from being altered.
+
+### 4. **Final Parameters**
+
+The `final` keyword can also be applied to method parameters, meaning that the parameter cannot be reassigned within the method.
+
+#### Example:
+```java
+public void method(final int param) {
+    param = 10;  // Compile-time error: Cannot assign a value to final parameter 'param'
+}
+```
+
+#### Key Points:
+- **Immutable Parameters**: Using `final` with method parameters ensures that the parameter value cannot be changed within the method, which can help avoid unintended side effects.
+
+### Summary
+
+- **Final Variables**: Can only be assigned once; after that, their value (for primitives) or reference (for objects) cannot be changed.
+- **Final Methods**: Cannot be overridden by subclasses, preserving the method's original behavior.
+- **Final Classes**: Cannot be subclassed, preventing inheritance.
+- **Final Parameters**: Cannot be reassigned within the method, ensuring the original value remains unchanged during execution.
+
+The `final` keyword is a powerful tool for ensuring immutability, enforcing design constraints, and improving code safety and readability in Java.
 # Polymorphism 
 
 **Polymorphism is one of the fundamental concepts of object-oriented programming (OOP). It allows objects to be treated as instances of their parent class rather than their actual class. Polymorphism enables a single function, operator, or object to behave differently in different contexts. 
@@ -250,7 +492,7 @@ public class Main {
 }
 ```
 ## Function Overriding (Run-Time Polymorphism)
-
+***OVERRIDDING IS DEPEND ON OBJECT
 Function overriding is an example of run-time polymorphism in Java. It occurs when a subclass provides a specific implementation for a method that is already defined in its superclass. The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
 
 #### Characteristics:
