@@ -954,7 +954,7 @@ min-height: 50%;
 ![[Pasted image 20240424150630.png]]
 
 ## Positions
-
+![[Pasted image 20240831070902.png]]
 *position:
 relative = positioned relative to where it normally
 fixed = positioned relative to the viewport

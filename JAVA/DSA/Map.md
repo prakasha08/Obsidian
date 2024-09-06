@@ -69,7 +69,7 @@ Index  | Values
 - **Open addressing** is more memory-efficient but may degrade in performance as the load factor increases due to clustering.
 
 Both methods have their use cases depending on the specific needs of the application.
-#  HashMap
+# HashMap
 In Java, a `HashMap` is a part of the Java Collections Framework and is used to store key-value(always in wrapper class like Integer,Float not primitives int,float) pairs. It's a map-based collection that allows you to store and retrieve values based on keys. Here are some key properties and how to use a `HashMap`:
 #### Creating a `HashMap`
 ```java

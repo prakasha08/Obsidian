@@ -309,6 +309,213 @@ class Solution {
         return score;
     }
 }
+```## ** [75. Sort Colors](https://leetcode.com/problems/sort-colors/)
+```java
+class Solution {
+    public void sortColors(int[] nums) {
+        int c1=0,c2=0,c3=0,n=nums.length;
+        for(int i=0;i<n;i++){
+            c1=nums[i]==0?c1+1:c1;
+            c2=nums[i]==1?c2+1:c2;
+        }
+        int k=0;
+       while(k<c1){
+            nums[k++]=0;
+        }
+       while(k<c1+c2){
+            nums[k++]=1;
+        }
+       while(k<n){
+            nums[k++]=2;
+        }
+    }
+}
+```
+
+```java
+//two Pointer Approach
+class Solution {
+    public void sortColors(int[] nums) {
+        int n=nums.length;
+       int l=0,r=n-1,i=0;
+       while(i<=r){//if i<r o 2 testcase will not pass
+            if(nums[i]==0){
+                int temp = nums[i];
+                nums[i]=nums[l];
+                nums[l] = temp;
+                l++;
+                i++;
+            }
+            else if(nums[i]==1)
+                i++;
+            else{
+                 int temp = nums[i];
+                nums[i]=nums[r];
+                nums[r] = temp;
+                r--;//if iterate i(i++) here 1 testcase will not pass
+            }
+       }
+    }
+}
+```
+# [283. Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+```java
+class Solution {
+    public void moveZeroes(int[] nums) {
+        // Instead of sorting, we directly move non-zero elements
+        int index = 0; // Pointer to track the position of the next non-zero element
+
+        // Move non-zero elements to the front
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        // Fill the remaining positions with zeros
+        while (index < nums.length) {
+            nums[index] = 0;
+            index++;
+        }
+    }
+}
+```
+# [268. Missing Number](https://leetcode.com/problems/missing-number/)
+```java
+class Solution {
+    public int missingNumber(int[] nums) {
+        Arrays.sort(nums);
+        for(int i = 0;i<nums.length;i++){
+            if(nums[i]!=i)
+                return i;
+        }
+        return nums.length;
+    }
+}
+```
+
+```java
+class Solution {
+    public int missingNumber(int[] nums) {
+        Arrays.sort(nums);
+        int res = 0;
+        for(int i = 0;i<nums.length;i++){
+            res = res ^ (nums[i] ^ i);
+        }
+        return res ^ nums.length;
+    }
+}
+```
+# [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+```java
+//3ms
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice = 10000;
+        int maxProfit = 0,cP=0;
+        for (int i = 0; i < prices.length; i++) {
+            minPrice = Math.min(prices[i],minPrice);
+            cP = prices[i] - minPrice;
+            maxProfit = Math.max(cP,maxProfit);
+        }
+        return maxProfit;
+    }
+}
+```
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length == 0)
+        {
+            return 0;
+        }
+        int minPrice = prices[0];
+        int result = 0;
+        for(int i=1; i<prices.length; i++)
+        {
+            if(prices[i] < minPrice)
+            {
+                minPrice = prices[i];
+            }
+            else if(prices[i]-minPrice > result)
+            {
+                result = prices[i]-minPrice;
+            }
+        }
+        return result;
+    }
+}
+```
+# ** [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice = 10000;
+        int maxProfit = 0,cP=0;
+        for (int i = 0; i < prices.length-1; i++) {
+            minPrice = Math.min(prices[i],minPrice);
+            cP = prices[i+1] - minPrice;
+            minPrice = 10000;
+            maxProfit += Math.max(cP,0);
+        }
+        return maxProfit;
+    }
+}
+```
+# ** [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+```java
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int m = matrix.length,n = matrix[0].length;
+        int left = 0, right = m * n - 1;
+        while(left <= right){
+            int mid = (left+right)/2;
+            int r = mid / n;//to find mid element row 
+            int c = mid % n;//to find mid element column
+            if(target == matrix[r][c])
+                return true;
+            else if(target>matrix[r][c])
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        return false;
+    }
+}
+```
+# ** [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
+```java
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int r = matrix.length-1;
+        int c = 0;
+        int cM = matrix[0].length;
+        while(r>=0 && c<cM){
+            if(target == matrix[r][c])
+                return true;
+            else if(target>matrix[r][c])
+                c++;
+            else
+                r--;
+        }
+        return false;
+    }
+}
+```
+# [162. Find Peak Element](https://leetcode.com/problems/find-peak-element/)
+```java
+class Solution {
+    public int findPeakElement(int[] nums) {
+        int n=nums.length;
+        for(int i=0;i<n-1;i++){
+            if(nums[i]>nums[i+1])
+                return i;
+        }
+        return n-1;
+    }
+}
 ```
 # [840. Magic Squares In Grid](https://leetcode.com/problems/magic-squares-in-grid/)
 ```java

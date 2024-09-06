@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/DSA/About Thread-Safety.md",
+                "file": "JAVA/DSA/Leetcode.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "  ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JAVA/DSA/About Thread-Safety.md",
+                "file": "JAVA/DSA/Leetcode.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JAVA/DSA/About Thread-Safety.md",
+                "file": "JAVA/DSA/Leetcode.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JAVA/DSA/About Thread-Safety.md"
+                "file": "JAVA/DSA/Leetcode.md"
               }
             }
           }
@@ -150,51 +150,52 @@
   },
   "active": "8dd6f202534ebd0a",
   "lastOpenFiles": [
-    "JAVA/DSA/List.md",
-    "JAVA/DSA/About Thread-Safety.md",
-    "Pasted image 20240828185729.png",
-    "Pasted image 20240828185724.png",
-    "JAVA/DSA/Map.md",
-    "List.md",
-    "JAVA/DSA/Sorting.md",
-    "JAVA/DSA/Queue.md",
-    "JAVA/DSA/Leetcode.md",
-    "JAVA/Overall/BASICS.md",
-    "JS/BASICS.md",
-    "Screenshot 2024-08-26 144550.png",
-    "JAVA/OOPs/OOPs in Java.md",
     "JAVA/Overall/LEET CODE.md",
+    "JAVA/DSA/Leetcode.md",
+    "JAVA/OOPs/OOPs in Java.md",
+    "JAVA/DSA/Linked List.md",
+    "HTML & CSS/JAVA/DSA/Leetcode.md",
     "JAVA/Overall/EXERCISES.md",
+    "Untitled.md",
+    "List.md",
+    "JS/Images/Screenshot 2024-08-26 144550.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221432.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221408.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221329.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221306.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221221.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-19 204428.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-19 204209.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-18 215129.png",
+    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-18 215039.png",
+    "HTML & CSS/JAVA/Overall/SHORT CUT KEYWORDDS.md",
+    "HTML & CSS/JAVA/Overall/LEET CODE.md",
+    "HTML & CSS/JAVA/Overall/Images",
+    "HTML & CSS/JAVA/Overall/EXERCISES.md",
+    "HTML & CSS/JAVA/Overall/BASICS.md",
+    "HTML & CSS/JAVA/Overall",
+    "HTML & CSS/JAVA/OOPs/OOPs in Java.md",
+    "HTML & CSS/JAVA/OOPs/IMAGES",
+    "HTML & CSS/JAVA/OOPs",
+    "HTML & CSS/JAVA/DSA/Sorting.md",
+    "HTML & CSS/JAVA/DSA/Queue.md",
+    "HTML & CSS/JAVA/DSA/List.md",
+    "HTML & CSS/JAVA/DSA/Map.md",
+    "HTML & CSS/JAVA/DSA/Linked List.md",
+    "HTML & CSS/JAVA/DSA/images",
+    "HTML & CSS/JAVA/DSA/Binary Search.md",
+    "HTML & CSS/JAVA/DSA/About Thread-Safety.md",
+    "HTML & CSS/JAVA/DSA",
+    "HTML & CSS/JAVA/CORE (AMIGO COURSE)/Amigo content.md",
+    "HTML & CSS/JAVA/CORE (AMIGO COURSE)/ABOUT.md",
+    "HTML & CSS/JAVA/CORE (AMIGO COURSE)",
+    "HTML & CSS/JAVA",
+    "JAVA/DSA/Binary Search.md",
     "PS/Set Questions.md",
-    "JS/OOPs in JS.md",
-    "Pasted image 20240814230453.png",
-    "Pasted image 20240813232200.png",
-    "Pasted image 20240813132338.png",
-    "Pasted image 20240813132331.png",
-    "Pasted image 20240813101325.png",
-    "Pasted image 20240813101258.png",
-    "Pasted image 20240813100543.png",
-    "PS/Level 4(own).md",
-    "PS/Level 5.md",
-    "Untitled.canvas",
-    "2024-08-07.md",
-    "PS/Level 3.md",
-    "JAVA/DSA/Leetcode",
-    "JAVA/DSA/images",
-    "JAVA/DSA",
-    "Untitled",
-    "BASICS.pdf",
-    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "PS/Level 4.md",
-    "PS/Level 5",
-    "HTML & CSS/BASICS.md",
-    "Set Questions.pdf",
-    "PS/images",
-    "JS/Images",
-    "JAVA/OOPs/IMAGES",
-    "JAVA/OOPs/Untitled.md",
-    "JS.md",
-    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "JAVA/Overall/SHORT CUT KEYWORDDS.md"
+    "PS/Level 3.md",
+    "Level 3.pdf",
+    "JAVA/DSA/Untitled",
+    "Untitled.canvas"
   ]
 }

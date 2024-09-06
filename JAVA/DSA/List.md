@@ -21,6 +21,12 @@ Java provides several implementations of the `List` interface, each with differe
   - **Usage**: Best suited for scenarios where frequent access and updates to elements are required.
 
 #### **b. Stack:**
+![[Pasted image 20240829181327.png]]
+![[Pasted image 20240829182500.png]]
+
+***If you create stack using List(interface) then we can work in stack using the list methods. you can only call the methods that are common to both `Stack` and `List`, as the variable is of type `List`. Stack-specific methods like `push()`, `pop()`, and `peek()` are not accessible through this reference.
+
+![[Pasted image 20240829182502.png]]
 - **Overview**: `Stack` is a subclass of `Vector` that implements a last-in, first-out (LIFO) stack of elements.
 - **Key Characteristics**:
   - **LIFO Order**: The last element added is the first one to be removed.

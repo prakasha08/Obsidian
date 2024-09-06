@@ -65,6 +65,164 @@ Understanding the distinction between compile-time and runtime is essential for 
 # Class And Object Creation
 **Here the Objects are in stack memory and their properties are in heap memory
 Whenever class(student) called it will be automatically memory in heap for the properties in it.
+### 1. **Class as a Blueprint**
+
+- **Class**: A class in Java is a blueprint or template for creating objects. It defines the attributes (properties) and methods (behaviors) that the objects created from this class will have.
+- **Attributes**: These are the properties or characteristics that objects of the class will have. For example, in a `Car` class, attributes might include `color`, `model`, and `year`.
+- **Methods**: These are the actions or behaviors that objects of the class can perform. For example, a `Car` class might have methods like `startEngine()`, `stopEngine()`, and `displayDetails()`.
+
+  **Analogy**: Think of a class as an architectural blueprint for a house. The blueprint itself is not a house, but it contains all the information needed to build one.
+
+  ```java
+  public class Car {
+      String color;  // Attribute
+      String model;  // Attribute
+      int year;      // Attribute
+
+      // Constructor to initialize a Car object
+      public Car(String color, String model, int year) {
+          this.color = color;
+          this.model = model;
+          this.year = year;
+      }
+
+      // Method to display car details
+      public void displayDetails() {
+          System.out.println("Car Model: " + model);
+          System.out.println("Color: " + color);
+          System.out.println("Year: " + year);
+      }
+  }
+  ```
+
+### 2. **Object as an Entity**
+
+- **Object**: An object is a concrete instance of a class, created using the `new` keyword. When you create an object, you bring the blueprint (class) to life. The object occupies space in memory and contains specific values for the attributes defined by the class.
+
+  **Analogy**: Continuing the house analogy, if the class is the blueprint, then an object is an actual house built according to that blueprint. The house has specific colors, dimensions, and features.
+
+The `new` keyword in Java is used to create a new object of a class. Here's a step-by-step explanation of how the `new` keyword works to create an object:
+
+#### 1. **Memory Allocation**
+   - When you use the `new` keyword, Java allocates memory on the heap to store the object. The amount of memory allocated depends on the size of the attributes (fields) defined in the class.
+   - For example, if you create a new `Car` object, memory is allocated for its `color`, `model`, and `year` attributes, along with any other instance variables.
+
+#### 2. **Constructor Call**
+   - After memory is allocated, the constructor of the class is called. The constructor is a special method that initializes the object. It sets up the initial state of the object by assigning values to its fields.
+   - If you pass parameters to the `new` keyword (e.g., `new Car("Red", "Toyota Corolla", 2020)`), these parameters are passed to the constructor to initialize the object with specific values.
+   - If no constructor is explicitly defined, Java provides a default constructor that initializes fields with default values (e.g., `0` for integers, `null` for objects, etc.).
+
+#### 3. **Object Initialization**
+   - Inside the constructor, the fields of the object are initialized with the values passed as arguments, or with default values if no arguments are provided.
+   - For example, in the `Car` class, the `color`, `model`, and `year` attributes are set based on the values passed to the constructor.
+
+#### 4. **Returning the Reference**
+   - After the object is created and initialized, the `new` keyword returns a reference to the object. This reference is usually stored in a variable.
+   - This reference is what you use to interact with the object (e.g., calling methods, accessing fields).
+
+#### 5. **Garbage Collection**
+   - The object created with `new` stays in memory as long as there are references pointing to it. When there are no more references to the object, the Java garbage collector automatically frees the memory used by the object, making it available for new objects.
+
+#### Example in Action
+
+Consider the following example:
+
+```java
+public class Car {
+    String color;
+    String model;
+    int year;
+
+    // Constructor to initialize the object
+    public Car(String color, String model, int year) {
+        this.color = color;
+        this.model = model;
+        this.year = year;
+    }
+}
+
+// In your main method:
+Car car1 = new Car("Red", "Toyota Corolla", 2020);
+```
+
+#### Step-by-Step Breakdown:
+
+1. **Memory Allocation**:
+   - When `new Car("Red", "Toyota Corolla", 2020)` is executed, Java allocates memory on the heap to hold the `Car` object.
+
+2. **Constructor Call**:
+   - The `Car` constructor is called with the parameters `"Red"`, `"Toyota Corolla"`, and `2020`.
+
+3. **Object Initialization**:
+   - Inside the constructor, the fields `color`, `model`, and `year` of the `Car` object are set to `"Red"`, `"Toyota Corolla"`, and `2020`, respectively.
+
+4. **Returning the Reference**:
+   - The `new` keyword returns a reference to the newly created `Car` object. This reference is stored in the variable `car1`.
+
+#### Summary:
+
+- The `new` keyword is essential in object-oriented programming as it allows you to create instances of classes.
+- It performs the crucial steps of allocating memory, initializing the object via the constructor, and then returning a reference to the object for further use in your program.
+
+Without the `new` keyword, you wouldn't be able to create new objects in Java, and therefore, you wouldn't be able to utilize the object-oriented capabilities of the language.
+  ```java
+  Car car1 = new Car("Red", "Toyota Corolla", 2020);  // Object creation
+  ```
+
+  - Here, `new Car("Red", "Toyota Corolla", 2020)` creates an object of the `Car` class. This object is a specific car with the color "Red", model "Toyota Corolla", and year 2020.
+
+### 3. **Instance as a Reference**
+
+- **Instance**: An instance is the reference to the object created from the class. It is the variable that points to the memory location where the object is stored. When you declare a variable and assign it the result of `new`, that variable becomes an instance of the class.
+
+  **Analogy**: If the object is the house, the instance is the address or name you give to that house, so you can find it later. For example, `car1` is the instance that refers to the specific `Car` object you created.
+
+  ```java
+  Car car1 = new Car("Red", "Toyota Corolla", 2020);  // car1 is the instance
+  ```
+
+  - In this line, `car1` is the instance of the `Car` class, pointing to the specific `Car` object with the attributes you provided.
+
+### How They Relate to Each Other
+
+- **Class as a Blueprint**:
+  - The class defines what an object will look like and how it will behave. It’s a static template that does not represent any specific object but can be used to create many objects.
+
+- **Object as an Entity**:
+  - The object is the actual representation of the class in memory, with real values for the attributes. It is a concrete manifestation of the class.
+
+- **Instance as a Reference**:
+  - The instance is the name or reference you use to interact with the object. It allows you to access and manipulate the object in your code.
+
+#### Example Together
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Creating an object of the Car class
+        Car car1 = new Car("Red", "Toyota Corolla", 2020);
+
+        // Using the instance to access the object's method
+        car1.displayDetails();
+    }
+}
+```
+
+- **Class (`Car`)**: Defines what every car object will look like (attributes like `color`, `model`, `year`) and how it will behave (methods like `displayDetails()`).
+- **Object (`new Car(...)`)**: The actual car with the color "Red", model "Toyota Corolla", and year 2020 is created in memory.
+- **Instance (`car1`)**: The reference to this specific car object, which you use to call methods like `displayDetails()` and access its attributes.
+
+This clear connection between the class, object, and instance is fundamental to understanding how object-oriented programming (OOP) works in Java.
+### What is an "Instance"?
+- **Instance**: In object-oriented programming, an instance refers to a specific object created from a class. A class is like a blueprint, and an instance is an actual object built using that blueprint.
+#### Example with the `Stack` Class:
+
+- **Class (`Stack`)**: The `Stack` class in Java is a blueprint that defines the properties (like the underlying data structure) and behaviors (like `push()`, `pop()`, `peek()`) that any stack should have.
+    
+- **Instance (`new Stack<>()`)**: When you write `new Stack<>()`, you're using the `Stack` class to create a specific object that behaves like a stack. This object is an "instance" of the `Stack` class.
+#### Memory Allocation:
+
+- **Memory Allocation**: When you create a new instance using `new Stack<>()`, Java allocates space in memory to store this stack. The stack's data (like the integers you push onto it) will be stored in this memory space.
 ![[Screenshot 2024-08-03 233338.png]]
 **Object will be  created in compile time and Properties are created in runtime(Here only it will allocate memory) 
 ![[Screenshot 2024-08-03 233538.png]]
@@ -178,7 +336,7 @@ public class Main {
 }
 ```
 ### Static Methods
-***OVERRIDDING IS DEPEND ON OBJECT. BUT STATIC METHOD DOESNOT DEPEND ON OBJECT. SO STATIC CANNOT BE OVERRIDE
+***OVERRIDDING IS DEPEND ON OBJECT. BUT STATIC METHOD DOES NOT DEPEND ON OBJECT. SO STATIC CANNOT BE OVERRIDE
 Static methods belong to the class rather than any instance of the class. They can be called without creating an instance of the class. Static methods can only access other static variables and static methods directly. 
 ```java
 class Example {
@@ -449,7 +607,7 @@ The `final` keyword is a powerful tool for ensuring immutability, enforcing desi
 *There are two main types of polymorphism in OOP:
 1.compile-time polymorphism(Achieved by defining multiple methods with the same name but different parameters. The decision about which method to invoke is made at compile time.) and 
 2.run-time polymorphism.(Achieved by defining a method in the subclass with the same signature as a method in the superclass. The decision about which method to invoke is made at run time, based on the actual object type.)**
-## Function Overloading (Compile-Time Polymorphism)
+## Function Overloading (Compile-Time Polymorphism)&&static Polymorphism.
 
 ![[Pasted image 20240813100543.png]]
 
@@ -1151,7 +1309,6 @@ public class Main {
 ### Explanation
 
 1. **Interface Definitions**:
-    
     - `Colorful` interface defines a method `color()`.
     - `Textured` interface defines a method `texture()`.
 2. **Class Implementing Interfaces**:
@@ -1339,8 +1496,6 @@ In this example:
 ###### Important Points:
 - A `protected` member is not accessible to non-subclass classes in different packages.
 - Only subclasses (direct or indirect) can access the `protected` member in different packages.
-
-###### Example of Inaccessibility:
 
 ###### Package: `com.example.other`
 
