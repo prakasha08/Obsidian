@@ -408,7 +408,6 @@ class Solution {
 ```
 ## [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
 ```java
-```java
  public int maximumUniqueSubarray(int[] nums) {
         int max = Integer.MIN_VALUE, l = 0, curSum = 0;
         int memo[] = new int[10001];
@@ -1495,7 +1494,7 @@ public int minDays(int[] bloomDay, int m, int k) {
 }
 ```
 ## [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-# Binary
+# Binary Tree
 
 ## [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 ```java
@@ -1712,7 +1711,136 @@ class Solution {
     }
 }
 ```
-##
+## [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+}
+```
+## [872. Leaf-Similar Trees](https://leetcode.com/problems/leaf-similar-trees/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> res1 = new ArrayList<>();
+        List<Integer> res2 = new ArrayList<>();
+        dfs(root1,res1);
+        dfs(root2,res2);
+        return res1.equals(res2);
+    }
+    void dfs(TreeNode root, List<Integer> res){
+        if(root == null)    return;
+        if(root.left ==  null && root.right == null)
+            res.add(root.val);
+        dfs(root.left,res);
+        dfs(root.right,res);
+    }
+}
+```
+## [111. Minimum Depth of Binary Tree](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null) return 0;
+        int level = 1;
+        Deque<TreeNode> q = new ArrayDeque();
+        q.offer(root);
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i = 0 ; i < size ;i++){
+                TreeNode curr = q.poll();
+                if(curr.left == null && curr.right == null)
+                    return level;
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            ++level;
+        }
+        return 0;
+    }
+}
+```
+## 
+## [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+```java
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        int rs = 0;
+       return srl(root,rs);
+    }
+    int srl(TreeNode root,int rs){
+        if(root == null)
+            return 0;
+        if(root.left == null && root.right == null)
+            return rs * 10 + root.val;
+       return srl(root.left,rs * 10 + root.val) + srl(root.right,rs * 10 + root.val);
+    }
+}
+```
 # Bit Manipulation
 ```java
 class Solution {
