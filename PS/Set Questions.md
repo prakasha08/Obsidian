@@ -89,7 +89,7 @@ int isPalindrome(char str[],int start,int end){
 int main() {
   char str[100];
     fgets(str, 100, stdin);
-    str[strcspn(str, "\n")] = 0;
+    str[strcspn(str, "\n")] = '\0';
 //   maxlen to store the max len of string and use is to check with upcomming palindrome
    int maxLen=0,start;
    for(int i=0;i<strlen(str);i++){

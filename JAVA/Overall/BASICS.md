@@ -91,8 +91,8 @@ KEYWORD "final".
 ![[Screenshot 2024-02-12 111237.png]]
 
 ## EXPLICIT CASTING
-![[Screenshot 2024-02-12 111306.png]]
 
+![[Screenshot 2024-02-12 111306.png]]
 ![[Screenshot 2024-02-12 111505.png]]
 
 ![[Screenshot 2024-02-12 111529.png]]
@@ -435,7 +435,8 @@ public static void main(String[] args) {
     System.out.println((int)Math.pow(4,4));  
     System.out.println(Math.sqrt(25));  
     System.out.println((int)Math.sqrt(25));  
-    System.out.println(Math.PI);  
+    System.out.println(Math.PI); 
+	int n =  Math.floor(4.06565)//4 
 }
 ```
 ![[Screenshot 2024-02-04 211456.png]]

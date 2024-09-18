@@ -517,6 +517,109 @@ class Solution {
     }
 }
 ```
+# [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+```java
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> temp = new ArrayList<>();
+            
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    temp.add(1); 
+                } else {
+                    temp.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+                }
+            }
+            
+            result.add(temp);
+        }
+        
+        return result;
+    }
+}
+```
+# [119. Pascal's Triangle II](https://leetcode.com/problems/pascals-triangle-ii/)
+```java
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<List<Integer>> result = new ArrayList<>();
+        
+        for (int i = 0; i <= 33; i++) {
+            List<Integer> temp = new ArrayList<>();
+            
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    temp.add(1); 
+                } else {
+                    temp.add(result.get(i - 1).get(j - 1) + result.get(i - 1).get(j));
+                }
+            }
+            
+            result.add(temp);
+        }
+        
+        return result.get(rowIndex); 
+    }
+}
+```
+# [1299. Replace Elements with Greatest Element on Right Side](https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/)
+```java
+class Solution {
+    public int[] replaceElements(int[] arr) {
+    int max =0;
+    for(int i = 0;i<arr.length;i++){
+        max = -1;
+        for(int j = i+1 ; j<arr.length;j++){
+            max = Math.max(max,arr[j]);
+        }
+        arr[i] = max;
+    }
+    return arr;
+    }
+}
+```
+
+```java
+class Solution 
+{
+    public int[] replaceElements(int[] arr) 
+    {
+        int n= arr.length;
+        int max= -1;
+        for(int i= n-1;i>=0;i--)
+        {
+            int curr= arr[i];
+            arr[i]= max;
+            if(curr>max)
+            {
+                max= curr;
+            }
+
+        }
+        return arr;
+    }
+}
+```
+
+# [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+
+```java
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int iP = nums.length;
+        for(int i = 0 ; i < nums.length;i++){
+            if(nums[i]>=target){
+                iP = i;
+                break;
+            }
+        }
+        return iP;
+    }
+}
+```
 # [840. Magic Squares In Grid](https://leetcode.com/problems/magic-squares-in-grid/)
 ```java
 

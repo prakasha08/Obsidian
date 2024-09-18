@@ -70,7 +70,173 @@ class Solution {
 }
 ```
 # HashMap && HashSet
-## [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)```java
+## [349. Intersection of Two Arrays](https://leetcode.com/problems/intersection-of-two-arrays/)
+```java
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set1 = new HashSet<>();
+        for (int num : nums1) {
+            set1.add(num);
+        }
+        HashSet<Integer> resultSet = new HashSet<>();
+        for (int num : nums2) {
+            if (set1.contains(num)) {
+                resultSet.add(num);
+            }
+        }
+        int[] resultArray = new int[resultSet.size()];
+        int i = 0;
+        for (int num : resultSet) {
+            resultArray[i++] = num;
+        }
+        return resultArray;
+    }
+}
+```
+## [350. Intersection of Two Arrays II](https://leetcode.com/problems/intersection-of-two-arrays-ii/)
+```java
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for (int num : nums1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        ArrayList<Integer> resultSet = new ArrayList<>();
+        for (int num : nums2) {
+            if (map.containsKey(num) && map.get(num)>0) {
+                resultSet.add(num);
+                 map.put(num, map.get(num) - 1);
+            }
+        }
+        int[] resultArray = new int[resultSet.size()];
+        int i = 0;
+        for (int num : resultSet) {
+            resultArray[i++] = num;
+        }
+        return resultArray;
+    }
+}
+```
+## [2215. Find the Difference of Two Arrays](https://leetcode.com/problems/find-the-difference-of-two-arrays/)
+```java
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        HashSet<Integer> set1 = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
+        for (int num : nums1) {
+            set1.add(num);
+        }
+        HashSet<Integer> set2 = new HashSet<>();
+        for (int num : nums2) {
+            set2.add(num);
+        } 
+        List<Integer> temp = new ArrayList<>();
+        for (int num : nums1) {
+            if(!set2.contains(num) && !temp.contains(num)){
+                temp.add(num);
+            }
+        }
+        result.add(temp);
+         temp = new ArrayList<>();
+        for (int num : nums2) {
+            if(!set1.contains(num) && !temp.contains(num)){
+                temp.add(num);
+            }
+        }
+        result.add(temp);
+        return result;
+    }
+}
+```
+
+```java
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+class Solution {
+    public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        // Use HashSet to store unique elements from nums1 and nums2
+        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+        
+        for (int num : nums1) {
+            set1.add(num);
+        }
+        for (int num : nums2) {
+            set2.add(num);
+        }
+        
+        // Lists to store the result
+        List<Integer> uniqueToNums1 = new ArrayList<>();
+        List<Integer> uniqueToNums2 = new ArrayList<>();
+        
+        // Find elements in nums1 that are not in nums2
+        for (int num : set1) {
+            if (!set2.contains(num)) {
+                uniqueToNums1.add(num);
+            }
+        }
+        
+        // Find elements in nums2 that are not in nums1
+        for (int num : set2) {
+            if (!set1.contains(num)) {
+                uniqueToNums2.add(num);
+            }
+        }
+        
+        // Add the results to the final list
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(uniqueToNums1);
+        result.add(uniqueToNums2);
+        
+        return result;
+    }
+}
+```
+## [2540. Minimum Common Value](https://leetcode.com/problems/minimum-common-value/)
+```java
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+      HashSet<Integer> set1 = new HashSet<>();
+        for (int num : nums1) {
+            set1.add(num);
+        }
+        for (int num : nums2) {
+            if (set1.contains(num)) {
+                return num;
+            }
+        }
+        return -1;  
+    }
+}
+```
+Optimal way     ||
+            V 
+```java
+import java.util.Arrays;
+
+class Solution {
+    public int getCommon(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        int i = 0, j = 0;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                return nums1[i];
+            } else if (nums1[i] < nums2[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+        return -1;
+    }
+}
+```
+## [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
+```java
 class Solution {
     public int romanToInt(String s) {
         int res=0;
@@ -458,6 +624,35 @@ class Solution {
 
 }
 ```
+## [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)
+```java
+class Solution {
+    private boolean isAnagram(String s1,String s2,int len){
+        int[] arr =  new int [26];
+        for(int i = 0;i<len;i++){
+            arr[s1.charAt(i)-'a']++;
+            arr[s2.charAt(i)-'a']--;
+        }
+        for(int i = 0;i<26;i++){
+            if(arr[i] >0)
+                return false;
+        }
+        return true;
+    }
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> index =  new ArrayList<>();
+        int len = s.length();
+        int pLen = p.length();
+        for(int i = 0;i<=len-pLen;i++){
+            String temp = s.substring(i,i+pLen);
+            if(isAnagram(temp, p,pLen)){
+                index.add(i);
+            }
+        }
+        return index;
+        }
+    }
+```
 ## [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 ```java
 class Solution {
@@ -821,6 +1016,25 @@ class Solution {
     }
 }
 ```
+## [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
+```java
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int maxArea = 0;
+        Stack<Integer> stack = new Stack();
+        for (int i = 0; i <= heights.length; i++) {
+            int height = (i == heights.length) ? 0 : heights[i];
+            while(!stack.isEmpty() && height<heights[stack.peek()]){
+                int h = heights[stack.pop()];
+                int w = stack.isEmpty()?i:i-stack.peek()-1;
+                maxArea = Math.max(maxArea, h * w);
+            }
+            stack.push(i);
+        }  
+        return maxArea;
+    }
+}
+```
 # Sorting
 ## [912. Sort an Array](https://leetcode.com/problems/sort-an-array/)
 ```java
@@ -1008,6 +1222,48 @@ class Solution {
                 j++;
         }
         return j==m;
+    }
+}
+```
+# Sliding Window
+```java
+class Solution {
+    private boolean isPermutation(char[] s1Freq, char[] windowFreq) {
+        for (int i = 0; i < 26; i++) {
+            if (s1Freq[i] != windowFreq[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkInclusion(String s1, String s2) {
+        if (s1.length() > s2.length()) {
+            return false;
+        }
+
+        // Frequency arrays for s1 and the sliding window of s2
+        char[] s1Freq = new char[26];  // Frequency array for s1
+        char[] windowFreq = new char[26];  // Frequency array for current window in s2
+
+        // Fill the frequency array for s1 and the first window in s2
+        for (int i = 0; i < s1.length(); i++) {
+            s1Freq[s1.charAt(i) - 'a']++;
+            windowFreq[s2.charAt(i) - 'a']++;
+        }
+
+        // Slide the window over s2
+        for (int i = s1.length(); i < s2.length(); i++) {
+            if (isPermutation(s1Freq, windowFreq)) {
+                return true;  // Return true if the frequencies match
+            }
+            // Add the next character to the window and remove the first character
+            windowFreq[s2.charAt(i) - 'a']++;
+            windowFreq[s2.charAt(i - s1.length()) - 'a']--;
+        }
+
+        // Check the last window
+        return isPermutation(s1Freq, windowFreq);
     }
 }
 ```
@@ -1306,6 +1562,40 @@ class Solution {
 ```
 # Binary Search
 
+## [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            // Check if mid is the target
+            if (nums[mid] == target) {
+                return mid;
+            }
+
+            // Determine which half is sorted
+            if (nums[left] <= nums[mid]) { // Left half is sorted
+                if (nums[left] <= target && target < nums[mid]) {
+                    right = mid - 1;  // Target is in the left half
+                } else {
+                    left = mid + 1;   // Target is in the right half
+                }
+            } else {  // Right half is sorted
+                if (nums[mid] < target && target <= nums[right]) {
+                    left = mid + 1;   // Target is in the right half
+                } else {
+                    right = mid - 1;  // Target is in the left half
+                }
+            }
+        }
+
+        return -1;  // Target not found
+    }
+}
+```
 ## [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 ```java
 class Solution {
@@ -1327,6 +1617,7 @@ class Solution {
     }
 }
 ```
+
 ## [240. Search a 2D Matrix II](https://leetcode.com/problems/search-a-2d-matrix-ii/)
 ```java
 class Solution {
@@ -1496,6 +1787,35 @@ public int minDays(int[] bloomDay, int m, int k) {
 ## [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
 # Binary Tree
 
+## [700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        while(root != null && root.val != val){
+            if(val<root.val)
+                root = root.left;
+            else
+                root = root.right;
+        }
+        return root;
+    }
+}
+```
 ## [94. Binary Tree Inorder Traversal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 ```java
 /**
@@ -1810,7 +2130,330 @@ class Solution {
     }
 }
 ```
-## 
+## [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+       List<List<Integer>> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                l1.add(curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(l1);
+       }
+       return res;
+    }
+}
+```
+## [107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+          List<List<Integer>> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                l1.add(curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(l1);
+       }
+       Collections.reverse(res);
+       return res;
+    }
+}
+```
+## [103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+       List<List<Integer>> res = new ArrayList();
+       if(root ==  null)    return res;
+       boolean flag = false;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                l1.add(curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            if(flag)   
+                Collections.reverse(l1);
+            flag = !flag;
+            res.add(l1);
+       }
+       return res;
+    }
+}
+```
+## [199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+         List<Integer> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            TreeNode curr = root; 
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                curr = q.poll();
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(curr.val);
+       }
+       return res;
+    }
+}
+```
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+         List<Integer> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                l1.add(curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(l1.getLast());
+       }
+       return res;
+    }
+}
+```
+## [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+         List<Double> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            double sum = 0; 
+            int size = q.size();
+            for(int i = 0;i<size;i++){ 
+                TreeNode curr = q.poll();
+                 sum += curr.val;
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            sum/=size;
+            res.add(sum);
+       }
+       return res;
+    }
+}
+```
+## [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if( root ==  null)
+            return new TreeNode(val);
+        TreeNode ans = root;
+        while(true){
+            if(ans.val<val){
+                if(ans.right == null){
+                    ans.right = new TreeNode(val);
+                    break;
+                }
+                else
+                    ans = ans.right;
+            }
+            else{
+                if(ans.left == null){
+                    ans.left = new TreeNode(val);
+                    break;
+                }
+                else
+                    ans = ans.left;
+            }
+        }
+        return root;
+    }
+}
+```
+## [112. Path Sum](https://leetcode.com/problems/path-sum/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        int rs = 0;
+        return ps(root,rs,targetSum);
+    }
+    boolean ps(TreeNode root,int rs,int targetSum){
+        if(root == null)    return false;
+        if(root.left == null && root.right == null){
+            rs +=root.val;
+            if(rs==targetSum)
+                return true;
+        }
+        return ps(root.left,rs+root.val,targetSum) || ps(root.right,rs+root.val,targetSum);
+            
+        
+    }
+}
+```
 ## [129. Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
 ```java
  * Definition for a binary tree node.
@@ -1839,6 +2482,406 @@ class Solution {
             return rs * 10 + root.val;
        return srl(root.left,rs * 10 + root.val) + srl(root.right,rs * 10 + root.val);
     }
+}
+```
+# Backtracking
+
+If Not Satisfies ,Function backtracks by removing the last element added.
+## [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
+```java
+class Solution {
+    private void backtracking(int start,List<List<Integer>> res, List<Integer> comb,int[] candidates, int target){
+        if(target<0)
+            return;
+        if(target == 0){
+            res.add(new  ArrayList<>(comb));
+            return ;
+        }
+        for(int i=start;i<candidates.length;i++){
+            comb.add(candidates[i]);
+            backtracking(i,res,comb,candidates,target-candidates[i]);
+            comb.remove(comb.size()-1);
+        }
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> comb = new ArrayList<>();
+        backtracking(0,res,comb,candidates,target);
+        return res;
+     }
+}
+```
+## [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
+```java
+class Solution {
+    private void backtracking(int start,List<List<Integer>> res, List<Integer> comb,int[] candidates, int target){
+        if(target<0)
+            return;
+        if(target == 0){
+            res.add(new  ArrayList<>(comb));
+            return ;
+        }
+        for(int i=start;i<candidates.length;i++){
+            if(i>start && candidates[i] == candidates[i-1])
+                continue;
+            comb.add(candidates[i]);
+            backtracking(i+1,res,comb,candidates,target-candidates[i]);
+            comb.remove(comb.size()-1);
+        }
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> comb = new ArrayList<>();
+        Arrays.sort(candidates);
+        backtracking(0,res,comb,candidates,target);
+        return res;
+     }
+}
+```
+## [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)
+```java
+class Solution {
+    private void backtracking(int start,List<List<Integer>> res, List<Integer> comb,int k, int target){
+        if(comb.size() == k){
+            if( target == 0){
+                res.add(new ArrayList(comb));
+            }
+            else
+                return;
+        }
+        for(int i=start;i<=9;i++){
+            comb.add(i);
+            backtracking(i+1,res,comb,k,target-i);
+            comb.remove(comb.size()-1);
+        }
+    }
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> comb = new ArrayList<>();
+        backtracking(1,res,comb,k,n);
+        return res;
+     }
+}
+```
+## [46. Permutations](https://leetcode.com/problems/permutations/)
+```java
+class Solution {
+    private void backtracking(int[] nums,List<List<Integer>> res, List<Integer> curr){
+        if(curr.size() == nums.length){
+            res.add(new ArrayList(curr));
+            return;
+        }
+        for(int num : nums){
+            if(!curr.contains(num)){
+            curr.add(num);
+            backtracking(nums,res,curr);
+            curr.remove(curr.size()-1); 
+            }
+        }
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        backtracking(nums,res,curr);
+        return res;
+     }
+}
+```
+## [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
+```java
+class Solution {
+    private void backtracking(int[] nums,List<List<Integer>> res, List<Integer> curr,boolean[] used){
+        if(curr.size() == nums.length && !res.contains(curr)){
+            res.add(new ArrayList(curr));
+            return;
+        }
+        for(int i = 0;i<nums.length;i++){
+            int num = nums[i];
+            if(!used[i]){
+            used[i]=true;
+            curr.add(num);
+            backtracking(nums,res,curr,used);
+            curr.remove(curr.size()-1);
+            used[i]=false; 
+            }
+        }
+    }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        backtracking(nums,res,curr,new boolean[nums.length]);
+        return res;
+     
+```
+
+Optimal code below
+
+```java
+import java.util.*;
+
+class Solution {
+    private void backtracking(int[] nums, List<List<Integer>> res, List<Integer> curr, boolean[] used) {
+        if (curr.size() == nums.length) {
+            res.add(new ArrayList<>(curr)); // Add a copy of the current permutation
+            return;
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            // Skip if the current number is already used or it's a duplicate of the previous number
+            // and the previous number wasn't used in this branch of the recursion
+            if (used[i] || (i > 0 && nums[i] == nums[i - 1] && !used[i - 1])) {
+                continue; // Skip duplicates
+            }
+
+            used[i] = true;
+            curr.add(nums[i]);
+            backtracking(nums, res, curr, used);
+            curr.remove(curr.size() - 1); // Backtrack by removing the last added number
+            used[i] = false; // Mark the current number as unused for the next iterations
+        }
+    }
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        Arrays.sort(nums); // Sort the array to handle duplicates
+        backtracking(nums, res, new ArrayList<>(), new boolean[nums.length]);
+        return res;
+    }
+}
+```
+## [77. Combinations](https://leetcode.com/problems/combinations/)
+```java
+class Solution {
+    private void backtrack( List<List<Integer>> res,List<Integer> curr,int j,int n,int k){
+        if(curr.size() == k){
+            res.add(new ArrayList(curr));
+            return;
+        }
+        for(int i = j ; i <= n ; i++){
+            curr.add(i);
+            backtrack(res,curr,i+1,n,k);
+            curr.remove(curr.size()-1); 
+        }
+    }
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> curr = new ArrayList<>();
+        backtrack(res,curr,1,n,k);
+        return res;
+    }
+}
+```
+## ** [51. N-Queens](https://leetcode.com/problems/n-queens/)
+```java
+class Solution {
+
+    private boolean canPlace(int row,int col, List<String> curr){
+        for(int i = row-1;i>=0;i--){
+            if(curr.get(i).charAt(col)=='Q')
+                return false;
+        }
+        for(int i = row-1, j=col-1;i>=0 && j>=0;i--,j--){
+            if(curr.get(i).charAt(j)=='Q')
+                return false;
+        }
+        for(int i = row-1, j = col+1; i>=0 && j<curr.size(); i--,j++){
+            if(curr.get(i).charAt(j)=='Q')
+                return false;
+        }
+        return true;
+    }
+    private void solveNQueens(int row, List<List<String>> res ,  List<String> curr ){
+        if(row == curr.size()){
+            res.add(new ArrayList(curr));
+            return;
+        }
+        for(int col = 0;col<curr.size();col++){
+            if(canPlace(row,col,curr)){
+                StringBuilder sb =  new StringBuilder(curr.get(row));
+                sb.setCharAt(col,'Q');
+                curr.set(row,sb.toString());
+                solveNQueens(row+1 ,res, curr );
+                sb.setCharAt(col,'.');
+                curr.set(row,sb.toString());
+            }
+        }
+    }
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> curr = new ArrayList<>();
+        for(int i=0; i<n;i++)
+            curr.add(".".repeat(n));
+        solveNQueens(0,res,curr);
+        return res;
+    }
+}
+```
+## ** [52. N-Queens II](https://leetcode.com/problems/n-queens-ii/)
+```java
+class Solution {
+
+    private boolean canPlace(int row,int col, List<String> curr){
+        for(int i = row-1;i>=0;i--){
+            if(curr.get(i).charAt(col)=='Q')
+                return false;
+        }
+        for(int i = row-1, j=col-1;i>=0 && j>=0;i--,j--){
+            if(curr.get(i).charAt(j)=='Q')
+                return false;
+        }
+        for(int i = row-1, j = col+1; i>=0 && j<curr.size(); i--,j++){
+            if(curr.get(i).charAt(j)=='Q')
+                return false;
+        }
+        return true;
+    }
+    private void totalNQueens(int row, int[] res ,  List<String> curr ){
+        if(row == curr.size()){
+            res[0]++;
+            return;
+        }
+        for(int col = 0;col<curr.size();col++){
+            if(canPlace(row,col,curr)){
+                StringBuilder sb =  new StringBuilder(curr.get(row));
+                sb.setCharAt(col,'Q');
+                curr.set(row,sb.toString());
+                totalNQueens(row+1 ,res, curr );
+                sb.setCharAt(col,'.');
+                curr.set(row,sb.toString());
+            }
+        }
+    }
+    public int totalNQueens(int n) {
+        int[] res =  {0};
+        List<String> curr = new ArrayList<>();
+        for(int i=0; i<n;i++)
+            curr.add(".".repeat(n));
+        totalNQueens(0,res,curr);
+        return res[0];
+    }
+}
+```
+
+## [127. Word Ladder](https://leetcode.com/problems/word-ladder/)
+```java
+import java.util.*;
+
+class Solution {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        // Check if the endWord is present in the wordList
+        Set<String> s = new HashSet<>(wordList);
+        if (!s.contains(endWord)) {
+            return 0; // endWord must be in the wordList to have a valid transformation
+        }
+        
+        // Initialize BFS
+        Queue<String> q = new LinkedList<>();
+        q.add(beginWord);
+        int level = 1; // Starting level is 1 because we start with the beginWord
+
+        // Perform BFS
+        while (!q.isEmpty()) {
+            int levelSize = q.size(); // Number of elements at the current level
+            
+            // Process all nodes at the current level
+            for (int i = 0; i < levelSize; i++) {
+                String curr = q.poll(); // Dequeue the current word
+                
+                // Try to transform each character of the current word
+                for (int j = 0; j < curr.length(); j++) {
+                    StringBuilder temp = new StringBuilder(curr);
+                    
+                    // Change each character to every letter from 'a' to 'z'
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        temp.setCharAt(j, c);
+                        String tempWord = temp.toString();
+                        
+                        // Skip if the word hasn't changed
+                        if (tempWord.equals(curr)) {
+                            continue;
+                        }
+                        
+                        // If transformed word is the endWord, return the length of the sequence
+                        if (tempWord.equals(endWord)) {
+                            return level + 1;
+                        }
+                        
+                        // If the transformed word is in the set, add it to the queue and remove it from the set
+                        if (s.contains(tempWord)) {
+                            q.add(tempWord);
+                            s.remove(tempWord); // Remove to avoid revisiting
+                        }
+                    }
+                }
+            }
+            level++; // Increment level after processing all nodes at this level
+        }
+
+        return 0; // Return 0 if no transformation sequence is found
+    }
+}
+```
+## [200. Number of Islands](https://leetcode.com/problems/number-of-islands/)
+```java
+class Solution {
+    void dfs(char[][]grid,int r,int c,int nR,int nC){
+        if(r<0 || c<0 || r>=nR || c>=nC || grid[r][c] == '0')
+            return;
+        grid[r][c] = '0';
+        dfs(grid,r+1,c,nR,nC);
+        dfs(grid,r-1,c,nR,nC);
+        dfs(grid,r,c+1,nR,nC);
+        dfs(grid,r,c-1,nR,nC);
+    }
+    public int numIslands(char[][] grid) {
+        int nR = grid.length;
+        int nC = grid[0].length;
+        int numIsLands = 0;
+        for(int i=0 ;i<nR;i++){
+            for(int j=0;j<nC;j++){
+                if(grid[i][j] == '1'){
+                    ++numIsLands;
+                    dfs(grid,i,j,nR,nC);
+                }
+            }
+        }
+        return numIsLands;
+    }
+}
+```
+# Compare func
+## [179. Largest Number](https://leetcode.com/problems/largest-number/)
+```java
+public class Solution {
+    public String largestNumber(int[] nums) {
+        // Convert integer array to string array
+        String[] strNums = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strNums[i] = Integer.toString(nums[i]);
+        }
+
+        // Sort the string array based on custom comparator
+        Arrays.sort(strNums, new Comparator<String>() {
+            public int compare(String s1, String s2) {
+                // Compare concatenated results
+                return (s2 + s1).compareTo(s1 + s2);
+            }
+        });
+
+        // If the largest number is "0", return "0"
+        if (strNums[0].equals("0")) {
+            return "0";
+        }
+
+        // Concatenate sorted strings
+        StringBuilder result = new StringBuilder();
+        for (String str : strNums) {
+            result.append(str);
+        }
+
+        return result.toString();
+    }
+    
 }
 ```
 # Bit Manipulation
