@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/DSA/Leetcode.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JAVA/DSA/Leetcode.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JAVA/DSA/Leetcode.md",
+                "file": "JAVA/OOPs/OOPs in Java.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JAVA/DSA/Leetcode.md"
+                "file": "JAVA/OOPs/OOPs in Java.md"
               }
             }
           }
@@ -150,9 +150,16 @@
   },
   "active": "8dd6f202534ebd0a",
   "lastOpenFiles": [
+    "Pasted image 20240919183626.png",
+    "Pasted image 20240919183203.png",
+    "Pasted image 20240919182737.png",
+    "Pasted image 20240919182637.png",
+    "Pasted image 20240919182635.png",
+    "Pasted image 20240919182627.png",
+    "Pasted image 20240919182623.png",
+    "JAVA/DSA/Leetcode.md",
     "JAVA/Overall/LEET CODE.md",
     "JAVA/Overall/EXERCISES.md",
-    "JAVA/DSA/Leetcode.md",
     "JAVA/Overall/BASICS.md",
     "JAVA/DSA/Binary Search.md",
     "JAVA/DSA/DFS & BFS.md",
@@ -170,12 +177,6 @@
     "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221432.png",
     "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221408.png",
     "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221329.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221306.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221221.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-19 204428.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-19 204209.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-18 215129.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-18 215039.png",
     "HTML & CSS/JAVA/Overall/SHORT CUT KEYWORDDS.md",
     "HTML & CSS/JAVA/Overall/LEET CODE.md",
     "HTML & CSS/JAVA/Overall/Images",
@@ -189,7 +190,6 @@
     "HTML & CSS/JAVA/DSA/Queue.md",
     "HTML & CSS/JAVA/DSA/List.md",
     "HTML & CSS/JAVA/DSA/Map.md",
-    "HTML & CSS/JAVA/DSA/Linked List.md",
     "HTML & CSS/JAVA/DSA/images",
     "HTML & CSS/JAVA/DSA",
     "HTML & CSS/JAVA/CORE (AMIGO COURSE)",

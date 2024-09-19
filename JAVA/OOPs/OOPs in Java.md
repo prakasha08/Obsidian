@@ -1738,3 +1738,69 @@ public class Main {
 ### Summary
 
 Abstraction in Java is a core principle of object-oriented programming that focuses on simplifying complex systems by hiding the implementation details and exposing only the essential features. It allows developers to work with high-level concepts and interactions without needing to understand the intricate workings beneath. This is achieved through abstract classes and interfaces, where abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation), and interfaces define a contract with abstract methods that must be implemented by any class that adheres to the interface. By using abstraction, developers can create more modular, maintainable, and understandable code, as they can concentrate on what an object does rather than how it does it.
+# Generics
+
+by the following we can only customize an Integer Array Only (Other types are not poosible to customize,possible only if we can write same code for each nd every types. So we go for a generics 
+
+![[Pasted image 20240919182737.png]]]]![[Pasted image 20240919182635.png]]![[Pasted image 20240919182637.png]]Generics provide a Parameterized type .
+![[Pasted image 20240919183203.png]]
+***Above means ArrayList Have only 'Integer'(Generics) (Parameterized type) objects.
+If you does not provide any type it will allow any type of value(Type safety).
+Detailed Explanation in Below
+![[Pasted image 20240919183626.png]]
+Generics in Java are a powerful feature that allows for the creation of classes, interfaces, and methods that can operate on any data type, while ensuring type safety at compile time. Without generics, code would need to be written and repeated for every different data type, which can lead to redundancy and potential errors. Below is an explanation based on the images and the context you provided.
+
+---
+
+### Customizing Integer Arrays
+
+In the first part, you're stating that without generics, we can only customize an integer array, which means we'd have to write code specifically tailored for handling integers. If we wanted to work with other data types (e.g., `Double`, `String`), we would need to rewrite the same code for each type. This leads to repetitive code and increases the likelihood of errors. 
+
+This is where **Generics** come in to provide a solution, allowing you to write more reusable and flexible code.
+
+---
+
+### Generics Overview
+
+Generics provide a way to parameterize types, meaning you can write a class, interface, or method that works with any type, while maintaining strong type safety. The primary advantage of generics is that it allows the same code to be reused for different data types without sacrificing the type checking that Java offers at compile time.
+
+For example, consider an `ArrayList<Integer>`. This is a parameterized type, which means that the `ArrayList` is restricted to holding only `Integer` objects. This is done by using the syntax `ArrayList<Integer>`, where `Integer` is the parameterized type.
+
+---
+
+### Parameterized Types in Generics
+
+The concept of a parameterized type means that you can define a class or method with a placeholder for the data type. When you instantiate an object of that class or call the method, you specify the actual data type (such as `Integer`, `String`, etc.) that will replace the placeholder.
+
+In the image example, `ArrayList<Integer>` means that the `ArrayList` can hold only `Integer` objects. The generic type parameter `<Integer>` restricts the types of elements that can be added to the list. This ensures **type safety**, as you won't be able to add any objects of a different type (like a `String`) to that `ArrayList`.
+
+If you don’t provide a type (for example, just `ArrayList` without the `<Integer>`), the compiler will allow any type of object to be added. However, this leads to **type safety issues**, which generics aim to prevent. Using raw types (i.e., without specifying the type parameter) can result in runtime errors because it doesn't enforce the type constraints at compile time.
+
+---
+
+### Example with Generics: 
+
+```java
+// Without Generics
+ArrayList list = new ArrayList(); // Raw type
+list.add("String"); // OK
+list.add(123); // OK
+
+// With Generics
+ArrayList<Integer> list = new ArrayList<>();
+list.add(123); // OK
+list.add("String"); // Compile-time error, type safety ensured
+```
+
+In the example above, using `ArrayList<Integer>` ensures that only `Integer` values can be added to the list, providing **compile-time type checking**. If you attempt to add a `String` to the list, the compiler will throw an error, preventing potential runtime errors.
+
+---
+
+### Conclusion
+
+Generics offer significant advantages, including:
+1. **Code Reusability**: You can write a single class or method that works with different types without rewriting it for each specific type.
+2. **Type Safety**: Generics enable stronger type checks at compile time, helping you catch errors early and preventing `ClassCastException` at runtime.
+3. **Cleaner Code**: With generics, your code becomes cleaner and easier to maintain, as it eliminates the need for casting.
+
+In summary, generics provide a mechanism for writing flexible, reusable, and type-safe code, which is especially useful when dealing with collections like `ArrayList`. The use of generics helps enforce type safety while avoiding the need to write multiple versions of the same code for different data types.
