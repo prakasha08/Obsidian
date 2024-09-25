@@ -259,6 +259,101 @@ class Solution {
     }
 }
 ```
+## [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
+```java
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        // Step 1: Convert banned words to a HashSet for O(1) lookup
+        HashSet<String> ban = new HashSet<>();
+        for (String banWord : banned) {
+            ban.add(banWord.toLowerCase());
+        }
+
+        // Step 2: Process the paragraph and count word occurrences
+        HashMap<String, Integer> para = new HashMap<>();
+        paragraph = paragraph.toLowerCase();
+        StringBuilder word = new StringBuilder();
+
+        for (int i = 0; i < paragraph.length(); i++) {
+            char c = paragraph.charAt(i);
+
+            // If the character is a letter, build the word
+            if (Character.isLetter(c)) {
+                word.append(c);
+            } else if (word.length() > 0) {
+                // Non-letter found, process the word
+                String finalWord = word.toString();
+                if (!ban.contains(finalWord)) {
+                    para.put(finalWord, para.getOrDefault(finalWord, 0) + 1);
+                }
+                word = new StringBuilder(); // Reset for the next word
+            }
+        }
+
+        // Step 3: Handle the last word if the paragraph ends without punctuation
+        if (word.length() > 0) {
+            String finalWord = word.toString();
+            if (!ban.contains(finalWord)) {
+                para.put(finalWord, para.getOrDefault(finalWord, 0) + 1);
+            }
+        }
+
+        // Step 4: Find the most common word
+        String mostCommon = "";
+        int maxCount = 0;
+        for (Map.Entry<String, Integer> entry : para.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                mostCommon = entry.getKey();
+                maxCount = entry.getValue();
+            }
+        }
+
+        return mostCommon;
+    }
+}
+```
+## [2399. Check Distances Between Same Letters](https://leetcode.com/problems/check-distances-between-same-letters/)
+```java
+class Solution {
+    public boolean checkDistances(String s, int[] distance) {
+        HashMap<Character, Integer> Distance = new HashMap<>();
+        
+        // Loop through the string to populate the Distance map
+        for (int i = 0; i < s.length(); i++) {
+            char currChar = s.charAt(i);
+            
+            // If it's the first time encountering the character, store its index
+            if (!Distance.containsKey(currChar)) {
+                Distance.put(currChar, i);
+            } 
+            // Else calculate the distance between occurrences
+            else {
+                // Update the map with the distance between the two occurrences of the character
+                Distance.put(currChar, i - Distance.get(currChar) - 1);
+            }
+        }
+        
+        // Now compare distances with the provided distance array
+        for (int i = 0; i < distance.length; i++) {
+            char expectedChar = (char) (i + 'a');  // Convert index to corresponding character
+            
+            // If the character appears in the string, compare the distances
+            if (Distance.containsKey(expectedChar)) {
+                int currDistance = Distance.get(expectedChar);
+                if (distance[i] != currDistance) {
+                    return false;  // If the distance doesn't match, return false
+                }
+            }
+        }
+        
+        return true;  // If all distances match, return true
+    }
+}
+```
 ## [136. Single Number](https://leetcode.com/problems/single-number/)
 
 ```java
@@ -2671,6 +2766,41 @@ class Solution {
     }
 }
 ```
+## [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+```java
+class Solution {
+    private void backtracking(List<String> result, StringBuilder curr, String digits, int index, HashMap<Character, String> map) {
+        if (curr.length() == digits.length()) {
+            result.add(curr.toString());
+            return;
+        }
+        String letters = map.get(digits.charAt(index));
+        for (char c : letters.toCharArray()) {
+            curr.append(c);  
+            backtracking(result, curr, digits, index + 1, map); 
+            curr.deleteCharAt(curr.length() - 1);
+        }
+    }
+
+    public List<String> letterCombinations(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return new ArrayList<>();
+        }
+        HashMap<Character, String> map = new HashMap<>();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        List<String> result = new ArrayList<>();
+        backtracking(result, new StringBuilder(), digits, 0, map);
+        return result;
+    }
+}
+```
 ## ** [51. N-Queens](https://leetcode.com/problems/n-queens/)
 ```java
 class Solution {
@@ -2849,7 +2979,7 @@ class Solution {
     }
 }
 ```
-# Compare func
+# Compare function
 ## [179. Largest Number](https://leetcode.com/problems/largest-number/)
 ```java
 public class Solution {

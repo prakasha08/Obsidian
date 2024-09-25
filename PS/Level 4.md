@@ -1,6 +1,5 @@
 ### Topic : String 
 
-
 ### Print without vowels
 ```C
 #include <stdio.h>
