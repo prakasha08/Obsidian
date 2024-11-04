@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "da1dcd23d780598a",
+        "id": "db6d649b52caeca3",
         "type": "tabs",
         "children": [
           {
-            "id": "8dd6f202534ebd0a",
+            "id": "c876707625931c63",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PHP/Basics.md",
+                "file": "JAVA/DSA/Leetcode.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "Leetcode"
             }
           }
         ],
@@ -40,7 +42,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -55,7 +59,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -63,7 +69,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -86,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PHP/Basics.md",
+                "file": "JAVA/DSA/Enum.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +102,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Enum"
             }
           },
           {
@@ -103,10 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PHP/Basics.md",
+                "file": "JAVA/DSA/Enum.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Enum"
             }
           },
           {
@@ -117,7 +129,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": false
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -126,8 +140,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PHP/Basics.md"
-              }
+                "file": "JAVA/DSA/Enum.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Enum"
             }
           }
         ],
@@ -148,54 +164,54 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8dd6f202534ebd0a",
+  "active": "c876707625931c63",
   "lastOpenFiles": [
+    "JAVA/Overall/BASICS.md",
+    "JAVA/DSA/Leetcode.md",
+    "JAVA/OOPs/Generics.md",
+    "JAVA/OOPs/OOPs in Java.md",
+    "JAVA/OOPs/Exception.md",
+    "JAVA/DSA/Map.md",
+    "OOPs in Java.pdf",
+    "Screenshot 2024-10-16 210739.png",
+    "Screenshot 2024-10-16 210501.png",
+    "JAVA/OOPs/Collection framework.md",
+    "JAVA/OOPs/About Thread-Safety.md",
+    "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
+    "JAVA/DSA/Queue.md",
+    "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
+    "JAVA/DSA/Enum.md",
+    "Pasted image 20241020221338.png",
+    "Pasted image 20241020221335.png",
+    "JAVA/DSA/Stack.md",
+    "JAVA/DSA/Linked List.md",
+    "JAVA/DSA/List.md",
+    "JAVA/DSA/Sorting.md",
     "PS/Level 4(own).md",
+    "PS/Level 5.md",
+    "PS/Level 3.md",
+    "PS/Level 4.md",
+    "JAVA/OOPs/IMAGES/Object Handling.md",
+    "Pasted image 20241016210749.png",
+    "Pasted image 20241016210506.png",
+    "Pasted image 20241016210503.png",
+    "Pasted image 20241016210402.png",
+    "JAVA/Overall/LEET CODE.md",
+    "JAVA/DSA/Binary Search.md",
+    "JAVA/DSA/DFS & BFS.md",
     "PHP/Basics.md",
     "PHP",
     "Level 4(own).pdf",
-    "PS/Level 4.md",
     "Level 4.pdf",
-    "JAVA/DSA/Map.md",
-    "JAVA/DSA/Leetcode.md",
-    "JAVA/DSA/List.md",
-    "JAVA/OOPs/OOPs in Java.md",
     "Pasted image 20240919183626.png",
     "Pasted image 20240919183203.png",
-    "Pasted image 20240919182737.png",
-    "Pasted image 20240919182637.png",
-    "Pasted image 20240919182635.png",
-    "Pasted image 20240919182627.png",
-    "Pasted image 20240919182623.png",
-    "JAVA/Overall/LEET CODE.md",
     "JAVA/Overall/EXERCISES.md",
-    "JAVA/Overall/BASICS.md",
-    "JAVA/DSA/Binary Search.md",
-    "JAVA/DSA/DFS & BFS.md",
-    "PS/Set Questions.md",
-    "PS/Level 5.md",
-    "PS/Level 3.md",
-    "JAVA/DSA/Linked List.md",
-    "HTML & CSS/JAVA/DSA/Leetcode.md",
-    "Untitled.md",
-    "List.md",
-    "JS/Images/Screenshot 2024-08-26 144550.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221432.png",
-    "HTML & CSS/JAVA/Overall/Images/Screenshot 2024-02-21 221408.png",
-    "HTML & CSS/JAVA/Overall/SHORT CUT KEYWORDDS.md",
-    "HTML & CSS/JAVA/Overall/LEET CODE.md",
     "HTML & CSS/JAVA/Overall/Images",
-    "HTML & CSS/JAVA/Overall/EXERCISES.md",
-    "HTML & CSS/JAVA/Overall/BASICS.md",
     "HTML & CSS/JAVA/Overall",
-    "HTML & CSS/JAVA/OOPs/OOPs in Java.md",
     "HTML & CSS/JAVA/OOPs/IMAGES",
     "HTML & CSS/JAVA/OOPs",
-    "HTML & CSS/JAVA/DSA/Sorting.md",
-    "HTML & CSS/JAVA/DSA/Queue.md",
     "HTML & CSS/JAVA/DSA/images",
     "HTML & CSS/JAVA/DSA",
-    "HTML & CSS/JAVA/CORE (AMIGO COURSE)",
     "Untitled.canvas"
   ]
 }

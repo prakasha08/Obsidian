@@ -1,7 +1,7 @@
 ![[WhatsApp Image 2024-07-30 at 9.57.46 PM.jpeg]]
 # Diff btw Run-compile time
-In programming, **runtime** and **compile-time** refer to different phases in the lifecycle of a program. Understanding the differences between them is crucial for debugging, optimizing, and writing effective code. Here's a breakdown of what each term means and how they differ:
 
+In programming, **runtime** and **compile-time** refer to different phases in the lifecycle of a program. Understanding the differences between them is crucial for debugging, optimizing, and writing effective code. Here's a breakdown of what each term means and how they differ:
 ### Compile-Time
 
 - **Definition**: Compile-time refers to the period during which the source code is translated into executable code by a compiler. This is the phase where the program is checked for syntax errors, type checking, and other static code analysis.
@@ -9,7 +9,7 @@ In programming, **runtime** and **compile-time** refer to different phases in th
 - **Key Aspects**:
   1. **Syntax Checking**: The compiler checks the code for syntax errors. If the syntax is incorrect, the program will not compile.
   2. **Type Checking**: The compiler ensures that variable types are consistent and correct according to the language's rules.
-  3. **Static Analysis**: The compiler may perform optimizations, inlining, and other static analysis techniques to improve performance and catch potential issues.
+  3. **Static Analysis**: The compiler may perform optimizations, in-lining, and other static analysis techniques to improve performance and catch potential issues.
   4. **Error Detection**: Errors that can be detected without executing the program, such as undeclared variables, type mismatches, or missing semicolons, are flagged at compile-time.
 
 - **Example**:
@@ -311,7 +311,7 @@ Static only access static data ,Not an Non-static Data(you cant use this because
 
 ### Static Variables
 
-A static variable is shared among all instances of a class. It's associated with the class itself rather than any particular instance of the class..
+A static variable is shared among all instances of a class. It's associated with the class itself rather than any particular instance of the class.
 ```java
 class Example {
     static int counter = 0; // Static variable
@@ -408,12 +408,12 @@ public class Main {
 ![[Pasted image 20240806234629.png]]
 ### Summary of Static Keyword Usage:
 
-|Feature|Description|
-|---|---|
-|**Static Variables**|Variables shared among all instances of a class.|
-|**Static Methods**|Methods that belong to the class rather than any instance, accessible without creating an instance.|
-|**Static Blocks**|Blocks used for static initialization of a class, executed once when the class is first loaded.|
-|**Static Classes**|Nested classes marked as static, which can access the outer class's static members but not non-static members.|
+| Feature              | Description                                                                                                    |
+| -------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Static Variables** | Variables shared among all instances of a class.                                                               |
+| **Static Methods**   | Methods that belong to the class rather than any instance, accessible without creating an instance.            |
+| **Static Blocks**    | Blocks used for static initialization of a class, executed once when the class is first loaded.                |
+| **Static Classes**   | Nested classes marked as static, which can access the outer class's static members but not non-static members. |
 
 By using the `static` keyword, Java provides a mechanism to create class-level attributes and methods that can be accessed without needing to instantiate objects, improving memory management and efficiency in certain scenarios.
 ***By Static we can inherit but cannot be override
@@ -696,8 +696,8 @@ public class Main {
 
 ```
 ### Dynamic method dispatch
-Dynamic method dispatch, also known as runtime polymorphism, is a core concept in object-oriented programming, particularly in languages like Java. It allows a program to determine at runtime which method implementation to execute, based on the actual object's type rather than the reference type.
 
+Dynamic method dispatch, also known as runtime polymorphism, is a core concept in object-oriented programming, particularly in languages like Java. It allows a program to determine at runtime which method implementation to execute, based on the actual object's type rather than the reference type.
 #### How Dynamic Method Dispatch Works
 
 1. **Inheritance and Overriding**:
@@ -710,7 +710,6 @@ Dynamic method dispatch, also known as runtime polymorphism, is a core concept i
 3. **Polymorphism**:
    - Polymorphism allows a subclass object to be referenced by a superclass variable.
    - At runtime, the actual method that gets invoked is determined by the type of the object, not the type of the reference.
-
 #### Example of Dynamic Method Dispatch
 
 Consider the following example to understand dynamic method dispatch:
@@ -1344,6 +1343,7 @@ The diamond problem is an issue that arises in multiple inheritance when a class
 https://www.w3schools.com/java/java_encapsulation.asp
 
 Encapsulation in Java is a fundamental principle of object-oriented programming that involves bundling data (variables) and methods (functions) that operate on the data into a single unit, often a class. The key idea behind encapsulation is to restrict direct access to some of an object's components, usually the internal state (variables), and enforce access through methods (getters and setters) that maintain the object's integrity and behavior.
+
 ![[Pasted image 20240813132338.png]]
 ### Key Points of Encapsulation
 
@@ -1517,7 +1517,7 @@ In this example:
 
 - `OtherClass` is neither in the same package as `BaseClass` nor a subclass of `BaseClass`.
 - Therefore, it cannot access the `protectedMethod`, and attempting to do so will result in a compile-time error.
-`private` Example
+#### Private Example
 ```java
 class Shape {
     // Private variable
@@ -1738,69 +1738,3 @@ public class Main {
 ### Summary
 
 Abstraction in Java is a core principle of object-oriented programming that focuses on simplifying complex systems by hiding the implementation details and exposing only the essential features. It allows developers to work with high-level concepts and interactions without needing to understand the intricate workings beneath. This is achieved through abstract classes and interfaces, where abstract classes can contain both abstract methods (without implementation) and concrete methods (with implementation), and interfaces define a contract with abstract methods that must be implemented by any class that adheres to the interface. By using abstraction, developers can create more modular, maintainable, and understandable code, as they can concentrate on what an object does rather than how it does it.
-# Generics
-
-by the following we can only customize an Integer Array Only (Other types are not poosible to customize,possible only if we can write same code for each nd every types. So we go for a generics 
-
-![[Pasted image 20240919182737.png]]]]![[Pasted image 20240919182635.png]]![[Pasted image 20240919182637.png]]Generics provide a Parameterized type .
-![[Pasted image 20240919183203.png]]
-***Above means ArrayList Have only 'Integer'(Generics) (Parameterized type) objects.
-If you does not provide any type it will allow any type of value(Type safety).
-Detailed Explanation in Below
-![[Pasted image 20240919183626.png]]
-Generics in Java are a powerful feature that allows for the creation of classes, interfaces, and methods that can operate on any data type, while ensuring type safety at compile time. Without generics, code would need to be written and repeated for every different data type, which can lead to redundancy and potential errors. Below is an explanation based on the images and the context you provided.
-
----
-
-### Customizing Integer Arrays
-
-In the first part, you're stating that without generics, we can only customize an integer array, which means we'd have to write code specifically tailored for handling integers. If we wanted to work with other data types (e.g., `Double`, `String`), we would need to rewrite the same code for each type. This leads to repetitive code and increases the likelihood of errors. 
-
-This is where **Generics** come in to provide a solution, allowing you to write more reusable and flexible code.
-
----
-
-### Generics Overview
-
-Generics provide a way to parameterize types, meaning you can write a class, interface, or method that works with any type, while maintaining strong type safety. The primary advantage of generics is that it allows the same code to be reused for different data types without sacrificing the type checking that Java offers at compile time.
-
-For example, consider an `ArrayList<Integer>`. This is a parameterized type, which means that the `ArrayList` is restricted to holding only `Integer` objects. This is done by using the syntax `ArrayList<Integer>`, where `Integer` is the parameterized type.
-
----
-
-### Parameterized Types in Generics
-
-The concept of a parameterized type means that you can define a class or method with a placeholder for the data type. When you instantiate an object of that class or call the method, you specify the actual data type (such as `Integer`, `String`, etc.) that will replace the placeholder.
-
-In the image example, `ArrayList<Integer>` means that the `ArrayList` can hold only `Integer` objects. The generic type parameter `<Integer>` restricts the types of elements that can be added to the list. This ensures **type safety**, as you won't be able to add any objects of a different type (like a `String`) to that `ArrayList`.
-
-If you don’t provide a type (for example, just `ArrayList` without the `<Integer>`), the compiler will allow any type of object to be added. However, this leads to **type safety issues**, which generics aim to prevent. Using raw types (i.e., without specifying the type parameter) can result in runtime errors because it doesn't enforce the type constraints at compile time.
-
----
-
-### Example with Generics: 
-
-```java
-// Without Generics
-ArrayList list = new ArrayList(); // Raw type
-list.add("String"); // OK
-list.add(123); // OK
-
-// With Generics
-ArrayList<Integer> list = new ArrayList<>();
-list.add(123); // OK
-list.add("String"); // Compile-time error, type safety ensured
-```
-
-In the example above, using `ArrayList<Integer>` ensures that only `Integer` values can be added to the list, providing **compile-time type checking**. If you attempt to add a `String` to the list, the compiler will throw an error, preventing potential runtime errors.
-
----
-
-### Conclusion
-
-Generics offer significant advantages, including:
-1. **Code Reusability**: You can write a single class or method that works with different types without rewriting it for each specific type.
-2. **Type Safety**: Generics enable stronger type checks at compile time, helping you catch errors early and preventing `ClassCastException` at runtime.
-3. **Cleaner Code**: With generics, your code becomes cleaner and easier to maintain, as it eliminates the need for casting.
-
-In summary, generics provide a mechanism for writing flexible, reusable, and type-safe code, which is especially useful when dealing with collections like `ArrayList`. The use of generics helps enforce type safety while avoiding the need to write multiple versions of the same code for different data types.

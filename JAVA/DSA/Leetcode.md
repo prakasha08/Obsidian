@@ -14,6 +14,65 @@ class Solution {
     }
 }
 ```
+## [54. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
+```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int[][] d = {{0,1},{1,0},{0,-1},{-1,0}};
+        int row = matrix.length;
+        int col = matrix[0].length;
+        boolean[][] visited = new boolean[row][col];
+        int k = 0;
+        int r = 0,c = 0;
+        int dr = d[0][0];
+        int dc = d[0][1];
+        List<Integer> result = new ArrayList<>();
+        while(result.size()!=row*col){
+            result.add(matrix[r][c]);
+            visited[r][c] = true;
+            int nr = r + d[k][0];
+            int nc = c + d[k][1];
+            if (nr < 0 || nr >= row || nc < 0 || nc >= col || visited[nr][nc]) {
+                k = (k + 1) % 4; 
+                nr = r + d[k][0];
+                nc = c + d[k][1];
+            }
+            r = nr;
+            c = nc;
+        }
+        return result;
+    }
+}
+```
+## [59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)
+```java
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] d = {{0,1},{1,0},{0,-1},{-1,0}};
+        int[][] matrix = new int[n][n];
+        boolean[][] visited = new boolean[n][n];
+        int k = 0;
+        int r = 0,c = 0;
+        int dr = d[0][0];
+        int dc = d[0][1];
+        int i = 1;
+        while( i <= n*n){
+           matrix[r][c] = i++;
+            visited[r][c] = true;
+            int nr = r + d[k][0];
+            int nc = c + d[k][1];
+            if (nr < 0 || nr >= n || nc < 0 || nc >= n || visited[nr][nc]) {
+                k = (k + 1) % 4; 
+                nr = r + d[k][0];
+                nc = c + d[k][1];
+            }
+            r = nr;
+            c = nc;
+        }
+        return matrix;
+    }
+}
+```
 ## [885. Spiral Matrix III](https://leetcode.com/problems/spiral-matrix-iii/)
 ```java
 class Solution {
@@ -232,6 +291,34 @@ class Solution {
             }
         }
         return -1;
+    }
+}
+```
+
+## [599. Minimum Index Sum of Two Lists](https://leetcode.com/problems/minimum-index-sum-of-two-lists/)
+```java
+class Solution {
+    public String[] findRestaurant(String[] list1, String[] list2) {
+        HashMap<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < list1.length; i++) {
+            map.put(list1[i], i);
+        }
+        ArrayList<String> result = new ArrayList<>();
+        int minIndexSum = Integer.MAX_VALUE;
+        for (int i = 0; i < list2.length; i++) {
+            if (map.containsKey(list2[i])) {
+                int indexSum = i + map.get(list2[i]);
+                if (indexSum < minIndexSum) {
+                    result.clear();
+                    result.add(list2[i]);
+                    minIndexSum = indexSum;
+                } 
+                else if (indexSum == minIndexSum) {
+                    result.add(list2[i]);
+                }
+            }
+        }
+        return result.toArray(new String[0]);
     }
 }
 ```
@@ -1092,6 +1179,23 @@ class Solution {
 }
 ```
 ## [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/)
+```java
+class Solution {
+        public int[] nextGreaterElements(int[] nums) {
+            int n=nums.length;
+            int[] res = new int[n];
+            Arrays.fill(res,-1);
+            Stack<Integer> stack = new Stack();
+            for(int i=0;i<2*n;i++){
+                while(!stack.empty()&&nums[i%n]>nums[stack.peek()]){
+                    res[stack.pop()]=nums[i%n];
+                }
+                stack.push(i%n);
+            }
+            return res;
+        }
+    }
+```
 ## [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
 ```java
 class Solution {
@@ -1109,6 +1213,110 @@ class Solution {
             }
             return res;
     }
+}
+```
+
+## [1673. Find the Most Competitive Subsequence](https://leetcode.com/problems/find-the-most-competitive-subsequence/)
+```java
+class Solution {
+    public int[] mostCompetitive(int[] nums, int k) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < nums.length; i++) {
+            int n = nums[i];
+            while (!stack.isEmpty() && stack.peek() > n && stack.size() + (nums.length - i) > k) {
+                stack.pop();
+            }
+            if (stack.size() < k) {
+                stack.push(n);
+            }
+        }
+        int[] result = new int[k];
+        for (int i = k - 1; i >= 0; i--) {
+            result[i] = stack.pop();
+        }
+        return result;
+    }
+}
+```
+## [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
+```java
+import java.util.Stack;
+
+class Solution {
+    public int calculate(String s) {
+        s = s.replaceAll("\\s+", "");  // Remove all spaces
+        Stack<Integer> s1 = new Stack<>();  // Stack for numbers
+        Stack<Character> s2 = new Stack<>();  // Stack for operators
+        int num = 0;  // To handle multi-digit numbers
+        char sign = '+';  // Track current operator, initialize with '+'
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            // Build the number if it's a digit
+            if (Character.isDigit(ch)) {
+                num = num * 10 + (ch - '0');  // For multi-digit numbers
+            }
+
+            // If it's an operator or we're at the last character, calculate based on current operator
+            if (!Character.isDigit(ch) || i == s.length() - 1) {
+                switch (sign) {
+                    case '+':
+                        s1.push(num);  // Add the current number to the stack
+                        break;
+                    case '-':
+                        s1.push(-num);  // Subtract the current number by pushing its negative
+                        break;
+                    case '*':
+                        s1.push(s1.pop() * num);  // Multiply the top of the stack
+                        break;
+                    case '/':
+                        s1.push(s1.pop() / num);  // Divide the top of the stack
+                        break;
+                }
+                sign = ch;  // Update the current operator
+                num = 0;  // Reset number
+            }
+        }
+
+        // Sum up all the numbers in the stack
+        int result = 0;
+        while (!s1.isEmpty()) {
+            result += s1.pop();
+        }
+
+        return result;
+    }
+}
+```
+## [402. Remove K Digits](https://leetcode.com/problems/remove-k-digits/)
+
+**Here StringBuilder is Act as Stack** 
+```java
+class Solution {
+    public String removeKdigits(String num, int k) {
+        int n = num.length();
+        if (k == n) {
+            return "0"; 
+        }
+        StringBuilder stack = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            char currentDigit = num.charAt(i);
+            while (k > 0 && stack.length() > 0 && stack.charAt(stack.length() - 1) > currentDigit) {
+                stack.deleteCharAt(stack.length() - 1); 
+                k--;
+            }
+            stack.append(currentDigit);
+        }
+        while (k > 0) {
+            stack.deleteCharAt(stack.length() - 1);
+            k--;
+        }
+        while (stack.length() > 0 && stack.charAt(0) == '0') {
+            stack.deleteCharAt(0);
+        }
+        return stack.length() == 0 ? "0" : stack.toString();
+    }
 }
 ```
 ## [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
@@ -1303,7 +1511,47 @@ class Solution {
     }
 }
 ```
+## [11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+```java
+class Solution {
+    public int maxArea(int[] height) {
+        int n =  height.length,ans=0;
+        int l = 0, r = n-1;
+        while(l<r){
+            if(height[l]<height[r]){
+                ans = Math.max((r-l)*height[l],ans);
+                l++;
+            }
+            else{
+                ans = Math.max((r-l)*height[r],ans);
+                r--;
+            }
+        }
+        return ans;
+    }
+}
+```
 ## [42. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+## [2149. Rearrange Array Elements by Sign](https://leetcode.com/problems/rearrange-array-elements-by-sign/)
+```java
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int[] result = new int[nums.length];
+        int l = 0,r=1;
+        for(int num : nums){
+            if(num>0 && l < result.length-1){
+                result[l] = num;
+                l+=2;
+            }
+            if(num<0 && r < result.length){
+                result[r] = num;
+                r+=2;
+            }
+        }
+        return result;
+    }
+}
+```
 ## [392. Is Subsequence](https://leetcode.com/problems/is-subsequence/)
 	
 ```java
@@ -1365,6 +1613,19 @@ class Solution {
 # Dynamic Programming
 
 **Memoization +(Recursion (Or) Iteration) = DP**
+## [338. Counting Bits](https://leetcode.com/problems/counting-bits/)
+```java
+class Solution {
+    public int[] countBits(int n) {
+        int[] ans = new int[n+1];
+        ans[0] = 0;
+        for(int i = 1; i<=n;i++){
+            ans[i] = ans[i/2] + (i & 1);
+        }
+        return ans;
+    }
+}
+```
 ## [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/)
 ```java
 //Normal Method,its performance is low and leads to overlapping so we go for DP.but it also give o/p
@@ -1630,7 +1891,6 @@ class Solution {
 }
 ```
 ## [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
-
 ```java
 class Solution {
     int dp[][];
@@ -1655,6 +1915,287 @@ class Solution {
 
 }
 ```
+## [494. Target Sum](https://leetcode.com/problems/target-sum/)
+```java
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum < Math.abs(target) || (sum + target) % 2 != 0) retur
+        int[] dp = new int[subsetSum + 1];
+        dp[0] = 1;
+        for (int num : nums) {
+            for (int j = subsetSum; j >= num; j--) {
+                dp[j] += dp[j - num];
+            }
+        }
+        return dp[subsetSum];
+    }
+}
+```
+## [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
+**Below is a own approach .It will give Pass max testcase **
+```java
+class Solution {
+    public static int countZeros(String str) {
+        return str.length() - str.replace("0", "").length();
+    }
+
+    public int findMaxForm(String[] strs, int m, int n) {
+        int max = 0;
+        for (int i = 0; i < strs.length; i++) {
+            int count = 1; 
+            int M = m; 
+            int N = n;
+            int t = countZeros(strs[i]);
+            int onesInCurrentString = strs[i].length() - t;
+            M -= t;
+            N -= onesInCurrentString;
+            if (M < 0 || N < 0) {
+                count = 0;
+                continue;
+            }
+            for (int j = 0; j < strs.length; j++) {
+                if (j == i) continue;
+                int z = countZeros(strs[j]);
+                int onesInNextString = strs[j].length() - z;
+                if (M >= z && N >= onesInNextString) {
+                    M -= z; 
+                    N -= onesInNextString;
+                    count++;
+                }
+            }
+            max = Math.max(max, count); 
+            if (max == strs.length) {
+                return max;
+            }
+        }
+        return max;
+    }
+}
+```
+
+```java
+public class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+        int[][] dp = new int[m + 1][n + 1];
+        for (String s : strs) {
+            int count0 = 0, count1 = 0;
+            for (char c : s.toCharArray()) {
+                if (c == '0') count0++;
+                else count1++;
+            }
+            for (int i = m; i >= count0; i--) {
+                for (int j = n; j >= count1; j--) {
+                    dp[i][j] = Math.max(dp[i][j], 1 + dp[i - count0][j - count1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
+```
+## [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+Without DP
+```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        // int[] dp = new int[nums.length];
+        // dp[0] = nums[0];
+        int currSum = nums[0];
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+        return maxSum;
+    }
+}
+```
+
+```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int maxSum = dp[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            maxSum = Math.max(maxSum, dp[i]);
+        }
+        return maxSum;
+    }
+}
+```
+## [152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
+without DP
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int currMax = nums[0];
+        int currMin = nums[0];
+        int maxProduct = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            int tempMax = currMax;  // store currMax before updating
+            
+            currMax = Math.max(nums[i], Math.max(currMax * nums[i], currMin * nums[i]));
+            currMin = Math.min(nums[i], Math.min(tempMax * nums[i], currMin * nums[i]));
+            
+            maxProduct = Math.max(currMax, maxProduct);
+        }
+        return maxProduct;
+    }
+}
+```
+
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int n = nums.length;
+        int[] dpMax = new int[n];
+        int[] dpMin = new int[n];
+
+        dpMax[0] = nums[0];
+        dpMin[0] = nums[0];
+        int maxProduct = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            dpMax[i] = Math.max(nums[i], Math.max(dpMax[i - 1] * nums[i], dpMin[i - 1] * nums[i]));
+            dpMin[i] = Math.min(nums[i], Math.min(dpMax[i - 1] * nums[i], dpMin[i - 1] * nums[i]));
+            maxProduct = Math.max(maxProduct, dpMax[i]);
+        }
+        return maxProduct;
+    }
+}
+```
+## [1749. Maximum Absolute Sum of Any Subarray](https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/)
+
+
+```java
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int maxSumEndingHere = nums[0];
+        int minSumEndingHere = nums[0];
+        int maxAbsoluteSum = Math.abs(nums[0]);
+        for (int i = 1; i < nums.length; i++) {
+            maxSumEndingHere = Math.max(nums[i], maxSumEndingHere + nums[i]);
+            minSumEndingHere = Math.min(nums[i], minSumEndingHere + nums[i]);
+
+            maxAbsoluteSum = Math.max(maxAbsoluteSum, Math.max(Math.abs(maxSumEndingHere), Math.abs(minSumEndingHere)));
+        }
+
+        return maxAbsoluteSum;
+    }
+}
+```
+
+```java
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int n = nums.length;
+        int[] maxDp = new int[n];
+        int[] minDp = new int[n];
+
+        // Initialize with the first element
+        maxDp[0] = nums[0];
+        minDp[0] = nums[0];
+        
+        // Initialize the result with the absolute of the first element
+        int maxAbsoluteSum = Math.abs(nums[0]);
+
+        // Fill in the DP arrays
+        for (int i = 1; i < n; i++) {
+            maxDp[i] = Math.max(nums[i], maxDp[i - 1] + nums[i]);
+            minDp[i] = Math.min(nums[i], minDp[i - 1] + nums[i]);
+            
+            // Update the maximum absolute sum by taking absolute values of both maxDp[i] and minDp[i]
+            maxAbsoluteSum = Math.max(maxAbsoluteSum, Math.abs(maxDp[i]));
+            maxAbsoluteSum = Math.max(maxAbsoluteSum, Math.abs(minDp[i]));
+        }
+
+        return maxAbsoluteSum;
+    }
+}
+```
+```java
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int sum = 0, min = 0, max = 0;
+
+        for (int num : nums) {
+            sum += num;
+            min = Math.min(min, sum);
+            max = Math.max(max, sum);
+        }
+
+        return max - min;        // min always <= 0, so 'max + Math.abs(min)' is the same        
+    }
+}
+```
+##  [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/)(DP & TreeSet)
+
+**TreeSet Code lead toTLE so We go for Dp**
+
+```java
+class Solution {
+    public int nthSuperUglyNumber(int n, int[] primes) {
+         PriorityQueue<Long> uglynos = new PriorityQueue<>();
+        HashSet<Long> seen =  new HashSet<>();
+        seen.add(1L);
+        uglynos.add(1L);
+        long Ugly = 0;
+        for(int i = 0 ; i< n;i++){
+            Ugly = uglynos.poll();
+            for(int prime : primes){
+                long newUgly = prime * Ugly;
+                if(!seen.contains(newUgly)){
+                    uglynos.add(newUgly);
+                    seen.add(newUgly);
+                }
+            }
+        }
+        return (int)Ugly;
+    }
+}
+```
+
+```java
+class Solution {
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        long[] dp = new long[n + 1];
+        dp[1] = 1; 
+        int numPrimes = primes.length;
+        int[] indices = new int[numPrimes];
+        long[] values = new long[numPrimes];
+
+        for (int i = 0; i < numPrimes; i++) {
+            indices[i] = 1;
+            values[i] = primes[i];
+        }
+
+        for (int i = 2; i <= n; i++) {
+            long minUgly = values[0];
+            for (int j = 1; j < numPrimes; j++) {
+                minUgly = Math.min(minUgly, values[j]);
+            }
+            dp[i] = minUgly;
+
+            for (int j = 0; j < numPrimes; j++) {
+                if (values[j] == minUgly) {
+                    indices[j]++;
+                    values[j] = dp[indices[j]] * primes[j];
+                }
+            }
+        }
+
+        return (int) dp[n];
+    }
+}
+```
+
 # Binary Search
 
 ## [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)
@@ -2979,6 +3520,61 @@ class Solution {
     }
 }
 ```
+## [79. Word Search](https://leetcode.com/problems/word-search/)
+```java
+class Solution {
+    private boolean isexist(char[][] board, String word, int i, int j, int k, int m, int n) {
+        if (k == word.length()) {
+            return true;
+        }
+        if (i < 0 || i >= m || j < 0 || j >= n || board[i][j] != word.charAt(k)) {
+            return false;
+        }
+        char temp = board[i][j];
+        board[i][j] = '#';
+        boolean found = isexist(board, word, i + 1, j, k + 1, m, n) || 
+                        isexist(board, word, i - 1, j, k + 1, m, n) || 
+                        isexist(board, word, i, j + 1, k + 1, m, n) ||
+                        isexist(board, word, i, j - 1, k + 1, m, n); 
+        board[i][j] = temp;
+        return found;
+    }
+
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == word.charAt(0) && isexist(board, word, i, j, 0, m, n)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+```
+## [494. Target Sum](https://leetcode.com/problems/target-sum/)
+```java
+class Solution {
+    private int count = 0;
+    private void backtrack(int[] nums, int target, int currSum, int currIndex) {
+        if (currIndex == nums.length) {
+            if (currSum == target) {
+                count++;
+            }
+            return;
+        }
+        backtrack(nums, target, currSum + nums[currIndex], currIndex + 1);
+        backtrack(nums, target, currSum - nums[currIndex], currIndex + 1);
+    }
+    public int findTargetSumWays(int[] nums, int target) {
+        count = 0;
+        backtrack(nums, target, 0, 0);
+        return count;
+    }
+}
+```
 # Compare function
 ## [179. Largest Number](https://leetcode.com/problems/largest-number/)
 ```java
@@ -3027,6 +3623,130 @@ class Solution {
         }
         
         return count;
+    }
+}
+```
+## [338. Counting Bits](https://leetcode.com/problems/counting-bits/)
+```java
+class Solution {
+    public int[] countBits(int n) {
+        int[] ans = new int[n+1];
+        ans[0] = 0;
+        for(int i = 1; i<=n;i++){
+            ans[i] = ans[i/2] + (i & 1);
+        }
+        return ans;
+    }
+}
+```
+## [2859. Sum of Values at Indices With K Set Bits](https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/)
+```java
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int result = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int index = i;
+            int count = 0;
+            while (index != 0) {
+                if ((index & 1) == 1) {
+                    count++;
+                }
+                index >>= 1;
+            }
+            if (count == k) {
+                result += nums.get(i);
+            }
+        }
+        return result;
+    }
+}
+```
+
+```java
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int result = 0;
+       for(int i = 0;i<nums.size();i++){
+        if(Integer.bitCount(i)==k)
+            result+=nums.get(i);
+       }
+       return result;
+    }
+}
+```
+# Queue
+## [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/) (DP and Queue & TreeSet)
+```java
+class Solution {
+    public int nthUglyNumber(int n) {
+        int dp[]=new int[n+1];
+        dp[1]=1;
+        int i2=1,i3=1,i5=1;
+        for(int i=2;i<=n;i++)
+        {
+            int i2ugly=dp[i2]* 2;
+            int i3ugly=dp[i3]* 3;
+            int i5ugly=dp[i5]* 5;
+            int minUgly=Math.min(i2ugly,Math.min(i3ugly,i5ugly));
+            dp[i]=minUgly;
+            if(minUgly == i2ugly)
+              i2++;
+            if(minUgly == i3ugly)
+              i3++;
+            if(minUgly == i5ugly)
+              i5++;
+        }
+        return dp[n];
+    }
+}
+```
+
+```java
+class Solution {
+    public int nthUglyNumber(int n) {
+        PriorityQueue<Long> uglynos = new PriorityQueue<>();
+        HashSet<Long> seen =  new HashSet<>();
+        seen.add(1L);
+        uglynos.add(1L);
+        long Ugly = 0;
+        int[] factors = {2,3,5};
+        for(int i = 0 ; i< n;i++){
+            Ugly = uglynos.poll();
+            for(int factor : factors){
+                long newUgly = factor * Ugly;
+                if(!seen.contains(newUgly)){
+                    uglynos.add(newUgly);
+                    seen.add(newUgly);
+                }
+            }
+        }
+        return (int)Ugly;
+    }
+}
+```
+
+```java
+import java.util.TreeSet;
+
+class Solution {
+    public int nthUglyNumber(int n) {
+        TreeSet<Long> uglynos = new TreeSet<>();  // TreeSet to store and maintain order
+        uglynos.add(1L);  // Start with 1 as the first super ugly number
+        
+        long Ugly = 0;  // Variable to store the current ugly number
+        int[] primes = {2,5,3};
+        for (int i = 0; i < n; i++) {
+            Ugly = uglynos.pollFirst();  // Get the smallest element (the next super ugly number)
+            
+            for ( int prime : primes) {
+                Long newUgly = prime * Ugly;
+                // Check to avoid overflow before adding
+                if (newUgly > 0 && !uglynos.contains(newUgly)) {
+                    uglynos.add(newUgly);  // Add new super ugly number if it's not already in the set
+                }
+            }
+        }
+        return (int)Ugly;
     }
 }
 ```
