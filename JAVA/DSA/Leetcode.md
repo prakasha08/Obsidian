@@ -1612,7 +1612,26 @@ class Solution {
 ```
 # Dynamic Programming
 
-**Memoization +(Recursion (Or) Iteration) = DP**
+**Memoization +(Recursion (Or) Iteration) = DP**\
+## [1137. N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/)
+```java
+class Solution {
+    public int tribonacci(int n) {
+        if(n == 0)
+            return 0;
+        if(n == 1 || n == 2)
+            return 1;
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 1;
+        for(int i = 3 ; i<=n;i++){
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+        }
+        return dp[n];
+    }
+}
+```
 ## [338. Counting Bits](https://leetcode.com/problems/counting-bits/)
 ```java
 class Solution {
@@ -1915,6 +1934,65 @@ class Solution {
 
 }
 ```
+## [1025. Divisor Game](https://leetcode.com/problems/divisor-game/)
+
+```java
+class Solution {
+    public boolean divisorGame(int n) {
+        int turn = 0; 
+        int x;
+        while (n > 1) {
+            x = 1;
+            while (n % x != 0 && x < n) {
+                x++;
+            }
+            n -= x;
+            turn = 1 - turn;
+        }
+        return turn == 1; 
+    }
+}
+```
+
+```java
+class Solution {
+    public boolean divisorGame(int n) {
+        boolean[] dp = new boolean[n+1];
+        for(int i = 2 ; i<=n;i++){
+            for(int x = 1 ;x<i;x++){
+                if(i%x==0 && !dp[i-x]){
+                    dp[i]=true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    }
+}
+```
+
+```java
+class Solution {
+    public boolean divisorGame(int n) {
+        return n%2==0;
+    }
+}
+```
+## [746. Min Cost Climbing Stairs](https://leetcode.com/problems/min-cost-climbing-stairs/)
+```java
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int n = cost.length;
+        int[] dp = new int[n];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.min(dp[i - 1], dp[i - 2]) + cost[i];
+        }
+        return Math.min(dp[n - 1], dp[n - 2]);
+    }
+}
+```
 ## [494. Target Sum](https://leetcode.com/problems/target-sum/)
 ```java
 class Solution {
@@ -2135,7 +2213,29 @@ class Solution {
     }
 }
 ```
-##  [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/)(DP & TreeSet)
+## [55. Jump Game](https://leetcode.com/problems/jump-game/)
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        if (nums.length == 1) 
+            return true;
+        boolean[] dp = new boolean[nums.length];
+        dp[0] = true;
+        for (int i = 0; i < nums.length; i++) {
+            if (!dp[i]) 
+                continue;
+            int maxJump = nums[i] + i;
+            for (int j = i + 1; j <= maxJump && j < nums.length; j++) {
+                dp[j] = true;
+                if (j == nums.length - 1) 
+                    return true;
+            }
+        }
+        return false;
+    }
+}
+```
+## [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/)(DP & TreeSet)
 
 **TreeSet Code lead toTLE so We go for Dp**
 
@@ -2577,7 +2677,7 @@ class Solution {
     }
 }
 ```
-## ** [100. Same Tree](https://leetcode.com/problems/same-tree/)\
+## ** [100. Same Tree](https://leetcode.com/problems/same-tree/)
 ```java
 /**
  * Definition for a binary tree node.
@@ -3623,6 +3723,36 @@ class Solution {
         }
         
         return count;
+    }
+}
+```
+## [67. Add Binary](https://leetcode.com/problems/add-binary/)
+```java
+class Solution {
+    private int append(int carry, int A, int B, StringBuilder s) {
+        int sum = A + B + carry;
+        int temp = sum % 2;
+        int newCarry = sum / 2;
+        s.append(temp);
+        return newCarry;
+    }
+
+    public String addBinary(String a, String b) {
+        int carry = 0;
+        StringBuilder s = new StringBuilder();
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        while (i >= 0 || j >= 0) {
+            int A = (i >= 0) ? a.charAt(i) - '0' : 0;
+            int B = (j >= 0) ? b.charAt(j) - '0' : 0;
+            carry = append(carry, A, B, s);
+            i--;
+            j--;
+        }
+        if (carry == 1) {
+            s.append(carry);
+        }
+        return s.reverse().toString();
     }
 }
 ```
