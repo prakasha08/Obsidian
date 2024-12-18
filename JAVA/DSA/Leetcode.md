@@ -346,6 +346,38 @@ class Solution {
     }
 }
 ```
+## [961. N-Repeated Element in Size 2N Array](https://leetcode.com/problems/n-repeated-element-in-size-2n-array/)
+```java
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        HashSet s=new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            if(!s.contains(nums[i]))
+                s.add(nums[i]);
+            else 
+                return nums[i];
+        }
+        return -1;
+    }
+}
+```
+Using HashMap
+```java
+class Solution {
+    public int repeatedNTimes(int[] nums) {
+        int n = nums.length/2;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int num : nums){
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if(entry.getValue()==n)
+                return entry.getKey();
+        }
+        return 0;
+    }
+}
+```
 ## [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
 ```java
 import java.util.HashMap;
@@ -804,6 +836,166 @@ class Solution {
 
     }
 
+}
+```
+## [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/)
+ Optimized Code
+ ```java
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+        HashMap<Integer, Integer> firstIndexMap = new HashMap<>();
+        HashMap<Integer, Integer> lastIndexMap = new HashMap<>();
+        int degree = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+            degree = Math.max(degree, frequencyMap.get(num));
+            if (!firstIndexMap.containsKey(num)) {
+                firstIndexMap.put(num, i);
+            }
+            lastIndexMap.put(num, i);
+        }
+        int minLength = nums.length;
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            int num = entry.getKey();
+            if (entry.getValue() == degree) {
+                int length = lastIndexMap.get(num) - firstIndexMap.get(num) + 1;
+                minLength = Math.min(minLength, length);
+            }
+        }
+        return minLength;
+    }
+}
+```
+Own Approach
+```java
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int degree = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > degree) {
+                degree = entry.getValue();
+            }
+        }
+        int result = Integer.MAX_VALUE;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == degree) {
+                int n = entry.getKey();
+                int k = 0, m = 0;
+                for (int i = 0; i < nums.length; i++) {
+                    if (nums[i] == n) {
+                        k = i;
+                        break;
+                    }
+                }
+                for (int i = nums.length - 1; i >= 0; i--) {
+                    if (nums[i] == n) {
+                        m = i;
+                        break;
+                    }
+                }        System.out.println(n);
+                result = Math.min(result,Math.abs(m - k) + 1);
+            }
+        }
+        return result;
+    }
+}
+```
+## [884. Uncommon Words from Two Sentences](https://leetcode.com/problems/uncommon-words-from-two-sentences/)
+```java
+class Solution {
+    public String[] uncommonFromSentences(String s1, String s2) {
+        HashMap<String, Integer> wordCount = new HashMap<>();
+                String combined = s1 + " " + s2;
+        String[] words = combined.split(" ");
+        for (String word : words) {
+            wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+        }
+        ArrayList<String> uncommonWords = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
+            if (entry.getValue() == 1) {
+                uncommonWords.add(entry.getKey());
+            }
+        }
+        return uncommonWords.toArray(new String[0]);
+    }
+}
+```
+## [2094. Finding 3-Digit Even Numbers](https://leetcode.com/problems/finding-3-digit-even-numbers/)
+```java
+class Solution {
+    public int[] findEvenNumbers(int[] digits) {
+        HashSet<Integer> resultSet = new HashSet<>(); // To avoid duplicates
+
+        int n = digits.length;
+        for (int i = 0; i < n; i++) {
+            if (digits[i] == 0) continue; // Skip leading zeros
+            for (int j = 0; j < n; j++) {
+                if (i == j) continue; // Avoid duplicate indices
+                for (int k = 0; k < n; k++) {
+                    if (i == k || j == k) continue; // Avoid duplicate indices
+                    if (digits[k] % 2 == 0) { // Last digit must be even
+                        int num = digits[i] * 100 + digits[j] * 10 + digits[k];
+                        resultSet.add(num); // Add unique number
+                    }
+                }
+            }
+        }
+
+        ArrayList<Integer> result = new ArrayList<>(resultSet);
+        Collections.sort(result);
+
+        int[] Result = new int[result.size()];
+        for(int i = 0 ; i<result.size();i++)
+            Result[i] = result.get(i);
+        return Result;
+    }
+}
+```
+## [1189. Maximum Number of Balloons](https://leetcode.com/problems/maximum-number-of-balloons/)
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int N = 0;
+        HashMap<String, Integer> m = new HashMap<>();
+        m.put("a", 1);
+        m.put("b", 1);
+        m.put("l", 2);
+        m.put("o", 2);
+        m.put("n", 1);
+        HashMap<String, Integer> n = new HashMap<>();
+        for (char c : text.toCharArray()) {
+            String key = String.valueOf(c);
+            n.put(key, n.getOrDefault(key, 0) + 1);
+        }
+        boolean flag = true;
+        while (flag) {
+            for (Map.Entry<String, Integer> entry : m.entrySet()) {
+                String key = entry.getKey();
+                int required = entry.getValue();
+                if (n.getOrDefault(key, 0) < required) {
+                    flag = false;
+                    break;
+                }
+                n.put(key, n.get(key) - required);
+            }
+            if (flag) {
+                N++;
+            }
+        }
+        return N;
+    }
 }
 ```
 ## [438. Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/)
@@ -2013,6 +2205,29 @@ class Solution {
     }
 }
 ```
+## [416. Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/)
+```java
+class Solution {
+    public boolean canPartition(int[] nums) {
+       int sum = 0;
+       for (int num : nums) {
+           sum += num;
+       }
+       if (sum % 2 != 0) {
+           return false;
+       }
+       int target = sum / 2;
+       boolean[] dp = new boolean[target + 1];
+       dp[0] = true;
+       for (int num : nums) {
+           for (int j = target; j >= num; j--) {
+               dp[j] = dp[j] || dp[j - num];
+           }
+       }
+       return dp[target];
+    }
+}
+```
 ## [474. Ones and Zeroes](https://leetcode.com/problems/ones-and-zeroes/)
 **Below is a own approach .It will give Pass max testcase **
 ```java
@@ -2213,6 +2428,32 @@ class Solution {
     }
 }
 ```
+## [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
+```java
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int m = grid.length,n=grid[0].length;
+        int[][] dp = new int[m][n];
+        dp[0][0] = grid[0][0];
+        for(int i = 0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                if(i==0&&j==0)
+                    continue;
+                int temp = 0;
+                if(i-1>=0 && j-1>=0){
+                   temp = Math.min(dp[i-1][j],dp[i][j-1]);
+                }
+                else if(i-1>=0)
+                    temp = dp[i-1][j];
+                else if(j-1>=0)
+                    temp = dp[i][j-1];
+                dp[i][j] = grid[i][j]+temp;
+            }
+        }
+        return dp[m-1][n-1];
+    }
+}
+```
 ## [55. Jump Game](https://leetcode.com/problems/jump-game/)
 ```java
 class Solution {
@@ -2235,6 +2476,164 @@ class Solution {
     }
 }
 ```
+## [45. Jump Game II](https://leetcode.com/problems/jump-game-ii/)
+```java
+class Solution {
+    public int jump(int[] nums) {
+        if (nums.length == 1) 
+            return 0;
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0]=0;
+        for (int i = 0; i < nums.length; i++) {
+            if (dp[i]==Integer.MAX_VALUE) 
+                continue;
+            int maxJump = nums[i] + i;
+            for (int j = i + 1; j <= maxJump && j < nums.length; j++) {
+                dp[j] = Math.min(dp[i]+1,dp[j]);
+            }
+        }
+        return dp[nums.length-1];
+    }
+}
+```
+## [1871. Jump Game VII](https://leetcode.com/problems/jump-game-vii/)(Using BFS Not DP)
+```java
+class Solution {
+    public boolean canReach(String s, int minJump, int maxJump) {
+        int n = s.length();
+        if (s.charAt(n - 1) != '0') {
+            return false;
+        }
+        boolean[] visited = new boolean[n]; 
+        visited[0] = true;
+        int farthest = 0;
+        for (int i = 0; i < n; i++) {
+            if (visited[i] && s.charAt(i) == '0') {
+                for (int j = Math.max(i + minJump, farthest + 1); j <= Math.min(i + maxJump, n - 1); j++) {
+                    if (s.charAt(j) == '0' && !visited[j]) {
+                        visited[j] = true;
+                        if (j == n - 1) 
+                            return true;
+                    }
+                }
+                farthest = i + maxJump;
+            }
+        }
+
+        return false;  // If we exit the loop without reaching the end, return false
+    }
+}
+```
+## [1937. Maximum Number of Points with Cost](https://leetcode.com/problems/maximum-number-of-points-with-cost/)
+Own Approach 
+```java
+class Solution {
+    public long maxPoints(int[][] points) {
+        int m = points.length, n = points[0].length;
+        long[][] dp = new long[m][n];
+        for (int c = 0; c < n; c++) {
+            dp[0][c] = points[0][c];
+        }
+        for (int r = 1; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                long penalty = Long.MIN_VALUE; 
+                for (int j = 0; j < n; j++) {
+                    penalty = Math.max(penalty, dp[r - 1][j] - Math.abs(j - c));
+                }
+                dp[r][c] = points[r][c] + penalty;
+            }
+        }
+
+        long result = 0;
+        for (int j = 0; j < n; j++) {
+            result = Math.max(result, dp[m - 1][j]);
+        }
+        return result;
+    }
+}
+```
+Below is an Efficient Way by Using Two-way Approach
+```java
+class Solution {
+    public long maxPoints(int[][] points) {
+        int m = points.length, n = points[0].length;
+        long[][] dp = new long[m][n];
+        for (int c = 0; c < n; c++) {
+            dp[0][c] = points[0][c];
+        }
+        for (int r = 1; r < m; r++) {
+            long[] left = new long[n];
+            long[] right = new long[n];
+            left[0] = dp[r - 1][0];
+            for (int c = 1; c < n; c++) {
+                left[c] = Math.max(left[c - 1] - 1, dp[r - 1][c]);
+            }
+            right[n - 1] = dp[r - 1][n - 1];
+            for (int c = n - 2; c >= 0; c--) {
+                right[c] = Math.max(right[c + 1] - 1, dp[r - 1][c]);
+            }
+            for (int c = 0; c < n; c++) {
+                dp[r][c] = points[r][c] + Math.max(left[c], right[c]);
+            }
+        }
+        long result = 0;
+        for (int c = 0; c < n; c++) {
+            result = Math.max(result, dp[m - 1][c]);
+        }
+
+        return result;
+    }
+}
+	```
+## [322. Coin Change](https://leetcode.com/problems/coin-change/)
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE - 1);
+        dp[0] = 0; 
+        for (int coin : coins) {
+            for (int i = coin; i <= amount; i++) {
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+        return dp[amount] == Integer.MAX_VALUE - 1 ? -1 : dp[amount];
+    }
+}
+```
+## [1981. Minimize the Difference Between Target and Chosen Elements](https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/)
+```java
+class Solution {
+    public int minimizeTheDifference(int[][] mat, int target) {
+        int m = mat.length, n = mat[0].length;
+        boolean[] dp = new boolean[80001];
+        dp[0] = true;
+        for (int r = 0; r < m; r++) {
+            boolean[] newDp = new boolean[80001];
+            for (int sum = 0; sum <= 80000; sum++) {
+                if (dp[sum]) {
+                    for (int val : mat[r]) {
+                        int newSum = sum + val;
+                        if (newSum <= 80000) {
+                            newDp[newSum] = true;
+                        }
+                    }
+                }
+            }
+            dp = newDp;
+        }
+        int result = Integer.MAX_VALUE;
+        for (int sum = 0; sum <= 80000; sum++) {
+            if (dp[sum]) {
+                result = Math.min(result, Math.abs(target - sum));
+            }
+        }
+        return result;
+    }
+}
+```
+
 ## [313. Super Ugly Number](https://leetcode.com/problems/super-ugly-number/)(DP & TreeSet)
 
 **TreeSet Code lead toTLE so We go for Dp**
@@ -3070,6 +3469,33 @@ class Solution {
     }
 }
 ```
+## [257. Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)
+```java
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        StringBuilder s = new StringBuilder();
+        path(s,root,result);
+        return result;
+    }
+    private void path(StringBuilder s,TreeNode root,List<String> result){
+        int l = s.length();
+        if (s.length() > 0)
+            s.append("->");
+        s.append(root.val);
+        if(root.left == null && root.right == null){
+            result.add(s.toString());
+        }
+        else{
+        if(root.left!=null)
+            path(s,root.left,result);
+        if(root.right!=null)
+            path(s,root.right,result);
+            }
+        s.setLength(l);
+    }
+}
+```
 ## [637. Average of Levels in Binary Tree](https://leetcode.com/problems/average-of-levels-in-binary-tree/)
 ```java
 /**
@@ -3617,6 +4043,25 @@ class Solution {
             }
         }
         return numIsLands;
+    }
+}
+```
+## [1863. Sum of All Subset XOR Totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)
+```java
+class Solution {
+    public int subsetXORSum(int[] nums) {
+        int[] sum  = {0};
+        int n = nums.length;
+        subXor(0,0,sum,nums);
+        return sum[0];
+    }
+    private void subXor(int i,int currXor,int[] sum,int[] nums){
+        if(i == nums.length){
+            sum[0]+=currXor;
+            return;
+        }
+         subXor(i+1,currXor^nums[i],sum,nums);
+         subXor(i+1,currXor,sum,nums);
     }
 }
 ```

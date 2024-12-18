@@ -548,9 +548,9 @@ public class Practice
 - Last line is correct ,because all the parameters are pass before the variable length parameter(it must be last).
 - "void print(String name ,double . . . numbers)".
 ## Format
-- ![[Pasted image 20240130214126.png]]
-- Access modifier -> Public ,Private ,Protected.
-- optional Static ->static
+ ![[Pasted image 20240130214126.png]]
+- Access modifier -> Public, Private, Protected.
+- optional Static -> Static
 - return type -> double , int, void.
 - Name -> method Name.
 - optional parameter -> string[],double.
@@ -639,7 +639,7 @@ static class lens{
 public static void main(String[] args) {  
     lens L1=new lens("Sony","30MM",3234.99,"RED",true);  
     lens L2=new lens("Canon","40MM",40.00,"BLACK",true);  
-    lens L3=new lens("Gopro","10MM",3500.00,"BLACK",false);  
+lens L3=new lens("Gopro","10MM",3500.00,"BLACK",false);  
   
 }
 ```
