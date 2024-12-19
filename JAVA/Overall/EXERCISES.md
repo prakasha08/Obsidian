@@ -630,6 +630,37 @@ public class Main {
     }
 ```
 ![[Pasted image 20240217211925.png]]
+```java
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int N = 1 , M = 1 , s = n * n;
+        for(int i = 0; i < n ; i++){
+            for(int k = 0 ; k < i ; k++)
+                System.out.print(" ");
+            M = N;
+            for(int j = i ; j < n ; j++){
+                if(N<10)
+                    System.out.print("0");
+                System.out.print(N);
+                // System.out.print(" ");
+                N+=1;
+            }
+            for(int j = i ; j < n ; j++){
+
+                System.out.print(M + s);
+                // System.out.print(" ");
+                M+=1;
+            }
+            s= ((int)Math.sqrt(s)-1) * ((int)Math.sqrt(s)-1);
+            System.out.println("");
+        }
+    }
+}
+```
+![[Pasted image 20241219095029.png]]
 # FACTORIAL
 #FACTORIAL
 ## Using do While: 
