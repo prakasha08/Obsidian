@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/Overall/EXERCISES.md",
+                "file": "SQL/Basics.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "EXERCISES"
+              "title": "Basics"
             }
           }
         ],
@@ -166,9 +166,17 @@
   },
   "active": "102fbb74bde65533",
   "lastOpenFiles": [
+    "JAVA/OOPs/OOPs in Java.md",
+    "SQL/Basics.md",
+    "JAVA/OOPs/Generics.md",
+    "JAVA/OOPs/Exception.md",
+    "JAVA/OOPs/Collection framework.md",
+    "JAVA/OOPs/About Thread-Safety.md",
+    "JAVA/Overall/EXERCISES.md",
+    "Pasted image 20241219112218.png",
+    "Pasted image 20241219112210.png",
     "Pasted image 20241219095029.png",
     "JAVA/Overall/LEET CODE.md",
-    "SQL/Basics.md",
     "BASICS.pdf",
     "Level 3.pdf",
     "OOPs in Java.pdf",
@@ -180,12 +188,7 @@
     "Pasted image 20241016210503.png",
     "Pasted image 20240919183626.png",
     "Pasted image 20240919182737.png",
-    "Pasted image 20240919182635.png",
-    "Pasted image 20240919182627.png",
-    "Pasted image 20240919182623.png",
     "JAVA/DSA/Leetcode.md",
-    "JAVA/OOPs/OOPs in Java.md",
-    "JAVA/Overall/EXERCISES.md",
     "JAVA/Overall/BASICS.md",
     "JAVA/java1.pdf",
     "JAVA/java3.pdf",
@@ -196,10 +199,6 @@
     "JAVA/Overall/SHORT CUT KEYWORDDS.md",
     "PS/Set Questions.md",
     "PS/Level 3.md",
-    "JAVA/OOPs/Generics.md",
-    "JAVA/OOPs/Exception.md",
-    "JAVA/OOPs/Collection framework.md",
-    "JAVA/OOPs/About Thread-Safety.md",
     "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "JAVA/DSA/Queue.md",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",

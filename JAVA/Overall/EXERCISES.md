@@ -639,7 +639,7 @@ class Main {
         int N = 1 , M = 1 , s = n * n;
         for(int i = 0; i < n ; i++){
             for(int k = 0 ; k < i ; k++)
-                System.out.print(" ");
+                System.out.print("   ");
             M = N;
             for(int j = i ; j < n ; j++){
                 if(N<10)
@@ -661,6 +661,28 @@ class Main {
 }
 ```
 ![[Pasted image 20241219095029.png]]
+```java
+public class Main
+{
+	public static void main(String[] args) {
+	    int N = 1;
+		for(int i = 0 ;i<10;i++){
+		    if(i%2!=0)
+		        System.out.print(N+1+" ");
+		    for(int j =0 ; j<10;j++){
+		        System.out.print(N);
+		       if(j>=0 && j+1<=10)
+		        System.out.print(" ");
+		    }
+		    if(i%2==0)
+		        System.out.print(N+1);
+		    N+=1;
+		    System.out.println("");
+		 }
+	 }
+}
+```
+![[Pasted image 20241219112218.png]]
 # FACTORIAL
 #FACTORIAL
 ## Using do While: 
