@@ -308,6 +308,13 @@ The `static` keyword in Java is used for memory management primarily. It can be 
 
 Static only access static data ,Not an Non-static Data(you cant use this because it requires an instance),but the function you are using it in does not depend on instances
 ![[Pasted image 20240806232352.png]]
+### **What Does Static Mean?**
+
+The keyword `static` in Java means that the member (variable or method):
+
+- Belongs to the **class**, not to any specific instance of the class.
+- Is shared among all instances of the class.
+- Can be accessed without creating an object of the class.
 
 ### Static Variables
 
