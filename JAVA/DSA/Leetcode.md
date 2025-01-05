@@ -2456,6 +2456,7 @@ class Solution {
 ```
 ## [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
 ```java
+Tabulation
 class Solution {
     public int minPathSum(int[][] grid) {
         int m = grid.length,n=grid[0].length;
@@ -2477,6 +2478,30 @@ class Solution {
             }
         }
         return dp[m-1][n-1];
+    }
+}
+```
+
+```java
+Memoization
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int m = grid.length,n=grid[0].length;
+        int[][] dp = new int[m][n];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+        return path(grid,dp,0,0,m,n);
+    }
+    private int path(int[][] grid,int[][] dp,int i,int j,int m,int n){
+       if(i>=m || j>=n)
+            return Integer.MAX_VALUE;
+       if(dp[i][j] != -1)
+            return dp[i][j];
+       if(i==m-1 && j == n-1)
+            return grid[i][j];
+        
+        return dp[i][j] = grid[i][j] + Math.min(path(grid,dp,i,j+1,m,n),path(grid,dp,i+1,j,m,n));
     }
 }
 ```
