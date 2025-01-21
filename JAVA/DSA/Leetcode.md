@@ -1511,6 +1511,76 @@ class Solution {
     }
 }
 ```
+## [2116. Check if a Parentheses String Can Be Valid](https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/)
+```java
+class Solution {
+    public boolean canBeValid(String s, String locked) {
+        if(s.length()%2!=0 || (s.charAt(0) == ')'&& locked.charAt(0)=='1')||(s.charAt(s.length()-1) == '('&& locked.charAt(s.length()-1)=='1'))
+            return false;
+        Stack<Character> lock = new Stack<>();
+        Stack<Character> unlocked = new Stack<>();
+        for(int i = 0 ; i < s.length() ; i++){
+            char l = locked.charAt(i);
+            char p = s.charAt(i);
+            if(l == '1'){
+                if(lock.isEmpty()){
+                    if(unlocked.isEmpty())
+                        lock.push(p);
+                    else 
+                        unlocked.pop();
+                }
+                else if(lock.peek()=='(' && p == ')')
+                    lock.pop();
+                else{
+                    if(unlocked.isEmpty())
+                        lock.push(p);
+                    else 
+                        unlocked.pop();
+                }
+            }
+            else if(l == '0'){
+                if(lock.isEmpty()){
+                    if(unlocked.isEmpty())
+                        unlocked.push(p);
+                    else
+                        unlocked.pop();
+                }
+                else if(lock.peek()=='(')
+                    lock.pop();
+                else{
+                        unlocked.push(p);
+                }
+            }
+        }
+        int balance = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (locked.charAt(i) == '0' || s.charAt(i) == '(') {
+                balance++;
+            } else {
+                balance--;
+            }
+            if (balance < 0) {
+                return false;
+            }
+        }
+        
+        balance = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (locked.charAt(i) == '0' || s.charAt(i) == ')') {
+                balance++;
+            } else {
+                balance--;
+            }
+            if (balance < 0) {
+                return false;
+            }
+        }
+        
+        return true;
+
+    }
+}
+```
 ## [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 ```java
 class Solution {
@@ -1686,7 +1756,6 @@ class Solution {
     }
 }
 ```**
-## ** [75. Sort Colors](https://leetcode.com/problems/sort-colors/)
 ```java
 class Solution {
     public void sortColors(int[] nums) {
@@ -1732,6 +1801,73 @@ class Solution {
                 r--;
             }
        }
+    }
+}
+```
+## [16. 3Sum Closest](https://leetcode.com/problems/3sum-closest/)
+```java
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        int result = 0,min = Integer.MAX_VALUE;
+        for(int i = 0;i<nums.length-2;i++){
+            int left = i+1;
+            int right = nums.length-1;
+            if(i>0 && nums[i] == nums[i-1])
+                continue;
+            while(left<right){
+                int n = nums[left] + nums[right] + nums[i];
+                if(target == n)
+                    return n;
+                else if(n<target)
+                    left++;
+                else 
+                    right--;
+                int diff = Math.abs(n-target);
+                if(diff<min){
+                    min = diff;
+                    result = n;
+                    }
+                }
+            }
+
+        return result;
+    }
+}
+```
+## [18. 4Sum](https://leetcode.com/problems/4sum/)
+```java
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+                Arrays.sort(nums);
+        List<List<Integer>> result =  new ArrayList<>();
+        for(int i = 0;i<nums.length-3;i++){
+            if(i>0 && nums[i-1] == nums[i])
+                continue;
+            for(int j = i+1 ; j < nums.length-2 ;j++){
+                int left = j+1;
+                int right = nums.length-1;
+                if( j > i+1 && nums[j] == nums[j-1])
+                    continue;
+                while(left<right){
+                    long n = (long)nums[left] + nums[right] + nums[i] + nums[j];
+                    if(n<target)
+                        left++;
+                    else if(n>target)
+                        right--;
+                    else{
+                        result.add(Arrays.asList(nums[i],nums[j], nums[left], nums[right]));
+                        while(left<right && nums[left] == nums[left+1])
+                            left++;
+                        while(left<right && nums[right] == nums[right-1])
+                            right--;
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
 ```
