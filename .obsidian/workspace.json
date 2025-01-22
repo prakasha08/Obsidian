@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/DSA/Leetcode.md",
+                "file": "JAVA/DSA/Linked List.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Leetcode"
+              "title": "Linked List"
             }
           }
         ],
@@ -166,9 +166,14 @@
   },
   "active": "aaaf81b5584b77f2",
   "lastOpenFiles": [
-    "JAVA/DSA/Enum.md",
-    "JAVA/DSA/Stack.md",
+    "JAVA/DSA/Map.md",
+    "JAVA/DSA/List.md",
     "JAVA/DSA/Leetcode.md",
+    "JAVA/DSA/Enum.md",
+    "JAVA/DSA/DFS & BFS.md",
+    "JAVA/DSA/Binary Search.md",
+    "JAVA/DSA/Linked List.md",
+    "JAVA/DSA/Stack.md",
     "PS/Level 4.md",
     "PS/Level 4(own).md",
     "PS/Level 5.md",
@@ -199,15 +204,11 @@
     "JAVA/java1.pdf",
     "JAVA/java3.pdf",
     "JAVA/java2.pdf",
-    "JAVA/DSA/Linked List.md",
-    "JAVA/DSA/Map.md",
-    "JAVA/DSA/List.md",
     "JAVA/Overall/SHORT CUT KEYWORDDS.md",
     "PS/Set Questions.md",
     "JAVA/CORE (AMIGO COURSE)/ABOUT.md",
     "JAVA/DSA/Queue.md",
     "JAVA/CORE (AMIGO COURSE)/Amigo content.md",
-    "JAVA/DSA/Sorting.md",
     "PHP",
     "Level 4(own).pdf",
     "Level 4.pdf",
