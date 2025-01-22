@@ -4113,6 +4113,32 @@ class Solution {
     }
 }
 ```
+## [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+```java
+class Solution {
+    private void backtrack(StringBuilder s, List<String> result, int n, int open, int close) {
+        if (s.length() == n * 2) {
+            result.add(s.toString());
+            return;
+        }
+        if (open < n) {
+            s.append('(');
+            backtrack(s, result, n, open + 1, close);
+            s.deleteCharAt(s.length() - 1); 
+        }
+        if (close < open) {
+            s.append(')');
+            backtrack(s, result, n, open, close + 1);
+            s.deleteCharAt(s.length() - 1);
+        }
+    }
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backtrack(new StringBuilder(), result, n, 0, 0);
+        return result;
+    }
+}
+```
 ## ** [51. N-Queens](https://leetcode.com/problems/n-queens/)
 ```java
 class Solution {
