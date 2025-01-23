@@ -2940,6 +2940,54 @@ class Solution {
 }
 ```
 
+# LinkedList
+## [206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head ==  null)
+            return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while(curr != null){
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+}
+```
+## [92. Reverse Linked List II](https://leetcode.com/problems/reverse-linked-list-ii/)
+```java
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null || left == right )
+            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode first = dummy;
+        for (int i = 0; i < left - 1; i++) {
+            first = first.next;
+        }
+        ListNode prev = first.next;
+        ListNode curr = prev.next;
+        int i = 0;
+        while(i<right-left){
+            ListNode temp = curr.next; 
+            curr.next = prev;         
+            prev = curr;            
+            curr = temp; 
+            i++;
+        }
+        first.next.next = curr;
+        first.next = prev;
+        return dummy.next;
+    }
+}
+```
+## 
 # Binary Search
 
 ## [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/)

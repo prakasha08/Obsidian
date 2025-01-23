@@ -222,3 +222,61 @@ Backward:
 4. **Traversal**: Move through the list to access or modify data.
 
 Let me know if you'd like more examples or detailed explanations!
+```java
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create a LinkedList
+        LinkedList<String> list = new LinkedList<>();
+
+        // Add elements
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+        System.out.println("Initial LinkedList: " + list);
+
+        // Add at a specific position
+        list.add(1, "Blueberry");
+        System.out.println("After adding Blueberry: " + list);
+
+        // Add to the beginning
+        list.addFirst("Mango");
+        System.out.println("After adding Mango at the beginning: " + list);
+
+        // Add to the end
+        list.addLast("Orange");
+        System.out.println("After adding Orange at the end: " + list);
+
+        // Remove elements
+        list.remove("Banana"); // By value
+        System.out.println("After removing Banana: " + list);
+
+        list.remove(2); // By index
+        System.out.println("After removing element at index 2: " + list);
+
+        list.removeFirst(); // Remove the first element
+        System.out.println("After removing the first element: " + list);
+
+        list.removeLast(); // Remove the last element
+        System.out.println("After removing the last element: " + list);
+
+        // Access elements
+        System.out.println("First element: " + list.getFirst());
+        System.out.println("Last element: " + list.getLast());
+
+        // Check if the list contains an element
+        System.out.println("Contains 'Cherry': " + list.contains("Cherry"));
+
+        // Get the size of the LinkedList
+        System.out.println("Size of LinkedList: " + list.size());
+
+        // Iterate through the LinkedList
+        System.out.println("Iterating through LinkedList:");
+        for (String item : list) {
+            System.out.println(item);
+        }
+    }
+}
+
+```
