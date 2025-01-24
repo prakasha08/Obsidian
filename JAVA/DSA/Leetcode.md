@@ -2987,6 +2987,91 @@ class Solution {
     }
 }
 ```
+## [21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 == null) return list2;
+        if (list2 == null) return list1;
+        ListNode head;
+        if (list1.val <= list2.val) {
+            head = list1;
+            list1 = list1.next;
+        } else {
+            head = list2;
+            list2 = list2.next;
+        }
+        ListNode current = head;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                current.next = list1;
+                list1 = list1.next;
+            } else {
+                current.next = list2;
+                list2 = list2.next;
+            }
+            current = current.next;
+        }
+        if (list1 != null) {
+            current.next = list1;
+        } else {
+            current.next = list2;
+        }
+
+        return head;
+    }
+}
+```
+
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+         PriorityQueue<Integer> queue = new PriorityQueue<>();
+         ListNode node = list1;
+            while (node != null) {
+                queue.add(node.val);
+                node = node.next;
+            }
+        node = list2;
+            while (node != null) {
+                queue.add(node.val);
+                node = node.next;
+            }
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        while (!queue.isEmpty()) {
+            current.next = new ListNode(queue.poll());
+            current = current.next;
+        }
+        return dummy.next;
+    }
+}
+```
+
+## [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+```java
+import java.util.PriorityQueue;
+
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+                for (int i = 0; i < lists.length; i++) {
+            ListNode node = lists[i];
+            while (node != null) {
+                queue.add(node.val);
+                node = node.next;
+            }
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+        while (!queue.isEmpty()) {
+            current.next = new ListNode(queue.poll());
+            current = current.next;
+        }
+        return dummy.next;
+    }
+}
+```
 ## 
 # Binary Search
 
