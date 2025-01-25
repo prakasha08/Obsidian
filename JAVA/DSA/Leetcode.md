@@ -1511,6 +1511,26 @@ class Solution {
     }
 }
 ```
+## [921. Minimum Add to Make Parentheses Valid](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/)
+```java
+class Solution {
+    public int minAddToMakeValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        int count = 0;
+        for(char c : s.toCharArray()){
+            if(c == '(')
+                stack.push(c);
+            else{
+                if(stack.isEmpty())
+                    count++;
+                else if(c == ')')
+                    stack.pop();
+            }
+        }
+        return stack.size() + count;
+    }
+}
+```
 ## [2116. Check if a Parentheses String Can Be Valid](https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/)
 ```java
 class Solution {
@@ -3070,6 +3090,95 @@ class Solution {
         }
         return dummy.next;
     }
+}
+```
+## [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+       if(l1 == null)
+            return l2;
+        if(l2 == null)
+            return l1;
+        ListNode dummy = new ListNode(0);
+        ListNode node = dummy;
+        int carry = 0;
+        while(l1 != null || l2 != null || carry != 0){
+            int sum = 0;
+            if(l1 == null && l2 != null){
+                sum+=l2.val;
+                l2 = l2.next;
+            }
+            else if(l2 == null && l1 != null){
+                sum+=l1.val;
+                l1 = l1.next;
+            }
+            else if(l1 != null && l2 != null ){
+                sum+=l1.val+l2.val;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            sum+=carry;
+            carry = sum/10;
+            node.next = new ListNode(sum%10);
+            node = node.next;
+        }
+        return dummy.next;
+    }
+}
+```
+## [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/)
+```java
+class Solution {
+    private ListNode reverseList(ListNode head) {
+        if(head ==  null)
+            return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while(curr != null){
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    l1 = reverseList(l1);
+    l2 = reverseList(l2);
+
+    if (l1 == null) return l2;
+    if (l2 == null) return l1;
+
+    ListNode dummy = new ListNode(0);
+    ListNode node = dummy;
+    int carry = 0;
+
+    while (l1 != null || l2 != null || carry != 0) {
+        int sum = 0;
+
+        if (l1 == null && l2 != null) {
+            sum += l2.val;
+            l2 = l2.next;
+        } else if (l2 == null && l1 != null) {
+            sum += l1.val;
+            l1 = l1.next;
+        } else if (l1 != null && l2 != null) {
+            sum += l1.val + l2.val;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+
+        sum += carry;
+        carry = sum / 10;
+
+        node.next = new ListNode(sum % 10);
+        node = node.next;
+    }
+    dummy.next = reverseList(dummy.next);
+    return dummy.next;
+}
+
 }
 ```
 ## 
