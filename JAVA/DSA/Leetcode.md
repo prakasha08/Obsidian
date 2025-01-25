@@ -3105,18 +3105,13 @@ class Solution {
         int carry = 0;
         while(l1 != null || l2 != null || carry != 0){
             int sum = 0;
-            if(l1 == null && l2 != null){
+            if(l2 != null){
                 sum+=l2.val;
                 l2 = l2.next;
             }
-            else if(l2 == null && l1 != null){
+            if(l1 != null){
                 sum+=l1.val;
                 l1 = l1.next;
-            }
-            else if(l1 != null && l2 != null ){
-                sum+=l1.val+l2.val;
-                l1 = l1.next;
-                l2 = l2.next;
             }
             sum+=carry;
             carry = sum/10;
@@ -3179,6 +3174,42 @@ class Solution {
     return dummy.next;
 }
 
+}
+```
+## [2487. Remove Nodes From Linked List](https://leetcode.com/problems/remove-nodes-from-linked-list/)
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head ==  null)
+            return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while(curr != null){
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+    public ListNode removeNodes(ListNode head) {
+    head =  reverseList(head);
+    ListNode dummy = new ListNode(0);
+    ListNode node = dummy;
+    ListNode list = head;
+    int max = 0;
+    while(list!=null){
+        if(list.val >= max){
+            max = list.val;
+            node.next = list;
+            node = node.next;
+        }
+        list = list.next;
+    }
+    node.next = null;
+    head = reverseList(dummy.next);
+    return head;
+    }
 }
 ```
 ## 
