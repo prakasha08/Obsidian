@@ -3212,6 +3212,120 @@ class Solution {
     }
 }
 ```
+## [3217. Delete Nodes From Linked List Present in Array](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/)
+```java
+class Solution {
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        HashSet<Integer> num =  new HashSet<>();
+        for(int n : nums){
+            num.add(n);
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode node = dummy;
+        ListNode list = head;
+        while(list !=null){
+            if(!num.contains(list.val)){
+                node.next = list;
+                node = node.next;
+            }
+            list = list.next;
+        }
+        node.next = null;
+        return dummy.next;
+    }
+}
+```
+## [237. Delete Node in a Linked List](https://leetcode.com/problems/delete-node-in-a-linked-list/)
+```java
+class Solution {
+    public void deleteNode(ListNode node) {
+         node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}
+```
+## [1721. Swapping Nodes in a Linked List](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/)
+```java
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        if (head == null || k <= 0) {
+            return head;
+        }
+        ListNode first = head, second = head, temp = head;
+        int length = 0;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+        if (k > length) {
+            return head;
+        }
+        for (int i = 1; i < k; i++) {
+            first = first.next;
+        }
+        temp = head;
+        for (int i = 1; i <= length - k; i++) {
+            second = second.next;
+        }
+        int tempVal = first.val;
+        first.val = second.val;
+        second.val = tempVal;
+
+        return head;
+    }
+}
+```
+## [24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null)
+            return head;
+        ListNode dummy = new ListNode(0);
+        ListNode list = dummy;
+        ListNode node =  head;
+        while(node!=null && node.next !=null){
+            list.next = node.next; 
+            node.next = node.next.next;
+            list.next.next = node;    
+            list = node;    
+            node = node.next; 
+        }
+        return dummy.next;
+    }
+}
+```
+## [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+```java
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+       ListNode temp = head;
+       int length = 0;
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+        if (n > length) {
+            return head;
+        }
+        if(n == length){
+            if( n == 1)
+                return null;
+            head = head.next;
+            return head;
+        }
+        ListNode p = null,c = head;
+        for(int i = 1;i<=length-n;i++){
+            p = c;
+            c = c.next;
+        }
+        if(n!=1)
+        p.next = c.next;
+        else p.next=null;
+        return head;
+    }
+}
+```
 ## 
 # Binary Search
 
