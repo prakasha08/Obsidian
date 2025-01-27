@@ -3326,6 +3326,40 @@ class Solution {
     }
 }
 ```
+## [876. Middle of the Linked List](https://leetcode.com/problems/middle-of-the-linked-list/)
+```java
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        if(head == null)
+            return head;
+        ListNode slow = head , fast = head, prev = null;
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+```
+## [2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list
+```java
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        if(head == null)
+            return head;
+        ListNode slow = head , fast = head, prev = null;
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if(prev != null)
+        prev.next = slow.next;
+        return prev == null?null:head;
+    }
+}
+```
 ## 
 # Binary Search
 
@@ -3975,6 +4009,56 @@ class Solution {
        }
        Collections.reverse(res);
        return res;
+    }
+}
+```
+## [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/)
+```java
+class Solution {
+    public int minimumOperations(TreeNode root) {
+       if(root ==  null)   return 0;
+       int count = 0;            
+       List<List<Integer>> res = new ArrayList();
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                l1.add(curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(l1);
+       }
+       for(List<Integer> list : res){
+             Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < list.size(); i++) {
+                map.put(list.get(i), i);
+            }
+            ArrayList<Integer> sortedList = new ArrayList<>(list);
+            Collections.sort(sortedList);
+            boolean[] visited = new boolean[list.size()];
+            for (int i = 0; i < list.size(); i++) {
+                if (visited[i] || map.get(sortedList.get(i)) == i) {
+                    continue;
+                }
+                int cycleSize = 0;
+                int j = i;
+                while (!visited[j]) {
+                    visited[j] = true;
+                    j = map.get(sortedList.get(j));
+                    cycleSize++;
+                }
+                if (cycleSize > 0) {
+                    count += (cycleSize - 1);
+                }
+            }
+       }
+       return count;
     }
 }
 ```
