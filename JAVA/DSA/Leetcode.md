@@ -3360,6 +3360,148 @@ class Solution {
     }
 }
 ```
+## [1019. Next Greater Node In Linked List](https://leetcode.com/problems/next-greater-node-in-linked-list/)
+```java
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+        int n = 0;
+        ListNode t = head;
+        while(t!=null){
+            n++;
+            t = t.next;
+        }
+        int[] res = new int[n];
+        int i=0;
+        ListNode list = head;
+        while(list!=null && list.next!=null){
+            ListNode temp = list.next;
+            while(temp!=null){
+                if(list.val<temp.val){
+                    res[i] = temp.val;
+                    break;
+                }
+                temp = temp.next;
+            }
+            i++;
+            list = list.next;
+        }
+        return res;
+    }
+}
+```
+
+```java
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+        List<Integer> values = new ArrayList<>();
+        while (head != null) {
+            values.add(head.val);
+            head = head.next;
+        }
+        int n = values.size();
+        int[] res = new int[n];
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= values.get(i)) {
+                stack.pop();
+            }
+            if(!stack.isEmpty())
+                res[i] = stack.peek();
+            stack.push(values.get(i));
+        }
+        return res;
+    }
+}
+```
+
+## [82. Remove Duplicates from Sorted List II](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/)
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        HashSet<Integer> seen = new HashSet<>();
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode current = head;
+        while (current != null) {
+             if (current.next != null && current.val == current.next.val) {
+                while (current.next != null && current.val == current.next.val) {
+                    current = current.next;
+                }
+                prev.next = current.next;
+            } else {
+                prev = prev.next;
+            }
+            current = current.next;
+        }
+        return dummy.next;
+    }
+}
+```
+## [61. Rotate List](https://leetcode.com/problems/rotate-list/)
+```java
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || k == 0)
+            return head;
+        int n = 1;
+        ListNode tail = head;
+        while(tail.next!=null){
+            n++;
+            tail = tail.next;
+        }
+        k= k%n;
+        if(k==0 || n == 1)
+            return head;        
+        tail.next = head;
+        ListNode newTail = head;
+        for(int i = 0;i<n-k-1;i++){
+            newTail = newTail.next;
+        }
+        head = newTail.next;
+        newTail.next = null;
+        return head;
+    }
+}
+```
+## [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+```java
+class Solution {
+    public int min(TreeNode root){
+        int min = -1;
+        while(root != null){
+            min =  root.val;
+            root = root.left;
+        }
+        return min;
+    }
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null)
+            return root;
+        if(key<root.val)
+            root.left = deleteNode(root.left,key);
+        else if(key>root.val)
+            root.right = deleteNode(root.right,key);
+        else{
+            if(root.left == null && root.right == null)
+                return null;
+            else if(root.left == null)
+                return root.right;
+            else if(root.right == null)
+                return root.left;
+            else{
+                root.val = min(root.right);
+                root.right = deleteNode(root.right,root.val);
+            }
+        }
+        return root;
+
+    }
+}
+```
 ## 
 # Binary Search
 
@@ -4253,50 +4395,6 @@ class Solution {
     }
 }
 ```
-## [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode insertIntoBST(TreeNode root, int val) {
-        if( root ==  null)
-            return new TreeNode(val);
-        TreeNode ans = root;
-        while(true){
-            if(ans.val<val){
-                if(ans.right == null){
-                    ans.right = new TreeNode(val);
-                    break;
-                }
-                else
-                    ans = ans.right;
-            }
-            else{
-                if(ans.left == null){
-                    ans.left = new TreeNode(val);
-                    break;
-                }
-                else
-                    ans = ans.left;
-            }
-        }
-        return root;
-    }
-}
-```
 ## [112. Path Sum](https://leetcode.com/problems/path-sum/)
 ```java
 /**
@@ -4362,6 +4460,111 @@ class Solution {
     }
 }
 ```
+## ## [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+```java
+class Solution {
+    private TreeNode anscestor(TreeNode root, TreeNode p, TreeNode q){
+        if(root ==  null)
+            return root;
+        if(root == p || root == q)
+            return root;     
+        TreeNode left = anscestor(root.left, p, q);
+        TreeNode right = anscestor(root.right,p, q);
+        if(left != null && right != null)
+            return root;
+        else if(left == null)
+            return right;
+        else 
+            return left;
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return anscestor(root,p,q);
+    }
+}
+```
+# Binary Search Tree
+## [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if( root ==  null)
+            return new TreeNode(val);
+        TreeNode ans = root;
+        while(true){
+            if(ans.val<val){
+                if(ans.right == null){
+                    ans.right = new TreeNode(val);
+                    break;
+                }
+                else
+                    ans = ans.right;
+            }
+            else{
+                if(ans.left == null){
+                    ans.left = new TreeNode(val);
+                    break;
+                }
+                else
+                    ans = ans.left;
+            }
+        }
+        return root;
+    }
+}
+```
+
+
+## [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
+```java
+class Solution {
+    public int min(TreeNode root){
+        int min = -1;
+        while(root != null){
+            min =  root.val;
+            root = root.left;
+        }
+        return min;
+    }
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null)
+            return root;
+        if(key<root.val)
+            root.left = deleteNode(root.left,key);
+        else if(key>root.val)
+            root.right = deleteNode(root.right,key);
+        else{
+            if(root.left == null && root.right == null)
+                return null;
+            else if(root.left == null)
+                return root.right;
+            else if(root.right == null)
+                return root.left;
+            else{
+                root.val = min(root.right);
+                root.right = deleteNode(root.right,root.val);
+            }
+        }
+        return root;
+
+    }
+}
+```
+## 
 # Backtracking
 
 If Not Satisfies ,Function backtracks by removing the last element added.
