@@ -3467,41 +3467,35 @@ class Solution {
     }
 }
 ```
-## [450. Delete Node in a BST](https://leetcode.com/problems/delete-node-in-a-bst/)
-```java
-class Solution {
-    public int min(TreeNode root){
-        int min = -1;
-        while(root != null){
-            min =  root.val;
-            root = root.left;
-        }
-        return min;
-    }
-    public TreeNode deleteNode(TreeNode root, int key) {
-        if(root == null)
-            return root;
-        if(key<root.val)
-            root.left = deleteNode(root.left,key);
-        else if(key>root.val)
-            root.right = deleteNode(root.right,key);
-        else{
-            if(root.left == null && root.right == null)
-                return null;
-            else if(root.left == null)
-                return root.right;
-            else if(root.right == null)
-                return root.left;
-            else{
-                root.val = min(root.right);
-                root.right = deleteNode(root.right,root.val);
-            }
-        }
-        return root;
 
+## [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)
+```java
+ */
+class Solution {
+    private TreeNode toBst(ArrayList<Integer> list,int l,int r){
+        if(l>r)
+            return null;
+        int mid = (l+r)/2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = toBst(list,l,mid-1);
+        root.right = toBst(list,mid+1,r);
+        return root;
+    }
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null)
+            return null;
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+        while(temp!=null){
+            list.add(temp.val);
+            temp = temp.next;
+        }
+        TreeNode root = toBst(list,0,list.size()-1);
+        return root;
     }
 }
 ```
+
 ## 
 # Binary Search
 
@@ -4564,7 +4558,214 @@ class Solution {
     }
 }
 ```
+## [449. Serialize and Deserialize BST](https://leetcode.com/problems/serialize-and-deserialize-bst/)
+```java
+public class Codec {
+    StringBuilder s = new StringBuilder();
+    public String serialize(TreeNode root) {
+        Deque<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        toString(s,q,root);
+        System.out.println(s);
+        return s.toString();
+    }
+    private void toString(StringBuilder s,Deque<TreeNode> q,TreeNode root){
+        while(!q.isEmpty()){
+            TreeNode node = q.poll();
+            if(node == null){
+                s.append("#$");
+                continue;
+            }
+            s.append(node.val);
+            s.append("$");
+            q.offer(node.left);
+            q.offer(node.right);
+        }
+    }
+
+    public TreeNode deserialize(String s) {
+        if (s.equals("#$")) return null; 
+
+        String[] parts = s.split("\\$");
+        TreeNode root = new TreeNode(Integer.parseInt(parts[0]));
+        Deque<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        int i = 1; 
+        while (!q.isEmpty() && i < parts.length) {
+            TreeNode node = q.poll();
+            if (!parts[i].equals("#")) {
+                node.left = new TreeNode(Integer.parseInt(parts[i]));
+                q.offer(node.left);
+            }
+            i++; 
+            if (i < parts.length && !parts[i].equals("#")) {
+                node.right = new TreeNode(Integer.parseInt(parts[i]));
+                q.offer(node.right);
+            }
+            i++;
+        }
+        return root;
+    }
+
+}
+```
+## [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+```java
+class Solution {
+    private TreeNode toBst(int[] nums,int l,int r){
+        if(l>r)
+            return null;
+        int mid = (l+r)/2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = toBst(nums,l,mid-1);
+        root.right = toBst(nums,mid+1,r);
+        return root;
+    }
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return toBst(nums,0,nums.length-1); 
+    }
+}
+```
+## [109. Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)
+```java
+class Solution {
+    private TreeNode toBst(ArrayList<Integer> list,int l,int r){
+        if(l>r)
+            return null;
+        int mid = (l+r)/2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = toBst(list,l,mid-1);
+        root.right = toBst(list,mid+1,r);
+        return root;
+    }
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null)
+            return null;
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+        while(temp!=null){
+            list.add(temp.val);
+            temp = temp.next;
+        }
+        TreeNode root = toBst(list,0,list.size()-1);
+        return root;
+    }
+}
+```
+## [1382. Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/)
+```java
+class Solution {
+    private void dfs(List<Integer> res,TreeNode root){
+        if(root == null)   
+            return ;
+        dfs(res,root.left);
+        res.add(root.val);
+        dfs(res,root.right);
+    }
+
+    private TreeNode toBst(List<Integer> list,int l,int r){
+        if(l>r)
+            return null;
+        int mid = (l+r)/2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = toBst(list,l,mid-1);
+        root.right = toBst(list,mid+1,r);
+        return root;
+    }
+
+    public TreeNode balanceBST(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        dfs(list,root);
+        return toBst(list,0,list.size()-1);
+    }
+}
+```
 ## 
+# N-Array
+## [589. N-ary Tree Preorder Traversal](https://leetcode.com/problems/n-ary-tree-preorder-traversal/)
+```java
+class Solution {
+    public List<Integer> preorder(Node root) {
+          List<Integer> res = new ArrayList<>();
+        dfs(res,root);
+        return res;
+    }
+    private void dfs(List<Integer> res,Node root){
+        if(root == null)   
+            return ;
+        res.add(root.val);
+        for(int i = 0;i<root.children.size();i++){
+            dfs(res,root.children.get(i));
+        }
+    }
+}
+```
+## [590. N-ary Tree Postorder Traversal](https://leetcode.com/problems/n-ary-tree-postorder-traversal/)
+```java
+class Solution {
+    public List<Integer> postorder(Node root) {
+        List<Integer> res = new ArrayList<>();
+        dfs(res,root);
+        return res;
+    }
+    private void dfs(List<Integer> res,Node root){
+        if(root == null)   
+            return ;
+        for(int i = 0;i<root.children.size();i++){
+            dfs(res,root.children.get(i));
+        }        
+        res.add(root.val);
+    }
+}
+```
+## [429. N-ary Tree Level Order Traversal](https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
+```java
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <Node> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                Node curr = q.poll();
+                l1.add(curr.val);
+                for(int j = 0;j<curr.children.size();j++){
+                    q.offer(curr.children.get(j));
+                }
+            }
+            res.add(l1);
+       }
+       return res;
+    }
+}
+```
+## [559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)
+```java
+class Solution {
+    public int maxDepth(Node root) {
+          List<List<Integer>> res = new ArrayList();
+       if(root ==  null)    return 0;
+       Deque <Node> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                Node curr = q.poll();
+                l1.add(curr.val);
+                for(int j = 0;j<curr.children.size();j++){
+                    q.offer(curr.children.get(j));
+                }
+            }
+            res.add(l1);
+       }
+       return res.size();
+    }
+}
+```
 # Backtracking
 
 If Not Satisfies ,Function backtracks by removing the last element added.
