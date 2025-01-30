@@ -1,6 +1,4 @@
 ### Topic : Arrays
-
-
 ### Count of array elements divisible by specific number
 
 ```C

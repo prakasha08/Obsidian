@@ -3496,6 +3496,31 @@ class Solution {
 }
 ```
 
+## [42. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+```java
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null || head.next == null)
+            return null;
+       ListNode fast = head;
+       ListNode slow = head;
+       while(fast!=null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow ==  fast)
+               break;
+       }
+       if(fast == null || fast.next == null)
+            return null;
+        slow = head;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+}
+```
 ## 
 # Binary Search
 
@@ -4476,6 +4501,36 @@ class Solution {
     }
 }
 ```
+## [116. Populating Next Right Pointers in Each Node](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
+```java
+class Solution {
+    public Node connect(Node root) {
+       if(root ==  null)    return root;
+       Deque <Node> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            List<Integer> l1 = new ArrayList<>();
+            int size = q.size();
+            Node curr = null;
+            for(int i = 0;i<size;i++){
+                Node prev = curr;
+                curr = q.poll();
+                l1.add(curr.val);
+                if(prev != null)
+                    prev.next = curr;
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            if(curr!=null)
+                curr.next = null;
+       }
+       return root;
+    }
+}
+```
+## 
 # Binary Search Tree
 ## [701. Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
 ```java
