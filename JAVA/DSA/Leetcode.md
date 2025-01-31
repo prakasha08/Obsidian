@@ -782,10 +782,6 @@ class Solution {
     }
 }
 ```
-
-```java
-
-```
 ## [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
 ```java
  public int maximumUniqueSubarray(int[] nums) {
@@ -4479,7 +4475,7 @@ class Solution {
     }
 }
 ```
-## ## [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+## [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 ```java
 class Solution {
     private TreeNode anscestor(TreeNode root, TreeNode p, TreeNode q){
@@ -4527,6 +4523,92 @@ class Solution {
                 curr.next = null;
        }
        return root;
+    }
+}
+```
+## [515. Find Largest Value in Each Tree Row](https://leetcode.com/problems/find-largest-value-in-each-tree-row/)
+```java
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList();
+       if(root ==  null)    return res;
+       Deque <TreeNode> q =  new ArrayDeque();
+       q.offer(root);
+       while(!q.isEmpty()){
+            int max = Integer.MIN_VALUE;
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                max = Math.max(max,curr.val);
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+            res.add(max);
+       }
+       return res;
+    }
+}
+```
+## [513. Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)
+```java
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+       if(root ==  null)    return 0;
+       Deque <TreeNode> q =  new ArrayDeque();
+       TreeNode res = new TreeNode();
+       q.offer(root);
+       while(!q.isEmpty()){
+            int max = Integer.MIN_VALUE;
+            int size = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode curr = q.poll();
+                if(i == 0)
+                    res = curr;
+                if(curr.left != null)
+                    q.offer(curr.left);
+                if(curr.right != null)
+                    q.offer(curr.right);
+            }
+          }
+       return res.val;
+    }
+}
+```
+## [606. Construct String from Binary Tree](https://leetcode.com/problems/construct-string-from-binary-tree/)
+```java
+class Solution {
+    private void traverse(TreeNode root, StringBuilder s) {
+        if (root == null) {
+            s.append("()");
+            return;
+        }
+        s.append("(").append(root.val);
+        if (root.left == null && root.right == null) {
+            s.append(")");
+        } else {
+            traverse(root.left, s);
+            if (root.right != null) {
+                traverse(root.right, s);
+            }
+            s.append(")");
+        }
+    }
+
+    public String tree2str(TreeNode root) {
+        if (root == null) {
+            return "";
+        }
+        StringBuilder s = new StringBuilder();
+        s.append(root.val);
+        if (root.left != null || root.right != null) {
+            traverse(root.left, s);
+            if (root.right != null) {
+                traverse(root.right, s);
+            }
+        }
+        return s.toString();
     }
 }
 ```
