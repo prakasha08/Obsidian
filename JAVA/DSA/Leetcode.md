@@ -3541,6 +3541,48 @@ class Solution {
     }
 }
 ```
+## [2130. Maximum Twin Sum of a Linked List](https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/)
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null)
+            return head;
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+
+    public int pairSum(ListNode head) {
+        int sum = 0;
+        ListNode temp = head;
+        int n = 0;
+        while (temp != null) {
+            temp = temp.next;
+            n++;
+        }
+        ListNode l1 = head;
+        ListNode mid = head;
+        for (int i = 0; i < n / 2; i++) {
+            mid = mid.next;
+        }
+        ListNode l2 = reverseList(mid);
+        int i = 0;
+        while (i < n / 2 && l1!=null && l2!=null) {
+            sum = Math.max(l1.val + l2.val, sum);
+            l1 = l1.next;
+            l2 = l2.next;
+            i++;
+        }
+        return sum;
+    }
+}
+```
 ## 
 # Binary Search
 
