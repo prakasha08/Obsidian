@@ -3517,6 +3517,30 @@ public class Solution {
     }
 }
 ```
+## [148. Sort List](https://leetcode.com/problems/sort-list/)
+```java
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode node = head;
+        while(node != null){
+            list.add(node.val);
+            node = node.next;
+        }
+        ListNode Dummy = new ListNode(0);
+        ListNode List = Dummy;
+        Collections.sort(list);
+        System.out.print(list);
+        int i = 0;
+        while(i<list.size()){
+            List.next = new ListNode(list.get(i));
+            List = List.next;
+            i++;
+        }
+        return Dummy.next;
+    }
+}
+```
 ## 
 # Binary Search
 
@@ -3897,6 +3921,22 @@ class Solution {
             return 0;
         return 1 + countNodes(root.left) + countNodes(root.right);
     }
+}
+```
+## [110. Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
+```java
+class Solution {
+public int level(TreeNode root) {
+    if (root == null) return 0;
+    return 1 + Math.max(level(root.left), level(root.right));
+}
+
+public boolean isBalanced(TreeNode root) {
+    if (root == null) return true;
+    int leftHeight = level(root.left);
+    int rightHeight = level(root.right);
+    return Math.abs(leftHeight - rightHeight) <= 1 && isBalanced(root.left) && isBalanced(root.right);
+}
 }
 ```
 ## ** [100. Same Tree](https://leetcode.com/problems/same-tree/)
