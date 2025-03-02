@@ -14,6 +14,18 @@ class Solution {
     }
 }
 ```
+
+```java
+class Solution {
+    public int singleNumber(int[] nums) {
+        int res=0;
+        for(int num:nums){
+         res^=num;
+        }
+        return res;
+    }
+}
+```
 ## [54. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)
 ```java
 class Solution {

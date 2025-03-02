@@ -558,10 +558,8 @@ int main() {
     }
     
     printf("%d",sSum);
-    
 }
 ```
-
 ### Array chunking 
 
 ```C

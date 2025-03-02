@@ -1,4 +1,3 @@
-
 ### Topic : String 
 
 ### Print without vowels
@@ -16,8 +15,6 @@ int main() {
         }
         printf("%c",s[i]);
     }
-
-
     return 0;
 }
 ```
@@ -32,7 +29,7 @@ int main() {
     char s[100];
     fgets(s,sizeof(s),stdin);
     
-    char c1, c2,c3,c4;
+    char c1,c2,c3,c4;
     scanf("%c %c %c %c",&c1,&c2,&c3,&c4);
     printf("%c %c %c %c",c1,c2,c3,c4);
     printf("\n");
@@ -79,8 +76,7 @@ int main(){
     printf("%c %d\n",c,max);
 }
 ```
-
-### program to print the given string without any alphabet character
+### Program to print the given string without any alphabet character
 ```C
 #include<stdio.h>
 #include<string.h>
@@ -89,11 +85,9 @@ int main(){
 int main(){
     char in[1000];
     fgets(in,sizeof(in),stdin);
-    
     int ar[256];
     int max = -1;
     char c = ' ';
-    
     for(int i=0;i<strlen(in);i++){
         char ch = in[i];
         if((ch >= 'A' && ch <= 'Z')||(ch>='a'&&ch<='z')) continue;
@@ -191,7 +185,56 @@ int main(){
 }
 ```
 
+```c
+#include <stdio.h>
+#include <string.h>
 
+#define CHAR_COUNT 256  // Total ASCII characters
+
+// Function to check if two strings are anagrams
+int isAnagram(char str1[], char str2[]) {
+    int count[CHAR_COUNT] = {0};  // Frequency array
+
+    // If lengths are different, they can't be anagrams
+    if (strlen(str1) != strlen(str2)) {
+        return 0;
+    }
+
+    // Count characters in str1 and subtract from str2
+    for (int i = 0; str1[i] != '\0'; i++) {
+        count[(int)str1[i]]++;  // Increment for str1
+        count[(int)str2[i]]--;  // Decrement for str2
+    }
+
+    // If all counts are zero, they are anagrams
+    for (int i = 0; i < CHAR_COUNT; i++) {
+        if (count[i] != 0) {
+            return 0;  // Not an anagram
+        }
+    }
+    return 1;  // Anagram
+}
+
+int main() {
+    char str1[100], str2[100];
+
+    // Input strings
+    printf("Enter first string: ");
+    scanf("%s", str1);
+    printf("Enter second string: ");
+    scanf("%s", str2);
+
+    // Check if they are anagrams
+    if (isAnagram(str1, str2)) {
+        printf("The strings are anagrams.\n");
+    } else {
+        printf("The strings are NOT anagrams.\n");
+    }
+
+    return 0;
+}
+
+```
 ### Find the largest and smallest word in a string. Input: The bottle is full Output: is bottle
 
 ```C
@@ -208,7 +251,7 @@ int main() {
     int count=0;
     int max = -1;
     int maxS = 0;
-    for(int i=0;i<strlen(in);i++){
+    for(int  =0;i<strlen(in);i++){
         if(in[i] == ' ' || i+1 == strlen(in)){
             if(min > count){
                 min = count;
@@ -325,7 +368,6 @@ int main(){
     printf("%s",res);
 }
 ```
-
 ### swap adjacent character
 
 ```C
@@ -409,7 +451,7 @@ int main(){
         if(in1 == in[i]){
             printf("%c",in2);
         }
-        else if(in1 >= '0' && in2 <= '9'){
+        else if(in1 >= '0' && in1 <= '9'){
             printf("n");
         }
         else{
