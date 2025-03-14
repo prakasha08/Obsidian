@@ -1,4 +1,4 @@
- 
+
 # Collision in HashMap solved By
 In a HashMap, handling collisions (when two keys hash to the same index) is a crucial aspect. Two common methods for collision resolution are **chaining** and **open addressing**.
 

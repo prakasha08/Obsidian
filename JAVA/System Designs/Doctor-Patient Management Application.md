@@ -1,4 +1,4 @@
-### ** Class Diagram Design**
+### Class Diagram Design
 
 A **class diagram** represents the **data model** with relationships between entities.
 
@@ -110,7 +110,7 @@ public abstract class User {
     protected String name;
     protected String email;
     protected String password;
-
+    
     public User(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;

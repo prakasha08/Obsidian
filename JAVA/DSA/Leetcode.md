@@ -5702,3 +5702,55 @@ class Solution {
     }
 }
 ```
+
+## [994. Rotting Oranges](https://leetcode.com/problems/rotting-oranges/)
+```java
+class Solution {
+
+    public int orangesRotting(int[][] grid) {
+        int m = grid.length;
+        int n= grid[0].length;
+        int result = 0;
+        while(true){
+            int flag = 0;
+            int[][] visited = new  int[m][n];
+            for(int i = 0;i<m;i++){
+                for(int j = 0;j<n;j++){
+                    if(grid[i][j]==2 && visited[i][j]!=1){
+                        if(i-1>=0&&grid[i-1][j]==1){
+                            grid[i-1][j]=2;
+                            visited[i-1][j] = 1;
+                            flag = 1;
+                        }
+                        if(i+1<m&&grid[i+1][j]==1){
+                            grid[i+1][j]=2;
+                            visited[i+1][j] = 1;
+                            flag = 1;
+                        }
+                        if(j-1>=0&&grid[i][j-1]==1){
+                            grid[i][j-1]=2;
+                            visited[i][j-1] = 1;
+                            flag = 1;
+                        }
+                        if(j+1<n&&grid[i][j+1]==1){
+                            grid[i][j+1]=2;
+                            visited[i][j+1] = 1;
+                            flag = 1;
+                        }
+                    }
+                }
+            }
+            if(flag == 0)
+                break;
+            result++;
+        }
+         for(int i = 0;i<m;i++){
+                for(int j = 0;j<n;j++){
+                    if(grid[i][j]==1)
+                        return -1;
+                }
+         }
+         return result;
+    }
+}
+```
