@@ -14,16 +14,44 @@ DBMS architecture is generally classified into **1-tier, 2-tier, and 3-tier arch
 ---
 
 ## **1-Tier Architecture**
+### **Overview:**
 
+- In **1-tier architecture**, the **database and the user interface** are on the **same machine**.
+- The user directly interacts with the database without an intermediary application.
+- Mostly used for **local applications** and **database management tools**.
 - The database is directly accessible by the user.
 - Used for local application development (e.g., developers testing code on their computers).
 - No security layer between user and database.
 
-📌 **Example**: A developer using MySQL on their laptop for testing.
+📌 **Example:**
+
+- Microsoft **Access**
+- Local **SQLite databases** in mobile apps
+- A developer using **MySQL Workbench** to query a database
+
+![[Pasted image 20250319221943.png]]
+#### **Advantages:**
+
+✅ Fast and simple, as everything runs on a single machine.  
+✅ No network latency.  
+✅ Ideal for small-scale applications.
+
+#### **Disadvantages:**
+
+❌ Not suitable for multi-user environments.  
+❌ Security risks due to direct access to the database.  
+❌ Poor scalability.
 
 ---
 
 ## **2-Tier Architecture**
+### **Overview:**
+
+- In **2-tier architecture**, the application (client) and database (server) are separate.
+- The **client application** sends queries to the **database server**, which processes and returns results.
+- Communication happens using **ODBC (Open Database Connectivity)** or **JDBC (Java Database Connectivity)**.
+
+![[Pasted image 20250319222138.png]]
  ![[Pasted image 20250305095416.png]]
 - Introduces an **Application Layer** between the user and the DBMS.
 - The application acts as a bridge, sending user requests to the database and returning results.
@@ -62,12 +90,35 @@ Imagine you have a **Microsoft Excel sheet** that needs to pull data from a **My
 
 - **JDBC (Java Database Connectivity)** is an API used in Java applications to interact with databases.
 - **PDO (PHP Data Objects)** is an API in PHP to connect to databases.
+### **Example:**
 
-🔹 **API Benefits:**  
-✅ **Faster** than ODBC (because it’s optimized for the specific database).  
-✅ Offers **more control** over database functions.  
-✅ Can support **advanced database features** that ODBC may not handle. 
+- A **Java application** using JDBC to connect to a **MySQL database**.
+- **Banking systems**, where the **ATM** (client) interacts with the **bank database** (server).
+
+### **Structure:**
+
+📌 **Client (User Interface & Business Logic)** ⟶ **Database Server**
+
+### **Advantages:**
+
+✅ Improved **security** (database is separate).  
+✅ **Better performance** compared to 1-tier.  
+✅ Can support **multiple users**.
+
+### **Disadvantages:**
+
+❌ Requires **network communication**, causing some latency.  
+❌ Harder to scale than 3-tier architecture.
 ## **3-Tier Architecture (Most Common in Web Applications)**
+### **Overview:**
+
+- In **3-tier architecture**, there are **three separate layers**:
+    1. **Presentation Layer (Client)** – User interacts through a **web browser or mobile app**.
+    2. **Application Layer (Server)** – Processes business logic and communicates with the database.
+    3. **Database Layer** – Stores data and processes queries.
+- Commonly used in **web applications and enterprise systems**.
+
+![[Pasted image 20250319222453.png]]
 ![[Pasted image 20250305095513.png]]
 
 - Extends the **2-tier architecture** by adding a **Presentation Layer (GUI Layer)**.
@@ -86,6 +137,26 @@ Imagine you have a **Microsoft Excel sheet** that needs to pull data from a **My
 1. **Presentation Layer (GUI Layer)** – User interface (website, mobile app).
 2. **Application Layer (Logic Layer)** – Handles business logic and communicates with the database.
 3. **Database Layer** – Stores and retrieves data.
+### **Example:**
+
+- **E-commerce websites** like Amazon.
+- **Social media platforms** like Facebook.
+- A **React frontend** ⟶ **Node.js backend** ⟶ **MongoDB database**.
+
+### **Structure:**
+
+📌 **Client (User Interface - Browser/App)** ⟶ **Application Server (Processes requests, Business Logic)** ⟶ **Database Server**
+
+### **Advantages:**
+
+✅ **Highly scalable** (can handle many users).  
+✅ **More secure** (database is not directly exposed).  
+✅ **Easier to maintain and update**.
+
+### **Disadvantages:**
+
+❌ **More complex** than 1-tier and 2-tier.  
+❌ Requires **networking and additional infrastructure**.
 
 ---
 

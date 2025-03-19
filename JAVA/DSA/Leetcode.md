@@ -1035,6 +1035,27 @@ class Solution {
         }
     }
 ```
+
+```java
+public List<Integer> findAnagrams(String s, String p) {
+        int[] pFreq = new int[26], sFreq = new int[26];
+        List<Integer> res = new ArrayList<>();
+
+        for (char c : p.toCharArray()) pFreq[c - 'a']++; // Store p frequency
+
+        for (int i = 0; i < s.length(); i++) {
+            sFreq[s.charAt(i) - 'a']++; // Add character to window
+
+            if (i >= p.length() - 1) { // Window reaches size of p
+                if (Arrays.equals(sFreq, pFreq)) res.add(i - p.length() + 1);
+                
+                sFreq[s.charAt(i - p.length() + 1) - 'a']--; // Remove leftmost
+            }
+        }
+        return res;
+    }
+}
+```
 ## [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 ```java
 class Solution {

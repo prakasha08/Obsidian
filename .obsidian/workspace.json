@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "97bc22360669e07f",
+        "id": "d6c2286e42506041",
         "type": "tabs",
         "children": [
           {
-            "id": "aaaf81b5584b77f2",
+            "id": "8ceffe9a9a84803e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "JAVA/System Designs/Doctor-Patient Management Application.md",
+                "file": "DBMS/Database Models.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Doctor-Patient Management Application"
+              "title": "Database Models"
             }
           }
         ],
@@ -54,7 +54,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "  ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -165,10 +165,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "aaaf81b5584b77f2",
+  "active": "8ceffe9a9a84803e",
   "lastOpenFiles": [
-    "JAVA/DSA/Leetcode.md",
+    "DBMS/DBMS Architecture.md",
     "DBMS/Database Models.md",
+    "Pasted image 20250319222453.png",
+    "Pasted image 20250319222138.png",
+    "Pasted image 20250319221943.png",
+    "JAVA/DSA/Leetcode.md",
+    "SQL/Basics.md",
+    "SQL/Functions.md",
+    "BASICS.pdf",
+    "JS/OOPs in JS.md",
+    "JAVA/OOPs/Chess Game Using OOPs.md",
+    "JAVA/System Designs/Doctor-Patient Management Application.md",
     "Pasted image 20250305102547.png",
     "Pasted image 20250305102544.png",
     "Pasted image 20250305102538.png",
@@ -180,21 +190,13 @@
     "PS/Level 4.md",
     "PS/Level 3.md",
     "PHP/Basics.md",
-    "JS/OOPs in JS.md",
     "JS/BASICS.md",
-    "JAVA/System Designs/Doctor-Patient Management Application.md",
     "HTML & CSS/BASICS.md",
-    "DBMS/DBMS Architecture.md",
-    "Pasted image 20250305095513.png",
-    "Pasted image 20250305095416.png",
-    "SQL/Basics.md",
     "Untitled.md",
     "DBMS",
-    "BASICS.pdf",
     "JAVA/DSA/Map.md",
     "OS/System Calls.md",
     "OS/Deadlock.md",
-    "Pasted image 20250302213213.png",
     "OS/Synchronization.md",
     "OS/State of Process.md",
     "OS/Scheduling & Schedulers.md",
@@ -204,8 +206,6 @@
     "JAVA/Overall/BASICS.md",
     "JAVA/System Designs",
     "JAVA/Untitled.md",
-    "JAVA/OOPs/About Thread-Safety.md",
-    "JAVA/OOPs/Chess Game Using OOPs.md",
     "JAVA/java1.pdf",
     "Level 3.pdf",
     "OOPs in Java.pdf",

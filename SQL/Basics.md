@@ -258,6 +258,156 @@ INNER JOIN departments AS d ON e.department_id = d.id;
 Using `e` as an alias for `employees` and `d` for `departments` makes the query shorter and more readable.
 
 
+### **CASE Statement in SQL**
+
+The `CASE` statement in SQL is used for conditional logic within SQL queries. It works like an `IF-ELSE` statement in programming languages. You can use it to return different values based on conditions.
+
+---
+
+#### **Syntax of CASE**
+
+There are two main types of `CASE` expressions in SQL:
+
+#### **1. Simple CASE Expression**
+
+This compares a column or expression against multiple values and returns a result.
+
+```sql
+CASE column_name
+    WHEN value1 THEN result1
+    WHEN value2 THEN result2
+    ELSE default_result
+END
+```
+
+#### **2. Searched CASE Expression**
+
+This evaluates multiple conditions and returns a result based on the first `TRUE` condition.
+
+```sql
+CASE 
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ELSE default_result
+END
+```
+
+---
+
+#### **Examples**
+
+#### **Example 1: Using Simple CASE**
+
+Let's say we have a `students` table:
+
+|student_id|name|grade|
+|---|---|---|
+|1|Alex|A|
+|2|Bob|B|
+|3|Chris|C|
+|4|David|A|
+
+We want to classify students based on their grades:
+
+```sql
+SELECT name, grade,
+    CASE grade
+        WHEN 'A' THEN 'Excellent'
+        WHEN 'B' THEN 'Good'
+        WHEN 'C' THEN 'Average'
+        ELSE 'Needs Improvement'
+    END AS performance
+FROM students;
+```
+
+**Output:**
+
+|name|grade|performance|
+|---|---|---|
+|Alex|A|Excellent|
+|Bob|B|Good|
+|Chris|C|Average|
+|David|A|Excellent|
+
+---
+
+#### **Example 2: Using Searched CASE**
+
+Suppose we have an `employees` table:
+
+|emp_id|name|salary|
+|---|---|---|
+|1|Alice|90000|
+|2|Bob|75000|
+|3|Charlie|50000|
+|4|David|30000|
+
+We want to categorize employees based on their salary:
+
+```sql
+SELECT name, salary,
+    CASE 
+        WHEN salary >= 80000 THEN 'High Salary'
+        WHEN salary >= 50000 THEN 'Medium Salary'
+        ELSE 'Low Salary'
+    END AS salary_category
+FROM employees;
+```
+
+**Output:**
+
+|name|salary|salary_category|
+|---|---|---|
+|Alice|90000|High Salary|
+|Bob|75000|Medium Salary|
+|Charlie|50000|Medium Salary|
+|David|30000|Low Salary|
+
+---
+
+#### **Using CASE in ORDER BY**
+
+You can also use `CASE` in `ORDER BY` to define custom sorting:
+
+```sql
+SELECT name, grade
+FROM students
+ORDER BY 
+    CASE grade 
+        WHEN 'A' THEN 1
+        WHEN 'B' THEN 2
+        WHEN 'C' THEN 3
+        ELSE 4
+    END;
+```
+
+This sorts `A` grades first, then `B`, then `C`.
+
+---
+
+#### **Using CASE in UPDATE**
+
+You can use `CASE` in an `UPDATE` statement:
+
+```sql
+UPDATE employees
+SET salary = 
+    CASE 
+        WHEN salary < 40000 THEN salary + 5000
+        WHEN salary BETWEEN 40000 AND 70000 THEN salary + 3000
+        ELSE salary + 2000
+    END;
+```
+
+This increases salary based on different conditions.
+
+---
+
+#### **Conclusion**
+
+- `CASE` helps in conditional logic inside SQL queries.
+- It works in `SELECT`, `ORDER BY`, `UPDATE`, and `WHERE` clauses.
+- It is similar to `IF-ELSE` statements in programming.
 
 ### **1. Inner Joins**
 
