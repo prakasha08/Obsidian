@@ -1315,11 +1315,7 @@ class Solution {
             int N = num % 1000;
             String s1 = getstring(N);
             if(N!=0){
-                if (!s1.isEmpty()) {
                   s.append(s1).append(post[i]).append(" ").append(Part);
-                }else{
-                    s.append(s1).append(post[i]);
-                }
                 Part=s.toString().trim();
                 s.delete(0,s.length());
             }
