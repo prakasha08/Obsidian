@@ -14,7 +14,6 @@ A **Database Model** is like a **blueprint** that defines how data is **organize
 		
 ![[Pasted image 20250305102454.png]]This model arranges data in a **tree-like structure**, similar to a **family tree**.
 Each record (data entry) has a **single parent** but can have **multiple children**.
-
 ### **Example:**
 
 A **school database** where:
@@ -81,9 +80,8 @@ Integrated Data Store (**IDS**).
 
 ![[Pasted image 20250305102527.png]]
 
-This model represents **real-world objects** as **entities** and their connections as **relationships**.  
+This model represents **real-world objects** as **entities** and their connections as **relationships**. 
 It is mostly used in **database design** before implementing a relational database.
-
 ### **Example:**
 
 A **hospital database** where:
@@ -262,15 +260,15 @@ A **social network database** where:
 
 ## **Summary Table of Database Models**
 
-|Database Model|Structure|Best Use Case|Advantages|Disadvantages|
-|---|---|---|---|---|
-|**Hierarchical**|Tree|Organizational charts, File Systems|Fast data access|No many-to-many relationships|
-|**Network**|Graph|Complex relationships (University, Banking)|Supports many-to-many|Hard to maintain|
-|**ER Model**|Entities & Relationships|Designing databases|Easy to visualize|Needs conversion to relational|
-|**Relational**|Tables|Banking, E-commerce|SQL support, easy to use|Slow for large-scale data|
-|**Object-Oriented**|Objects|Multimedia, CAD systems|Supports complex data types|Not widely used|
-|**NoSQL**|Documents/Key-Value|Big data, Real-time applications|Scalable, high performance|Limited querying|
-|**Graph**|Nodes & Edges|Social Networks, Recommendations|Best for complex relationships|Expensive|
+| Database Model      | Structure                | Best Use Case                               | Advantages                     | Disadvantages                  |
+| ------------------- | ------------------------ | ------------------------------------------- | ------------------------------ | ------------------------------ |
+| **Hierarchical**    | Tree                     | Organizational charts, File Systems         | Fast data access               | No many-to-many relationships  |
+| **Network**         | Graph                    | Complex relationships (University, Banking) | Supports many-to-many          | Hard to maintain               |
+| **ER Model**        | Entities & Relationships | Designing databases                         | Easy to visualize              | Needs conversion to relational |
+| **Relational**      | Tables                   | Banking, E-commerce                         | SQL support, easy to use       | Slow for large-scale data      |
+| **Object-Oriented** | Objects                  | Multimedia, CAD systems                     | Supports complex data types    | Not widely used                |
+| **NoSQL**           | Documents/Key-Value      | Big data, Real-time applications            | Scalable, high performance     | Limited querying               |
+| **Graph**           | Nodes & Edges            | Social Networks, Recommendations            | Best for complex relationships | Expensive                      |
 
 ---
 ### **Comparison Table (Including ER Model)**

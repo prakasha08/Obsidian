@@ -115,6 +115,136 @@ SELECT * FROM employees WHERE department IN ('Sales', 'Marketing', 'IT');
 
 Returns employees working in either Sales, Marketing, or IT.
 
+### 🔹 `ANY` Operator
+
+The `ANY` keyword compares a value to **any value in a list or subquery** — meaning **"at least one"** must match the condition.
+
+### ✅ Syntax:
+
+sql
+
+CopyEdit
+
+`<value> <operator> ANY (<subquery>)`
+
+### ✅ Meaning:
+
+It returns `TRUE` if the comparison is `TRUE` **for at least one** value in the subquery.
+
+### 📌 Example 1: Using `ANY` with `>`
+
+**Question**: Find employees who earn **more than at least one** employee in department 30.
+
+sql
+
+CopyEdit
+
+`SELECT name FROM employees WHERE salary > ANY (     SELECT salary     FROM employees     WHERE department_id = 30 );`
+
+🔍 **What happens**:
+
+- The subquery fetches all salaries in department 30.
+    
+- The outer query finds employees whose salary is **greater than at least one** of those salaries.
+    
+
+---
+
+### 🔹 `ALL` Operator
+
+The `ALL` keyword compares a value to **every value** in a list or subquery — meaning **"must satisfy the condition for all values"**.
+
+#### ✅ Syntax:
+
+sql
+
+CopyEdit
+
+`<value> <operator> ALL (<subquery>)`
+
+#### ✅ Meaning:
+
+It returns `TRUE` if the comparison is `TRUE` **for every** value in the subquery.
+
+#### 📌 Example 2: Using `ALL` with `>`
+
+**Question**: Find employees who earn **more than every** employee in department 30.
+
+sql
+
+CopyEdit
+
+`SELECT name FROM employees WHERE salary > ALL (     SELECT salary     FROM employees     WHERE department_id = 30 );`
+
+🔍 **What happens**:
+
+- The subquery fetches all salaries in department 30.
+    
+- The outer query finds employees whose salary is **greater than the highest** salary from that list.
+    
+
+---
+
+### 🔁 Comparison: `ANY` vs `ALL`
+
+| Operator | Means…               | Returns TRUE if…                                     |
+| -------- | -------------------- | ---------------------------------------------------- |
+| `ANY`    | At least one matches | **One or more** values in subquery satisfy condition |
+| `ALL`    | All must match       | **Every** value in subquery satisfies condition      |
+
+---
+
+#### 📌 More Examples
+
+#### Using `= ANY` (same as `IN`)
+
+sql
+
+CopyEdit
+
+`SELECT name FROM employees WHERE department_id = ANY (10, 20, 30);`
+
+🔸 This works like:
+
+sql
+
+CopyEdit
+
+`WHERE department_id IN (10, 20, 30);`
+
+---
+
+#### Using `!= ALL` (not equal to all → i.e., different from every value)
+
+sql
+
+CopyEdit
+
+`SELECT name FROM employees WHERE department_id != ALL (10, 20, 30);`
+
+🔸 This means: department_id is **not equal to 10, 20, or 30** — different from **every** listed value.
+
+---
+
+#### ⚠️ Things to Note
+
+- If the subquery returns **no rows**, then:
+    
+    - `x > ANY (empty)` → `FALSE`
+        
+    - `x > ALL (empty)` → `TRUE` (vacuously true)
+        
+- Use `ALL` carefully — it’s **stricter** than `ANY`.
+    
+
+---
+
+#### 💡 Tip
+
+| Use `ANY` when:                                                          | Use `ALL` when:                                     |
+| ------------------------------------------------------------------------ | --------------------------------------------------- |
+| You want to check if a value is greater/less than **any** value in a set | You want to check if it’s greater/less than **all** |
+| You're okay if **one** match works                                       | You need it to satisfy **all**                      |
 ### 9. `BETWEEN`
 
 `BETWEEN` selects values within a specific range, including both endpoints.
@@ -135,6 +265,15 @@ SELECT * FROM employees WHERE salary > 3000 AND salary < 6000;
 
 ### 10. `LIKE`
 
+| LIKE Operator                | Description                                                                  |
+| ---------------------------- | ---------------------------------------------------------------------------- |
+| WHERE first_name LIKE 'a%'   | Finds any values that start with "a"                                         |
+| WHERE first_name LIKE '%a'   | Finds any values that end with "a"                                           |
+| WHERE first_name LIKE '%or%' | Finds any values that have "or" in any position                              |
+| WHERE first_name LIKE '_r%'  | Finds any values that have "r" in the second position                        |
+| WHERE first_name LIKE 'a_%'  | Finds any values that start with "a" and are at least 2 characters in length |
+| WHERE first_name LIKE 'a__%' | Finds any values that start with "a" and are at least 3 characters in length |
+| WHERE first_name LIKE 'a%o'  | Finds any values that start with "a" and ends with "o"                       |
 `LIKE` is used for pattern matching. It works with the `%` and `_` wildcards:
 
 - `%` matches any sequence of characters (including none).
@@ -257,6 +396,288 @@ INNER JOIN departments AS d ON e.department_id = d.id;
 
 Using `e` as an alias for `employees` and `d` for `departments` makes the query shorter and more readable.
 
+
+### `COALESCE()`
+The `COALESCE()` function in SQL is used to **return the first non-NULL value** from a list of expressions.
+
+---
+
+#### 🔹 Syntax
+
+```sql
+COALESCE(value1, value2, ..., valueN)
+```
+
+- It checks values from left to right.
+    
+- It returns the **first value that is NOT NULL**.
+    
+- If **all values are NULL**, it returns `NULL`.
+    
+
+---
+
+#### ✅ Example 1: Basic Usage
+
+```sql
+SELECT COALESCE(NULL, NULL, 'Hello', 'World');
+```
+
+🔹 **Output**:
+
+```
+Hello
+```
+
+🧠 Explanation: It returns `'Hello'` because it's the **first non-NULL** value.
+
+---
+
+#### ✅ Example 2: Handling NULL in Columns
+
+Assume a `students` table:
+
+|id|name|nickname|
+|---|---|---|
+|1|Alice|NULL|
+|2|Bob|Bobby|
+|3|Charlie|NULL|
+
+You want to show the `nickname` if it exists, otherwise the `name`:
+
+```sql
+SELECT COALESCE(nickname, name) AS display_name
+FROM students;
+```
+
+🔹 **Result**:
+
+|display_name|
+|---|
+|Alice|
+|Bobby|
+|Charlie|
+
+---
+
+#### ✅ Example 3: With Default Values
+
+If a `salary` is NULL, show `0` instead:
+
+```sql
+SELECT name, COALESCE(salary, 0) AS salary
+FROM employees;
+```
+
+---
+
+#### ✅ Example 4: With Multiple Fallbacks
+
+```sql
+SELECT COALESCE(NULL, NULL, NULL, 'Fallback', 'Other');
+```
+
+🔹 Returns: `'Fallback'`
+
+---
+
+#### 🔁 COALESCE vs ISNULL vs IFNULL
+
+|Function|DB Systems Supported|Description|
+|---|---|---|
+|`COALESCE`|✅ ANSI SQL Standard|Returns first non-NULL from a list|
+|`ISNULL(x, y)`|SQL Server only|Returns `x` if not NULL, else `y`|
+|`IFNULL(x, y)`|MySQL only|Same as ISNULL|
+
+---
+
+#### 💡 Use Cases
+
+|Use Case|Example|
+|---|---|
+|Replace NULL with default|`COALESCE(address, 'Not Provided')`|
+|Prioritize multiple optional fields|`COALESCE(email, phone, 'No Contact Info')`|
+|Avoid NULL in calculations|`price * COALESCE(discount, 1)`|
+
+---
+
+#### ⚠️ Notes
+
+- All expressions in `COALESCE` should be of **compatible data types**.
+    
+- It stops evaluating as soon as it finds the **first non-NULL**.
+
+### String Functions
+
+---
+
+## ✅ 1. `CONCAT()` – Join Strings Together
+
+### 🔹 Purpose:
+
+Used to **combine two or more strings** into one.
+
+### ✅ Syntax:
+
+```sql
+CONCAT(string1, string2, ..., stringN)
+```
+
+### ✅ Example:
+
+```sql
+SELECT CONCAT('Hello', ' ', 'World') AS result;
+```
+
+🔸 **Output:**
+
+```
+Hello World
+```
+
+---
+
+### 📌 Real Table Example:
+
+Assume a table `students`:
+
+|first_name|last_name|
+|---|---|
+|Alice|Johnson|
+|Bob|Smith|
+
+```sql
+SELECT CONCAT(first_name, ' ', last_name) AS full_name
+FROM students;
+```
+
+🔸 **Result:**
+
+|full_name|
+|---|
+|Alice Johnson|
+|Bob Smith|
+
+---
+
+## ✅ 2. `LEN()` / `LENGTH()` – Get String Length
+
+### 🔹 Purpose:
+
+Returns the **number of characters** in a string.
+
+> ✅ Note:
+> 
+> - `LEN()` is used in **SQL Server**
+>     
+> - `LENGTH()` is used in **MySQL, PostgreSQL, SQLite**
+>     
+
+### ✅ Syntax (SQL Server):
+
+```sql
+SELECT LEN('Hello') AS len;
+```
+
+🔸 Output:
+
+```
+5
+```
+
+### ✅ Syntax (MySQL, PostgreSQL):
+
+```sql
+SELECT LENGTH('Hello') AS len;
+```
+
+---
+
+### 📌 Real Table Example:
+
+```sql
+SELECT name, LEN(name) AS name_length
+FROM employees;
+```
+
+---
+
+## ✅ 3. `UPPER()` – Convert to Uppercase
+
+### 🔹 Purpose:
+
+Converts **all characters** of a string to **uppercase**.
+
+### ✅ Syntax:
+
+```sql
+SELECT UPPER('hello world') AS upper_text;
+```
+
+🔸 Output:
+
+```
+HELLO WORLD
+```
+
+---
+
+### 📌 Real Table Example:
+
+```sql
+SELECT UPPER(first_name) AS upper_name
+FROM students;
+```
+
+|first_name|upper_name|
+|---|---|
+|Alice|ALICE|
+|Bob|BOB|
+
+---
+
+## ✅ 4. `LOWER()` – Convert to Lowercase
+
+### 🔹 Purpose:
+
+Converts **all characters** of a string to **lowercase**.
+
+### ✅ Syntax:
+
+```sql
+SELECT LOWER('HELLO WORLD') AS lower_text;
+```
+
+🔸 Output:
+
+```
+hello world
+```
+
+---
+
+### 📌 Real Table Example:
+
+```sql
+SELECT LOWER(email) AS clean_email
+FROM users;
+```
+
+---
+
+## ✅ Summary Table
+
+|Function|Description|Example|Output|
+|---|---|---|---|
+|`CONCAT()`|Joins strings|`CONCAT('A', 'B')`|`'AB'`|
+|`LEN()`|Length of string (SQL Server)|`LEN('Hello')`|`5`|
+|`LENGTH()`|Length of string (MySQL/PostgreSQL)|`LENGTH('Hello')`|`5`|
+|`UPPER()`|Converts to uppercase|`UPPER('hello')`|`'HELLO'`|
+|`LOWER()`|Converts to lowercase|`LOWER('HELLO')`|`'hello'`|
+
+---
+
+Let me know if you want examples with `WHERE`, `GROUP BY`, or `CASE` using these functions!
 
 ### **CASE Statement in SQL**
 
@@ -441,7 +862,7 @@ ON db1.customers.customer_id = db2.orders.customer_id;
 ```
 
 - Joins the `customers` table in `db1` with the `orders` table in `db2`.
-
+![[Pasted image 20250618224345.png]]
 ---
 
 ### **🔹 LEFT JOIN in SQL (with a Clear Example)**
@@ -723,6 +1144,8 @@ A **CROSS JOIN** produces a **Cartesian Product** of two tables, meaning **each 
 
 ---
 
+
+
 ## **🔹 Example Scenario: University Database**
 
 Consider two tables:
@@ -985,7 +1408,172 @@ Would you like an example where `UNION` is used with additional filtering? 🚀
 
 ---
 
-## ** GROUP BY – What is it?**
+## Aggregate Function
+
+### ✅ What Are Aggregate Functions in SQL?
+
+**Aggregate functions** perform a **calculation on a set of values** and return a **single summary value**.
+
+They are often used with `GROUP BY` or in queries to get totals, averages, counts, etc.
+
+---
+
+### 🔸 Common Aggregate Functions
+
+|Function|Description|
+|---|---|
+|`COUNT()`|Counts rows|
+|`SUM()`|Adds up numeric values|
+|`AVG()`|Calculates average of numeric values|
+|`MIN()`|Finds the smallest (minimum) value|
+|`MAX()`|Finds the largest (maximum) value|
+
+---
+
+### 🔹 1. `COUNT()` – Count Rows
+
+#### ✅ Example:
+
+```sql
+SELECT COUNT(*) FROM employees;
+```
+
+🔸 Counts **all rows** in the `employees` table.
+
+---
+
+#### ✅ With a condition:
+
+```sql
+SELECT COUNT(*) 
+FROM employees 
+WHERE department = 'Sales';
+```
+
+🔸 Counts only employees in the Sales department.
+
+---
+
+### 🔹 2. `SUM()` – Total of Column
+
+#### ✅ Example:
+
+```sql
+SELECT SUM(salary) 
+FROM employees;
+```
+
+🔸 Returns the total salary paid to all employees.
+
+---
+
+### 🔹 3. `AVG()` – Average Value
+
+#### ✅ Example:
+
+```sql
+SELECT AVG(salary) 
+FROM employees;
+```
+
+🔸 Gives the **average salary** of all employees.
+
+---
+
+### 🔹 4. `MIN()` and `MAX()` – Lowest & Highest
+
+#### ✅ Example:
+
+```sql
+SELECT MIN(salary), MAX(salary) 
+FROM employees;
+```
+
+🔸 Shows:
+
+- The **lowest salary** in the company
+    
+- The **highest salary**
+    
+
+---
+
+#### 🔸 Using `GROUP BY` with Aggregate Functions
+
+You can use `GROUP BY` to get aggregate values **per group**.
+
+#### 🧾 Example Table: `employees`
+
+|id|name|department|salary|
+|---|---|---|---|
+|1|Alice|HR|30000|
+|2|Bob|IT|50000|
+|3|Jane|HR|35000|
+|4|Mark|IT|60000|
+
+---
+
+#### ✅ Query: Average Salary Per Department
+
+```sql
+SELECT department, AVG(salary)
+FROM employees
+GROUP BY department;
+```
+
+🔸 Output:
+
+|department|avg(salary)|
+|---|---|
+|HR|32500|
+|IT|55000|
+
+---
+
+### 🔸 Filtering Aggregates with `HAVING`
+
+Use `HAVING` to filter **after aggregation** (not `WHERE`).
+
+#### ✅ Query: Departments with average salary > 40000
+
+```sql
+SELECT department, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY department
+HAVING AVG(salary) > 40000;
+```
+
+---
+
+### ✅ Summary Table
+
+|Function|Purpose|Example|
+|---|---|---|
+|`COUNT()`|Count rows|`COUNT(*)` or `COUNT(column)`|
+|`SUM()`|Add values|`SUM(price)`|
+|`AVG()`|Average of values|`AVG(score)`|
+|`MIN()`|Smallest value|`MIN(age)`|
+|`MAX()`|Largest value|`MAX(salary)`|
+
+---
+
+### 🧠 Notes
+
+- `COUNT(*)` counts **all rows**, even if there are NULLs.
+    
+- `COUNT(column)` ignores **NULL values**.
+    
+- `AVG()`, `SUM()` work only on numeric data.
+    
+- Combine with `GROUP BY` to get per-group summaries.
+    
+- Use `HAVING` to filter groups **after aggregation**.
+    
+
+---
+
+Would you like some **practice problems**, or a **visual example** using real data?
+## GROUP BY – What is it?
 
 **`GROUP BY`** is used to **group rows** that have the same values in a specified column. After grouping, we can use **aggregate functions** like `COUNT()`, `SUM()`, `AVG()`, `MAX()`, `MIN()`, etc., to perform calculations on each group.
 
@@ -1187,6 +1775,169 @@ HAVING SUM(total_amount) > 500;
 
 ---
 
+## **** Aggregate function ** 
+#### ✅ What Are Aggregate Functions in SQL?
+
+**Aggregate functions** perform a **calculation on a set of values** and return a **single summary value**.
+
+They are often used with `GROUP BY` or in queries to get totals, averages, counts, etc.
+
+---
+
+#### 🔸 Common Aggregate Functions
+
+|Function|Description|
+|---|---|
+|`COUNT()`|Counts rows|
+|`SUM()`|Adds up numeric values|
+|`AVG()`|Calculates average of numeric values|
+|`MIN()`|Finds the smallest (minimum) value|
+|`MAX()`|Finds the largest (maximum) value|
+
+---
+
+#### 🔹 1. `COUNT()` – Count Rows
+
+### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT COUNT(*) FROM employees;`
+
+🔸 Counts **all rows** in the `employees` table.
+
+---
+
+### ✅ With a condition:
+
+sql
+
+CopyEdit
+
+`SELECT COUNT(*)  FROM employees  WHERE department = 'Sales';`
+
+🔸 Counts only employees in the Sales department.
+
+---
+
+#### 🔹 2. `SUM()` – Total of Column
+
+### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT SUM(salary)  FROM employees;`
+
+🔸 Returns the total salary paid to all employees.
+
+---
+
+#### 🔹 3. `AVG()` – Average Value
+
+#### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT AVG(salary)  FROM employees;`
+
+🔸 Gives the **average salary** of all employees.
+
+---
+
+#### 🔹 4. `MIN()` and `MAX()` – Lowest & Highest
+
+#### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT MIN(salary), MAX(salary)  FROM employees;`
+
+🔸 Shows:
+
+- The **lowest salary** in the company
+    
+- The **highest salary**
+    
+
+---
+
+#### 🔸 Using `GROUP BY` with Aggregate Functions
+
+You can use `GROUP BY` to get aggregate values **per group**.
+
+#### 🧾 Example Table: `employees`
+
+|id|name|department|salary|
+|---|---|---|---|
+|1|Alice|HR|30000|
+|2|Bob|IT|50000|
+|3|Jane|HR|35000|
+|4|Mark|IT|60000|
+
+---
+
+#### ✅ Query: Average Salary Per Department
+
+sql
+
+CopyEdit
+
+`SELECT department, AVG(salary) FROM employees GROUP BY department;`
+
+🔸 Output:
+
+|department|avg(salary)|
+|---|---|
+|HR|32500|
+|IT|55000|
+
+---
+
+#### 🔸 Filtering Aggregates with `HAVING`
+
+Use `HAVING` to filter **after aggregation** (not `WHERE`).
+
+#### ✅ Query: Departments with average salary > 40000
+
+sql
+
+CopyEdit
+
+`SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department HAVING AVG(salary) > 40000;`
+
+---
+
+#### ✅ Summary Table
+
+|Function|Purpose|Example|
+|---|---|---|
+|`COUNT()`|Count rows|`COUNT(*)` or `COUNT(column)`|
+|`SUM()`|Add values|`SUM(price)`|
+|`AVG()`|Average of values|`AVG(score)`|
+|`MIN()`|Smallest value|`MIN(age)`|
+|`MAX()`|Largest value|`MAX(salary)`|
+
+---
+
+#### 🧠 Notes
+
+- `COUNT(*)` counts **all rows**, even if there are NULLs.
+    
+- `COUNT(column)` ignores **NULL values**.
+    
+- `AVG()`, `SUM()` work only on numeric data.
+    
+- Combine with `GROUP BY` to get per-group summaries.
+    
+- Use `HAVING` to filter groups **after aggregation**.
 ## **🎯 Quick Practice Questions**
 
 Try these queries to test your understanding:
@@ -1564,3 +2315,248 @@ SOURCE /path/to/backup.sql;
 ---
 
 Let me know if you want deeper explanations or further examples for any specific topic!
+
+# **Window Function**
+## ✅ What Is a Window Function?
+
+A **window function** performs a **calculation across a set of table rows that are somehow related to the current row**, without collapsing the rows like `GROUP BY` does.
+
+🔹 It **does not group or reduce** the number of rows — instead, it returns a **value for each row** based on a **"window" (a subset of rows)**.
+
+---
+
+## 🧠 Syntax of Window Function
+
+sql
+
+CopyEdit
+
+`<function_name>() OVER (     [PARTITION BY column]     [ORDER BY column]     [ROWS ...] )`
+
+---
+
+## 📌 Most Common Window Functions
+
+|Function|Purpose|
+|---|---|
+|`ROW_NUMBER()`|Assigns a unique row number|
+|`RANK()`|Gives rank with gaps|
+|`DENSE_RANK()`|Gives rank without gaps|
+|`NTILE(N)`|Divides rows into N equal groups|
+|`SUM()`|Running or partitioned sum|
+|`AVG()`|Running or partitioned average|
+|`LEAD()`|Get next row’s value|
+|`LAG()`|Get previous row’s value|
+
+---
+
+## 🎯 Sample Table: `sales`
+
+Imagine we have this table:
+
+| id | employee | department | sales |
+| -- | -------- | ---------- | ----- |
+| 1  | Alice    | A          | 500   |
+| 2  | Bob      | A          | 300   |
+| 3  | Carol    | B          | 800   |
+| 4  | Dave     | A          | 700   |
+| 5  | Erin     | B          | 600   |
+
+---
+
+## 🔸 1. `ROW_NUMBER()` – Unique number per row (per group)
+
+```sql
+SELECT employee, department, sales,
+  ROW_NUMBER() OVER (PARTITION BY department ORDER BY sales DESC) AS row_num
+FROM sales;
+```
+
+📌 This assigns a **unique number** starting from 1 **within each department**, based on `sales DESC`.
+
+### 🧾 Output:
+
+| employee | department | sales | row\_num |
+| -------- | ---------- | ----- | -------- |
+| Dave     | A          | 700   | 1        |
+| Alice    | A          | 500   | 2        |
+| Bob      | A          | 300   | 3        |
+| Carol    | B          | 800   | 1        |
+| Erin     | B          | 600   | 2        |
+
+---
+
+### What are `RANK()` and `DENSE_RANK()`?
+
+Both are **window functions** used to assign a rank to each row within a partition of a result set based on a specific column order (typically used with `ORDER BY` inside `OVER()`).
+
+- **`RANK()`**: Gives **gaps** in ranking when there are ties.
+    
+- **`DENSE_RANK()`**: Gives **no gaps**—ranks increase consecutively even if there are ties.
+    
+
+---
+
+### 🔸 Example Table: `Sales`
+
+|Employee|Region|Sales|
+|---|---|---|
+|Alice|East|1000|
+|Bob|East|900|
+|Carol|East|900|
+|Dave|East|800|
+|Eve|West|950|
+|Frank|West|950|
+|Grace|West|900|
+
+---
+
+### 🔹 SQL Query with `RANK()` and `DENSE_RANK()`
+
+sql
+
+CopyEdit
+
+`SELECT      Employee,     Region,     Sales,     RANK() OVER (PARTITION BY Region ORDER BY Sales DESC) AS rank_pos,     DENSE_RANK() OVER (PARTITION BY Region ORDER BY Sales DESC) AS dense_rank_pos FROM Sales;`
+
+---
+
+### 🔸 Output Explained
+
+|Employee|Region|Sales|RANK()|DENSE_RANK()|
+|---|---|---|---|---|
+|Alice|East|1000|1|1|
+|Bob|East|900|2|2|
+|Carol|East|900|2|2|
+|Dave|East|800|4|3|
+|Eve|West|950|1|1|
+|Frank|West|950|1|1|
+|Grace|West|900|3|2|
+
+---
+
+### ✅ Key Differences:
+
+- In the **East region**, Bob and Carol tie with 900 sales:
+    
+    - `RANK()` assigns both a **2**, but the next rank is **4** (skips 3).
+        
+    - `DENSE_RANK()` assigns both a **2**, and the next rank is **3** (no gap).
+        
+- In the **West region**, Eve and Frank tie with 950 sales:
+    
+    - `RANK()` assigns both a **1**, next is **3** (Grace).
+        
+    - `DENSE_RANK()` assigns both a **1**, next is **2**.
+        
+
+---
+
+### 🔹 When to Use Which?
+
+- Use **`RANK()`** if you want to reflect the true **position including ties** (with skipped ranks).
+    
+- Use **`DENSE_RANK()`** if you want to **avoid gaps** in ranking.
+## 🔸 4. `SUM()` – Running total (cumulative)
+
+```sql
+SELECT employee, department, sales,
+  SUM(sales) OVER (PARTITION BY department ORDER BY sales) AS running_total
+FROM sales;
+```
+
+📌 For each department, it adds up the sales **up to the current row** (running total).
+
+### 🧾 Output:
+
+| employee | dept | sales | running\_total |
+| -------- | ---- | ----- | -------------- |
+| Bob      | A    | 300   | 300            |
+| Alice    | A    | 500   | 800            |
+| Dave     | A    | 700   | 1500           |
+| Erin     | B    | 600   | 600            |
+| Carol    | B    | 800   | 1400           |
+
+---
+
+## 🔸 5. `LAG()` – Previous row’s value
+
+```sql
+SELECT employee, department, sales,
+  LAG(sales) OVER (PARTITION BY department ORDER BY sales) AS previous_sales
+FROM sales;
+```
+
+📌 Shows the `sales` value of the **previous row** in each department group.
+
+### 🧾 Output:
+
+| employee | dept | sales | previous\_sales |
+| -------- | ---- | ----- | --------------- |
+| Bob      | A    | 300   | NULL            |
+| Alice    | A    | 500   | 300             |
+| Dave     | A    | 700   | 500             |
+| Erin     | B    | 600   | NULL            |
+| Carol    | B    | 800   | 600             |
+
+---
+
+## 🔸 6. `LEAD()` – Next row’s value
+
+```sql
+SELECT employee, department, sales,
+  LEAD(sales) OVER (PARTITION BY department ORDER BY sales) AS next_sales
+FROM sales;
+```
+
+📌 Shows the `sales` value of the **next row** in each department group.
+
+### 🧾 Output:
+
+| employee | dept | sales | next\_sales |
+| -------- | ---- | ----- | ----------- |
+| Bob      | A    | 300   | 500         |
+| Alice    | A    | 500   | 700         |
+| Dave     | A    | 700   | NULL        |
+| Erin     | B    | 600   | 800         |
+| Carol    | B    | 800   | NULL        |
+
+---
+
+## 🔸 7. `NTILE(n)` – Split rows into buckets
+
+```sql
+SELECT employee, department, sales,
+  NTILE(2) OVER (ORDER BY sales DESC) AS bucket
+FROM sales;
+```
+
+📌 Divides the entire result set into **2 groups** (as evenly as possible).
+
+### 🧾 Output:
+
+| employee | sales | bucket |
+| -------- | ----- | ------ |
+| Carol    | 800   | 1      |
+| Dave     | 700   | 1      |
+| Erin     | 600   | 1      |
+| Alice    | 500   | 2      |
+| Bob      | 300   | 2      |
+
+---
+
+## ✅ Summary of Window Functions
+
+| Function       | Purpose                       |
+| -------------- | ----------------------------- |
+| `ROW_NUMBER()` | Unique row number per group   |
+| `RANK()`       | Rank with gaps                |
+| `DENSE_RANK()` | Rank without gaps             |
+| `SUM()`        | Running or grouped totals     |
+| `LAG()`        | Get value from previous row   |
+| `LEAD()`       | Get value from next row       |
+| `NTILE(n)`     | Distribute rows into n groups |
+
+---
+
+Would you like to try custom examples on your own table or practice queries for learning?

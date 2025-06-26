@@ -31,7 +31,6 @@ A LAN connects computers within a limited area such as an office, building, or c
 - Common access methods: Ethernet, Token Ring.
     
 - Covers a small, restricted area.
-    
 
 #### 💡 Applications:
 
@@ -121,7 +120,6 @@ A WAN connects computers across large distances, such as countries or continents
 - **Shares Centralized Resources** like servers and internet lines.
     
 - **Supports Multimedia Communication** (email with attachments, etc.).
-    
 
 #### 👎 Disadvantages:
 

@@ -65,7 +65,7 @@ Understanding the distinction between compile-time and runtime is essential for 
 # Class And Object Creation
 **Here the Objects are in stack memory and their properties are in heap memory
 Whenever class(student) called it will be automatically memory in heap for the properties in it.
-### 1. **Class as a Blueprint**
+### 1. Class as a Blueprint
 
 - **Class**: A class in Java is a blueprint or template for creating objects. It defines the attributes (properties) and methods (behaviors) that the objects created from this class will have.
 - **Attributes**: These are the properties or characteristics that objects of the class will have. For example, in a `Car` class, attributes might include `color`, `model`, and `year`.
@@ -76,8 +76,8 @@ Whenever class(student) called it will be automatically memory in heap for the p
   ```java
   public class Car {
       String color;  // Attribute
-      String model;  // Attribute
-      int year;      // Attribute
+      String model; 
+      int year;  
 
       // Constructor to initialize a Car object
       public Car(String color, String model, int year) {
@@ -1735,12 +1735,12 @@ public class Main {
 
 ### Key Differences Between Abstract Classes and Interfaces
 
-|Feature|Abstract Class|Interface|
-|---|---|---|
-|**Methods**|Can have abstract and concrete methods|Can only have abstract methods (Java 8 allows default and static methods)|
-|**Fields**|Can have instance variables (fields)|Cannot have instance variables (can have constants)|
-|**Inheritance**|Can extend one class|Can implement multiple interfaces|
-|**Use Case**|Used when classes share a common base class and behavior|Used to define a contract that multiple classes can implement|
+| Feature         | Abstract Class                                           | Interface                                                                 |
+| --------------- | -------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Methods**     | Can have abstract and concrete methods                   | Can only have abstract methods (Java 8 allows default and static methods) |
+| **Fields**      | Can have instance variables (fields)                     | Cannot have instance variables (can have constants)                       |
+| **Inheritance** | Can extend one class                                     | Can implement multiple interfaces                                         |
+| **Use Case**    | Used when classes share a common base class and behavior | Used to define a contract that multiple classes can implement             |
 
 ### Summary
 
