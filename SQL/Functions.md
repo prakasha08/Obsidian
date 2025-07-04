@@ -15,16 +15,16 @@ In MySQL, several **date and time functions** allow manipulation of dates like `
 
 ### **2. Date Difference & Extraction**
 
-|Function|Description|Example|
-|---|---|---|
-|`DATEDIFF(date1, date2)`|Returns the number of days between two dates|`DATEDIFF('2024-03-10', '2024-03-01')` → `9`|
-|`TIMESTAMPDIFF(unit, date1, date2)`|Returns difference in specified unit|`TIMESTAMPDIFF(HOUR, '2024-03-01 08:00:00', '2024-03-01 10:00:00')` → `2`|
-|`YEAR(date)`|Extracts the year from a date|`YEAR('2024-03-01')` → `2024`|
-|`MONTH(date)`|Extracts the month from a date|`MONTH('2024-03-01')` → `3`|
-|`DAY(date)`|Extracts the day from a date|`DAY('2024-03-01')` → `1`|
-|`HOUR(time)`|Extracts the hour from a time|`HOUR('10:30:00')` → `10`|
-|`MINUTE(time)`|Extracts the minutes from a time|`MINUTE('10:30:00')` → `30`|
-|`SECOND(time)`|Extracts the seconds from a time|`SECOND('10:30:00')` → `0`|
+| Function                            | Description                                  | Example                                                                   |
+| ----------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------- |
+| `DATEDIFF(date1, date2)`            | Returns the number of days between two dates | `DATEDIFF('2024-03-10', '2024-03-01')` → `9`                              |
+| `TIMESTAMPDIFF(unit, date1, date2)` | Returns difference in specified unit         | `TIMESTAMPDIFF(HOUR, '2024-03-01 08:00:00', '2024-03-01 10:00:00')` → `2` |
+| `YEAR(date)`                        | Extracts the year from a date                | `YEAR('2024-03-01')` → `2024`                                             |
+| `MONTH(date)`                       | Extracts the month from a date               | `MONTH('2024-03-01')` → `3`                                               |
+| `DAY(date)`                         | Extracts the day from a date                 | `DAY('2024-03-01')` → `1`                                                 |
+| `HOUR(time)`                        | Extracts the hour from a time                | `HOUR('10:30:00')` → `10`                                                 |
+| `MINUTE(time)`                      | Extracts the minutes from a time             | `MINUTE('10:30:00')` → `30`                                               |
+| `SECOND(time)`                      | Extracts the seconds from a time             | `SECOND('10:30:00')` → `0`                                                |
 
 ---
 

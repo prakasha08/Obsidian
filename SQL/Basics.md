@@ -298,13 +298,13 @@ Returns employees whose names start with "A."
 
 **Special Characters in REGEXP:**
 
-- `^` – Start of string.
-- `$` – End of string.
-- `.` – Any single character.
-- `*` – Zero or more occurrences of the previous character.
-- `+` – One or more occurrences of the previous character.
-- `[ ]` – Matches any character within brackets.
-- `[a-z]` – Range, matches any lowercase letter.
+	- `^` – Start of string.
+	- `$` – End of string.
+	- `.` – Any single character.
+	- `*` – Zero or more occurrences of the previous character.
+	- `+` – One or more occurrences of the previous character.
+	- `[ ]` – Matches any character within brackets.
+	- `[a-z]` – Range, matches any lowercase letter.
 
 **Examples:**
 
@@ -362,6 +362,119 @@ SELECT * FROM employees LIMIT 10;
 
 Returns the first 10 rows of the result set.
 
+
+### `OFFSET` in SQL – Skip Rows in Result Set
+
+#### 🔹 **Purpose**:
+
+`OFFSET` is used to **skip a specific number of rows** before starting to return results from a query.
+
+---
+
+#### ✅ Syntax:
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column_name
+LIMIT n OFFSET m;
+```
+
+- `LIMIT n` → Returns **n** rows
+    
+- `OFFSET m` → **Skips m** rows before returning data
+    
+
+> 🧠 Think of `OFFSET m` as telling SQL:  
+> “**Ignore the first `m` rows**, then give me the next `n` rows.”
+
+---
+
+#### 📘 Example Table: `Employees`
+
+|id|name|salary|
+|---|---|---|
+|1|Alice|5000|
+|2|Bob|7000|
+|3|Carol|6000|
+|4|David|8000|
+|5|Emma|9000|
+
+---
+
+##### ✅ Example 1: Skip the first row
+
+```sql
+SELECT name, salary
+FROM Employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+```
+
+##### 🔍 Explanation:
+
+1. `ORDER BY salary DESC`: Sorts salaries from high to low → Emma, David, Bob, Carol, Alice
+    
+2. `OFFSET 1`: Skips **Emma (highest salary)**
+    
+3. `LIMIT 1`: Returns **David (second highest salary)**
+    
+
+---
+
+##### ✅ Output:
+
+|name|salary|
+|---|---|
+|David|8000|
+
+---
+
+##### ✅ Example 2: Get the 3rd highest salary
+
+```sql
+SELECT name, salary
+FROM Employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 2;
+```
+
+🔸 Skips top 2 → Emma, David  
+🔸 Returns the 3rd → **Bob**
+
+---
+
+##### ✅ Output:
+
+|name|salary|
+|---|---|
+|Bob|7000|
+
+---
+
+#### 📝 Summary Table
+
+|Clause|Description|Example|
+|---|---|---|
+|`LIMIT n`|Return **up to n rows**|`LIMIT 5`|
+|`OFFSET m`|**Skip m rows** before starting to return|`OFFSET 2`|
+|Combined|Skip m, then return next n|`LIMIT 3 OFFSET 2`|
+
+---
+
+#### ✅ Bonus: Pagination
+
+```sql
+-- Page 1: LIMIT 5 OFFSET 0
+-- Page 2: LIMIT 5 OFFSET 5
+-- Page 3: LIMIT 5 OFFSET 10
+```
+
+Useful for displaying data page by page in apps.
+
+---
+
+Would you like me to include a visual diagram or printable PDF for all these paging + OFFSET usages?
 ### 15. `INNER JOIN`
 
 `INNER JOIN` combines rows from two tables based on a common field, returning only matching rows.
@@ -507,9 +620,7 @@ SELECT COALESCE(NULL, NULL, NULL, 'Fallback', 'Other');
     
 - It stops evaluating as soon as it finds the **first non-NULL**.
 
-### String Functions
-
----
+# String Functions
 
 ## ✅ 1. `CONCAT()` – Join Strings Together
 
@@ -665,485 +776,231 @@ FROM users;
 
 ---
 
-## ✅ Summary Table
+## ✅ 5. `LEFT()` – Get Leftmost Characters
 
-|Function|Description|Example|Output|
-|---|---|---|---|
-|`CONCAT()`|Joins strings|`CONCAT('A', 'B')`|`'AB'`|
-|`LEN()`|Length of string (SQL Server)|`LEN('Hello')`|`5`|
-|`LENGTH()`|Length of string (MySQL/PostgreSQL)|`LENGTH('Hello')`|`5`|
-|`UPPER()`|Converts to uppercase|`UPPER('hello')`|`'HELLO'`|
-|`LOWER()`|Converts to lowercase|`LOWER('HELLO')`|`'hello'`|
+### 🔹 Purpose:
 
----
+Returns the **first N characters** from the **left** side of a string.
 
-Let me know if you want examples with `WHERE`, `GROUP BY`, or `CASE` using these functions!
-
-### **CASE Statement in SQL**
-
-The `CASE` statement in SQL is used for conditional logic within SQL queries. It works like an `IF-ELSE` statement in programming languages. You can use it to return different values based on conditions.
-
----
-
-#### **Syntax of CASE**
-
-There are two main types of `CASE` expressions in SQL:
-
-#### **1. Simple CASE Expression**
-
-This compares a column or expression against multiple values and returns a result.
+### ✅ Syntax:
 
 ```sql
-CASE column_name
-    WHEN value1 THEN result1
-    WHEN value2 THEN result2
-    ELSE default_result
-END
+SELECT LEFT('Database', 4) AS result;
 ```
 
-#### **2. Searched CASE Expression**
+🔸 **Output:**
 
-This evaluates multiple conditions and returns a result based on the first `TRUE` condition.
-
-```sql
-CASE 
-    WHEN condition1 THEN result1
-    WHEN condition2 THEN result2
-    ELSE default_result
-END
+```
+Data
 ```
 
 ---
 
-#### **Examples**
+### 📌 Real Table Example:
 
-#### **Example 1: Using Simple CASE**
-
-Let's say we have a `students` table:
-
-|student_id|name|grade|
-|---|---|---|
-|1|Alex|A|
-|2|Bob|B|
-|3|Chris|C|
-|4|David|A|
-
-We want to classify students based on their grades:
+Assume a table `employees`:
 
 ```sql
-SELECT name, grade,
-    CASE grade
-        WHEN 'A' THEN 'Excellent'
-        WHEN 'B' THEN 'Good'
-        WHEN 'C' THEN 'Average'
-        ELSE 'Needs Improvement'
-    END AS performance
-FROM students;
-```
-
-**Output:**
-
-|name|grade|performance|
-|---|---|---|
-|Alex|A|Excellent|
-|Bob|B|Good|
-|Chris|C|Average|
-|David|A|Excellent|
-
----
-
-#### **Example 2: Using Searched CASE**
-
-Suppose we have an `employees` table:
-
-|emp_id|name|salary|
-|---|---|---|
-|1|Alice|90000|
-|2|Bob|75000|
-|3|Charlie|50000|
-|4|David|30000|
-
-We want to categorize employees based on their salary:
-
-```sql
-SELECT name, salary,
-    CASE 
-        WHEN salary >= 80000 THEN 'High Salary'
-        WHEN salary >= 50000 THEN 'Medium Salary'
-        ELSE 'Low Salary'
-    END AS salary_category
+SELECT name, LEFT(name, 3) AS short_name
 FROM employees;
 ```
 
-**Output:**
+🔸 **Result:**
 
-|name|salary|salary_category|
-|---|---|---|
-|Alice|90000|High Salary|
-|Bob|75000|Medium Salary|
-|Charlie|50000|Medium Salary|
-|David|30000|Low Salary|
+|name|short_name|
+|---|---|
+|Prakash|Pra|
+|Ananya|Ana|
 
 ---
 
-#### **Using CASE in ORDER BY**
+## ✅ 6. `RIGHT()` – Get Rightmost Characters
 
-You can also use `CASE` in `ORDER BY` to define custom sorting:
+### 🔹 Purpose:
+
+Returns the **last N characters** from the **right** side of a string.
+
+### ✅ Syntax:
 
 ```sql
-SELECT name, grade
-FROM students
-ORDER BY 
-    CASE grade 
-        WHEN 'A' THEN 1
-        WHEN 'B' THEN 2
-        WHEN 'C' THEN 3
-        ELSE 4
-    END;
+SELECT RIGHT('Database', 4) AS result;
 ```
 
-This sorts `A` grades first, then `B`, then `C`.
+🔸 **Output:**
 
----
-
-#### **Using CASE in UPDATE**
-
-You can use `CASE` in an `UPDATE` statement:
-
-```sql
-UPDATE employees
-SET salary = 
-    CASE 
-        WHEN salary < 40000 THEN salary + 5000
-        WHEN salary BETWEEN 40000 AND 70000 THEN salary + 3000
-        ELSE salary + 2000
-    END;
 ```
-
-This increases salary based on different conditions.
-
----
-
-#### **Conclusion**
-
-- `CASE` helps in conditional logic inside SQL queries.
-- It works in `SELECT`, `ORDER BY`, `UPDATE`, and `WHERE` clauses.
-- It is similar to `IF-ELSE` statements in programming.
-
-### **1. Inner Joins**
-
-An **inner join** retrieves records with matching values in both tables.
-
-#### Example:
-
-```sql
-SELECT customers.first_name, orders.order_date
-FROM customers
-INNER JOIN orders
-ON customers.customer_id = orders.customer_id;
-```
-
-- Retrieves customers and their order dates.
-- Rows without a match in `orders` are excluded.
-
----
-
-### **2. Joining Across Databases**
-
-You can join tables across different databases by qualifying the database names.
-
-#### Example:
-
-```sql
-SELECT db1.customers.first_name, db2.orders.order_date
-FROM db1.customers
-INNER JOIN db2.orders
-ON db1.customers.customer_id = db2.orders.customer_id;
-```
-
-- Joins the `customers` table in `db1` with the `orders` table in `db2`.
-![[Pasted image 20250618224345.png]]
----
-
-### **🔹 LEFT JOIN in SQL (with a Clear Example)**
-
-A **LEFT JOIN** in SQL returns **all rows from the left table** and **matching rows from the right table**. If there is **no match in the right table, NULL values** are returned for columns from the right table.
-
----
-
-### **📌 Example Scenario**
-
-We have two tables:  
-1️⃣ `students` → Contains student details  
-2️⃣ `courses` → Contains course details
-
-#### **🔹 students Table**
-
-|student_id|name|age|
-|---|---|---|
-|1|Alice|22|
-|2|Bob|23|
-|3|John|24|
-|4|Emma|21|
-
-#### **🔹 courses Table**
-
-|course_id|student_id|course_name|
-|---|---|---|
-|101|1|Math|
-|102|2|Science|
-|103|4|History|
-
----
-
-### **🔹 LEFT JOIN Query**
-
-```sql
-SELECT students.student_id, students.name, courses.course_name
-FROM students
-LEFT JOIN courses ON students.student_id = courses.student_id;
+base
 ```
 
 ---
 
-### **🔹 Output of the Query**
-
-|student_id|name|course_name|
-|---|---|---|
-|1|Alice|Math|
-|2|Bob|Science|
-|3|John|NULL|
-|4|Emma|History|
-
----
-
-### **🔹 Explanation**
-
-- **Alice (ID=1)** → Has a course ("Math") ✅
-- **Bob (ID=2)** → Has a course ("Science") ✅
-- **Emma (ID=4)** → Has a course ("History") ✅
-- **John (ID=3)** → Has **no matching course** in the `courses` table, so `NULL` appears in the `course_name` column ❌
-
----
-
-### **🔹 Key Points**
-
-✅ **Returns all records from the left table (`students`)**  
-✅ **Matches records from the right table (`courses`)**  
-✅ **If there is no match, NULL is returned for the right table columns**
-
-Would you like an example with real SQL execution? 🚀
-
----
-
-### **4. Joining Multiple Tables**
-
-Joins more than two tables.
-
-#### Example:
+### 📌 Real Table Example:
 
 ```sql
-SELECT customers.first_name, orders.order_date, shippers.name AS shipper_name
-FROM customers
-JOIN orders ON customers.customer_id = orders.customer_id
-JOIN shippers ON orders.shipper_id = shippers.shipper_id;
+SELECT name, RIGHT(name, 2) AS suffix
+FROM employees;
 ```
 
-- Retrieves customers, their order dates, and the shipper name.
+|name|suffix|
+|---|---|
+|Prakash|sh|
+|Ananya|ya|
 
 ---
 
-### **5. Compound Join Conditions**
+## ✅ 7. `SUBSTRING()` / `SUBSTR()` – Extract Part of String
 
-Joins tables with multiple conditions.
+### 🔹 Purpose:
 
-#### Example:
+Extracts a **portion of a string** starting at a given position.
+
+### ✅ Syntax:
 
 ```sql
-SELECT *
-FROM employees e
-JOIN departments d
-ON e.department_id = d.department_id
-AND e.hire_date > '2020-01-01';
+SELECT SUBSTRING('Database', 2, 4) AS result;
 ```
 
-- Joins employees and departments where the department matches and the employee was hired after 2020.
+- Start at position `2` (1-based index)
+    
+- Take `4` characters
+    
 
----
+🔸 **Output:**
 
-### **6. Implicit Join Syntax**
-
-Joins without the `JOIN` keyword (old-style).
-
-#### Example:
-
-```sql
-SELECT customers.first_name, orders.order_date
-FROM customers, orders
-WHERE customers.customer_id = orders.customer_id;
 ```
-
-- Less readable; not recommended.
-
----
-
-### **7. Outer Joins**
-
-Includes rows with no match from one or both tables.
-
-#### Example:
-
-**Left Outer Join:**
-
-```sql
-SELECT customers.first_name, orders.order_date
-FROM customers
-LEFT JOIN orders
-ON customers.customer_id = orders.customer_id;
-```
-
-- Includes all customers, even those without orders.
-
-**Right Outer Join:**
-
-```sql
-SELECT orders.order_date, customers.first_name
-FROM orders
-RIGHT JOIN customers
-ON orders.customer_id = customers.customer_id;
-```
-
-- Includes all orders, even those without customers.
-
----
-
-### **8. Outer Join Between Multiple Tables**
-
-Combines multiple outer joins.
-
-#### Example:
-
-```sql
-SELECT c.first_name, o.order_date, sh.name AS shipper_name
-FROM customers c
-LEFT JOIN orders o ON c.customer_id = o.customer_id
-LEFT JOIN shippers sh ON o.shipper_id = sh.shipper_id;
-```
-
-- Includes all customers, their orders (if any), and shipper details.
-
----
-
-### **9. Self Outer Joins**
-
-### **🔹 SELF JOIN in SQL (with Clear Explanation & Example)**
-
-A **SELF JOIN** is when a table joins with **itself**. This is useful for hierarchical relationships like **employees & managers**, **students & mentors**, or **parent-child relationships**.
-
----
-
-### **📌 Example Scenario: Employee-Manager Relationship**
-
-We have a **single table `employees`** where each employee has a **manager_id** (which refers to another employee in the same table).
-
-#### **🔹 employees Table**
-
-|employee_id|name|manager_id|
-|---|---|---|
-|1|Alice|NULL|
-|2|Bob|1|
-|3|John|1|
-|4|Emma|2|
-|5|Chris|2|
-
-### **🔹 SELF JOIN Query**
-
-```sql
-SELECT e1.employee_id AS EmployeeID, e1.name AS Employee, 
-       e2.employee_id AS ManagerID, e2.name AS Manager
-FROM employees e1
-LEFT JOIN employees e2 
-ON e1.manager_id = e2.employee_id;
+ATAB
 ```
 
 ---
 
-### **🔹 Output of the Query**
-
-|EmployeeID|Employee|ManagerID|Manager|
-|---|---|---|---|
-|1|Alice|NULL|NULL|
-|2|Bob|1|Alice|
-|3|John|1|Alice|
-|4|Emma|2|Bob|
-|5|Chris|2|Bob|
-
----
-
-### **🔹 Explanation**
-
-1️⃣ **Alice (ID=1)** has no manager (`NULL`).  
-2️⃣ **Bob (ID=2) & John (ID=3)** report to **Alice (ID=1)**.  
-3️⃣ **Emma (ID=4) & Chris (ID=5)** report to **Bob (ID=2)**.
-
----
-
-### **🔹 Key Points**
-
-✅ **SELF JOIN treats a table like two different tables** using aliases (`e1` & `e2`).  
-✅ Used for **hierarchical data** like employees-managers, students-mentors, etc.  
-✅ Can be `INNER JOIN` (only matched results) or `LEFT JOIN` (keep all employees, even without a manager).
-
-Would you like an example with another dataset? 🚀
-
----
-
-### **10. The USING Clause**
-
-Simplifies join conditions when column names are the same.
-
-#### Example:
+### 📌 Real Table Example:
 
 ```sql
-SELECT *
-FROM customers
-JOIN orders USING (customer_id);
+SELECT email, SUBSTRING(email, 1, 5) AS prefix
+FROM users;
 ```
 
-- Same as `ON customers.customer_id = orders.customer_id`.
+|email|prefix|
+|---|---|
+|[prakash@gmail.com](mailto:prakash@gmail.com)|praka|
 
 ---
 
-### **11. Natural Joins**
+## ✅ 8. `REPLACE()` – Replace Substring
 
-Automatically joins tables with matching column names.
+### 🔹 Purpose:
 
-#### Example:
+Replaces **part of a string** with something else.
+
+### ✅ Syntax:
 
 ```sql
-SELECT *
-FROM customers
-NATURAL JOIN orders;
+SELECT REPLACE('SQL is fun', 'fun', 'powerful') AS result;
 ```
 
-- Joins on columns with the same name.
+🔸 **Output:**
+
+```
+SQL is powerful
+```
 
 ---
 
-### **12. Cross Joins**
+### 📌 Real Table Example:
 
-### **What is a CROSS JOIN?**
+```sql
+SELECT REPLACE(phone_number, '-', '') AS clean_number
+FROM contacts;
+```
 
-A **CROSS JOIN** produces a **Cartesian Product** of two tables, meaning **each row from the first table is combined with every row from the second table**.
-
-🔹 **Key Points:**
-
-- **No ON condition is used** (unlike INNER/LEFT/RIGHT JOIN).
-- If **Table A has `m` rows** and **Table B has `n` rows**, the result will have **`m × n` rows**.
-- It is useful for **generating combinations of values**.
+|phone_number|clean_number|
+|---|---|
+|987-654-3210|9876543210|
 
 ---
 
+## ✅ 9. `TRIM()` – Remove Spaces
+
+### 🔹 Purpose:
+
+Removes **leading and trailing spaces** (or specified characters) from a string.
+
+### ✅ Syntax:
+
+```sql
+SELECT TRIM('   Hello   ') AS trimmed;
+```
+
+🔸 **Output:**
+
+```
+Hello
+```
+
+---
+
+### 📌 Real Table Example:
+
+```sql
+SELECT TRIM(name) AS clean_name
+FROM users;
+```
+
+---
+
+## ✅ 10. `REVERSE()` – Reverse a String
+
+### 🔹 Purpose:
+
+Returns the **reverse** of the input string.
+
+### ✅ Syntax:
+
+```sql
+SELECT REVERSE('SQL') AS reversed;
+```
+
+🔸 **Output:**
+
+```
+LQS
+```
+
+---
+
+### 📌 Real Table Example:
+
+```sql
+SELECT name, REVERSE(name) AS flipped
+FROM employees;
+```
+
+|name|flipped|
+|---|---|
+|Prakash|hsakarp|
+|Ananya|ayanan|
+
+---
+
+| Function                   | Description                                         | Example                        | Output      |
+| -------------------------- | --------------------------------------------------- | ------------------------------ | ----------- |
+| `CONCAT()`                 | Joins/combines two or more strings                  | `CONCAT('A', 'B')`             | `'AB'`      |
+| `LEN()`                    | Returns length of string (**SQL Server**)           | `LEN('Hello')`                 | `5`         |
+| `LENGTH()`                 | Returns length of string (**MySQL/PostgreSQL**)     | `LENGTH('Hello')`              | `5`         |
+| `UPPER()`                  | Converts string to **uppercase**                    | `UPPER('hello')`               | `'HELLO'`   |
+| `LOWER()`                  | Converts string to **lowercase**                    | `LOWER('HELLO')`               | `'hello'`   |
+| `LEFT()`                   | Returns leftmost N characters                       | `LEFT('Hello', 2)`             | `'He'`      |
+| `RIGHT()`                  | Returns rightmost N characters                      | `RIGHT('Hello', 3)`            | `'llo'`     |
+| `SUBSTRING()` / `SUBSTR()` | Extracts part of a string from a position           | `SUBSTRING('Hello', 2, 3)`     | `'ell'`     |
+| `REPLACE()`                | Replaces part of a string                           | `REPLACE('abcabc', 'a', 'x')`  | `'xbcxbc'`  |
+| `TRIM()`                   | Removes spaces (or characters) from both ends       | `TRIM(' Hello ')`              | `'Hello'`   |
+| `LTRIM()`                  | Removes spaces from **left** side (**SQL Server**)  | `LTRIM(' Hello')`              | `'Hello'`   |
+| `RTRIM()`                  | Removes spaces from **right** side (**SQL Server**) | `RTRIM('Hello ')`              | `'Hello'`   |
+| `INSTR()`                  | Returns position of substring (**MySQL**)           | `INSTR('abcde', 'c')`          | `3`         |
+| `POSITION()`               | Position of substring (**PostgreSQL**)              | `POSITION('c' IN 'abcde')`     | `3`         |
+| `CHARINDEX()`              | Position of substring (**SQL Server**)              | `CHARINDEX('c', 'abcde')`      | `3`         |
+| `REVERSE()`                | Reverses a string                                   | `REVERSE('abc')`               | `'cba'`     |
+| `CONCAT_WS()`              | Concatenates with separator (**MySQL/PostgreSQL**)  | `CONCAT_WS('-', '2025', '07')` | `'2025-07'` |
 
 
 ## **🔹 Example Scenario: University Database**
@@ -2316,6 +2173,157 @@ SOURCE /path/to/backup.sql;
 
 Let me know if you want deeper explanations or further examples for any specific topic!
 
+
+# Numeric & Math Functions in SQL**
+
+### 🔢 **1.1 `RAND()`**
+
+- **Purpose**: Returns a random floating-point number between **0 (inclusive)** and **1 (exclusive)**.
+    
+- **Syntax**: `RAND([seed])`
+    
+    - `seed` is optional and gives the same result every time when provided.
+        
+- **Example**:
+    
+    ```sql
+    SELECT RAND();         -- Example output: 0.726481
+    SELECT RAND(10);       -- Always returns the same value for seed 10
+    ```
+    
+
+---
+
+### 🔁 **1.2 `ROUND()`**
+
+- **Purpose**: Rounds a number to a specified number of decimal places.
+    
+- **Syntax**: `ROUND(number, decimal_places)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT ROUND(123.4567, 2);   -- Output: 123.46
+    SELECT ROUND(123.4567, 0);   -- Output: 123
+    ```
+    
+
+---
+
+### ⬇️ **1.3 `FLOOR()`**
+
+- **Purpose**: Returns the largest integer **less than or equal to** the number.
+    
+- **Syntax**: `FLOOR(number)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT FLOOR(123.9);    -- Output: 123
+    SELECT FLOOR(-123.9);   -- Output: -124
+    ```
+    
+
+---
+
+### ⬆️ **1.4 `CEIL()` or `CEILING()`**
+
+- **Purpose**: Returns the smallest integer **greater than or equal to** the number.
+    
+- **Syntax**: `CEIL(number)` or `CEILING(number)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT CEIL(123.1);     -- Output: 124
+    SELECT CEIL(-123.1);    -- Output: -123
+    ```
+    
+
+---
+
+### ➕➖ **1.5 `ABS()`**
+
+- **Purpose**: Returns the absolute (positive) value of a number.
+    
+- **Syntax**: `ABS(number)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT ABS(-25);        -- Output: 25
+    SELECT ABS(25);         -- Output: 25
+    ```
+    
+
+---
+
+### 🔋 **1.6 `POWER()`**
+
+- **Purpose**: Raises a number to the power of another number (exponent).
+    
+- **Syntax**: `POWER(base, exponent)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT POWER(2, 3);     -- Output: 8 (2³)
+    SELECT POWER(5, 2);     -- Output: 25
+    ```
+    
+
+---
+
+### 🧮 **1.7 `SQRT()`**
+
+- **Purpose**: Returns the square root of a number.
+    
+- **Syntax**: `SQRT(number)`
+    
+- **Example**:
+    
+    ```sql
+    SELECT SQRT(25);        -- Output: 5
+    SELECT SQRT(2);         -- Output: 1.4142...
+    ```
+    
+
+---
+
+## ✅ Summary Table
+
+|Function|Description|Example|Result|
+|---|---|---|---|
+|`RAND()`|Random float between 0 and 1|`RAND()`|0.726|
+|`ROUND()`|Round number to N decimals|`ROUND(123.456, 2)`|123.46|
+|`FLOOR()`|Round **down** to nearest integer|`FLOOR(123.9)`|123|
+|`CEIL()`|Round **up** to nearest integer|`CEIL(123.1)`|124|
+|`ABS()`|Absolute value (removes negative sign)|`ABS(-5)`|5|
+|`POWER()`|Raise number to a power|`POWER(3, 2)`|9|
+|`SQRT()`|Square root|`SQRT(16)`|4|
+
+---
+
+## 📘 Bonus Tips for Preparation
+
+- Use `SELECT` statements to practice these in an SQL tool (like MySQL, PostgreSQL, or SQLite).
+    
+- Combine functions:
+    
+    ```sql
+    SELECT ROUND(SQRT(20), 2);  -- Output: 4.47
+    ```
+    
+- Try real data columns:
+    
+    ```sql
+    SELECT name, ROUND(salary, 0), FLOOR(salary), CEIL(salary) FROM employees;
+    ```
+    
+
+---
+
+Would you like some **practice problems** for each of these functions?
 # **Window Function**
 ## ✅ What Is a Window Function?
 
@@ -2326,14 +2334,144 @@ A **window function** performs a **calculation across a set of table rows that a
 ---
 
 ## 🧠 Syntax of Window Function
+```sql
+<function_name>() OVER (
+    [PARTITION BY column]
+    [ORDER BY column]
+    [ROWS ...]
+)
+```
 
-sql
-
-CopyEdit
-
-`<function_name>() OVER (     [PARTITION BY column]     [ORDER BY column]     [ROWS ...] )`
+This is how **window functions** work in SQL — they allow you to compute values across a "window" (a subset of rows related to the current row) without collapsing the result like `GROUP BY` does.
 
 ---
+
+## 🧱 Full Breakdown of Each Part:
+
+---
+
+### ✅ 1. `<function_name>()`
+
+This is the **window function** you're using. Some common ones are:
+
+|Function|What it does|
+|---|---|
+|`ROW_NUMBER()`|Gives a unique row number within a partition|
+|`RANK()`|Gives a rank with gaps if values are equal|
+|`DENSE_RANK()`|Like `RANK()` but no gaps|
+|`SUM(column)`|Running total (cumulative sum)|
+|`AVG(column)`|Running average|
+|`LAG(column, n)`|Gets value from `n` rows before the current one|
+|`LEAD(column, n)`|Gets value from `n` rows after the current one|
+
+---
+
+### ✅ 2. `OVER (...)`
+
+This clause **defines the "window"** — i.e., the set of rows the function will operate over. Inside it, you can use:
+
+---
+
+### ✅ 3. `PARTITION BY column`
+
+- Divides the data into groups (like `GROUP BY`) **within the window function**.
+    
+- The function restarts for each partition.
+    
+
+#### 💡 Example:
+
+```sql
+ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC)
+```
+
+This will:
+
+- Assign a row number **starting from 1** for each `department_id`
+    
+- Ordered by `salary DESC` within each department
+    
+
+---
+
+### ✅ 4. `ORDER BY column`
+
+- Specifies the **order of rows** within each partition for the function to work on.
+    
+
+#### Example with `LAG()`:
+
+```sql
+LAG(salary) OVER (PARTITION BY department_id ORDER BY hire_date)
+```
+
+- For each department, get the salary of the person who was hired **just before** the current person.
+    
+
+---
+
+### ✅ 5. `ROWS BETWEEN ...`
+
+This is **optional** and defines an **explicit window frame**.
+
+Used with aggregate functions like `SUM()` or `AVG()` to limit rows in the window:
+
+#### Example:
+
+```sql
+SUM(salary) OVER (ORDER BY hire_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+```
+
+This gives a sum of:
+
+- The current row
+    
+- The 2 rows before it (based on `hire_date`)
+    
+
+#### Common Frame Options:
+
+|Syntax|Meaning|
+|---|---|
+|`ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`|From the first row up to the current one (running total)|
+|`ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING`|One before, current, and one after|
+|`ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING`|From current row to the end|
+
+---
+
+## 🧩 Full Example
+
+```sql
+SELECT 
+    employee_id,
+    department_id,
+    salary,
+    RANK() OVER (PARTITION BY department_id ORDER BY salary DESC) AS dept_rank,
+    SUM(salary) OVER (PARTITION BY department_id ORDER BY salary ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total
+FROM Employee;
+```
+
+### 🔍 What it does:
+
+- `RANK()` gives each employee a rank within their department based on salary
+    
+- `SUM()` gives a **cumulative total** of salaries **within their department**
+    
+
+---
+
+## ✅ Summary Table
+
+|Clause|What it does|
+|---|---|
+|`OVER`|Defines the window for the function|
+|`PARTITION BY`|Resets the function per group (like `GROUP BY` inside window)|
+|`ORDER BY`|Sets the order in which the function is applied|
+|`ROWS BETWEEN ...`|Defines a specific range of rows (optional, mainly for aggregates)|
+
+---
+
+Would you like a visual diagram or to practice this with real datasets like sales, salaries, or student marks?
 
 ## 📌 Most Common Window Functions
 
@@ -2558,5 +2696,203 @@ FROM sales;
 | `NTILE(n)`     | Distribute rows into n groups |
 
 ---
+## 🔰 What is a CTE?
 
-Would you like to try custom examples on your own table or practice queries for learning?
+A **Common Table Expression (CTE)** is a temporary result set you can reference within a `SELECT`, `INSERT`, `UPDATE`, or `DELETE` query.
+
+Think of it like creating a **temporary named result** (like a virtual table) to make your query easier to read, debug, and reuse.
+
+---
+
+## 🧱 Basic Syntax
+
+```sql
+WITH cte_name AS (
+    SELECT ...
+    FROM ...
+    WHERE ...
+)
+SELECT * FROM cte_name;
+```
+
+---
+
+## 🪜 Step-by-Step Breakdown
+
+### ✅ Step 1: Traditional Approach Without CTE
+
+```sql
+SELECT department_id
+FROM (
+    SELECT department_id, COUNT(*) as emp_count
+    FROM Employee
+    GROUP BY department_id
+) AS temp
+WHERE emp_count > 5;
+```
+
+This is harder to read when nested multiple times.
+
+---
+
+### ✅ Step 2: With CTE (Same logic, cleaner)
+
+```sql
+WITH DepartmentCount AS (
+    SELECT department_id, COUNT(*) AS emp_count
+    FROM Employee
+    GROUP BY department_id
+)
+SELECT department_id
+FROM DepartmentCount
+WHERE emp_count > 5;
+```
+
+📌 `DepartmentCount` is the CTE name — it's like a temporary view we can query from.
+
+---
+
+## 🛠️ Key Benefits of Using CTE
+
+|Feature|Benefit|
+|---|---|
+|Readability|Simplifies complex queries with nested subqueries|
+|Reusability|You can refer to the same logic multiple times|
+|Recursion (advanced)|You can perform recursive operations using CTEs|
+|Modular design|Break logic into steps (like declaring variables)|
+
+---
+
+## 🧠 Multiple CTEs
+
+```sql
+WITH dept_count AS (
+    SELECT department_id, COUNT(*) AS emp_count
+    FROM Employee
+    GROUP BY department_id
+),
+high_load_depts AS (
+    SELECT department_id
+    FROM dept_count
+    WHERE emp_count > 5
+)
+SELECT e.employee_id, e.department_id
+FROM Employee e
+JOIN high_load_depts h ON e.department_id = h.department_id;
+```
+
+✔️ We created 2 CTEs and used them like intermediate steps.
+
+---
+
+## 🔄 Recursive CTE (Advanced)
+
+Used to solve problems like hierarchy, path-finding, trees, etc.
+
+### 🎯 Example: Employee Manager Chain
+
+Table:
+
+```sql
+Employee(employee_id, name, manager_id)
+```
+
+### Query: Show management chain
+
+```sql
+WITH RECURSIVE ManagementChain AS (
+    SELECT employee_id, name, manager_id, 1 AS level
+    FROM Employee
+    WHERE manager_id IS NULL  -- CEO level
+    
+    UNION ALL
+
+    SELECT e.employee_id, e.name, e.manager_id, mc.level + 1
+    FROM Employee e
+    JOIN ManagementChain mc ON e.manager_id = mc.employee_id
+)
+SELECT * FROM ManagementChain;
+```
+
+This recursively follows the reporting hierarchy.
+
+---
+
+## 🧪 Real Example: LeetCode Style
+
+Given:
+
+```sql
+Employee(employee_id, department_id, primary_flag)
+```
+
+CTE to get department counts:
+
+```sql
+WITH DeptCount AS (
+    SELECT employee_id, COUNT(*) AS dept_count
+    FROM Employee
+    GROUP BY employee_id
+)
+SELECT e.employee_id, e.department_id
+FROM Employee e
+JOIN DeptCount d ON e.employee_id = d.employee_id
+WHERE e.primary_flag = 'Y' OR d.dept_count = 1;
+```
+
+---
+
+## 🔐 CTE vs TEMP TABLE vs SUBQUERY
+
+|Feature|CTE|Temp Table|Subquery|
+|---|---|---|---|
+|Scope|One query|Session (can persist)|One-time use|
+|Readability|High|Moderate|Low (nested)|
+|Reusability|Within query|Across queries (temp)|Not reusable|
+|Performance|Similar, but not indexed|Can be indexed|Inline only|
+
+---
+
+## 🧩 Summary
+
+|Concept|Description|
+|---|---|
+|CTE|A temporary named result set inside a SQL query|
+|Syntax|`WITH name AS (SELECT ...)`|
+|Recursive CTE|Allows self-referencing for tree or hierarchy logic|
+|Multiple CTEs|Can be declared in sequence with commas|
+|Best for|Clean, readable queries; replacing subqueries|
+|Not for|Long-term storage or indexed operations (use temp tables for that)|
+
+---
+
+Would you like practice questions or use CTEs in specific real-world scenarios (e.g., top N per group, salary hierarchy, etc.)?
+# Frequently Asked Questions
+
+**What is SQL used for?**
+
+SQL is used for managing and manipulating data in relational database management systems (RDBMS). It allows users to query, update, and delete data from databases.
+
+**What are the main components of an SQL statement?**
+
+An SQL statement typically consists of clauses like SELECT, FROM, WHERE, and may also include keywords like JOIN, GROUP BY, and ORDER BY, depending on the specific operation.
+
+**What's the difference between SQL and MySQL?**
+
+SQL is a language for managing databases, while MySQL is a specific database management system that uses SQL as its query language. MySQL is just one of many RDBMS options available.
+
+**What are the different types of SQL statements?**
+
+SQL statements can broadly be categorized into Data Manipulation Language (DML) statements (e.g., SELECT, INSERT, UPDATE, DELETE), Data Definition Language (DDL) statements (e.g., CREATE, ALTER, DROP), and Data Control Language (DCL) statements (e.g., GRANT, REVOKE).
+
+**What are primary keys and foreign keys in SQL?**
+
+A primary key is an unique identifier for a record in a table, ensuring each row has a distinct identity. A foreign key, on the other hand, establishes a link between tables, typically referencing the primary key of another table.
+
+**What is a SQL JOIN, and how does it work?**
+
+SQL JOIN is used to combine rows from two or more tables based on a related column between them. Common joins include INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN.
+
+**What are SQL transactions and why are they significant?**
+
+SQL transactions are sequences of one or more SQL statements treated as a single unit of work. They are important for ensuring data consistency and integrity, allowing you to make multiple changes to a database as a single operation.

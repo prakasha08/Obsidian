@@ -5685,6 +5685,41 @@ class Solution {
     }
 }
 ```
+## [542. 01 Matrix](https://leetcode.com/problems/01-matrix/)
+```java
+class Solution {
+    public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int[][] result = new int[m][n];
+        int INF = 10000; 
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 0) {
+                    result[i][j] = 0;
+                } else {
+                    result[i][j] = INF;
+                    if (i > 0)
+                        result[i][j] = Math.min(result[i][j], result[i - 1][j] + 1);
+                    if (j > 0)
+                        result[i][j] = Math.min(result[i][j], result[i][j - 1] + 1);
+                }
+            }
+        }
+
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                if (i < m - 1)
+                    result[i][j] = Math.min(result[i][j], result[i + 1][j] + 1);
+                if (j < n - 1)
+                    result[i][j] = Math.min(result[i][j], result[i][j + 1] + 1);
+            }
+        }
+
+        return result;
+    }
+}
+```
 ## [1863. Sum of All Subset XOR Totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)
 ```java
 class Solution {
@@ -6408,3 +6443,325 @@ class Solution {
 }
 ```
 ##
+
+# PATTERN PRINTING
+#PATTERNPRINTING
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=1;j<=i;j++){  
+            System.out.print(i+" ");  
+        }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216210415.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    int num=1;
+    for(int i=1;i<=N;i++){  
+        for(int j=1;j<=i;j++){  
+            System.out.print(num + " ");  
+            num++;
+        }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240222072554.png]]
+
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    int n = 65;
+    if(N>0){
+        for (int i = 1; i<=N;i++){
+            for(int j=1;j<=i;j++){
+                System.out.print("%c ",n);
+                n++;
+            }
+             System.out.print();
+        } 
+}
+```
+![[Pasted image 20240222071908.png]]
+
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=1;i>=j;j++){  
+            System.out.print("* ");  
+        }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216212921.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=0;j<=N-i;j++){  
+            System.out.print("* ");  
+        }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216224142.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=1;j<=N-i;j++){  
+            System.out.print("  ");  
+        }for(int j=1;j<=i;j++){  
+        System.out.print("* ");  
+    }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216212744.png]]
+
+```java
+    public static void main(String[] args) {  
+        Scanner n =new Scanner(System.in);  
+        int N = n.nextInt();  
+for(int i = 1;i<=N;i++){  
+    for(int j=1;j<=N-i;j++){  
+        System.out.print(" ");  
+    }for(int k=1;k<=i;k++){  
+        System.out.print("* ");  
+    }  
+    System.out.println();  
+}  
+    }
+```
+![[Pasted image 20240208215921.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+   for(int i =N;i>=1;i--){  
+    for(int j=1;j<=N-i;j++){  
+        System.out.print("  ");  
+    }for(int k=1;k<=i;k++){  
+        System.out.print("* ");  
+    }  
+    System.out.println();  
+}
+}
+```
+![[Pasted image 20240216220804.png]]
+```java
+    public static void main(String[] args) {  
+        Scanner n =new Scanner(System.in);  
+        int N = n.nextInt();  
+for(int i =N;i>=1;i--){  
+    for(int j=1;j<=N-i;j++){  
+        System.out.print(" ");  
+    }for(int k=1;k<=i;k++){  
+        System.out.print("* ");  
+    }  
+    System.out.println();  
+}  
+    }
+```
+![[Pasted image 20240208220021.png]]
+```java
+    public static void main(String[] args) {  
+        Scanner n =new Scanner(System.in);  
+        int N = n.nextInt();  
+for(int i = 1;i<=N;i++){  
+    for(int j=1;j<=N-i;j++){  
+        System.out.print(" ");  
+    }for(int k=1;k<=2*i-1;k++){  
+        System.out.print("*");  
+    }  
+    System.out.println();  
+}  
+    }
+```
+![[Pasted image 20240216221256.png]]
+```java
+    public static void main(String[] args) {  
+        Scanner n =new Scanner(System.in);  
+        int N = n.nextInt();  
+for(int i = 1;i<=N;i++){  
+    for(int j=1;j<=N-i;j++){  
+        System.out.print("  ");  
+    }for(int k=1;k<=2*i-1;k++){  
+        System.out.print("*");  
+    }  
+    System.out.println();  
+}  
+    }
+
+```
+![[Pasted image 20240216221329.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=1;j<=N-i;j++){  
+            System.out.print(" ");  
+        }for(int j=1;j<=2*i-1;j++){  
+            if(i==N)  
+                System.out.print("*");  
+            else if(j==1||j==2*i-1)  
+                 System.out.print("*");  
+            else  
+                System.out.print(" ");  
+        }  
+        System.out.println();  
+    }  
+}
+```
+```java
+public static void main(String[] args) {  
+    Scanner s = new Scanner(System.in);  
+    System.out.print("Enter an Int: ");  
+    int n = s.nextInt();  
+    for(int i = 1; i <= n; i++){  
+        for(int j = n; j > i; j--)  
+            System.out.print(" ");  
+        System.out.print("*");  
+        for(int x = 1; x < (i * 2) - 2; x++)  
+            System.out.print(i == n ? "*" : " ");  
+        if(i != 1)  
+            System.out.print("*");  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216223522.png]]
+```java
+public static void main(String[] args) {  
+    Scanner scanner = new Scanner(System.in);  
+    System.out.print("Enter the Number: ");  
+    int N=scanner.nextInt();  
+    for(int i=1;i<=N;i++){  
+        for(int j=1;j<=N;j++){  
+            System.out.print("* ");  
+        }  
+        System.out.println();  
+    }  
+}
+```
+![[Pasted image 20240216224312.png]]
+```java
+public class Main {  
+    public static void main(String[] args) {  
+        Scanner scanner = new Scanner(System.in);  
+        System.out.print("Enter the Number: ");  
+        int N=scanner.nextInt();  
+        for(int i=1;i<=N;i++){  
+            for(int j=1;j<=N;j++)  
+                if(i==1||i==N)  
+                    System.out.print("* ");  
+                 else  
+                     if(j==1||j==N)  
+                         System.out.print("* ");  
+                      else  
+                         System.out.print("  ");  
+             System.out.println();  
+        }  
+    }
+```
+![[Pasted image 20240217211925.png]]
+```java
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int N = 1 , M = 1 , s = n * n;
+        for(int i = 0; i < n ; i++){
+            for(int k = 0 ; k < i ; k++)
+                System.out.print("   ");
+            M = N;
+            for(int j = i ; j < n ; j++){
+                if(N<10)
+                    System.out.print("0");
+                System.out.print(N);
+                // System.out.print(" ");
+                N+=1;
+            }
+            for(int j = i ; j < n ; j++){
+
+                System.out.print(M + s);
+                // System.out.print(" ");
+                M+=1;
+            }
+            s= ((int)Math.sqrt(s)-1) * ((int)Math.sqrt(s)-1);
+            System.out.println("");
+        }
+    }
+}
+```
+![[Pasted image 20241219095029.png]]
+```java
+public class Main
+{
+	public static void main(String[] args) {
+	    int N = 1;
+		for(int i = 0 ;i<10;i++){
+		    if(i%2!=0)
+		        System.out.print(N+1+" ");
+		    for(int j =0 ; j<10;j++){
+		        System.out.print(N);
+		       if(j>=0 && j+1<=10)
+		        System.out.print(" ");
+		    }
+		    if(i%2==0)
+		        System.out.print(N+1);
+		    N+=1;
+		    System.out.println("");
+		 }
+	 }
+}
+```
+![[Pasted image 20241219112218.png]]
+
+```java
+class Main {
+    public static void main(String[] args) {
+        int n = 5;
+        for(int i = 1;i<2*n;i+=2){
+            for(int j = 1; j<=i;j++)
+                System.out.print(j);
+            System.out.println();
+        }
+        for(int i = n*2-3;i>=1;i-=2){
+            for(int j = 1; j<=i;j++)
+                System.out.print(j);
+            System.out.println();
+        }
+    }
+}
+```
+![[Pasted image 20250702094527.png]]
+
+```java
+
+```
