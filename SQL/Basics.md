@@ -317,7 +317,149 @@ SELECT * FROM employees WHERE name REGEXP '^A.*s$';
 ```
 
 Returns names starting with "A" and ending with "s."
+#### ✅ 1. `^` – Start of String
 
+#### 📘 Meaning:
+
+Matches only if the **pattern begins** at the **start** of the string.
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'apple' REGEXP '^a';  -- ✅ 1 (matches) SELECT 'banana' REGEXP '^a'; -- ❌ 0 (does not start with 'a')`
+
+---
+
+#### ✅ 2. `$` – End of String
+
+#### 📘 Meaning:
+
+Matches only if the **pattern ends** at the **end** of the string.
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'banana' REGEXP 'a$';   -- ✅ 1 (ends with 'a') SELECT 'grape' REGEXP 'a$';    -- ❌ 0`
+
+---
+
+#### ✅ 3. `.` – Any Single Character
+
+#### 📘 Meaning:
+
+Matches **exactly one character** of any kind (except line breaks).
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'cat' REGEXP 'c.t';     -- ✅ 1 (matches 'c' + any char + 't') SELECT 'cut' REGEXP 'c.t';     -- ✅ 1 SELECT 'ct'  REGEXP 'c.t';     -- ❌ 0 (missing middle character)`
+
+---
+
+#### ✅ 4. `*` – Zero or More Occurrences of Previous Character
+
+#### 📘 Meaning:
+
+Matches **zero or more times** of the character **just before the `*`**.
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'baaaa' REGEXP 'ba*';   -- ✅ 1 (matches 'b' + any number of 'a') SELECT 'b'     REGEXP 'ba*';   -- ✅ 1 (zero 'a') SELECT 'bc'    REGEXP 'ba*';   -- ✅ 1 (zero 'a') SELECT 'bac'   REGEXP 'ba*';   -- ✅ 1 SELECT 'bccc'  REGEXP 'ba*';   -- ❌ 0 ('a' missing)`
+
+---
+
+#### 5. `+` – One or More Occurrences of Previous Character
+
+#### 📘 Meaning:
+
+Matches **at least one** of the previous character.
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'baaaa' REGEXP 'ba+';   -- ✅ 1 (at least one 'a') SELECT 'ba'    REGEXP 'ba+';   -- ✅ 1 SELECT 'b'     REGEXP 'ba+';   -- ❌ 0 ('a' is required at least once)`
+
+---
+
+#### ✅ 6. `[ ]` – Character Class
+
+##### 📘 Meaning:
+
+Matches **any one character** inside the brackets.
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'cat' REGEXP 'c[aeiou]t'; -- ✅ 1 ('a' is in the set) SELECT 'cot' REGEXP 'c[aeiou]t'; -- ✅ 1 ('o' is in the set) SELECT 'cpt' REGEXP 'c[aeiou]t'; -- ❌ 0 ('p' is not in the set)`
+
+---
+
+#### ✅ 7. `[a-z]` – Character Range
+
+##### 📘 Meaning:
+
+Matches **any one character** from the given range (`a` to `z` lowercase).
+
+##### ✅ Example:
+
+sql
+
+CopyEdit
+
+`SELECT 'hello' REGEXP '[a-z]';   -- ✅ 1 (has lowercase letters) SELECT '1234'  REGEXP '[a-z]';   -- ❌ 0 (no letters) SELECT 'H'     REGEXP '[a-z]';   -- ❌ 0 (uppercase is not matched)`
+
+---
+
+#### ✅ Extra: Combine Them Together
+
+##### Example 1:
+
+sql
+
+CopyEdit
+
+`SELECT 'abc123' REGEXP '^[a-z]+[0-9]+$'; -- ✅ Starts with letters, ends with numbers -- ✅ Output: 1`
+
+##### ✅ Example 2:
+
+sql
+
+CopyEdit
+
+`SELECT 'a.b-c@leetcode.com' REGEXP '^[a-zA-Z][a-zA-Z0-9_.-]*@leetcode\\.com$'; -- ✅ Full email pattern with rules -- ✅ Output: 1`
+
+---
+
+#### 🧠 Summary Table
+
+| Symbol  | Meaning                                | Example Pattern | Matches Example     |
+| ------- | -------------------------------------- | --------------- | ------------------- |
+| `^`     | Start of string                        | `^a`            | `'apple'`           |
+| `$`     | End of string                          | `a$`            | `'banana'`          |
+| `.`     | Any one character                      | `c.t`           | `'cat', 'cut'`      |
+| `*`     | Zero or more of the previous character | `ba*`           | `'b', 'ba', 'baaa'` |
+| `+`     | One or more of the previous character  | `ba+`           | `'ba', 'baaa'`      |
+| `[abc]` | One of a set of characters             | `c[aeiou]t`     | `'cat', 'cot'`      |
+| `[a-z]` | Range of characters                    | `[a-z]`         | `'hello'`           |
 ### 12. `IS NULL`
 
 `IS NULL` checks for `NULL` values in a column.
@@ -622,6 +764,27 @@ SELECT COALESCE(NULL, NULL, NULL, 'Fallback', 'Other');
 
 # String Functions
 
+## 📚 **Common SQL String Functions (with Examples)**
+
+| Function                   | Description                                         | Example                        | Output     |
+| -------------------------- | --------------------------------------------------- | ------------------------------ | ---------- |
+| `CONCAT()`                 | Joins/combines two or more strings                  | `CONCAT('A', 'B')`             | `'AB'`     |
+| `LEN()`                    | Returns length of string (**SQL Server**)           | `LEN('Hello')`                 | `5`        |
+| `LENGTH()`                 | Returns length of string (**MySQL/PostgreSQL**)     | `LENGTH('Hello')`              | `5`        |
+| `UPPER()`                  | Converts string to **uppercase**                    | `UPPER('hello')`               | `'HELLO'`  |
+| `LOWER()`                  | Converts string to **lowercase**                    | `LOWER('HELLO')`               | `'hello'`  |
+| `LEFT()`                   | Returns leftmost N characters                       | `LEFT('Hello', 2)`             | `'He'`     |
+| `RIGHT()`                  | Returns rightmost N characters                      | `RIGHT('Hello', 3)`            | `'llo'`    |
+| `SUBSTRING()` / `SUBSTR()` | Extracts part of a string from a position           | `SUBSTRING('Hello', 2, 3)`     | `'ell'`    |
+| `REPLACE()`                | Replaces part of a string                           | `REPLACE('abcabc', 'a', 'x')`  | `'xbcxbc'` |
+| `TRIM()`                   | Removes spaces (or characters) from both ends       | `TRIM(' Hello ')`              | `'Hello'`  |
+| `LTRIM()`                  | Removes spaces from **left** side (**SQL Server**)  | `LTRIM(' Hello')`              | `'Hello'`  |
+| `RTRIM()`                  | Removes spaces from **right** side (**SQL Server**) | `RTRIM('Hello ')`              | `'Hello'`  |
+| `INSTR()`                  | Returns position of substring (**MySQL**)           | `INSTR('abcde', 'c')`          | `3`        |
+| `POSITION()`               | Position of substring (**PostgreSQL**)              | `POSITION('c' IN 'abcde')`     | `3`        |
+| `CHARINDEX()`              | Position of substring (**SQL Server**)              | `CHARINDEX('c', 'abcde')`      | `3`        |
+| `REVERSE()`                | Reverses a string                                   | `REVERSE('abc')`               | `'cba'`    |
+| `CONCAT_WS()`              | Concatenates with separator (**MySQL/PostgreSQL**)  | `CONCAT_WS('-', '2025', '07')` |            |
 ## ✅ 1. `CONCAT()` – Join Strings Together
 
 ### 🔹 Purpose:
@@ -1655,7 +1818,7 @@ They are often used with `GROUP BY` or in queries to get totals, averages, count
 
 #### 🔹 1. `COUNT()` – Count Rows
 
-### ✅ Example:
+##### ✅ Example:
 
 sql
 
@@ -1667,7 +1830,7 @@ CopyEdit
 
 ---
 
-### ✅ With a condition:
+##### ✅ With a condition:
 
 sql
 
@@ -1681,7 +1844,7 @@ CopyEdit
 
 #### 🔹 2. `SUM()` – Total of Column
 
-### ✅ Example:
+##### Example:
 
 sql
 
@@ -1695,7 +1858,7 @@ CopyEdit
 
 #### 🔹 3. `AVG()` – Average Value
 
-#### ✅ Example:
+##### ✅ Example:
 
 sql
 
@@ -1709,7 +1872,7 @@ CopyEdit
 
 #### 🔹 4. `MIN()` and `MAX()` – Lowest & Highest
 
-#### ✅ Example:
+##### Example:
 
 sql
 
@@ -1726,6 +1889,123 @@ CopyEdit
 
 ---
 
+#### 🔹 5.`GROUP_CONCAT()` – Combine Grouped Values into a String
+
+##### **Purpose**:
+
+`GROUP_CONCAT()` is an **aggregate function** in MySQL used to **combine multiple rows into a single string**, separated by a comma (or custom delimiter).
+
+---
+
+##### Syntax:
+
+```sql
+GROUP_CONCAT([DISTINCT] column_name
+             [ORDER BY col ASC|DESC]
+             [SEPARATOR 'separator'])
+```
+
+---
+
+##### 📘 Example Table: `students`
+
+|class|student_name|
+|---|---|
+|A|Alice|
+|A|Bob|
+|B|Charlie|
+|B|David|
+
+---
+
+##### ✅ Example 1: Basic Group Concatenation
+
+```sql
+SELECT class,
+       GROUP_CONCAT(student_name) AS students
+FROM students
+GROUP BY class;
+```
+
+###### 🔹 Output:
+
+|class|students|
+|---|---|
+|A|Alice,Bob|
+|B|Charlie,David|
+
+---
+
+##### ✅ Example 2: With `ORDER BY` Inside
+
+```sql
+SELECT class,
+       GROUP_CONCAT(student_name ORDER BY student_name DESC) AS students
+FROM students
+GROUP BY class;
+```
+
+🔸 Orders names descending inside each group.
+
+---
+
+##### ✅ Example 3: With Custom Separator
+
+```sql
+SELECT class,
+       GROUP_CONCAT(student_name SEPARATOR ' | ') AS students
+FROM students
+GROUP BY class;
+```
+
+🔸 Output:
+
+|class|students|
+|---|---|
+|A|Alice|
+|B|Charlie|
+
+---
+
+##### ✅ Example 4: With `DISTINCT` to avoid duplicates
+
+```sql
+SELECT class,
+       GROUP_CONCAT(DISTINCT student_name) AS students
+FROM students
+GROUP BY class;
+```
+
+🔸 Removes duplicate names in the group.
+
+---
+
+##### 🧠 Notes:
+
+- `GROUP_CONCAT()` is **MySQL-specific** (not supported in SQL Server or PostgreSQL directly).
+    
+- Default separator is `,`.
+    
+- You can **limit result length** using:
+    
+    ```sql
+    SET SESSION group_concat_max_len = 100000;
+    ```
+    
+
+---
+
+##### ✅ Summary Table:
+
+| Feature              | Usage Example                                |
+| -------------------- | -------------------------------------------- |
+| Basic use            | `GROUP_CONCAT(name)`                         |
+| With sort            | `GROUP_CONCAT(name ORDER BY name DESC)`      |
+| Custom separator     | `GROUP_CONCAT(name SEPARATOR '               |
+| Remove duplicates    | `GROUP_CONCAT(DISTINCT name)`                |
+| Set max length limit | `SET SESSION group_concat_max_len = 100000;` |
+
+---
 #### 🔸 Using `GROUP BY` with Aggregate Functions
 
 You can use `GROUP BY` to get aggregate values **per group**.
@@ -1905,148 +2185,220 @@ WHERE department_id = 2;
 ```
 
 ---
+##  **What is a Subquery?**
 
-## **🔹 SQL Subqueries (With Clear Examples)**
-
-A **subquery** is a SQL query **inside another query**. It can be used in **`SELECT`**, **`FROM`**, **`WHERE`**, or **`HAVING`** clauses.
-
----
-
-## **🔹 Types of Subqueries**
-
-### 1️⃣ **Subquery in `SELECT` (Scalar Subquery)**
-
-- Used to **fetch a single value** and use it in the main query.
-
-### 2️⃣ **Subquery in `WHERE` (Filtering Condition)**
-
-- Used to **filter results based on another query**.
-
-### 3️⃣ **Subquery in `FROM` (Derived Table)**
-
-- Used to **treat a subquery result as a table**.
-
-### 4️⃣ **Subquery in `HAVING` (Filtering Groups)**
-
-- Used to **filter grouped data**.
+A **subquery** (also called an **inner query** or **nested query**) is a query **inside another query**.  
+It's used when you want to get data from one query and **use it inside another**.
 
 ---
 
-## **🔹 1️⃣ Subquery in `SELECT` Clause**
+# ✅ **1. Basic Subquery (in WHERE clause)**
 
-**Goal:** Find employee salaries and how they compare to the **average salary**.
+### 🧠 Use Case:
 
-```sql
-SELECT name, salary, 
-       (SELECT AVG(salary) FROM employees) AS avg_salary
-FROM employees;
-```
+To **filter data** based on a result from another query.
 
-### **🔹 Output**
+### 🗂️ Example Tables:
 
-|name|salary|avg_salary|
+**Employees**
+
+|id|name|department_id|
 |---|---|---|
-|Alice|50,000|58,750|
-|Bob|60,000|58,750|
-|John|55,000|58,750|
-|Emma|70,000|58,750|
+|1|Alice|1|
+|2|Bob|2|
+|3|Charlie|1|
 
-✅ **The subquery calculates the average salary** and displays it in each row.
+**Departments**
+
+|id|dept_name|
+|---|---|
+|1|HR|
+|2|Engineering|
 
 ---
 
-## **🔹 2️⃣ Subquery in `WHERE` Clause**
+### 📌 Example Query:
 
-**Goal:** Get employees earning **above the average salary**.
+Find employees who work in the **HR** department.
 
 ```sql
-SELECT name, salary 
-FROM employees
-WHERE salary > (SELECT AVG(salary) FROM employees);
+SELECT name
+FROM Employees
+WHERE department_id = (
+    SELECT id
+    FROM Departments
+    WHERE dept_name = 'HR'
+);
 ```
 
-### **🔹 Output**
-
-|name|salary|
-|---|---|
-|Bob|60,000|
-|Emma|70,000|
-
-✅ **The subquery calculates the average salary**, and the main query filters employees with higher salaries.
+✅ Here, the **subquery** returns `1` (id of HR), and the outer query selects employees with `department_id = 1`.
 
 ---
 
-## **1️⃣ Subquery in `FROM` Clause (Derived Table)**
+# ✅ **2. Subquery in SELECT Clause**
 
-### **🔹 Query Breakdown**
+### 🧠 Use Case:
+
+To add a **calculated column** using another query.
+
+### 📌 Example Query:
+
+Show each employee's name and their department name.
 
 ```sql
-SELECT department_id, avg_salary 
+SELECT name,
+    (SELECT dept_name 
+     FROM Departments 
+     WHERE Departments.id = Employees.department_id) AS dept_name
+FROM Employees;
+```
+
+✅ The subquery runs **for each row** in Employees.
+
+---
+
+# ✅ **3. Subquery in FROM Clause** (Derived Table / Inline View)
+
+### 🧠 Use Case:
+
+Use a subquery as a **temporary table**.
+
+### 📌 Example Query:
+
+Get the number of employees in each department.
+
+```sql
+SELECT dept_name, COUNT(*) AS total_employees
 FROM (
-    SELECT department_id, AVG(salary) AS avg_salary
-    FROM employees 
-    GROUP BY department_id
-) AS dept_avg;
+    SELECT e.id, d.dept_name
+    FROM Employees e
+    JOIN Departments d ON e.department_id = d.id
+) AS dept_employees
+GROUP BY dept_name;
 ```
 
-### **🔹 What This Query Does**
-
-1. **Inner Query (Subquery)**
-    
-    ```sql
-    SELECT department_id, AVG(salary) AS avg_salary
-    FROM employees 
-    GROUP BY department_id;
-    ```
-    
-    - This **groups** employees by `department_id`.
-    - It calculates the **average salary** for each department.
-2. **Outer Query**
-    
-    ```sql
-    SELECT department_id, avg_salary 
-    FROM (...) AS dept_avg;
-    ```
-    
-    - The **outer query** selects the `department_id` and `avg_salary` from the **subquery result**.
+✅ The subquery (`dept_employees`) returns a combined table with employee and department names, which is then grouped.
 
 ---
 
-### **🔹 Example with Data**
+# ✅ **4. Correlated Subquery**
 
-#### **👨‍💻 Sample `employees` Table**
+### 🧠 Use Case:
 
-|employee_id|name|salary|department_id|
-|---|---|---|---|
-|1|Alice|50,000|1|
-|2|Bob|60,000|2|
-|3|John|55,000|1|
-|4|Emma|70,000|3|
+A subquery that **depends on each row** from the outer query.
 
-#### **🔹 Step 1: Subquery Result (Average Salary per Department)**
+### 📌 Example Query:
 
-|department_id|avg_salary|
-|---|---|
-|1|52,500|
-|2|60,000|
-|3|70,000|
+Get employees whose department has more than 1 employee.
 
-#### **🔹 Step 2: Outer Query Reads the Table**
+```sql
+SELECT name
+FROM Employees e1
+WHERE (
+    SELECT COUNT(*) 
+    FROM Employees e2 
+    WHERE e2.department_id = e1.department_id
+) > 1;
+```
 
-- The main query **fetches results from this derived table** and displays them.
-
-### **🔹 Final Output**
-
-|department_id|avg_salary|
-|---|---|
-|1|52,500|
-|2|60,000|
-|3|70,000|
-
-✅ **This method is useful when you need to compute something first and then filter or process it further.**
+✅ The subquery is **correlated** with the outer query — it runs for each employee.
 
 ---
 
+# ✅ **5. EXISTS with Subquery**
+
+### 🧠 Use Case:
+
+Check if **a row exists** in another table.
+
+### 📌 Example Query:
+
+Get departments that have employees.
+
+```sql
+SELECT dept_name
+FROM Departments d
+WHERE EXISTS (
+    SELECT 1
+    FROM Employees e
+    WHERE e.department_id = d.id
+);
+```
+
+✅ The subquery checks whether **at least one employee** is in that department.
+
+---
+
+# ✅ **6. NOT EXISTS Subquery**
+
+### 📌 Example Query:
+
+Get departments with **no employees**.
+
+```sql
+SELECT dept_name
+FROM Departments d
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Employees e
+    WHERE e.department_id = d.id
+);
+```
+
+✅ Subquery returns false if any employee exists in that department.
+
+---
+
+# ✅ **7. IN vs EXISTS vs JOIN**
+
+- `IN` is simple, but can be slower with large subquery result sets.
+    
+- `EXISTS` is usually faster when subquery returns **a lot of rows**.
+    
+- `JOIN` is better if you want to **return data from both tables**.
+    
+
+---
+
+# ✅ **8. Subquery with Aggregates**
+
+### 📌 Example Query:
+
+Get employees who earn **more than the average salary**.
+
+```sql
+SELECT name, salary
+FROM Employees
+WHERE salary > (
+    SELECT AVG(salary) FROM Employees
+);
+```
+
+✅ Subquery calculates average salary, outer query compares it.
+
+---
+
+# ✅ **9. Nested Subqueries**
+
+### 📌 Example:
+
+Find employees in the **department with the highest total salary**.
+
+```sql
+SELECT name
+FROM Employees
+WHERE department_id = (
+    SELECT department_id
+    FROM Employees
+    GROUP BY department_id
+    ORDER BY SUM(salary) DESC
+    LIMIT 1
+);
+```
+
+✅ Inner subquery finds the `department_id` with max salary sum.
+
+---
 ## **2️⃣ Subquery in `HAVING` Clause**
 
 ### **🔹 Query Breakdown**
@@ -2112,7 +2464,7 @@ HAVING AVG(salary) > 58,750;
 
 ---
 
-## **🔹 Key Takeaways**
+### **🔹 Key Takeaways**
 
 ### **📌 Subquery in `FROM` (Derived Table)**
 
@@ -2126,7 +2478,7 @@ HAVING AVG(salary) > 58,750;
 
 ---
 
-## **🔹 Summary Table**
+### **🔹 Summary Table**
 
 |**Type**|**When to Use?**|**Example Use Case**|
 |---|---|---|
@@ -2134,7 +2486,7 @@ HAVING AVG(salary) > 58,750;
 |**Subquery in `HAVING`**|When you need to **filter groups** based on a condition|Find **departments where the avg salary is above the global avg**|
 
 Would you like more examples or clarification on any part? 🚀
-## **🔹 Key Takeaways**
+### **🔹 Key Takeaways**
 
 ✔ **Subqueries help perform nested calculations**.  
 ✔ Can be used in **`SELECT`**, **`WHERE`**, **`FROM`**, and **`HAVING`**.  
@@ -2172,6 +2524,21 @@ SOURCE /path/to/backup.sql;
 ---
 
 Let me know if you want deeper explanations or further examples for any specific topic!
+
+
+### 🚀 Summary Table
+
+|Subquery Type|Where Used?|Key Use Case|
+|---|---|---|
+|Basic Subquery|WHERE clause|Filtering using another query|
+|Subquery in SELECT|SELECT clause|Adding extra info/column|
+|Subquery in FROM|FROM clause|Treat as temporary/virtual table|
+|Correlated Subquery|WHERE/SELECT|Subquery depends on outer query|
+|EXISTS / NOT EXISTS|WHERE clause|Check if rows exist or not|
+|Nested Subqueries|Anywhere|Layered logic (complex scenarios)|
+
+---
+
 
 
 # Numeric & Math Functions in SQL**

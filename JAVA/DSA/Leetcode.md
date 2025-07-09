@@ -3847,6 +3847,37 @@ class Solution {
     }
 }
 ```
+## [81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/)
+```java
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int l = 0,r = nums.length-1,mid = 0;
+        while(l<=r){
+            mid = l+(r-l)/2;
+            if(nums[mid] == target)
+                return true;
+            
+            if(nums[l] == nums[mid] && nums[r] == nums[mid]){
+                l++;
+                r--;
+            }
+            else if(nums[l]<=nums[mid]){
+                if(nums[l]<=target && target < nums[mid])
+                    r = mid-1;
+                else
+                    l =mid +1;
+            }
+            else {
+                if(nums[mid]<target && target <= nums[r])
+                    l =mid +1;
+                else
+                    r = mid-1;
+            }
+        }
+        return false;
+    }
+}
+```
 ## [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 ```java
 class Solution {
@@ -4036,6 +4067,28 @@ public int minDays(int[] bloomDay, int m, int k) {
 }
 ```
 ## [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+```java
+class Solution {
+    public int findMin(int[] nums) {
+       int l=0,r=nums.length-1;
+     
+       while(l<=r){  
+        int mid = (l+r)/2;
+        if(nums[0]<=nums[r]) 
+                return nums[0];
+        if(nums[mid]>nums[mid+1])
+                return nums[mid+1];
+        if(nums[mid-1]>nums[mid])
+                return nums[mid];
+        if(nums[0]<nums[mid])
+                l=mid+1;
+        else
+                r=mid-1;
+        }
+        return 0;
+    }
+}
+```
 # Binary Tree
 
 ## [700. Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
@@ -6444,6 +6497,88 @@ class Solution {
 ```
 ##
 
+# Subsquences 
+## [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+
+**TLE
+```java
+import java.util.*;
+
+class Solution {
+    public String minWindow(String s, String t) {
+        int n = s.length(), m = t.length();
+        if (n < m) return "";
+
+        int l = 0, r = 0;
+        String result = "";  
+        int minLen = Integer.MAX_VALUE;
+
+        while (r < n) {
+            if (l <= r) {
+                String s1 = s.substring(l, r + 1);
+                if (containsAllChars(s1, t)) {
+                    if (r - l + 1 < minLen) {
+                        result = s1;
+                        minLen = r - l + 1;
+                    }
+                    l++;
+                } else {
+                    r++; 
+                }
+            } else {
+                r++;  
+            }
+        }
+
+        return result;
+    }
+
+    private boolean containsAllChars(String s1, String s2) {
+        int[] s1Count = new int[128];
+        int[] s2Count = new int[128];
+        for (char c : s1.toCharArray()) s1Count[c]++;
+        for (char c : s2.toCharArray()) s2Count[c]++;
+        for (int i = 0; i < 128; i++) {
+            if (s2Count[i] > s1Count[i]) return false;
+        }
+        return true;
+    }
+}
+```
+Optimized
+```java
+class Solution {
+    public String minWindow(String s, String t) {
+        if (s.length() < t.length()) return "";
+        int[] tFreq = new int[128];
+        for (char c : t.toCharArray()) tFreq[c]++;
+        int[] windowFreq = new int[128];
+        int have = 0, need = t.length();
+        int left = 0, minLen = Integer.MAX_VALUE, start = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            windowFreq[c]++;
+            if (tFreq[c] > 0 && windowFreq[c] <= tFreq[c]) {
+                have++;
+            }
+            while (have == need) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    start = left;
+                }
+                char leftChar = s.charAt(left);
+                windowFreq[leftChar]--;
+
+                if (tFreq[leftChar] > 0 && windowFreq[leftChar] < tFreq[leftChar]) {
+                    have--;
+                }
+                left++;
+            }
+        }
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+    }
+}
+```
 # PATTERN PRINTING
 #PATTERNPRINTING
 ```java
