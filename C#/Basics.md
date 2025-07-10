@@ -318,3 +318,210 @@ Console.WriteLine(result); // true
 
 
 ![[Pasted image 20250709231545.png]]
+
+## **Functions in C#**
+
+![[Pasted image 20250710231254.png]]![[Pasted image 20250710231256.png]]
+
+
+In C#, a **function** (also called a **method**) is a block of code that performs a task. It can **accept inputs**, **perform operations**, and **return results**.
+
+---
+
+### 🔹 Basic Function Syntax:
+
+```csharp
+returnType FunctionName(parameterList)
+{
+    // body
+    return value;
+}
+```
+
+---
+
+### 1. **Function Without Parameters and Return**
+
+```csharp
+static void Greet()
+{
+    Console.WriteLine("Hello from a function!");
+}
+```
+
+Call it in `Main`:
+
+```csharp
+Greet();
+```
+
+---
+
+### 2. **Function With Parameters**
+
+```csharp
+static void GreetUser(string name)
+{
+    Console.WriteLine("Hello, " + name + "!");
+}
+```
+
+```csharp
+GreetUser("Prakash");
+```
+
+---
+
+### 3. **Function That Returns a Value**
+
+```csharp
+static int Add(int a, int b)
+{
+    return a + b;
+}
+```
+
+```csharp
+int result = Add(10, 5);
+Console.WriteLine("Sum: " + result);
+```
+
+---
+
+### 4. **Function Overloading (Same Name, Different Parameters)**
+
+```csharp
+static int Multiply(int a, int b) => a * b;
+
+static double Multiply(double a, double b) => a * b;
+```
+
+---
+
+### 5. **Main Method - Entry Point**
+
+```csharp
+static void Main(string[] args)
+{
+    // this is where your program starts running
+}
+```
+
+---
+
+### **Operators**
+
+- Arithmetic (`+`, `-`, `*`, `/`, `%`)
+    
+- Comparison (`==`, `!=`, `<`, `>`, `<=`, `>=`)
+    
+- Logical (`&&`, `||`, `!`)
+    
+- Assignment (`=`, `+=`, `-=`, `*=`, `/=`)
+    
+- Increment/Decrement (`++`, `--`)
+    
+
+### **If-Else & Nested Conditions**
+
+- `if`, `else if`, `else`
+    
+- `switch-case` structure
+    
+
+###  **Loops**
+
+- `for` loop
+    
+- `while` loop
+    
+- `do-while` loop
+    
+- `break` and `continue`
+    
+
+---
+
+####  Hands-On Practice Code Snippets
+
+---
+
+### Operators Example
+![[Pasted image 20250710233017.png]]
+
+```csharp
+int a = 10, b = 3;
+
+Console.WriteLine("Sum: " + (a + b));
+Console.WriteLine("Modulus: " + (a % b));
+Console.WriteLine("a > b? " + (a > b));
+Console.WriteLine("Logical AND: " + ((a > 5) && (b < 5)));
+```
+
+---
+
+### If-Else Example
+
+```csharp
+int num = 15;
+if (num > 0)
+    Console.WriteLine("Positive");
+else if (num < 0)
+    Console.WriteLine("Negative");
+else
+    Console.WriteLine("Zero");
+```
+
+---
+
+### Switch Case
+
+```csharp
+int day = 3;
+switch (day)
+{
+    case 1: Console.WriteLine("Monday"); break;
+    case 2: Console.WriteLine("Tuesday"); break;
+    case 3: Console.WriteLine("Wednesday"); break;
+    default: Console.WriteLine("Invalid day"); break;
+}
+```
+
+---
+
+### For Loop
+
+```csharp
+for (int i = 1; i <= 5; i++)
+{
+    Console.WriteLine("Number: " + i);
+}
+```
+
+---
+
+### While Loop
+
+```csharp
+int i = 1;
+while (i <= 5)
+{
+    Console.WriteLine("Count: " + i);
+    i++;
+}
+```
+
+---
+
+### Do While Loop
+
+```csharp
+int j = 1;
+do
+{
+    Console.WriteLine("Do While: " + j);
+    j++;
+} while (j <= 5);
+```
+
+---

@@ -2536,6 +2536,7 @@ Let me know if you want deeper explanations or further examples for any specific
 |Correlated Subquery|WHERE/SELECT|Subquery depends on outer query|
 |EXISTS / NOT EXISTS|WHERE clause|Check if rows exist or not|
 |Nested Subqueries|Anywhere|Layered logic (complex scenarios)|
+### [[SQL Exercises.pdf]](SubQuery Excercises)
 
 ---
 
@@ -2716,7 +2717,18 @@ This is how **window functions** work in SQL — they allow you to compute value
 ## 🧱 Full Breakdown of Each Part:
 
 ---
+• expression|column: The target column for which the window function will compute a
+value.
+• OVER() clause: Defines the window or set of rows on which the window function
+operates. Without this clause, the function operates on all rows in the result set.
+• PARTITION BY (Optional): Divides the result set into partitions or sets, and the window
+function is applied to each partition separately. It works similarly to GROUP BY, but it
+doesn't reduce the number of rows.
 
+◦ SUM(salary) OVER (PARTITION BY department)
+
+• ORDER BY (Optional): Specifies the order in which rows are processed within each
+partition. Useful for ranking or time-based calculations.
 ### ✅ 1. `<function_name>()`
 
 This is the **window function** you're using. Some common ones are:
@@ -2985,7 +2997,16 @@ FROM sales;
 ---
 
 ## 🔸 5. `LAG()` – Previous row’s value
-
+Syntax:
+----------------------------------------------------------------
+```sql
+LAG(column_name, offset, default_value)
+OVER ( [ PARTITION BY expr_list optional ]
+ORDER BY order_list )
+```
+ column_name: The column from which to fetch the value.
+ offset: Number of rows behind from the current row (default is 1).
+ default_value: Value to return if the offset goes beyond the dataset (optional).
 ```sql
 SELECT employee, department, sales,
   LAG(sales) OVER (PARTITION BY department ORDER BY sales) AS previous_sales
@@ -3007,7 +3028,16 @@ FROM sales;
 ---
 
 ## 🔸 6. `LEAD()` – Next row’s value
-
+Syntax:
+----------------------------------------------------------------
+```sql
+LEAD(column_name, offset, default_value)
+OVER ( [ PARTITION BY expr_list optional ]
+ORDER BY order_list )
+```
+ column_name: The column from which to fetch the value.
+ offset: Number of rows ahead from the current row (default is 1).
+ default_value: Value to return if the offset goes beyond the dataset (optional).
 ```sql
 SELECT employee, department, sales,
   LEAD(sales) OVER (PARTITION BY department ORDER BY sales) AS next_sales
@@ -3061,8 +3091,11 @@ FROM sales;
 | `LAG()`        | Get value from previous row   |
 | `LEAD()`       | Get value from next row       |
 | `NTILE(n)`     | Distribute rows into n groups |
-
+|                |                               |
+***Nth_VALUE(),FIRST_VALUE() and LAST_VALUE() are in below pdf
+### [[WINDOW FUNCTIONS GUIDE.pdf]]
 ---
+
 ## 🔰 What is a CTE?
 
 A **Common Table Expression (CTE)** is a temporary result set you can reference within a `SELECT`, `INSERT`, `UPDATE`, or `DELETE` query.
@@ -3234,6 +3267,8 @@ WHERE e.primary_flag = 'Y' OR d.dept_count = 1;
 ---
 
 Would you like practice questions or use CTEs in specific real-world scenarios (e.g., top N per group, salary hierarchy, etc.)?
+#### [[Advanced SQL.pdf]]
+### [[🚀 Top 10 Complex SQL Queries You Must Know! 🛠️___.pdf]]
 # Frequently Asked Questions
 
 **What is SQL used for?**
