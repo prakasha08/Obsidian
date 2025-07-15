@@ -6579,6 +6579,28 @@ class Solution {
     }
 }
 ```
+## Longest Common Substring(https://www.geeksforgeeks.org/problems/longest-common-substring1452/1)
+```java
+class Solution {
+    public int longestCommonSubstr(String s1, String s2) {
+        int max = 0;
+
+        String shorter = (s1.length() < s2.length()) ? s1 : s2;
+        String longer = (s1.length() < s2.length()) ? s2 : s1;
+
+        for (int i = 0; i < shorter.length(); i++) {
+            for (int j = i; j < shorter.length(); j++) {
+                String sub = shorter.substring(i, j + 1); 
+                if (longer.contains(sub)) {
+                    max = Math.max(max, j - i + 1);
+                }
+            }
+        }
+        return max;
+    }
+}
+
+```
 # PATTERN PRINTING
 #PATTERNPRINTING
 ```java

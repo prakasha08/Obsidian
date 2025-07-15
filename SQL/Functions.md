@@ -54,13 +54,14 @@ In MySQL, several **date and time functions** allow manipulation of dates like `
 
 ### **5. Miscellaneous**
 
-|Function|Description|Example|
-|---|---|---|
-|`LAST_DAY(date)`|Returns the last day of the month for the given date|`LAST_DAY('2024-03-01')` → `'2024-03-31'`|
-|`WEEK(date)`|Returns the week number (0-53)|`WEEK('2024-03-01')` → `9`|
-|`DAYOFWEEK(date)`|Returns the weekday index (1=Sunday, 7=Saturday)|`DAYOFWEEK('2024-03-01')` → `6 (Friday)`|
-|`DAYOFYEAR(date)`|Returns the day of the year (1-366)|`DAYOFYEAR('2024-03-01')` → `61`|
-|`QUARTER(date)`|Returns the quarter (1-4)|`QUARTER('2024-03-01')` → `1`|
+| Function          | Description                                          | Example                                   |
+| ----------------- | ---------------------------------------------------- | ----------------------------------------- |
+| `LAST_DAY(date)`  | Returns the last day of the month for the given date | `LAST_DAY('2024-03-01')` → `'2024-03-31'` |
+| `WEEK(date)`      | Returns the week number (0-53)                       | `WEEK('2024-03-01')` → `9`                |
+| `DAYOFWEEK(date)` | Returns the weekday index (1=Sunday, 7=Saturday)     | `DAYOFWEEK('2024-03-01')` → `6 (Friday)`  |
+| `DAYOFYEAR(date)` | Returns the day of the year (1-366)                  | `DAYOFYEAR('2024-03-01')` → `61`          |
+| `QUARTER(date)`   | Returns the quarter (1-4)                            | `QUARTER('2024-03-01')` → `1`             |
+|                   |                                                      |                                           |
 
 ---
 

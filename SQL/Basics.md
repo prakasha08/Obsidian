@@ -1,4 +1,4 @@
-
++
 ### 1. `SELECT`
 
 The `SELECT` statement retrieves specific columns or all columns (`*`) from a table.
@@ -325,10 +325,6 @@ Matches only if the **pattern begins** at the **start** of the string.
 
 ##### ✅ Example:
 
-sql
-
-CopyEdit
-
 `SELECT 'apple' REGEXP '^a';  -- ✅ 1 (matches) SELECT 'banana' REGEXP '^a'; -- ❌ 0 (does not start with 'a')`
 
 ---
@@ -357,10 +353,6 @@ Matches **exactly one character** of any kind (except line breaks).
 
 ##### ✅ Example:
 
-sql
-
-CopyEdit
-
 `SELECT 'cat' REGEXP 'c.t';     -- ✅ 1 (matches 'c' + any char + 't') SELECT 'cut' REGEXP 'c.t';     -- ✅ 1 SELECT 'ct'  REGEXP 'c.t';     -- ❌ 0 (missing middle character)`
 
 ---
@@ -388,10 +380,6 @@ CopyEdit
 Matches **at least one** of the previous character.
 
 ##### ✅ Example:
-
-sql
-
-CopyEdit
 
 `SELECT 'baaaa' REGEXP 'ba+';   -- ✅ 1 (at least one 'a') SELECT 'ba'    REGEXP 'ba+';   -- ✅ 1 SELECT 'b'     REGEXP 'ba+';   -- ❌ 0 ('a' is required at least once)`
 
@@ -1440,13 +1428,13 @@ They are often used with `GROUP BY` or in queries to get totals, averages, count
 
 ### 🔸 Common Aggregate Functions
 
-|Function|Description|
-|---|---|
-|`COUNT()`|Counts rows|
-|`SUM()`|Adds up numeric values|
-|`AVG()`|Calculates average of numeric values|
-|`MIN()`|Finds the smallest (minimum) value|
-|`MAX()`|Finds the largest (maximum) value|
+| Function  | Description                          |
+| --------- | ------------------------------------ |
+| `COUNT()` | Counts rows                          |
+| `SUM()`   | Adds up numeric values               |
+| `AVG()`   | Calculates average of numeric values |
+| `MIN()`   | Finds the smallest (minimum) value   |
+| `MAX()`   | Finds the largest (maximum) value    |
 
 ---
 
@@ -1567,13 +1555,13 @@ HAVING AVG(salary) > 40000;
 
 ### ✅ Summary Table
 
-|Function|Purpose|Example|
-|---|---|---|
-|`COUNT()`|Count rows|`COUNT(*)` or `COUNT(column)`|
-|`SUM()`|Add values|`SUM(price)`|
-|`AVG()`|Average of values|`AVG(score)`|
-|`MIN()`|Smallest value|`MIN(age)`|
-|`MAX()`|Largest value|`MAX(salary)`|
+| Function  | Purpose           | Example                       |
+| --------- | ----------------- | ----------------------------- |
+| `COUNT()` | Count rows        | `COUNT(*)` or `COUNT(column)` |
+| `SUM()`   | Add values        | `SUM(price)`                  |
+| `AVG()`   | Average of values | `AVG(score)`                  |
+| `MIN()`   | Smallest value    | `MIN(age)`                    |
+| `MAX()`   | Largest value     | `MAX(salary)`                 |
 
 ---
 
@@ -1592,7 +1580,7 @@ HAVING AVG(salary) > 40000;
 
 ---
 
-Would you like some **practice problems**, or a **visual example** using real data?
+
 ## GROUP BY – What is it?
 
 **`GROUP BY`** is used to **group rows** that have the same values in a specified column. After grouping, we can use **aggregate functions** like `COUNT()`, `SUM()`, `AVG()`, `MAX()`, `MIN()`, etc., to perform calculations on each group.
@@ -2733,15 +2721,15 @@ partition. Useful for ranking or time-based calculations.
 
 This is the **window function** you're using. Some common ones are:
 
-|Function|What it does|
-|---|---|
-|`ROW_NUMBER()`|Gives a unique row number within a partition|
-|`RANK()`|Gives a rank with gaps if values are equal|
-|`DENSE_RANK()`|Like `RANK()` but no gaps|
-|`SUM(column)`|Running total (cumulative sum)|
-|`AVG(column)`|Running average|
-|`LAG(column, n)`|Gets value from `n` rows before the current one|
-|`LEAD(column, n)`|Gets value from `n` rows after the current one|
+| Function          | What it does                                    |
+| ----------------- | ----------------------------------------------- |
+| `ROW_NUMBER()`    | Gives a unique row number within a partition    |
+| `RANK()`          | Gives a rank with gaps if values are equal      |
+| `DENSE_RANK()`    | Like `RANK()` but no gaps                       |
+| `SUM(column)`     | Running total (cumulative sum)                  |
+| `AVG(column)`     | Running average                                 |
+| `LAG(column, n)`  | Gets value from `n` rows before the current one |
+| `LEAD(column, n)` | Gets value from `n` rows after the current one  |
 
 ---
 
