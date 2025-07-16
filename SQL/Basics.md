@@ -1,4 +1,4 @@
-+
+
 ### 1. `SELECT`
 
 The `SELECT` statement retrieves specific columns or all columns (`*`) from a table.

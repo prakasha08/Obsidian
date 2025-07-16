@@ -408,7 +408,91 @@ static void Main(string[] args)
 ```
 
 ---
+### **Var**
 
+- `var` is a **keyword** used to **implicitly declare a variable**, letting the compiler **infer the type** from the value assigned.
+    
+- Introduced in **C# 3.0**
+    
+- Still **strongly typed** — once a type is inferred, it **cannot be changed**.
+    
+
+---
+
+####  Syntax:
+
+```csharp
+var variableName = value;
+```
+
+🧠 The type is **determined at compile time** — **not dynamic** like JavaScript.
+
+---
+
+#### Examples:
+
+```csharp
+var age = 25;            // Inferred as int
+var name = "Prakash";    // Inferred as string
+var price = 99.99;       // Inferred as double
+var isActive = true;     // Inferred as bool
+```
+
+✅ These are **equivalent** to:
+
+```csharp
+int age = 25;
+string name = "Prakash";
+double price = 99.99;
+bool isActive = true;
+```
+
+---
+
+#### 🚫 Invalid Use of `var`
+
+```csharp
+var x; // ❌ Error: Must be initialized
+```
+
+- The compiler **must know the type** at the time of declaration.
+    
+
+---
+
+#### 💡 Best Practices for `var`
+
+|👍 Use `var` when…|👎 Avoid `var` when…|
+|---|---|
+|The type is **obvious from the right-hand side**|It makes code **less readable**|
+|You're working with **LINQ** or **anonymous types**|You're **learning the language** and need clarity|
+|Reducing repetition in **long types**|You assign `null` or unclear types|
+
+---
+
+#### ✅ Real-Life Example:
+
+```csharp
+var students = new List<string> { "Ram", "Priya", "Kiran" };
+
+foreach (var student in students)
+{
+    Console.WriteLine(student);
+}
+```
+
+---
+
+####  Difference Between `var`, `dynamic`, and `object`
+
+|Feature|`var`|`dynamic`|`object`|
+|---|---|---|---|
+|Type inferred at compile time|✅ Yes|❌ No (runtime)|❌ No (runtime)|
+|Type-safe|✅ Yes|❌ No|❌ No|
+|Can change type later|❌ No|✅ Yes|✅ Yes|
+|Use case|Clean syntax, known types|COM, JSON, reflection|Boxing/unboxing|
+
+---
 ### **Operators**
 
 - Arithmetic (`+`, `-`, `*`, `/`, `%`)
@@ -523,5 +607,317 @@ do
     j++;
 } while (j <= 5);
 ```
+
+### Foreach Loop
+
+
+🔹 Purpose:
+
+The `foreach` loop is used to iterate over elements in a **collection** or **array** without needing to manage an index manually.
+
+---
+
+#### 🔧 Syntax:
+
+```csharp
+foreach (datatype variable in collection)
+{
+    // code to execute for each element
+}
+```
+
+---
+
+#### ✅ 1. **Example with an Array**
+
+```csharp
+string[] fruits = { "Apple", "Banana", "Mango" };
+
+foreach (string fruit in fruits)
+{
+    Console.WriteLine(fruit);
+}
+```
+
+🧾 Output:
+
+```
+Apple
+Banana
+Mango
+```
+
+---
+
+#### ✅ 2. **Example with List**
+
+```csharp
+List<int> numbers = new List<int> { 10, 20, 30 };
+
+foreach (int num in numbers)
+{
+    Console.WriteLine("Number: " + num);
+}
+```
+
+---
+
+#### ✅ 3. **Example with Dictionary**
+
+```csharp
+Dictionary<string, int> studentMarks = new Dictionary<string, int>
+{
+    { "Alice", 90 },
+    { "Bob", 85 },
+    { "Charlie", 95 }
+};
+
+foreach (KeyValuePair<string, int> entry in studentMarks)
+{
+    Console.WriteLine($"{entry.Key} scored {entry.Value}");
+}
+```
+
+🧾 Output:
+
+```
+Alice scored 90
+Bob scored 85
+Charlie scored 95
+```
+
+---
+
+#### 🧠 Key Notes
+
+|Point|Description|
+|---|---|
+|✅|Great for **read-only** iterations|
+|❌|You **can’t modify** the collection inside a `foreach` directly|
+|💡|Use `for` loop if you need index access or to **update elements**|
+
+---
+
+### **Array in C#**
+
+####  Declaration and Initialization
+
+```csharp
+int[] numbers = new int[3];                  // Empty array
+int[] scores = { 85, 90, 78, 92 };           // Initialized
+```
+
+---
+
+#### Looping
+
+```csharp
+foreach (int score in scores)
+{
+    Console.WriteLine(score);
+}
+```
+
+---
+
+####  **Array Methods (from `System.Array` class)**
+
+|Method / Property|Example|Description|
+|---|---|---|
+|`Length`|`scores.Length`|Gets total number of elements|
+|`Sort()`|`Array.Sort(scores);`|Sorts elements in ascending order|
+|`Reverse()`|`Array.Reverse(scores);`|Reverses element order|
+|`IndexOf()`|`int i = Array.IndexOf(scores, 90);`|Gets index of a value|
+|`LastIndexOf()`|`Array.LastIndexOf(scores, 90);`|Gets last matching index|
+|`Copy()`|`Array.Copy(scores, newArray, 4);`|Copies items to another array|
+|`Clear()`|`Array.Clear(scores, 1, 2);`|Clears (sets to 0/default) values at given positions|
+
+---
+
+#### Example:
+
+```csharp
+int[] scores = { 85, 70, 95, 60 };
+
+// Sort
+Array.Sort(scores);  // 60, 70, 85, 95
+
+// Reverse
+Array.Reverse(scores);  // 95, 85, 70, 60
+
+// Index
+int idx = Array.IndexOf(scores, 85);  // 1
+
+// Copy
+int[] copy = new int[4];
+Array.Copy(scores, copy, 4);
+
+// Clear
+Array.Clear(scores, 1, 2);  // sets index 1 and 2 to 0
+```
+
+---
+
+### **ArrayList in C#**
+
+(From `System.Collections`)
+
+#### Declaration
+
+```csharp
+ArrayList list = new ArrayList();
+list.Add("Apple");
+list.Add(100);
+list.Add(99.99);
+```
+
+---
+
+#### Looping
+
+```csharp
+foreach (var item in list)
+{
+    Console.WriteLine(item);
+}
+```
+
+---
+
+#### **ArrayList Methods & Properties**
+
+|Method / Property|Example|Description|
+|---|---|---|
+|`Add()`|`list.Add("New Item");`|Adds element|
+|`Insert()`|`list.Insert(1, "Inserted");`|Adds at index|
+|`Remove()`|`list.Remove("Apple");`|Removes by value|
+|`RemoveAt()`|`list.RemoveAt(2);`|Removes by index|
+|`Clear()`|`list.Clear();`|Removes all|
+|`Contains()`|`list.Contains(100);`|Checks presence|
+|`IndexOf()`|`list.IndexOf(99.99);`|Gets index of item|
+|`Count`|`list.Count`|Total number of elements|
+|`Sort()`|`list.Sort();`|Sorts elements (same type only!)|
+|`Reverse()`|`list.Reverse();`|Reverses order|
+
+---
+
+#### Example:
+
+```csharp
+ArrayList items = new ArrayList() { "Book", "Pen", "Pencil" };
+
+// Add
+items.Add("Eraser");
+
+// Insert
+items.Insert(2, "Sharpener");  // Pen, Sharpener, Pencil...
+
+// Remove
+items.Remove("Pen");
+
+// RemoveAt
+items.RemoveAt(1);  // Removes at index 1
+
+// Contains
+bool hasBook = items.Contains("Book");
+
+// Count
+Console.WriteLine("Total: " + items.Count);
+
+// Sort (only if all same type)
+ArrayList numbers = new ArrayList() { 10, 2, 5 };
+numbers.Sort();  // 2, 5, 10
+
+// Reverse
+numbers.Reverse();  // 10, 5, 2
+```
+
+---
+
+### **List in C#**
+
+(From `System.Collections.Generic`)
+
+#### Declaration
+
+```csharp
+List<int> numbers = new List<int> { 1, 3, 5 };
+List<string> names = new List<string>();
+```
+
+---
+
+#### Looping
+
+```csharp
+foreach (int num in numbers)
+{
+    Console.WriteLine(num);
+}
+```
+
+---
+
+#### **List Methods & Properties**
+
+|Method / Property|Example|Description|
+|---|---|---|
+|`Add()`|`numbers.Add(7);`|Adds item|
+|`AddRange()`|`numbers.AddRange(new int[] { 9, 11 });`|Adds multiple items|
+|`Insert()`|`numbers.Insert(1, 4);`|Inserts at index|
+|`InsertRange()`|`numbers.InsertRange(0, new int[] { 0, 2 });`|Inserts multiple items|
+|`Remove()`|`numbers.Remove(3);`|Removes first matching item|
+|`RemoveAt()`|`numbers.RemoveAt(2);`|Removes by index|
+|`RemoveRange()`|`numbers.RemoveRange(0, 2);`|Removes a group|
+|`Contains()`|`numbers.Contains(5);`|Checks if item exists|
+|`IndexOf()`|`numbers.IndexOf(11);`|Gets index of item|
+|`Sort()`|`numbers.Sort();`|Sorts ascending|
+|`Reverse()`|`numbers.Reverse();`|Reverses order|
+|`Clear()`|`numbers.Clear();`|Empties list|
+|`Count`|`numbers.Count`|Gets size|
+|`ToArray()`|`int[] arr = numbers.ToArray();`|Converts to array|
+
+---
+
+#### Example:
+
+```csharp
+List<int> numbers = new List<int> { 5, 10, 15 };
+
+// Add
+numbers.Add(20);
+
+// AddRange
+numbers.AddRange(new int[] { 25, 30 });
+
+// Insert
+numbers.Insert(1, 7); // 5, 7, 10, ...
+
+// Remove
+numbers.Remove(15);
+
+// Sort + Reverse
+numbers.Sort();
+numbers.Reverse();
+
+// Convert to array
+int[] arr = numbers.ToArray();
+
+// Count
+Console.WriteLine("Total: " + numbers.Count);
+```
+
+---
+
+#### Final Summary Table
+
+|Feature|`Array`|`ArrayList`|`List<T>`|
+|---|---|---|---|
+|Type-safe|✅ Yes|❌ No|✅ Yes|
+|Resizable|❌ No|✅ Yes|✅ Yes|
+|Generic|❌ No|❌ No|✅ Yes|
+|Index Access|✅ Yes|✅ Yes|✅ Yes|
+|Sort, Reverse|✅ Yes (`Array.Sort`)|✅ Yes|✅ Yes|
+|Preferred Use|Fixed size, fast access|Legacy, mixed data|✅ Most used in real-world|
 
 ---
