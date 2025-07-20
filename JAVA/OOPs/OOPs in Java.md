@@ -609,7 +609,7 @@ public void method(final int param) {
 
 The `final` keyword is a powerful tool for ensuring immutability, enforcing design constraints, and improving code safety and readability in Java.
 # Polymorphism 
-
+**Polymorphism** means **"many forms"**.
 **Polymorphism is one of the fundamental concepts of object-oriented programming (OOP). It allows objects to be treated as instances of their parent class rather than their actual class. Polymorphism enables a single function, operator, or object to behave differently in different contexts. 
 *There are two main types of polymorphism in OOP:
 1.compile-time polymorphism(Achieved by defining multiple methods with the same name but different parameters. The decision about which method to invoke is made at compile time.) and 
@@ -704,6 +704,7 @@ public class Main {
 ```
 ### Dynamic method dispatch
 
+Java uses **dynamic dispatch** for all non-static, non-final methods.
 Dynamic method dispatch, also known as runtime polymorphism, is a core concept in object-oriented programming, particularly in languages like Java. It allows a program to determine at runtime which method implementation to execute, based on the actual object's type rather than the reference type.
 #### How Dynamic Method Dispatch Works
 
